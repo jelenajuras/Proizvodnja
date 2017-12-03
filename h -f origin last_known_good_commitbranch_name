@@ -1,0 +1,69 @@
+[33mcommit 14d18cf44e4afaf0aa8fd12e245d3207b3c06ea5[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: programeri <programeri@ucione.local>
+Date:   Wed Nov 29 22:01:32 2017 +0100
+
+    servis
+
+[33mcommit b194cf01158f9671c14d1b17b4de292bb4a7b608[m
+Author: jelenajuras <you@example.comjjuras72@gmail.com>
+Date:   Tue Nov 28 12:40:15 2017 +0100
+
+    Komentari - store i ispis
+
+[33mcommit aefbfaf2b56cefaeb55e224091357bc38c56bae5[m
+Author: programeri <programeri@ucione.local>
+Date:   Mon Nov 27 21:33:07 2017 +0100
+
+    Komentari na post
+
+[33mcommit 3a0869c719dcc0ee84ec4dffef2f71a28934ee83[m
+Author: programeri <programeri@ucione.local>
+Date:   Thu Nov 23 21:27:24 2017 +0100
+
+    Dodavanje funkcionalnoosti za post
+
+[33mcommit b832946f190e5da8a56c130887ad62fc180d799c[m
+Author: programeri <programeri@ucione.local>
+Date:   Tue Nov 21 21:31:31 2017 +0100
+
+    Add post feature
+
+[33mcommit 75d114537c029676bca6bd5021033b69b7277f33[m
+Author: programeri <programeri@ucione.local>
+Date:   Fri Nov 17 21:48:12 2017 +0100
+
+    Add migrations and models
+
+[33mcommit 6b0be159838a611909bd04816e3ae6d39f9e4c3c[m
+Merge: 0e41103 d912cae
+Author: programeri <programeri@ucione.local>
+Date:   Wed Nov 15 21:31:17 2017 +0100
+
+    ...
+
+[33mcommit d912cae69dcc10b97772c2b5bc95c78547e4e9c1[m
+Merge: 2fe2760 2936c2a
+Author: Tomislav Kescec <tkescec@users.noreply.github.com>
+Date:   Wed Nov 15 21:19:08 2017 +0100
+
+    Merge pull request #1 from mongal/master
+    
+    Update readme - Monika
+
+[33mcommit 2936c2ac6502f1e4d83379ccd895b52c5f3d24da[m
+Author: programeri <programeri@ucione.local>
+Date:   Wed Nov 15 21:10:13 2017 +0100
+
+    Update readme - Monika
+
+[33mcommit 0e41103439516cbfbc0eb46c2668467904181a90[m
+Author: programeri <programeri@ucione.local>
+Date:   Wed Nov 15 21:10:01 2017 +0100
+
+    Jelena - promjena readme
+
+[33mcommit 2fe2760944599a4f42dd9907d884e1d0413f9a90[m
+Author: Tomislav <tomislav.kescec@gmail.com>
+Date:   Wed Nov 15 10:35:21 2017 +0100
+
+    Init
