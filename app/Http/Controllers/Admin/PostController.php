@@ -8,7 +8,7 @@ use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdatePostRequest;
 use Sentinel;
-
+use App\Model\Comment;
 
 class PostController extends Controller
 {
