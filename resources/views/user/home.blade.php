@@ -14,7 +14,7 @@
 	<p>
 		<h2>{{ $post->title }}</h2>
 		<div>{{ $post->user->email }}</div>
-		<div> $post->comments->content</div>
+		<div> {{ $post->comments->content}} </div>
 	</p>
 @endforeach
 </div>

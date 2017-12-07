@@ -19,9 +19,13 @@ class CommentsService
 	
 	public function pendingComments()
 	{
-		$user_id = Sentinel::getuser()->id;
-		$posts = Post::where('user_id', $user_id)->count();
+		$posts = Post::where('user_id', Sentinel::getuser()->id)->get();
 		
-		return $posts;
+		$comments_num = 0;
+		foreach ($posts as $post) {
+			$comments_num += $post->pendingComments->count();
+		
+	}
+	return $comments_num;
 	}
 }
