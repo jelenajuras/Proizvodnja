@@ -1,23 +1,23 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use Mail;
 use Sentinel;
 use App\Http\Requests;
+use App\Http\Requests\UserRequest; //ok
 use Centaur\AuthManager;
 use Illuminate\Http\Request;
 use Cartalyst\Sentinel\Users\IlluminateUserRepository;
 use App\Http\Controllers\Controller;
+use App\Models\Users;
+use App\Models\ProductionProject;
 
 class UserController extends Controller
 {
     /** @var Cartalyst\Sentinel\Users\IlluminateUserRepository */
     protected $userRepository;
-
     /** @var Centaur\AuthManager */
     protected $authManager;
-
     public function __construct(AuthManager $authManager)
     {
         // Middleware
@@ -26,12 +26,10 @@ class UserController extends Controller
         $this->middleware('sentinel.access:users.view', ['only' => ['index', 'show']]);
         $this->middleware('sentinel.access:users.update', ['only' => ['edit', 'update']]);
         $this->middleware('sentinel.access:users.destroy', ['only' => ['destroy']]);
-
         // Dependency Injection
         $this->userRepository = app()->make('sentinel.users');
         $this->authManager = $authManager;
     }
-
     /**
      * Display a listing of the users.
      *
@@ -39,11 +37,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->userRepository->createModel()->with('roles')->paginate(15);
-
-        return view('admin.users.index', ['users' => $users]);
+        $users = Users::orderBy('last_name','ASC')->get();
+		
+		$kupac = ProductionProject::join('customers','production_projects.investitor_id','customers.id')->select('production_projects.*','customers.naziv as tvrtka')->get();
+		
+		
+		//dd($kupac);
+        return view('admin.users.index', ['users' => $users])->with('kupac',$kupac);
     }
-
     /**
      * Show the form for creating a new user.
      *
@@ -52,66 +53,55 @@ class UserController extends Controller
     public function create()
     {
         $roles = app()->make('sentinel.roles')->createModel()->all();
-
         return view('admin.users.create', ['roles' => $roles]);
     }
-
     /**
      * Store a newly created user in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        // Validate the form data
-        $result = $this->validate($request, [
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
-
-        // Assemble registration credentials and attributes
-        $credentials = [
-            'email' => trim($request->get('email')),
+        $input = $request;
+		
+		if($request->get('productionProject_id') <> null){
+		$data = array(
+			'email' => trim($request->get('email')),
             'password' => $request->get('password'),
             'first_name' => $request->get('first_name', null),
-            'last_name' => $request->get('last_name', null)
-        ];
-        $activate = (bool)$request->get('activate', false);
-
-        // Attempt the registration
-        $result = $this->authManager->register($credentials, $activate);
-
-        if ($result->isFailure()) {
-            return $result->dispatch;
-        }
-
-        // Do we need to send an activation email?
-        if (!$activate) {
-            $code = $result->activation->getCode();
-            $email = $result->user->email;
-            Mail::queue(
-                'email.welcome',
-                ['code' => $code, 'email' => $email],
-                function ($message) use ($email) {
-                    $message->to($email)
-                        ->subject('Your account has been created');
-                }
-            );
-        }
-
-        // Assign User Roles
+            'last_name' => $request->get('last_name', null),
+			'telefon' => $request->get('telefon'),
+			'productionProject_id'=> $request->get('productionProject_id')
+			//'department_id' => $request->get('department_id', null)
+		);
+		} else {
+			
+			$data = array(
+			'email' => trim($request->get('email')),
+            'password' => $request->get('password'),
+            'first_name' => $request->get('first_name', null),
+            'last_name' => $request->get('last_name', null),
+			'telefon' => $request->get('telefon'),
+			//'department_id' => $request->get('department_id', null)
+		);
+		}
+		
+		$result = $this->authManager->register($data, $activation=true);
+		// Assign User Roles
         foreach ($request->get('roles', []) as $slug => $id) {
             $role = Sentinel::findRoleBySlug($slug);
             if ($role) {
                 $role->users()->attach($result->user);
             }
         }
-
-        $result->setMessage("User {$request->get('email')} has been created.");
-        return $result->dispatch(route('users.index'));
+			
+		$message = session()->flash('success', 'Uspješno je dodan novi djelatnik');
+		
+		//return redirect()->back()->withFlashMessage($messange);
+		return redirect()->route('users.index')->withFlashMessage($message);
+	
     }
-
     /**
      * Display the specified user.
      *
@@ -124,7 +114,6 @@ class UserController extends Controller
         // Change this to point to the appropriate view for your project.
         return redirect()->route('users.index');
     }
-
     /**
      * Show the form for editing the specified user.
      *
@@ -136,21 +125,17 @@ class UserController extends Controller
         // Fetch the user object
         // $id = $this->decode($hash);
         $user = $this->userRepository->findById($id);
-
         // Fetch the available roles
         $roles = app()->make('sentinel.roles')->createModel()->all();
-
         if ($user) {
             return view('admin.users.edit', [
                 'user' => $user,
                 'roles' => $roles
             ]);
         }
-
         session()->flash('error', 'Invalid user.');
         return redirect()->back();
     }
-
     /**
      * Update the specified user in storage.
      *
@@ -162,25 +147,36 @@ class UserController extends Controller
     {
         // Decode the user id
         // $id = $this->decode($hash);
-
         // Validate the form data
         $result = $this->validate($request, [
             'email' => 'required|email|max:255|unique:users,email,'.$id,
             'password' => 'confirmed|min:6',
         ]);
-
         // Assemble the updated attributes
-        $attributes = [
-            'email' => trim($request->get('email')),
+		
+		if($request->get('productionProject_id') <> null){
+		$attributes = array(
+			'email' => trim($request->get('email')),
+            'password' => $request->get('password'),
             'first_name' => $request->get('first_name', null),
-            'last_name' => $request->get('last_name', null)
-        ];
+            'last_name' => $request->get('last_name', null),
+			'telefon' => $request->get('telefon'),
+			'productionProject_id'=> $request->get('productionProject_id')
+		);
+		} else {
+			$attributes = array(
+			'email' => trim($request->get('email')),
+            'password' => $request->get('password'),
+            'first_name' => $request->get('first_name', null),
+            'last_name' => $request->get('last_name', null),
+			'telefon' => $request->get('telefon')
+		);
+		}
 
         // Do we need to update the password as well?
         if ($request->has('password')) {
             $attributes['password'] = $request->get('password');
         }
-
         // Fetch the user object
         $user = $this->userRepository->findById($id);
         if (!$user) {
@@ -190,23 +186,18 @@ class UserController extends Controller
             session()->flash('error', 'Invalid user.');
             return redirect()->back()->withInput();
         }
-
         // Update the user
         $user = $this->userRepository->update($user, $attributes);
-
         // Update role assignments
         $roleIds = array_values($request->get('roles', []));
         $user->roles()->sync($roleIds);
-
         // All done
         if ($request->ajax()) {
             return response()->json(['user' => $user], 200);
         }
-
         session()->flash('success', "{$user->email} has been updated.");
         return redirect()->route('users.index');
     }
-
     /**
      * Remove the specified user from storage.
      *
@@ -218,32 +209,26 @@ class UserController extends Controller
         // Fetch the user object
         //$id = $this->decode($hash);
         $user = $this->userRepository->findById($id);
-
         // Check to be sure user cannot delete himself
         if (Sentinel::getUser()->id == $user->id) {
             $message = "You cannot remove yourself!";
-
             if ($request->ajax()) {
                 return response()->json($message, 422);
             }
             session()->flash('error', $message);
             return redirect()->route('users.index');
         }
-
-
         // Remove the user
         $user->delete();
-
         // All done
         $message = "{$user->email} has been removed.";
         if ($request->ajax()) {
             return response()->json([$message], 200);
         }
-
         session()->flash('success', $message);
         return redirect()->route('users.index');
     }
-
+	
     /**
      * Decode a hashid
      * @param  string $hash
@@ -252,7 +237,6 @@ class UserController extends Controller
     // protected function decode($hash)
     // {
     //     $decoded = $this->hashids->decode($hash);
-
     //     if (!empty($decoded)) {
     //         return $decoded[0];
     //     } else {

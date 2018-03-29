@@ -27,13 +27,13 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'DESC')->paginate(12);
-		return view('index')->with('posts', $posts); //drugi parametar - drugi način slanja
+       // $posts = Post::orderBy('created_at', 'DESC')->paginate(12);
+		return view('index');//->with('posts', $posts); drugi parametar - drugi način slanja
     }
 	public function show($slug)
 	{
-		$post = Post::where('slug',$slug)->first();
-		return view('post.show')->with('post', $post);
+		/*$post = Post::where('slug',$slug)->first();
+		return view('post.show')->with('post', $post);*/
 	}
 	
 	public function storeComment(CommentRequest $request)

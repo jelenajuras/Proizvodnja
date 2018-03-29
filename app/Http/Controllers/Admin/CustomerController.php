@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Models\City;
+use Illuminate\Http\Request; 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CityRequest;
+use App\Http\Requests\CustomerRequest;
+use App\Models\Customer;
 use Sentinel;
 
-class CityController extends Controller
+class CustomerController extends Controller
 {
-     /**
+    /**
    * Set middleware to quard controller.
    *
    * @return void
@@ -27,8 +27,8 @@ class CityController extends Controller
      */
     public function index()
     {
-		$gradovi = City::orderBy('grad','ASC')->paginate(20);
-		return view('admin.cities.index',['gradovi'=>$gradovi]);
+		$customers = Customer::orderBy('naziv','ASC')->paginate(20);
+		return view('admin.customers.index',['customers'=>$customers]);	
     }
 
     /**
@@ -38,7 +38,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        return view('admin.cities.create');
+        return view('admin.customers.create');
     }
 
     /**
@@ -47,22 +47,24 @@ class CityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CityRequest $request)
+    public function store(CustomerRequest $request)
     {
         $input = $request;
 
 		$data = array(
-			'id'  => $input['id'],
-			'grad'  => $input['grad']
+			'naziv'  => $input['naziv'],
+			'adresa'  => $input['adresa'],
+			'grad'  => $input['grad'],
+			'oib'  => $input['oib']
 		);
 		
-		$grad = new City();
-		$grad->saveGrad($data);
+		$customer = new Customer();
+		$customer->saveCustomer($data);
 		
-		$message = session()->flash('success', 'Uspješno je dodan novi grad');
+		$message = session()->flash('success', 'Uspješno je dodan novi naručitelj');
 		
 		//return redirect()->back()->withFlashMessage($messange);
-		return redirect()->route('admin.cities.index')->withFlashMessage($message);
+		return redirect()->route('admin.customers.index')->withFlashMessage($message);
     }
 
     /**
@@ -73,9 +75,9 @@ class CityController extends Controller
      */
     public function show($id)
     {
-        $grad = City::find($id);
+        $customer = Customer::find($id);
 		
-		return view('admin.cities.show', ['grad' => $grad]);
+	//	return view('admin.customers.show', ['customer' => $customer]);
     }
 
     /**
@@ -86,9 +88,8 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        $grad = City::find($id);
-		return view('admin.cities.edit', ['grad' => $grad]);
-	
+        $customer = Customer::find($id);
+		return view('admin.customers.edit', ['customer' => $customer]);
     }
 
     /**
@@ -98,21 +99,24 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CityRequest $request, $id)
+    public function update(CustomerRequest $request, $id)
     {
-        $grad = City::find($id);
+        $customer = Customer::find($id);
 		$input = $request;
 		
 		$data = array(
-			'grad'  => $input['grad']
+			'naziv'  => $input['naziv'],
+			'adresa'  => $input['adresa'],
+			'grad'  => $input['grad'],
+			'oib'  => $input['oib']
 		);
 		
-		$grad->updateGrad($data);
+		$customer->updateCustomer($data);
 		
-		$message = session()->flash('success', 'Uspješno su ispravljeni podaci grada');
+		$message = session()->flash('success', 'Uspješno su ispravljeni podaci naručitelja');
 		
 		//return redirect()->back()->withFlashMessage($messange);
-		return redirect()->route('admin.cities.index')->withFlashMessage($message);
+		return redirect()->route('admin.customers.index')->withFlashMessage($message);
     }
 
     /**
@@ -123,11 +127,11 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
-        $grad = City::find($id);
-		$grad->delete();
+        $customer = Customer::find($id);
+		$customer ->delete();
 		
-		$message = session()->flash('success', 'Grad je uspješno obrisan');
+		$message = session()->flash('success', 'Naručitelj je uspješno obrisan');
 		
-		return redirect()->route('admin.cities.index')->withFlashMessage($message);
+		return redirect()->route('admin.customers.index')->withFlashMessage($message);
     }
 }

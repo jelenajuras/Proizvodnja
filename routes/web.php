@@ -36,8 +36,6 @@ Route::post('password/reset/{code}', ['as' => 'auth.password.reset.attempt', 'us
 Route::get('password/reset', ['as' => 'auth.password.request.form', 'uses' => 'Auth\PasswordController@getRequest']);
 Route::post('password/reset', ['as' => 'auth.password.request.attempt', 'uses' => 'Auth\PasswordController@postRequest']);
 
-
-
 /*############# ADMIN ##############*/
 Route::group(['prefix' => 'admin'], function () {
   // Dashboard
@@ -56,8 +54,56 @@ Route::group(['prefix' => 'admin'], function () {
   'update'		=> 'admin.posts.update', 
   'destroy'		=> 'admin.posts.destroy'
   ]]);
+  Route::resource('cities', 'Admin\CityController', ['names' => [
+  'index' 		=> 'admin.cities.index', 
+  'create' 		=> 'admin.cities.create', 
+  'store' 		=> 'admin.cities.store', 
+  'show' 		=> 'admin.cities.show', 
+  'edit' 		=> 'admin.cities.edit', 
+  'update'		=> 'admin.cities.update', 
+  'destroy'		=> 'admin.cities.destroy'
+  ]]);
+  Route::resource('customers', 'Admin\CustomerController', ['names' => [
+  'index' 		=> 'admin.customers.index', 
+  'create' 		=> 'admin.customers.create', 
+  'store' 		=> 'admin.customers.store', 
+  'show' 		=> 'admin.customers.show', 
+  'edit' 		=> 'admin.customers.edit', 
+  'update'		=> 'admin.customers.update', 
+  'destroy'		=> 'admin.customers.destroy'
+  ]]);
+  Route::resource('projects', 'Admin\ProjectController', ['names' => [
+  'index' 		=> 'admin.projects.index', 
+  'create' 		=> 'admin.projects.create', 
+  'store' 		=> 'admin.projects.store', 
+  'show' 		=> 'admin.projects.show', 
+  'edit' 		=> 'admin.projects.edit', 
+  'update'		=> 'admin.projects.update', 
+  'destroy'		=> 'admin.projects.destroy'
+  ]]);
+  Route::resource('cabinets', 'Admin\CabinetController', ['names' => [
+  'index' 		=> 'admin.cabinets.index', 
+  'create' 		=> 'admin.cabinets.create', 
+  'store' 		=> 'admin.cabinets.store', 
+  'show' 		=> 'admin.cabinets.show', 
+  'edit' 		=> 'admin.cabinets.edit', 
+  'update'		=> 'admin.cabinets.update', 
+  'destroy'		=> 'admin.cabinets.destroy'
+  ]]);
+  Route::resource('production_projects', 'Admin\ProductionProjectController', ['names' => [
+  'index' 		=> 'admin.production_projects.index', 
+  'create' 		=> 'admin.production_projects.create', 
+  'store' 		=> 'admin.production_projects.store', 
+  'show' 		=> 'admin.production_projects.show', 
+  'edit' 		=> 'admin.production_projects.edit', 
+  'update'		=> 'admin.production_projects.update', 
+  'destroy'		=> 'admin.production_projects.destroy'
+  ]]);
 });
 
 // Post page
 Route::post('/comment/store', ['as' => 'comment.store', 'uses' => 'IndexController@storeComment']);
 Route::get('/{slug}', ['as' => 'post.show', 'uses' => 'IndexController@show']);
+
+// Kontakt - kupac
+Route::post('customer/contact', ['as' => 'customer.contact', 'uses' => 'Admin\UserController@store']);

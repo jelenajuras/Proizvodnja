@@ -1,45 +1,50 @@
 @extends('layouts.admin')
 
-@section('title', 'Gradovi')
+@section('title', 'Proizvodni projekti')
 
 @section('content')
-   
 		<div class='btn-toolbar pull-right'>
-            <a class="btn btn-default btn-md" href="{{ route('admin.cities.create') }}">
+            <a class="btn btn-default btn-md" href="{{ route('admin.production_projects.create') }}">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                Dodaj grad
+                Dodaj projekt
             </a>
         </div>
 
-        <h3>Gradovi</h3>
+        <h3>Proizvodni projekti</h3>
 		<!--<input class="form-control" id="myInput" type="text" placeholder="Traži..">-->
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="table-responsive">
-			@if(count($gradovi) > 0)
+			@if(count($production_projects) > 0)
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Grad</th>
-                            <th>Poštanski broj</th>
-                            <th>Options</th>
+                            <th>Broj projekta</th>
+							<th>Naziv proizvornog projekta</th>
+							<th>Naziv projekta</th>
+                            <th>Investitor</th>
+                            <th>Voditelj</th>
+							<th>Opcije</th>
                         </tr>
                     </thead>
                     <tbody id="myTable">
-					@foreach ($gradovi as $grad)
+					@foreach ($production_projects as $production_project)
                         <tr>
-							<td>{{ $grad->grad }}</td>
-							<td>{{ $grad->id}}	</td>
+							<td>{{ $production_project->id }}</td>
+							<td><a href="{{ route('admin.production_projects.show', $production_project->id ) }}"</a>{{ $production_project->naziv }}</td>
+							<td>{{ $production_project->project['id'] . ' ' . $production_project->project['naziv'] }}</td>
+							<td>{{ $production_project->investitor }}</td>
+							<td>{{ $production_project->user['first_name'] . ' ' .  $production_project->user['last_name'] }}</td>
                             <td id="td1">
-                                <a href="{{ route('admin.cities.edit', $grad->id) }}" class="btn btn-default ">
+                                <a href="{{ route('admin.production_projects.edit', $production_project->id) }}" class="btn btn-default ">
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                         Ispravi
                                 </a>
-                                <a href="{{ route('admin.cities.destroy', $grad->id) }}" class="btn btn-danger action_confirm" data-method="delete" data-token="{{ csrf_token() }}">
+                                <!--<a href="{{ route('admin.production_projects.destroy', $production_project->id) }}" class="btn btn-danger action_confirm" data-method="delete" data-token="{{ csrf_token() }}">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Obriši
-                                </a>
+                                </a>-->
                             </td>
                         </tr>
                     @endforeach
@@ -56,7 +61,7 @@
                     </tbody>
                 </table>
 				@else
-					{{'Nema unesenih gradova!'}}
+					{{'Nema unesenih projekata!'}}
 				@endif
             </div>
 

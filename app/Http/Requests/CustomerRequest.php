@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CityRequest extends FormRequest
+class CustomerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +16,7 @@ class CityRequest extends FormRequest
         return true;
     }
 
-       /**
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -24,17 +24,20 @@ class CityRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' 	=> 'required|min:5',
-			'grad'  => 'required'
+            'naziv'   => 'required',
+			'adresa'  => 'required',
+			'grad' => 'required',
+			'oib' => 'required'
         ];
     }
 	
 	public function messages()
 	{
 		return [
-			'id.required'	 => 'Unos poštanskog broja je obavezan!',
-			'id.min'	 => 'Poštanski broja treba imati minimalno 5 brojeva!',
-			'grad.required'  => 'Unos grada je obavezan!'
+			'naziv.required'   => 'Unos naziva firme je obavezan!',
+			'adresa.required'  => 'Unos adrese je obavezan!',
+			'grad.required' => 'Unos grada je obavezan!',
+			'oib.required' => 'Unos OIB-a je obavezan!'
 		];
 	}
 }

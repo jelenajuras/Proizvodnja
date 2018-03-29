@@ -6,8 +6,8 @@
 <div class="row">
     @if (Sentinel::check())
     <div class="jumbotron">
-        <h1>Hello, {{ Sentinel::getUser()->email }}!</h1>
-        <p>You are now logged in.</p>
+        <h2>Prijavljen/a si, {{ Sentinel::getUser()->first_name . ' ' . Sentinel::getUser()->last_name}}!</h2>
+       
     </div>
     @else
         <div class="jumbotron">

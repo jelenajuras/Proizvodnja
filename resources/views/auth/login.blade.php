@@ -2,12 +2,13 @@
 
 @section('title', 'Login')
 
+
 @section('content')
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Login</h3>
+            <div class="panel-heading" id="input2">
+                <h3 class="panel-title">Prijavi se</h3>
             </div>
             <div class="panel-body">
                 <form accept-charset="UTF-8" role="form" method="post" action="{{ route('auth.login.attempt') }}">
@@ -22,12 +23,12 @@
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input name="remember" type="checkbox" value="true" {{ old('remember') == 'true' ? 'checked' : ''}}> Remember Me
+                            <input name="remember" type="checkbox" value="true" {{ old('remember') == 'true' ? 'checked' : ''}}> Zapamti me
                         </label>
                     </div>
                     <input name="_token" value="{{ csrf_token() }}" type="hidden">
-                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
-                    <p style="margin-top:5px; margin-bottom:0"><a href="{{ route('auth.password.request.form') }}" type="submit">Forgot your password?</a></p>
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Prijava" id="input1">
+                    <!--<p style="margin-top:5px; margin-bottom:0"><a href="{{ route('auth.password.request.form') }}" type="submit">Forgot your password?</a></p>-->
                 </fieldset>
                 </form>
             </div>
