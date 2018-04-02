@@ -56,10 +56,10 @@
 									<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 									Ispravi
 								</a>
-								<!--<a href="{{ route('users.destroy', $user->id) }}" class="btn btn-danger action_confirm" data-method="delete" data-token="{{ csrf_token() }}">
+								<a href="{{ route('users.destroy', $user->id) }}" class="btn btn-danger action_confirm" data-method="delete" data-token="{{ csrf_token() }}">
 									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 									Obriši
-								</a></td>-->
+								</a></td>
 								
 							</tr>
 						@endforeach

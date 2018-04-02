@@ -65,17 +65,15 @@ class UserController extends Controller
     {
         $input = $request;
 		
-		if($request->get('productionProject_id') <> null){
+	//	if($request->get('productionProject_id') <> null){
 		$data = array(
 			'email' => trim($request->get('email')),
             'password' => $request->get('password'),
             'first_name' => $request->get('first_name', null),
-            'last_name' => $request->get('last_name', null),
-			'telefon' => $request->get('telefon'),
-			'productionProject_id'=> $request->get('productionProject_id')
+            'last_name' => $request->get('last_name', null)
 			//'department_id' => $request->get('department_id', null)
 		);
-		} else {
+	/*	} else {
 			
 			$data = array(
 			'email' => trim($request->get('email')),
@@ -85,7 +83,7 @@ class UserController extends Controller
 			'telefon' => $request->get('telefon'),
 			//'department_id' => $request->get('department_id', null)
 		);
-		}
+		}*/
 		
 		$result = $this->authManager->register($data, $activation=true);
 		// Assign User Roles
@@ -154,7 +152,7 @@ class UserController extends Controller
         ]);
         // Assemble the updated attributes
 		
-		if($request->get('productionProject_id') <> null){
+		//if($request->get('productionProject_id') <> null){
 		$attributes = array(
 			'email' => trim($request->get('email')),
             'password' => $request->get('password'),
@@ -163,7 +161,7 @@ class UserController extends Controller
 			'telefon' => $request->get('telefon'),
 			'productionProject_id'=> $request->get('productionProject_id')
 		);
-		} else {
+	/*	} else {
 			$attributes = array(
 			'email' => trim($request->get('email')),
             'password' => $request->get('password'),
@@ -171,7 +169,7 @@ class UserController extends Controller
             'last_name' => $request->get('last_name', null),
 			'telefon' => $request->get('telefon')
 		);
-		}
+		}*/
 
         // Do we need to update the password as well?
         if ($request->has('password')) {
