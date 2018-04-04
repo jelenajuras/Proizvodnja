@@ -97,30 +97,6 @@
 						</div>
 						<div class="checkbox">
 							<label>
-								<input type="checkbox" name="permissions[cities.create]" value="1">
-								cities.create
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" name="permissions[cities.update]" value="1">
-								cities.update
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" name="permissions[cities.view]" value="1">
-								cities.view
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" name="permissions[cities.delete]" value="1">
-								cities.delete
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
 								<input type="checkbox" name="permissions[customers.create]" value="1">
 								customers.create
 							</label>
@@ -169,7 +145,31 @@
 						</div>
 					</div>
 					<div class="col-md-4 col-md-offset-1">
-					
+						<div class="checkbox">
+								<label>
+									<input type="checkbox" name="permissions[production_projects.create]" value="1">
+									production_projects.create
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="permissions[production_projects.update]" value="1">
+									production_projects.update
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="permissions[production_projects.view]" value="1">
+									production_projects.view
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="permissions[production_projects.delete]" value="1">
+									production_projects.delete
+								</label>
+							</div>
+						</div>
 					</div>
 					
                     <input name="_token" value="{{ csrf_token() }}" type="hidden">

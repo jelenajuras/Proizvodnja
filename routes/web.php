@@ -99,6 +99,15 @@ Route::group(['prefix' => 'admin'], function () {
   'update'		=> 'admin.production_projects.update', 
   'destroy'		=> 'admin.production_projects.destroy'
   ]]);
+  Route::resource('productions', 'Admin\ProductionController', ['names' => [
+  'index' 		=> 'admin.productions.index', 
+  'create' 		=> 'admin.productions.create', 
+  'store' 		=> 'admin.productions.store', 
+  'show' 		=> 'admin.productions.show', 
+  'edit' 		=> 'admin.productions.edit', 
+  'update'		=> 'admin.productions.update', 
+  'destroy'		=> 'admin.productions.destroy'
+  ]]);
 });
 
 // Post page

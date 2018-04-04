@@ -14,7 +14,7 @@
 					<fieldset>
 						<div class="form-group {{ ($errors->has('naziv')) ? 'has-error' : '' }}">
 						<text>Naziv firme</text>
-							<input class="form-control" placeholder="Naziv firme" name="naziv" type="text" value="{{ old('naziv') }}" />
+							<input class="form-control" placeholder="Naziv firme" name="naziv" type="text" value="{{ old('naziv') }}" autofocus />
 							{!! ($errors->has('naziv') ? $errors->first('naziv', '<p class="text-danger">:message</p>') : '') !!}
 						</div>
 						<div class="form-group {{ ($errors->has('adresa')) ? 'has-error' : '' }}">

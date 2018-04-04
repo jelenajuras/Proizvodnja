@@ -53,11 +53,20 @@ class ProjectController extends Controller
     {
        // $user_id = Sentinel::getUser()->id;
 		$input = $request;
+		$investitor =  $input['investitor_id'];
+		$naručitelj = $input['customer_id'];
+		
+		if(!$input['investitor_id']) {
+			$investitor = $input['customer_id'];
+		} 
+		if(!$input['customer_id']) {
+			$naručitelj = $input['investitor_id'];
+		} 
 
 		$data = array(
 			'id'             => $input['id'],
-			'customer_id'    => $input['customer_id'],
-			'investitor_id'  => $input['investitor_id'],
+			'customer_id'    => $naručitelj,
+			'investitor_id'  => $investitor,
 			'naziv' 		 => $input['naziv'],
 			'objekt' 		 => $input['objekt']
 		);

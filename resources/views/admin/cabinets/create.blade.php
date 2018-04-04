@@ -32,9 +32,21 @@
 							</div>
 							<label>Proizvođač:</label>
 							<div class="form-group">
-								<input class="form-control" placeholder="Proizvođač" name="proizvodjac" type="text" value="{{ old('proizvodjac') }}" />
+								<select class="form-control" name="proizvodjac" value="{{ old('proizvodjac') }}">
+									<option value="0"></option>
+									<option>ABB</option>
+									<option>Eaton</option>
+									<option>Rittal</option>
+									<option>Schneider</option>
+									<option>Schrack</option>
+									<option>Siemens</option>
+								</select>
 								{!! ($errors->has('proizvodjac') ? $errors->first('proizvodjac', '<p class="text-danger">:message</p>') : '') !!}
 							</div>
+							<!--<label> Drugi proizvođač:</label>
+							<div class="form-group">
+								<input class="form-control" placeholder="Proizvođač" name="proizvodjac" type="text" value="{{ old('proizvodjac') }}">
+							</div>-->
 							<label>Naziv ormara (KKS):</label>
 							<div class="form-group">
 								<input class="form-control" placeholder="Naziv" name="naziv" type="text" value="{{ old('naziv') }}" />

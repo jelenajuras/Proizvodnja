@@ -73,30 +73,6 @@
 						</div>
 						<div class="checkbox">
 							<label>
-								<input type="checkbox" name="permissions[cities.create]" value="1" {{ $role->hasAccess('cities.create') ? 'checked' : '' }}>
-								cities.create
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" name="permissions[cities.update]" value="1" {{ $role->hasAccess('cities.update') ? 'checked' : '' }}>
-								cities.update
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" name="permissions[cities.view]" value="1" {{ $role->hasAccess('cities.view') ? 'checked' : '' }}>
-								cities.view
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" name="permissions[cities.delete]" value="1" {{ $role->hasAccess('cities.delete') ? 'checked' : '' }}>
-								cities.delete
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
 								<input type="checkbox" name="permissions[customers.create]" value="1" {{ $role->hasAccess('customers.create') ? 'checked' : '' }}>
 								customers.create
 							</label>
@@ -141,6 +117,32 @@
 							<label>
 								<input type="checkbox" name="permissions[projects.delete]" value="1" {{ $role->hasAccess('projects.delete') ? 'checked' : '' }}>
 								projects.delete
+							</label>
+						</div>
+					</div>
+					<div class="col-md-4 col-md-offset-1">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="permissions[production_projects.create]" value="1" {{ $role->hasAccess('production_projects.create') ? 'checked' : '' }}>
+								production_projects.create
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="permissions[production_projects.update]" value="1" {{ $role->hasAccess('production_projects.update') ? 'checked' : '' }}>
+								production_projects.update
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="permissions[production_projects.view]" value="1" {{ $role->hasAccess('production_projects.view') ? 'checked' : '' }}>
+								production_projects.view
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="permissions[production_projects.delete]" value="1" {{ $role->hasAccess('production_projects.delete') ? 'checked' : '' }}>
+								production_projects.delete
 							</label>
 						</div>
 					</div>

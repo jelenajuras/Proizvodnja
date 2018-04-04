@@ -65,25 +65,24 @@ class UserController extends Controller
     {
         $input = $request;
 		
-	//	if($request->get('productionProject_id') <> null){
+		if(!$request->get('productionProject_id')){
 		$data = array(
 			'email' => trim($request->get('email')),
             'password' => $request->get('password'),
             'first_name' => $request->get('first_name', null),
-            'last_name' => $request->get('last_name', null)
-			//'department_id' => $request->get('department_id', null)
+            'last_name' => $request->get('last_name', null),
+			'telefon' => $request->get('telefon', null)
 		);
-	/*	} else {
-			
+		} else {
 			$data = array(
 			'email' => trim($request->get('email')),
             'password' => $request->get('password'),
             'first_name' => $request->get('first_name', null),
             'last_name' => $request->get('last_name', null),
-			'telefon' => $request->get('telefon'),
-			//'department_id' => $request->get('department_id', null)
+			'telefon' => $request->get('telefon', null),
+			'productionProject_id' => $request->get('productionProject_id')
 		);
-		}*/
+		}
 		
 		$result = $this->authManager->register($data, $activation=true);
 		// Assign User Roles
@@ -152,24 +151,22 @@ class UserController extends Controller
         ]);
         // Assemble the updated attributes
 		
-		//if($request->get('productionProject_id') <> null){
+		if(!$request->get('productionProject_id')){
 		$attributes = array(
 			'email' => trim($request->get('email')),
-            'password' => $request->get('password'),
             'first_name' => $request->get('first_name', null),
             'last_name' => $request->get('last_name', null),
-			'telefon' => $request->get('telefon'),
-			'productionProject_id'=> $request->get('productionProject_id')
+			'telefon' => $request->get('telefon', null)
 		);
-	/*	} else {
+		}else {
 			$attributes = array(
 			'email' => trim($request->get('email')),
-            'password' => $request->get('password'),
             'first_name' => $request->get('first_name', null),
             'last_name' => $request->get('last_name', null),
-			'telefon' => $request->get('telefon')
+			'telefon' => $request->get('telefon', null),
+			'productionProject_id' => $request->get('productionProject_id')
 		);
-		}*/
+		}
 
         // Do we need to update the password as well?
         if ($request->has('password')) {

@@ -26,29 +26,30 @@
 				<p>{{ 'Naručitelj: '}}<b>{{ $production_project->investitor }}</b></p>
 				<p>{{ 'Voditelj projekta: '}}<b>{{ $production_project->user['first_name'] . ' ' . $production_project->user['last_name'] }}</b></p>
 				<p>{{ 'Kontakti: '}}</p>
+				
 				<div id="pomak">
 					<table>
-					@foreach($kontakti as $kontakt)
+					@foreach($contacts as $contact)
 						<tr>
 							<td>
-								<p><b>{{ $kontakt->first_name . ' ' . $kontakt->last_name }}</b>
+								<p><b>{{ $contact->first_name . ' ' . $contact->last_name }}</b>
 								</p>
 							</td>
 							<td>
-								<a href="{{ route('users.edit', $kontakt->id) }}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Ispravi</a>
+								<a href="{{ route('users.edit', $contact->id) }}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Ispravi</a>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<p>Telefon: {{ $kontakt->telefon }}</p>
+								<p>Telefon: {{ $contact->telefon }}</p>
 							</td>	
 						</tr>
 						<tr>
 							<td>
-								<p>e-mail: {{ $kontakt->email }}</p> 
+								<p>e-mail: {{ $contact->email }}</p> 
 							</td>
 						</tr>
-						@if(DB::table('role_users')->where('user_id', $kontakt->id)->first())
+						@if(DB::table('role_users')->where('user_id', $contact->id)->first())
 						<tr>
 							<td>
 								<p><ins>Glavni kontakt</ins></p> 
@@ -110,8 +111,4 @@
 				</div>
 			</div>
 		</div>
-    </div>
-	
-	
-
 @stop

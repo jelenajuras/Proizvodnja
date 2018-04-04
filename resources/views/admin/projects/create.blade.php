@@ -15,7 +15,7 @@
                 <fieldset>
 					<div class="form-group {{ ($errors->has('id')) ? 'has-error' : '' }}">
 						<text>Broj projekta</text>
-                        <input class="form-control" placeholder="Broj projekta" name="id" type="text" value="{{ old('id') }}" />
+                        <input class="form-control" placeholder="Broj projekta" name="id" type="text" value="{{ old('id') }}" autofocus/>
                         {!! ($errors->has('id') ? $errors->first('id', '<p class="text-danger">:message</p>') : '') !!}
                     </div>
                     <div class="form-group {{ ($errors->has('customer_id')) ? 'has-error' : '' }}">

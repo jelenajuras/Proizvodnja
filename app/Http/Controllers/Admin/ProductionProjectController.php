@@ -97,12 +97,11 @@ class ProductionProjectController extends Controller
      */
     public function show($id)
     {
-        $production_project = ProductionProject::join('customers','production_projects.investitor_id','=','customers.id')->select('production_projects.*','customers.naziv as investitor')->first();
+        $production_project = ProductionProject::join('customers','production_projects.investitor_id','=','customers.id')->select('production_projects.*','customers.naziv as investitor')->find($id);
 		$roles = app()->make('sentinel.roles')->createModel()->where('slug','kupac')->first();
-		$kontakti = Users::where('productionProject_id','=',$id)->get();
-
+		$contacts = Users::where('productionProject_id','=',$id)->get();
 		
-		return view('admin.production_projects.show', ['production_project' => $production_project], ['roles' => $roles])->with('kontakti',$kontakti);
+		return view('admin.production_projects.show', ['production_project' => $production_project], ['roles' => $roles])->with('contacts',$contacts);
     }
 
     /**

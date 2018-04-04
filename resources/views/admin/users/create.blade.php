@@ -13,7 +13,7 @@
                 <form accept-charset="UTF-8" role="form" method="post" action="{{ route('users.store') }}">
                 <fieldset>
                     <div class="form-group {{ ($errors->has('first_name')) ? 'has-error' : '' }}">
-                        <input class="form-control" placeholder="Ime" name="first_name" type="text" value="{{ old('first_name') }}" />
+                        <input class="form-control" placeholder="Ime" name="first_name" type="text" value="{{ old('first_name') }}" autofocus />
                         {!! ($errors->has('first_name') ? $errors->first('first_name', '<p class="text-danger">:message</p>') : '') !!}
                     </div>
                     <div class="form-group {{ ($errors->has('last_name')) ? 'has-error' : '' }}">
