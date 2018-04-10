@@ -28,8 +28,8 @@ class CabinetController extends Controller
      */
     public function index()
     {
-		$cabinets = Cabinet::orderBy('id','DESC')->paginate(100);
-		
+		$cabinets = Cabinet::join('production_projects','cabinets.projekt_id','=','production_projects.id')->join('projects','production_projects.projekt_id','=','projects.id')->join('customers','production_projects.investitor_id','=','customers.id')->select('cabinets.*','production_projects.id as brProjekta','production_projects.investitor_id as kupac','projects.id as PrBroj','projects.naziv as PrNaziv','projects.objekt','customers.naziv as investitor')->orderBy('id','ASC')->get();
+
 		return view('admin.cabinets.index',['cabinets'=>$cabinets]);
     }
 

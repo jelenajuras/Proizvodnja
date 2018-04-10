@@ -8,11 +8,15 @@
 	td {
 		font-size: 12px;
 	}
+	#tr1 {
+		text-align: center;
+	}
+	
 </style>
 @section('content')
    
 <div class='btn-toolbar pull-right'>
-	<a class="btn btn-default btn-md" href="{{ route('admin.cabinets.create') }}">
+	<a class="btn btn-default btn-md" href="{{ route('admin.cabinets.create') }}" id="button">
 		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 		Dodaj novi ormar
 	</a>
@@ -25,37 +29,40 @@
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div class="table-responsive">
 		@if(count($cabinets) > 0)
-			<table class="table table-hover">
+			<table id="table_id" class="display">
 				<thead>
 					<tr  class="center">
 						<th>Broj</th>
-						<th>Investitor, adresa</th>
+						<th>Broj projekta, Investitor, naziv projekta</th>
 						<th>Objekt</th>
-						<th>Naziv projekta</th>
+						<th>Proizvođač</th>
 						<th>Naziv ormara (KKS)</th>
+						<th>Dimenzija</th>
+						<th>Tip</th>
+						<th>Model</th>
 						<th>Izvedba</th>
 						<th>Materijal</th>
-						<th>Tip ormara</th>
 						<th>Nazivni napon</th>
 						<th>Nazivna struja</th>
 						<th>Prekidna moć</th>
 						<th>Sustav zaštite</th>
 						<th>IP zaštita ormara</th>
-						<th>Opcije</th>
+						<th class="not-export-column">Opcije</th>
 					</tr>
 				</thead>
-				<tbody id="myTable">
+				<tbody >
 				@foreach ($cabinets as $cabinet)
-					<tr>
+				<tr>
 						<td>{{ $cabinet->id }}</td>
-						<td>{{ $cabinet->projekt_id }}</td>
+						<td>{{ $cabinet->PrBroj . ' - ' . $cabinet->investitor . ' - ' . $cabinet->PrNaziv }}</td>
+						<td>{{ $cabinet->objekt }}</td>
 						<td>{{ $cabinet->proizvodjac }}</td>
 						<td>{{ $cabinet->naziv }}</td>
 						<td>{{ $cabinet->velicina }}</td>
 						<td>{{ $cabinet->tip }}</td>
 						<td>{{ $cabinet->model }}</td>
-						<td>{{ $cabinet->materijal }}</td>
 						<td>{{ $cabinet->izvedba }}</td>
+						<td>{{ $cabinet->materijal }}</td>
 						<td>{{ $cabinet->napon }}</td>
 						<td>{{ $cabinet->struja }}</td>
 						<td>{{ $cabinet->prekidna_moc }}</td>
@@ -63,7 +70,7 @@
 						<td>{{ $cabinet->ip_zastita }}</td>
 						
 						<td id="td1">
-							<a href="{{ route('admin.cabinets.edit', $cabinet->id) }}" class="btn btn-default ">
+							<a href="{{ route('admin.cabinets.edit', $cabinet->id) }}" class="btn btn-default btn-md" id="button">
 								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 									Ispravi
 							</a>
@@ -75,24 +82,21 @@
 					</tr>
 				@endforeach
 				<script>
-				$(document).ready(function(){
-				  $("#myInput").on("keyup", function() {
-					var value = $(this).val().toLowerCase();
-					$("#myTable tr").filter(function() {
-					  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					$(document).ready(function(){
+					  $("#myInput").on("keyup", function() {
+						var value = $(this).val().toLowerCase();
+						$("#myTable tr").filter(function() {
+						  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+						});
+					  });
 					});
-				  });
-				});
 				</script>
 				</tbody>
 			</table>
 			@else
 				{{'Nema unesenih ormara!'}}
 			@endif
-			{!! $cabinets->render() !!}
 		</div>
-
 	</div>
 </div>
-	
 @stop

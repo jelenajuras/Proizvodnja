@@ -4,7 +4,7 @@
 
 @section('content')
 	<div class='btn-toolbar pull-right'>
-		<a class="btn btn-default btn-md" href="{{ route('admin.customers.create') }}" >
+		<a class="btn btn-default btn-md" href="{{ route('admin.customers.create') }}" id="button">
 			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 			Dodaj naručitelja
 		</a>
@@ -17,7 +17,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="table-responsive">
 			@if(count($customers) > 0)
-                <table class="table table-hover">
+                <table id="table_id" class="display">
                     <thead>
                         <tr>
                             <th>Firma</th>
@@ -35,11 +35,11 @@
 							<td>{{ $customer->grad }}</td>
 							<td>{{ $customer->oib }}</td>
                             <td id="td1">
-                                <a href="{{ route('admin.customers.edit', $customer->id) }}" class="btn btn-default ">
+                                <a href="{{ route('admin.customers.edit', $customer->id) }}" class="btn btn-default btn-md" id="button">
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                         Ispravi
                                 </a>
-                                <!--<a href="{{ route('admin.customers.destroy', $customer->id) }}" class="btn btn-danger action_confirm" data-method="delete" data-token="{{ csrf_token() }}">
+                                <!--<a href="{{ route('admin.customers.destroy', $customer->id) }}" class="btn btn-danger btn-md action_confirm" data-method="delete" data-token="{{ csrf_token() }}" id="button">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Obriši
                                 </a>-->

@@ -63,13 +63,18 @@
 @section('content')
 	
 	<div class="tab">
-	  <button class="tablinks" onclick="openCity(event, 'Opći')" id="defaultOpen">Opći podaci</button>
-	  <button class="tablinks" onclick="openCity(event, 'Ormari')" id="defaultOpen">Ormari</button>
-	  <button class="tablinks" onclick="openCity(event, 'Priprema')" id="defaultOpen">Priprema</button>
-	  <button class="tablinks" onclick="openCity(event, 'Nabava')">Nabava</button>
-	  <button class="tablinks" onclick="openCity(event, 'Proizvodnja')">Proizvodnja</button>
+		@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator'))
+			<button class="tablinks" onclick="openCity(event, 'Opći')" id="defaultOpen">Opći podaci</button>
+		@endif
+			<button class="tablinks" onclick="openCity(event, 'Ormari')" id="defaultOpen">Ormari</button>
+		@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator'))
+			<button class="tablinks" onclick="openCity(event, 'Priprema')" id="defaultOpen">Priprema</button>
+			<button class="tablinks" onclick="openCity(event, 'Nabava')">Nabava</button>
+			<button class="tablinks" onclick="openCity(event, 'Proizvodnja')">Proizvodnja</button>
+		@endif
 	</div>
 	<!-- Opći podaci projekta -->
+	@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator'))
 	<div id="Opći" class="tabcontent">
 		<span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
 		
@@ -117,60 +122,84 @@
 				</div>
 			</div>
 		</div>
-		<div class="panel-body">
-			<div class="row">
-				<div class="col-sm-6 col-md-6 col-lg-4">
-				<h4><small>Dodaj novi kontakt</small></h4>
-				</br>
-					<form accept-charset="UTF-8" role="form" method="post" action="{{ route('customer.contact')}}">
-						<fieldset>
-							<div>
-								<input class="form-control" name="productionProject_id" type="hidden" value="{{ $production->id }}"/>
+		<div class="row">
+			<div class="col-sm-6 col-md-6 col-lg-4">
+			<h4><small>Dodaj novi kontakt</small></h4>
+			</br>
+				<form accept-charset="UTF-8" role="form" method="post" action="{{ route('customer.contact')}}">
+					<fieldset>
+						<div>
+							<input class="form-control" name="productionProject_id" type="hidden" value="{{ $production->id }}"/>
+						</div>
+						<div class="form-group {{ ($errors->has('first_name')) ? 'has-error' : '' }}">
+							<input class="form-control" placeholder="Ime" name="first_name" type="text" value="{{ old('first_name') }}" />
+							{!! ($errors->has('first_name') ? $errors->first('first_name', '<p class="text-danger">:message</p>') : '') !!}
+						</div>
+						<div class="form-group {{ ($errors->has('last_name')) ? 'has-error' : '' }}">
+							<input class="form-control" placeholder="Prezime" name="last_name" type="text" value="{{ old('last_name') }}" />
+							{!! ($errors->has('last_name') ? $errors->first('last_name', '<p class="text-danger">:message</p>') : '') !!}
+						</div>
+						<div class="form-group {{ ($errors->has('telefon')) ? 'has-error' : '' }}">
+							<input class="form-control" placeholder="Broj telefona" name="telefon" type="text" value="{{ old('telefon') }}" />
+							{!! ($errors->has('telefon') ? $errors->first('telefon', '<p class="text-danger">:message</p>') : '') !!}
+						</div>
+						<div class="form-group {{ ($errors->has('email')) ? 'has-error' : '' }}">
+							<input class="form-control" placeholder="E-mail" name="email" type="text" value="{{ old('email') }}">
+							{!! ($errors->has('email') ? $errors->first('email', '<p class="text-danger">:message</p>') : '') !!}
+						</div>
+						<div class="form-group  {{ ($errors->has('password')) ? 'has-error' : '' }}">
+							<input class="form-control" placeholder="Password" name="password" type="password" value="">
+							{!! ($errors->has('password') ? $errors->first('password', '<p class="text-danger">:message</p>') : '') !!}
+						</div>
+						<div class="form-group {{ ($errors->has('password_confirmation')) ? 'has-error' : '' }}">
+							<input class="form-control" placeholder="Potvrdi password" name="password_confirmation" type="password" />
+							{!! ($errors->has('password_confirmation') ? $errors->first('password_confirmation', '<p class="text-danger">:message</p>') : '') !!}
+						</div>
+						<h5>Dozvola</h5>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="roles[{{ $roles->slug }}]" value="{{ $roles->id }}">
+									{{ $roles->name . ' (Ima pristup stranici)' }}
+								</label>
 							</div>
-							<div class="form-group {{ ($errors->has('first_name')) ? 'has-error' : '' }}">
-								<input class="form-control" placeholder="Ime" name="first_name" type="text" value="{{ old('first_name') }}" />
-								{!! ($errors->has('first_name') ? $errors->first('first_name', '<p class="text-danger">:message</p>') : '') !!}
-							</div>
-							<div class="form-group {{ ($errors->has('last_name')) ? 'has-error' : '' }}">
-								<input class="form-control" placeholder="Prezime" name="last_name" type="text" value="{{ old('last_name') }}" />
-								{!! ($errors->has('last_name') ? $errors->first('last_name', '<p class="text-danger">:message</p>') : '') !!}
-							</div>
-							<div class="form-group {{ ($errors->has('telefon')) ? 'has-error' : '' }}">
-								<input class="form-control" placeholder="Broj telefona" name="telefon" type="text" value="{{ old('telefon') }}" />
-								{!! ($errors->has('telefon') ? $errors->first('telefon', '<p class="text-danger">:message</p>') : '') !!}
-							</div>
-							<div class="form-group {{ ($errors->has('email')) ? 'has-error' : '' }}">
-								<input class="form-control" placeholder="E-mail" name="email" type="text" value="{{ old('email') }}">
-								{!! ($errors->has('email') ? $errors->first('email', '<p class="text-danger">:message</p>') : '') !!}
-							</div>
-							<div class="form-group  {{ ($errors->has('password')) ? 'has-error' : '' }}">
-								<input class="form-control" placeholder="Password" name="password" type="password" value="">
-								{!! ($errors->has('password') ? $errors->first('password', '<p class="text-danger">:message</p>') : '') !!}
-							</div>
-							<div class="form-group {{ ($errors->has('password_confirmation')) ? 'has-error' : '' }}">
-								<input class="form-control" placeholder="Potvrdi password" name="password_confirmation" type="password" />
-								{!! ($errors->has('password_confirmation') ? $errors->first('password_confirmation', '<p class="text-danger">:message</p>') : '') !!}
-							</div>
-							<h5>Dozvola</h5>
-								<div class="checkbox">
-									<label>
-										<input type="checkbox" name="roles[{{ $roles->slug }}]" value="{{ $roles->id }}">
-										{{ $roles->name . ' (Ima pristup stranici)' }}
-									</label>
-								</div>
-								</br>
-							{{ csrf_field() }}
-						</fieldset>
-						<input class="btn btn-default btn-md" type="submit" value="Unesi kontakt">
-					</form>
-				</div>
+							</br>
+						{{ csrf_field() }}
+					</fieldset>
+					<input class="btn btn-default btn-md" type="submit" value="Unesi kontakt">
+				</form>
 			</div>
 		</div>
 	</div>
+	@endif
 	<!-- Opći podaci ormara -->
 	<div id="Ormari" class="tabcontent">
-	  <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
-	  
+		<span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+		<div class="row">
+			<div class="col-xs-6 col-md-8 col-md-10 col-lg-12">
+				<div class="panel-heading">
+					<h5>Popis ormara</h5>
+					<br>
+					@foreach($cabinets as $cabinet)
+					<div>
+						<p>Tvornički ID broj ormara: <b>{{ $cabinet->id }}</b></p>
+						<p>Proizvođač: <b>{{ $cabinet->proizvodjac }}</b></p>
+						<p>Naziv (KKS): <b>{{ $cabinet->naziv }}</b></p>
+						<p>Dimenzija: <b>{{ $cabinet->velicina }}</b></p>
+						<p>Izvedba: <b>{{ $cabinet->tip }}</b></p>
+						<p>Tip: <b>{{ $cabinet->izvedba }}</b></p>
+						<p>Model: <b>{{ $cabinet->model }}</b></p>
+						<p>Materijal: <b>{{ $cabinet->materijal }}</b></p>
+						<p>Nazivni napon: <b>{{ $cabinet->napon }}</b></p>
+						<p>Nazivna struja: <b>{{ $cabinet->struja }}</b></p>
+						<p>Prekidna moć: <b>{{ $cabinet->prekidna_moc }}</b></p>
+						<p>Sustav zaštite: <b>{{ $cabinet->sustav_zastite }}</b></p>
+						<p>IP zaštita ormara: <b>{{ $cabinet->ip_zastita }}</b></p>
+					</div>
+					<hr>
+					@endforeach
+				</div>
+			</div>
+	  </div>
 	  
 	</div>
 	

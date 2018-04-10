@@ -73,11 +73,11 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show() //show($id)
     {
         $customer = Customer::find($id);
 		
-	//	return view('admin.customers.show', ['customer' => $customer]);
+		return view('admin.customers.show',['customer' => $customer]);
     }
 
     /**

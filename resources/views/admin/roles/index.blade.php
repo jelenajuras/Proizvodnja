@@ -4,7 +4,7 @@
 
 @section('content')
     <div class='btn-toolbar pull-right'>
-		<a class="btn btn-default btn-md" href="{{ route('roles.create') }}" >
+		<a class="btn btn-default btn-md" href="{{ route('roles.create') }}" id="button">
 			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 			Dodaj dozvolu
 		</a>
@@ -30,14 +30,14 @@
                                 <td>{{ $role->slug }}</td>
                                 <td>{{ implode(", ", array_keys($role->permissions)) }}</td>
                                 <td>
-                                    <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-default">
+                                    <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-default btn md" id="button">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                         Ispravi
                                     </a>
-                                    <a href="{{ route('roles.destroy', $role->id) }}" class="btn btn-danger action_confirm" data-method="delete" data-token="{{ csrf_token() }}">
+                                   <!-- <a href="{{ route('roles.destroy', $role->id) }}" class="btn btn-danger btn-md action_confirm" data-method="delete" data-token="{{ csrf_token() }}" id="button">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Obriši
-                                    </a>
+                                    </a>-->
                                 </td>
                             </tr>
                         @endforeach

@@ -65,7 +65,7 @@ class ProductionController extends Controller
 		$contacts = Users::where('productionProject_id','=',$id)->get();
 		$cabinets= Cabinet::where('projekt_id','=',$production->id)->get();
 		
-		dd($cabinets);
+		//dd($cabinets);
 		
 		return view('admin.productions.show', ['production' => $production], ['roles' => $roles])->with('contacts',$contacts)->with('cabinets',$cabinets);
     }
