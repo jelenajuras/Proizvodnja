@@ -24,7 +24,6 @@ class CabinetRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' 	=> 'required|min:3',
 			'projekt_id'  => 'required',
 			'naziv'  => 'required',
 			'velicina'  => 'required',
@@ -38,8 +37,6 @@ class CabinetRequest extends FormRequest
 	public function messages()
 	{
 		return [
-			'id.required'	 => 'Unos broja ormara je obavezan!',
-			'id.min'	 => 'Broj ormara treba imati minimalno 5 brojeva!',
 			'projekt_id.required'  => 'Unos projekta je obavezan!',
 			'naziv.required'  => 'Unos projekta je obavezan!',
 			'tip.required'  => 'Unos projekta je obavezan!',

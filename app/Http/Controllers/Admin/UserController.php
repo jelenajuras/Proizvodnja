@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Cartalyst\Sentinel\Users\IlluminateUserRepository;
 use App\Http\Controllers\Controller;
 use App\Models\Users;
-use App\Models\ProductionProject;
+use App\Models\Project;
 
 class UserController extends Controller
 {
@@ -39,8 +39,7 @@ class UserController extends Controller
     {
         $users = Users::orderBy('last_name','ASC')->get();
 		
-		$kupac = ProductionProject::join('customers','production_projects.investitor_id','customers.id')->select('production_projects.*','customers.naziv as tvrtka')->get();
-		
+		$kupac = Project::join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as tvrtka')->get();
 		
 		//dd($kupac);
         return view('admin.users.index', ['users' => $users])->with('kupac',$kupac);

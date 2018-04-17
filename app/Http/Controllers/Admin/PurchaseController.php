@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Production;
-use App\Models\Users;
-use App\Models\Cabinet;
-use App\Models\Project;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use DateTime;
-use App\Models\Preparation;
+use App\Models\Cabinet;
 use App\Models\Purchase;
+use App\Http\Controllers\Controller;
+use Sentinel;
 
-class ProductionController extends Controller
+class PurchaseController extends Controller
 {
-     /**
+    /**
    * Set middleware to quard controller.
    *
    * @return void
@@ -31,7 +27,7 @@ class ProductionController extends Controller
      */
     public function index()
     {
-		return view('admin.productions.index');
+        //
     }
 
     /**
@@ -44,7 +40,7 @@ class ProductionController extends Controller
         $idOrmara = $request->id;
 		$cabinet = Cabinet::where('id','=',$idOrmara)->first();
 
-		return view('admin.productions.create')->with('idOrmara', $idOrmara)->with('cabinet', $cabinet);
+		return view('admin.purchases.create')->with('idOrmara', $idOrmara)->with('cabinet', $cabinet);
     }
 
     /**
@@ -58,33 +54,29 @@ class ProductionController extends Controller
         $input = $request->except(['_token']);
 		$project = Cabinet::where('id',$input['ormar_id'])->first();
 		$brProj = $project->projekt_id;
-
+		//dd($brProj);
 		
 		$data = array(
-			'ormar_id'  => $input['ormar_id'],
 			'datum'  => date("Y-m-d", strtotime($input['datum'])),
-			'koment_mp'  => $input['koment_mp'],
+			'ormar_id'  => $input['ormar_id'],
 			'koment_orm'  => $input['koment_orm'],
+			'koment_kan'  => $input['koment_kan'],
+			'koment_sine'  => $input['koment_sine'],
 			'koment_vod'  => $input['koment_vod'],
-			'koment_ozn'  => $input['koment_ozn'],
-			'koment_slMp'  => $input['koment_slMp'],
-			'koment_oznMp'  => $input['koment_oznMp'],
-			'koment_ozic'  => $input['koment_ozic'],
-			'koment_dok'  => $input['koment_dok'],
-			'koment_isp'  => $input['koment_isp'],
+			'koment_bak'  => $input['koment_bak'],
+			'koment_stez'  => $input['koment_stez'],
+			'koment_sklOpr'  => $input['koment_sklOpr'],
 			'rijeseno1'  => $input['rijeseno1'],
 			'rijeseno2'  => $input['rijeseno2'],
 			'rijeseno3'  => $input['rijeseno3'],
 			'rijeseno4'  => $input['rijeseno4'],
 			'rijeseno5'  => $input['rijeseno5'],
 			'rijeseno6'  => $input['rijeseno6'],
-			'rijeseno7'  => $input['rijeseno7'],
-			'rijeseno8'  => $input['rijeseno8'],
-			'rijeseno9'  => $input['rijeseno9']
+			'rijeseno7'  => $input['rijeseno7']
 		);
 		
-		$production = new Production();
-		$production->saveProduction($data);
+		$purchase = new Purchase();
+		$purchase->savePurchase($data);
 		
 		$message = session()->flash('success', 'Zapis je uspješno spremljen.');
 		
@@ -95,83 +87,65 @@ class ProductionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Production  $production
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-		$project = Project::join('customers','projects.investitor_id','=','customers.id')->select('projects.*','customers.naziv as investitor')->find($id);
-			
-		$roles = app()->make('sentinel.roles')->createModel()->where('slug','kupac')->first();
-		$contacts = Users::where('productionProject_id','=',$id)->get();
-		$cabinets = Cabinet::where('projekt_id','=',$project->id)->get();
-		$preparations = Preparation::get();
-		$purchases = Purchase::get();
-		$productions = Production::get();
-		
-
-	//	$datum_1 = new DateTime($cabinets);
-	//	$datum_1->modify('-10 days');
-	
-		
-		return view('admin.productions.show', ['project' => $project], ['roles' => $roles])->with('contacts',$contacts)->with('cabinets',$cabinets)->with('preparations',$preparations)->with('purchases',$purchases)->with('productions',$productions);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Production  $production
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $production = Production::find($id);
-		$cabinet = Cabinet::where('id','=',$production->ormar_id)->first();
+        $purchase = Purchase::find($id);
+		$cabinet = Cabinet::where('id','=',$purchase->ormar_id)->first();
 		
 		//dd($cabinet);
 		
-		return view('admin.productions.edit', ['production' => $production])->with('cabinet', $cabinet);
+		return view('admin.purchases.edit', ['purchase' => $purchase])->with('cabinet', $cabinet);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Production  $production
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $production = Production::find($id);
+        $purchase = Purchase::find($id);
 		$input = $request;
 		$project = Cabinet::where('id',$input['ormar_id'])->first();
 		$brProj = $project->projekt_id;
 		//dd($brProj);
 
 		$data = array(
-			'ormar_id'  => $input['ormar_id'],
 			'datum'  => date("Y-m-d", strtotime($input['datum'])),
-			'koment_mp'  => $input['koment_mp'],
+			'ormar_id'  => $input['ormar_id'],
 			'koment_orm'  => $input['koment_orm'],
+			'koment_kan'  => $input['koment_kan'],
+			'koment_sine'  => $input['koment_sine'],
 			'koment_vod'  => $input['koment_vod'],
-			'koment_ozn'  => $input['koment_ozn'],
-			'koment_slMp'  => $input['koment_slMp'],
-			'koment_oznMp'  => $input['koment_oznMp'],
-			'koment_ozic'  => $input['koment_ozic'],
-			'koment_dok'  => $input['koment_dok'],
-			'koment_isp'  => $input['koment_isp'],
+			'koment_bak'  => $input['koment_bak'],
+			'koment_stez'  => $input['koment_stez'],
+			'koment_sklOpr'  => $input['koment_sklOpr'],
 			'rijeseno1'  => $input['rijeseno1'],
 			'rijeseno2'  => $input['rijeseno2'],
 			'rijeseno3'  => $input['rijeseno3'],
 			'rijeseno4'  => $input['rijeseno4'],
 			'rijeseno5'  => $input['rijeseno5'],
 			'rijeseno6'  => $input['rijeseno6'],
-			'rijeseno7'  => $input['rijeseno7'],
-			'rijeseno8'  => $input['rijeseno8'],
-			'rijeseno9'  => $input['rijeseno9']
+			'rijeseno7'  => $input['rijeseno7']
 		);
 		
-		$production->updateProduction($data);
+		$purchase->updatePurchase($data);
 		
 		$message = session()->flash('success', 'Uspješno su ispravljeni podaci');
 		
@@ -182,10 +156,10 @@ class ProductionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Production  $production
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Production $production)
+    public function destroy($id)
     {
         //
     }

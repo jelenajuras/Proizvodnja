@@ -61,7 +61,17 @@
                        <textarea class="form-control" name="objekt" id="projekt-name" >{{ $project->objekt }}</textarea>
 					   {!! ($errors->has('objekt') ? $errors->first('objekt', '<p class="text-danger">:message</p>') : '') !!}
                     </div>
-					
+					<div class="form-group {{ ($errors->has('user_id')) ? 'has-error' : '' }}">
+					<text>Voditelj projekta</text>
+						<select class="form-control" name="user_id" id="sel1">
+							<option selected="selected" value="{{ $project->user_id }}">
+							{{ $project->user['first_name'] . ' '. $project->user['last_name']}} </option>
+							@foreach ($users as $user)
+								<option name="user_id" value=" {{ $user->id}} ">{{ $user->first_name . ' ' . $user->last_name }}</option>
+							@endforeach
+						</select>
+						 {!! ($errors->has('user_id') ? $errors->first('user_id', '<p class="text-danger">:message</p>') : '') !!}
+					</div>	
 					
 					{{ csrf_field() }}
 					{{ method_field('PUT') }}

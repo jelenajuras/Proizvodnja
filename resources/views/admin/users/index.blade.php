@@ -33,7 +33,7 @@
 						@if($user->productionProject_id)
 						<?php 
 							$proj = $user->productionProject_id;
-							$kupac = DB::table('production_projects')->join('customers','production_projects.investitor_id','customers.id')->select('production_projects.*','customers.naziv as tvrtka')->where('production_projects.id','=', $proj)->first();
+							$kupac = DB::table('projects')->join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as tvrtka')->where('projects.id','=', $proj)->first();
 							$kupac = $kupac->tvrtka;
 							?>
 						@else

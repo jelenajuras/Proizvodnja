@@ -7,7 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
 	
-	protected $fillable = ['id','customer_id','investitor_id','naziv','objekt'];
+	protected $fillable = ['id','customer_id','investitor_id','naziv','objekt','user_id'];
+	
+	
+	/*
+	* The Eloquent customer model name
+	* 
+	* @var string
+	*/
+	protected static $userModel = 'App\Models\Users'; 	
 	
 	/*
 	* The Eloquent customer model name
@@ -46,6 +54,17 @@ class Project extends Model
 	{
 		return $this->hasMany(static::$loccoModel,'projekt_id')->orderBy('created_at','DESC')->paginate(10);
 	}	
+	
+	/*
+	* Returns the customer relationship
+	* 
+	* @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	*/
+	
+	public function user()
+	{
+		return $this->belongsTo(static::$userModel,'user_id');
+	}
 	
 	/*
 	* Returns the customer relationship

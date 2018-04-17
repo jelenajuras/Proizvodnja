@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProjectRequest;
 use App\Http\Controllers\Controller;
@@ -40,7 +41,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+		$users = Users::join('role_users','users.id','=','role_users.user_id')->select('users.*','role_users.role_id')->where('role_users.role_id','<>','4')->orderBy('last_name','ASC')->get();
+        return view('admin.projects.create')->with('users',$users);
     }
 	
 	/**
@@ -68,7 +70,8 @@ class ProjectController extends Controller
 			'customer_id'    => $naručitelj,
 			'investitor_id'  => $investitor,
 			'naziv' 		 => $input['naziv'],
-			'objekt' 		 => $input['objekt']
+			'objekt' 		 => $input['objekt'],
+			'user_id'  		=> $input['user_id']
 		);
 		
 		$project = new Project();
@@ -102,7 +105,8 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project = Project::find($id);
-		return view('admin.projects.edit', ['project' => $project]);
+		$users = Users::join('role_users','users.id','=','role_users.user_id')->select('users.*','role_users.role_id')->where('role_users.role_id','<>','4')->orderBy('last_name','ASC')->get();
+		return view('admin.projects.edit', ['project' => $project])->with('users',$users);
 	
     }
 	 public function update(ProjectRequest $request, $id)
@@ -111,11 +115,11 @@ class ProjectController extends Controller
 		$input = $request;
 		
 		$data = array(
-			
 			'customer_id'    => $input['customer_id'],
 			'investitor_id'  => $input['investitor_id'],
 			'naziv'			 => $input['naziv'],
-			'objekt' 		 => $input['objekt']
+			'objekt' 		 => $input['objekt'],
+			'user_id'  		=> $input['user_id']
 		);
 		
 		$project->updateProject($data);

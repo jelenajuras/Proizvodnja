@@ -6,14 +6,43 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cabinet extends Model
 {
-    protected $fillable = ['id','projekt_id','proizvodjac','naziv','tip','model','velicina','materijal','izvedba','napon','struja','prekidna_moc','sustav_zastite','ip_zastita'];
+    protected $fillable = ['brOrmara','projektirao_id','odobrio_id','datum_isporuke','projekt_id','proizvodjac','proizvodjacOpr','naziv','tip','model','velicina','materijal','izvedba','napon','struja','prekidna_moc','sustav_zastite','ip_zastita','ulaz_kabela','oznake','logo','napomena'];
 	
 	/*
 	* The Eloquent project model name
 	* 
 	* @var string
 	*/
-	protected static $projectModel = 'App\Models\ProductionProject'; 
+	protected static $projectModel = 'App\Models\Project'; 
+	
+	/*
+	* The Eloquent project model name
+	* 
+	* @var string
+	*/
+	protected static $userModel = 'App\Models\Users'; 
+	
+	/*
+	* Returns the customer relationship
+	* 
+	* @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	*/
+	
+	public function odobrio_user()
+	{
+		return $this->belongsTo(static::$userModel,'odobrio_id');
+	}
+	
+	/*
+	* Returns the customer relationship
+	* 
+	* @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	*/
+	
+	public function projektirao_user()
+	{
+		return $this->belongsTo(static::$userModel,'projektirao_id');
+	}
 	
 	/*
 	* Returns the customer relationship

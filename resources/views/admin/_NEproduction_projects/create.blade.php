@@ -40,7 +40,7 @@
 						<select class="form-control" name="user_id" id="sel1">
 							<option disabled selected value> </option>
 							@foreach ($users as $user)
-								@id($user->id)
+								@if($user->id)
 								<option name="user_id" value=" {{ $user->id}} ">{{ $user->first_name . ' ' . $user->last_name }}</option>
 							@endforeach
 						</select>

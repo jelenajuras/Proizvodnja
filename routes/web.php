@@ -108,6 +108,24 @@ Route::group(['prefix' => 'admin'], function () {
   'update'		=> 'admin.productions.update', 
   'destroy'		=> 'admin.productions.destroy'
   ]]);
+  Route::resource('preparations', 'Admin\PreparationController', ['names' => [
+  'index' 		=> 'admin.preparations.index', 
+  'create' 		=> 'admin.preparations.create', 
+  'store' 		=> 'admin.preparations.store', 
+  'show' 		=> 'admin.preparations.show', 
+  'edit' 		=> 'admin.preparations.edit', 
+  'update'		=> 'admin.preparations.update', 
+  'destroy'		=> 'admin.preparations.destroy'
+  ]]);
+  Route::resource('purchases', 'Admin\PurchaseController', ['names' => [
+  'index' 		=> 'admin.purchases.index', 
+  'create' 		=> 'admin.purchases.create', 
+  'store' 		=> 'admin.purchases.store', 
+  'show' 		=> 'admin.purchases.show', 
+  'edit' 		=> 'admin.purchases.edit', 
+  'update'		=> 'admin.purchases.update', 
+  'destroy'		=> 'admin.purchases.destroy'
+  ]]);
 });
 
 // Post page

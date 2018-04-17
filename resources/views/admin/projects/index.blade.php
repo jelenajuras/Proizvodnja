@@ -26,6 +26,7 @@
 							<th>Investitor</th>
 							<th>Naziv projekta</th>
 							<th>Naziv objekta</th>
+							<th>Voditelj projekta</th>
                             <th>Options</th>
                         </tr>
                     </thead>
@@ -37,6 +38,7 @@
 								<td>{{ $project->investitor['naziv'] }}</td>
 								<td>{{ $project->naziv }}</td>
 								<td>{{ $project->objekt }}</td>
+								<td>{{ $project->user['first_name'] . ' ' . $project->user['last_name'] }}</td>
                                   <td id="td1">
                                     <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-default btn-md" id="button">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>

@@ -61,6 +61,7 @@
 	  <button class="tablinks" onclick="openCity(event, 'Priprema')" id="defaultOpen">Priprema</button>
 	  <button class="tablinks" onclick="openCity(event, 'Nabava')">Nabava</button>
 	  <button class="tablinks" onclick="openCity(event, 'Proizvodnja')">Proizvodnja</button>
+	  <button class="tablinks" onclick="openCity(event, 'Status')">Status ormara</button>
 	</div>
 
 	<div id="Opći" class="tabcontent">
@@ -86,7 +87,20 @@
 	  <h4>Proizvodnja</h4>
 	  <p></p>
 	</div>
+
+	<div id="Status" class="tabcontent">
+	  <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+	  <h4>Status ormara</h4>
+	  <p></p>
+	</div>
 	
+	<script type="text/javascript">
+		$('.date').datepicker({  
+		   format: 'dd-mm-yyyy',
+		   startDate:'-60y',
+		   endDate:'+1y',
+		}); 
+	</script> 
 	<script>
 	function openCity(evt, cityName) {
 		var i, tabcontent, tablinks;

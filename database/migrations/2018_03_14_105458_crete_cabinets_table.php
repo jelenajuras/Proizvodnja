@@ -14,9 +14,11 @@ class CreteCabinetsTable extends Migration
     public function up()
     {
         Schema::create('cabinets', function (Blueprint $table) {
-            $table->unsignedInteger('id');
+            $table->increments('id');
 			$table->unsignedInteger('projekt_id');
 			$table->string('proizvodjac');
+			$table->date('rok_isporuke');
+			$table->string('proizvodjacOpr')->nullable($value = true);
 			$table->string('naziv');
 			$table->string('velicina');
 			$table->string('tip');
@@ -28,6 +30,15 @@ class CreteCabinetsTable extends Migration
 			$table->string('prekidna_moc')->nullable($value = true);
 			$table->string('sustav_zastite')->nullable($value = true);
 			$table->string('ip_zastita')->nullable($value = true);
+			$table->string('ulaz_kabela')->nullable($value = true);
+			$table->string('dim_kanalice')->nullable($value = true);
+			$table->string('bak_razvod')->nullable($value = true);
+			$table->string('oznake')->nullable($value = true);
+			$table->string('logo')->nullable($value = true);
+			$table->string('napomena')->nullable($value = true);
+			$table->date('datum_isporuke');
+			$table->unsignedInteger('projektirao_id');
+			$table->unsignedInteger('odobrio_id');
 			$table->timestamps();
         });
     }

@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration
 			$table->integer('customer_id')->nullable();
 			$table->string('naziv')->nullable($value = true);
 			$table->string('objekt')->nullable($value = true);
+			$table->integer('user_id')->nullable($value = true);
 			$table->timestamps();
         });
     }

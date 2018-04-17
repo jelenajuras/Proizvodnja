@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Cabinet;
+use App\Models\Users;
+use App\Models\Project;
 use App\Http\Requests\CabinetRequest;
 use App\Http\Controllers\Controller;
 use Sentinel;
-use App\Models\ProductionProject;
 
 class CabinetController extends Controller
 {
@@ -28,7 +29,7 @@ class CabinetController extends Controller
      */
     public function index()
     {
-		$cabinets = Cabinet::join('production_projects','cabinets.projekt_id','=','production_projects.id')->join('projects','production_projects.projekt_id','=','projects.id')->join('customers','production_projects.investitor_id','=','customers.id')->select('cabinets.*','production_projects.id as brProjekta','production_projects.investitor_id as kupac','projects.id as PrBroj','projects.naziv as PrNaziv','projects.objekt','customers.naziv as investitor')->orderBy('id','ASC')->get();
+		$cabinets = Cabinet::join('projects','cabinets.projekt_id','=','projects.id')->join('customers','projects.investitor_id','=','customers.id')->select('cabinets.*','projects.id as PrBroj','projects.investitor_id as kupac','projects.naziv as PrNaziv','projects.objekt','customers.naziv as investitor')->orderBy('id','ASC')->get();
 
 		return view('admin.cabinets.index',['cabinets'=>$cabinets]);
     }
@@ -40,10 +41,12 @@ class CabinetController extends Controller
      */
     public function create()
     {
-		$projects = ProductionProject::join('projects','production_projects.projekt_id','=','projects.id')->join('customers','projects.investitor_id','customers.id')->select('production_projects.*','projects.naziv as nazivProjekta', 'projects.id as brProjekta','projects.objekt as objekt','projects.investitor_id','customers.naziv as investitor')->orderBy('id','ASC')->get();
+		$projects = Project::join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->orderBy('id','ASC')->get();
+		$zadnjibr = Cabinet::orderBy('brOrmara','DESC')->first();
+		$users = Users::join('role_users','users.id','=','role_users.user_id')->select('users.*','role_users.role_id')->where('role_users.role_id','<>','4')->orderBy('last_name','ASC')->get();
 		
-		//dd($projects);
-		return view('admin.cabinets.create')->with('projects',$projects);
+		//dd($zadnjibr->brOrmara);
+		return view('admin.cabinets.create')->with('projects',$projects)->with('zadnjibr',$zadnjibr)->with('users',$users);
     }
 
     /**
@@ -55,11 +58,15 @@ class CabinetController extends Controller
     public function store(CabinetRequest $request)
     {
 		$input = $request->except(['_token']);
-
+	//	dd($input);
 		$data = array(
-			'id'  => $input['id'],
+			'brOrmara'  => $input['brOrmara'],
+			'projektirao_id'  => $input['projektirao_id'],
+			'odobrio_id'  => $input['odobrio_id'],
 			'projekt_id'  => $input['projekt_id'],
+			'datum_isporuke'  => date("Y-m-d", strtotime($input['datum_isporuke'])),
 			'proizvodjac'  => $input['proizvodjac'],
+			'proizvodjacOpr'  => $input['proizvodjacOpr'],
 			'naziv'  => $input['naziv'],
 			'velicina'  => $input['velicina'],
 			'tip'  => $input['tip'],
@@ -70,7 +77,12 @@ class CabinetController extends Controller
 			'struja'  => $input['struja'],
 			'prekidna_moc'  => $input['prekidna_moc'],
 			'sustav_zastite'  => $input['sustav_zastite'],
-			'ip_zastita'  => $input['ip_zastita']
+			'ip_zastita'  => $input['ip_zastita'],
+			'ulaz_kabela'  => $input['ulaz_kabela'] . ' '. $input['kab_dimenzija'] ,
+			/*'bak_razvod'  => $input['bak_razvod']. ' '. $input['bak_dimenzija'],*/
+			'oznake'  => $input['oznake'],
+			'logo'  => $input['logo'],
+			'napomena'  => $input['napomena']
 		);
 		
 		$cabinet = new Cabinet();
@@ -104,9 +116,9 @@ class CabinetController extends Controller
     public function edit($id)
     {
         $cabinet = Cabinet::find($id);
-		$projects = ProductionProject::join('projects','production_projects.projekt_id','=','projects.id')->join('customers','projects.investitor_id','customers.id')->select('production_projects.*','projects.naziv as nazivProjekta', 'projects.id as brProjekta','projects.objekt as objekt','projects.investitor_id','customers.naziv as investitor')->orderBy('id','ASC')->get();
-		
-		return view('admin.cabinets.edit', ['cabinet' => $cabinet])->with('projects',$projects);
+		$projects = Project::join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->orderBy('id','ASC')->get();
+		$users = Users::join('role_users','users.id','=','role_users.user_id')->select('users.*','role_users.role_id')->where('role_users.role_id','<>','4')->orderBy('last_name','ASC')->get();
+		return view('admin.cabinets.edit', ['cabinet' => $cabinet])->with('projects',$projects)->with('users',$users);
     }
 
     /**
@@ -120,11 +132,15 @@ class CabinetController extends Controller
     {
         $cabinet = Cabinet::find($id);
 		$input = $request->except(['_token']);
-
+		//dd($input);
 		$data = array(
-			'id'  => $input['id'],
+			'brOrmara'  => $input['brOrmara'],
+			'projektirao_id'  => $input['projektirao_id'],
+			'odobrio_id'  => $input['odobrio_id'],
 			'projekt_id'  => $input['projekt_id'],
+			'datum_isporuke'  => date("Y-m-d", strtotime($input['datum_isporuke'])),
 			'proizvodjac'  => $input['proizvodjac'],
+			'proizvodjacOpr'  => $input['proizvodjacOpr'],
 			'naziv'  => $input['naziv'],
 			'velicina'  => $input['velicina'],
 			'tip'  => $input['tip'],
@@ -135,14 +151,19 @@ class CabinetController extends Controller
 			'struja'  => $input['struja'],
 			'prekidna_moc'  => $input['prekidna_moc'],
 			'sustav_zastite'  => $input['sustav_zastite'],
-			'ip_zastita'  => $input['ip_zastita']
+			'ip_zastita'  => $input['ip_zastita'],
+			'ulaz_kabela'  => $input['ulaz_kabela'] . ' '. $input['kab_dimenzija'] ,
+			/*'bak_razvod'  => $input['bak_razvod']. ' '. $input['bak_dimenzija'],*/
+			'oznake'  => $input['oznake'],
+			'logo'  => $input['logo'],
+			'napomena'  => $input['napomena']
 		);
 		
 		$cabinet->updateCabinet($data);
 		
 		$message = session()->flash('success', 'Ispravljeni su podaci ormara' . $cabinet->id );
 		
-		return redirect()->route('admin.posts.index')->withFlashMessage($message);
+		return redirect()->route('admin.cabinets.index')->withFlashMessage($message);
     }
 
     /**

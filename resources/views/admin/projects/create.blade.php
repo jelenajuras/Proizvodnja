@@ -47,6 +47,16 @@
                        <textarea class="form-control"  placeholder="Naziv objekta"  name="objekt" id="projekt-name"></textarea>
                         {!! ($errors->has('objekt') ? $errors->first('objekt', '<p class="text-danger">:message</p>') : '') !!}
                     </div>
+					<div class="form-group {{ ($errors->has('user_id')) ? 'has-error' : '' }}">
+					<text>Voditelj projekta</text>
+						<select class="form-control" name="user_id" id="sel1">
+							<option disabled selected value> </option>
+							@foreach ($users as $user)
+								<option name="user_id" value=" {{ $user->id}} ">{{ $user->first_name . ' ' . $user->last_name }}</option>
+							@endforeach
+						</select>
+						 {!! ($errors->has('user_id') ? $errors->first('user_id', '<p class="text-danger">:message</p>') : '') !!}
+					</div>	 
 	
                     <input name="_token" value="{{ csrf_token() }}" type="hidden">
                     <input class="btn btn-lg btn-primary btn-block" type="submit" value="Upiši projekt" id="input2">

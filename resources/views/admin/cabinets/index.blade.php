@@ -35,6 +35,7 @@
 						<th>Broj</th>
 						<th>Broj projekta, Investitor, naziv projekta</th>
 						<th>Objekt</th>
+						<th>Datum isporuke</th>
 						<th>Proizvođač</th>
 						<th>Naziv ormara (KKS)</th>
 						<th>Dimenzija</th>
@@ -56,6 +57,7 @@
 						<td>{{ $cabinet->id }}</td>
 						<td>{{ $cabinet->PrBroj . ' - ' . $cabinet->investitor . ' - ' . $cabinet->PrNaziv }}</td>
 						<td>{{ $cabinet->objekt }}</td>
+						<td>{{  date('d.m.Y', strtotime($cabinet->datum_isporuke)) }}</td>
 						<td>{{ $cabinet->proizvodjac }}</td>
 						<td>{{ $cabinet->naziv }}</td>
 						<td>{{ $cabinet->velicina }}</td>
