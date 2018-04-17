@@ -27,139 +27,17 @@
 	<!-- Side dropdown -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
+	<link rel="stylesheet" href="{{ URL::asset('css/admin.css') }}"/>
+	
 	@stack('stylesheet')
 	
 </head>
-<style>
-	* {
-		padding:0;
-		margin:0;
-	}
-	html {
-		font-family: "Lato", sans-serif;
-		font-size: 16px;
-	}
 
-	/* Fixed sidenav, full height */
-	.sidenav {
-		height: 100%;
-		width: 180px;
-		position: fixed;
-		z-index: 1;
-		top: 0;
-		left: 0;
-		background-color: #111;
-		overflow-x: hidden;
-		padding-top: 15px;
-	}
-
-	/* Style the sidenav links and the dropdown button */
-	.sidenav a, .dropdown-btn {
-		padding: 6px 8px 6px 16px;
-		text-decoration: none;
-		font-size: 0.75em;
-		color: #818181;
-		display: block;
-		border: none;
-		background: none;
-		width: 100%;
-		text-align: left;
-		cursor: pointer;
-		outline: none;
-	}
-
-	/* On mouse-over */
-	.sidenav a:hover, .dropdown-btn:hover {
-		color: #f1f1f1;
-	}
-
-	/* Main content */
-	.main {
-		margin-left: 180px; /* Same as the width of the sidenav */
-		font-size: 0.75em; /* Increased text to enable scrolling */
-		padding: 5px 15px;
-		
-	}
-	
-	/* Add an active class to the active dropdown button */
-	.active {
-		background-color: orange;
-		color: black;
-	}
-
-	/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-	.dropdown-container {
-		display: none;
-		background-color: #262626;
-		padding-left: 16px;
-	}
-
-	/* Optional: Style the caret down icon */
-	.fa-caret-down {
-		float: right;
-		padding-right: 8px;
-	}
-
-	/* Some media queries for responsiveness */
-	@media screen and (max-height: 450px) {
-		.sidenav {padding-top: 0.94em;}
-		.sidenav a {font-size: 1.13em;}
-	}
-	#duplico {
-		color: #ff6600;
-		font-size: 1.25em;
-	}
-	.navbar-right {
-		color: #818181;
-		padding-top: 13px;
-		list-style-type: none;
-	}
-	#input2 {
-		background-color:#262626;
-		color:#ff6600;
-	}
-	th {
-		text-align: center;
-		font-weight: normal;
-		text-size: 0.50rem;
-	}
-	#center{
-		padding-left: 180px;
-	}
-	#button {
-		font-size: 0.75rem;
-	}
-	.button {
-		font-size: 0.88rem;
-	}
-	h1, h2, h3, h4, h5, h6 {
-		font-size: 1.5em;
-	}
-	.proizv {
-		font-size:10px;
-	}
-	.tabcontent, a {
-		overflow: auto;
-	}
-	input {
-		font-size:0.75rem;
-		white-space: wrap;
-	}
-	option {
-		font-size:0.75rem;
-	}
-	.form-control {
-		font-size:0.66rem;
-		padding:1rem;
-	}
-	
-</style>
-</head>
 <body>
-
 	<div class="sidenav">
+		<!--<img src="{{ asset('img/Duplico_logo-mali.png') }}"/>-->
 		<a class="navbar-brand" href="{{ route('admin.dashboard') }}" id="duplico">Duplico</a>
-
+	
 	<!-- Vide administrator i proizvodnja -->
 		@if (Sentinel::check() && Sentinel::inRole('administrator') || Sentinel::inRole('proizvodnja'))
 			<button class="dropdown-btn">Opći podaci 
@@ -193,6 +71,14 @@
 		@endif
 		
 	<!-- Vidi kupac i basic -->
+		@if (Sentinel::check() && Sentinel::inRole('basic'))
+			<button class="dropdown-btn">Opći podaci 
+				<i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-container">
+				<a class="{{ Request::is('proizvodnja/*') ? 'active' : '' }}" href="{{ route('admin.cabinets.index') }}">Ormari</a>
+			</div>
+		@endif
 		@if (Sentinel::check() && Sentinel::inRole('kupac') || Sentinel::inRole('basic'))
 			<button class="dropdown-btn">Proizvodnja
 				<i class="fa fa-caret-down"></i>
@@ -205,7 +91,6 @@
 			@endforeach
 			</div>
 		@endif
-
 	</div>
 	
 	<nav class="navbar navbar-inverse">

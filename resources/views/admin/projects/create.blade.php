@@ -2,7 +2,6 @@
 
 @section('title', 'Dodaj novi projekt')
 
-
 @section('content')
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -21,9 +20,9 @@
                     <div class="form-group {{ ($errors->has('customer_id')) ? 'has-error' : '' }}">
 						<text>Naručitelj</text>
 						<select class="form-control" name="customer_id" id="sel1">
-							<option disabled selected value> </option>
+							<option disabled selected value></option>
 							@foreach (DB::table('customers')->orderBy('naziv','ASC')->get() as $customer)
-								<option name="customer_id" value=" {{$customer->id}} ">{{ $customer->naziv }}</option>
+								<option name="customer_id" value="{{$customer->id }}">{{ $customer->naziv }}</option>
 							@endforeach
 						</select>
 						{!! ($errors->has('customer_id') ? $errors->first('customer_id', '<p class="text-danger">:message</p>') : '') !!}
@@ -31,9 +30,9 @@
 					<div class="form-group">
 						<text>Investitor</text>
 						<select class="form-control" name="investitor_id"  id="sel1">
-							<option disabled selected value> </option>
+							<option disabled selected value></option>
 							@foreach (DB::table('customers')->get() as $customer)
-								<option name="investitor_id" value=" {{$customer->id}} ">{{ $customer->naziv }}</option>
+								<option name="investitor_id" value="{{$customer->id}}">{{ $customer->naziv }}</option>
 							@endforeach
 						</select>
                     </div>
