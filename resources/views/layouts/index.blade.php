@@ -16,6 +16,8 @@
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+		
+		<link rel="stylesheet" href="{{ URL::asset('css/index.css') }}"/>
 </head>
 <style>	
 
@@ -32,33 +34,46 @@
 }
 </style>
     <body>
-      <nav class="navbar navbar-inverse">
-          <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-				    <a class="navbar-brand" href="#" id="duplico">Duplico</a>
-			    </div>
+		<nav class="navbar navbar-inverse">
+		  <div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#" id="duplico">Duplico</a>
+				</div>
 				
 				<ul class="nav navbar-nav navbar-right">
-                    @if (Sentinel::check())
-                        <li>
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="user"></span> {{ Sentinel::getUser()->first_name }} <span class="caret"></span></a>
-                          <ul class="dropdown-menu">
-                            <li><a href="{{ route('auth.logout') }}">Odjava</a></li>
-                          </ul>
-                        </li>
-                    @else
-                        <li><a href="{{ route('auth.login.form') }}">Prijava</a></li>
-                        <li><a href="{{ route('auth.register.form') }}">Registracija</a></li>
-                    @endif
-                </ul>
+					@if (Sentinel::check())
+						<li>
+						  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="user"></span> {{ Sentinel::getUser()->first_name }} <span class="caret"></span></a>
+						  <ul class="dropdown-menu">
+							<li><a href="{{ route('auth.logout') }}">Odjava</a></li>
+						  </ul>
+						</li>
+					@else
+						<li><a href="{{ route('auth.login.form') }}">Prijava</a></li>
+						<li><a href="{{ route('auth.register.form') }}">Registracija</a></li>
+					@endif
+				</ul>
 				
-          </div>
-      </nav>
-        <div class="container">
-            @include('notifications')
-            @yield('content')
-        </div>
+		  </div>
+		</nav>
+		
+		<section>
+			<header class="head">
+				<img src="{{ asset('img/struja.jpeg') }}"/>
+			</header>
+			<article>
+			
+			</article>
+			
+			<footer>
+			</footer>
+		</section>
+
+		<div class="container">
+			@include('notifications')
+			@yield('content')
+		</div>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

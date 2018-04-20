@@ -1,7 +1,9 @@
 @extends('layouts.index')
 
 @section('title', 'Login')
+<style>
 
+</style>
 
 @section('content')
 <div class="row">

@@ -1,0 +1,43 @@
+/*  CSS Index */
+
+section{
+	display:block;
+	margin:-20px auto 20px 0;
+	position: relativ;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.head {
+	height: 500px;
+	overflow: hidden;
+}
+
+.head img {
+	width:100%;
+}
+
+.login p {
+	width: 100%;
+	position:absolute; 
+	color: #ff8533;
+	font-size: 2.5rem;
+	top: 10%;
+	transform: translateY(-50%);
+	text-shadow: 0 0 10px black;
+}
+
+.login {
+	width: 100%;
+
+}
+
+.login button {
+	top: 15%;
+	width: 150px;
+	height: 40px;
+	position:absolute; 
+	background-color: #e85c00;
+	border: solid 3px #d9d9d9;
+	color: #d9d9d9;
+}
