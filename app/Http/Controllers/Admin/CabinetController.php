@@ -58,7 +58,18 @@ class CabinetController extends Controller
     public function store(CabinetRequest $request)
     {
 		$input = $request->except(['_token']);
-	//	dd($input);
+		
+		$proizvodjacOpr=array();
+		$i=0;
+		foreach($input as $key => $value){
+			if(strstr($key,'_',true) == 'proizvodjacOpr' ) {
+				array_push($proizvodjacOpr, $value);
+				$i++;
+			}
+		}
+		$oprema = implode(", ", $proizvodjacOpr);
+		//dd($input);
+
 		$data = array(
 			'brOrmara'  => $input['brOrmara'],
 			'projektirao_id'  => $input['projektirao_id'],
@@ -66,7 +77,7 @@ class CabinetController extends Controller
 			'projekt_id'  => $input['projekt_id'],
 			'datum_isporuke'  => date("Y-m-d", strtotime($input['datum_isporuke'])),
 			'proizvodjac'  => $input['proizvodjac'],
-			'proizvodjacOpr'  => $input['proizvodjacOpr'],
+			'proizvodjacOpr'  => $oprema,
 			'naziv'  => $input['naziv'],
 			'velicina'  => $input['velicina'],
 			'tip'  => $input['tip'],
@@ -118,7 +129,18 @@ class CabinetController extends Controller
         $cabinet = Cabinet::find($id);
 		$projects = Project::join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->orderBy('id','ASC')->get();
 		$users = Users::join('role_users','users.id','=','role_users.user_id')->select('users.*','role_users.role_id')->where('role_users.role_id','<>','4')->orderBy('last_name','ASC')->get();
-		return view('admin.cabinets.edit', ['cabinet' => $cabinet])->with('projects',$projects)->with('users',$users);
+		$proizvodjacOpr = explode(', ',$cabinet->proizvodjacOpr);
+		
+		$kab_dimenzija="";
+		$ulaz_kabela="";
+		if(strpos($cabinet->ulaz_kabela,'Otvor') !== false) {
+			$kabel = explode(' ',$cabinet->ulaz_kabela);
+			$kab_dimenzija = end($kabel);
+			$ulaz_kabela = array_chunk($kabel,3);
+			$ulaz_kabela = implode(' ',$ulaz_kabela[0]);
+		} 
+
+		return view('admin.cabinets.edit', ['cabinet' => $cabinet])->with('projects',$projects)->with('users',$users)->with('proizvodjacOpr',$proizvodjacOpr)->with('kab_dimenzija',$kab_dimenzija)->with('ulaz_kabela',$ulaz_kabela);
     }
 
     /**
@@ -133,6 +155,18 @@ class CabinetController extends Controller
         $cabinet = Cabinet::find($id);
 		$input = $request->except(['_token']);
 		//dd($input);
+		
+		$proizvodjacOpr=array();
+		$Ulkabela =array();
+		$i=0;
+		foreach($input as $key => $value){
+			if(strstr($key,'_',true) == 'proizvodjacOpr' ) {
+				array_push($proizvodjacOpr, $value);
+				$i++;
+			}
+		}
+		$oprema = implode(", ", $proizvodjacOpr);
+		
 		$data = array(
 			'brOrmara'  => $input['brOrmara'],
 			'projektirao_id'  => $input['projektirao_id'],
@@ -140,7 +174,7 @@ class CabinetController extends Controller
 			'projekt_id'  => $input['projekt_id'],
 			'datum_isporuke'  => date("Y-m-d", strtotime($input['datum_isporuke'])),
 			'proizvodjac'  => $input['proizvodjac'],
-			'proizvodjacOpr'  => $input['proizvodjacOpr'],
+			'proizvodjacOpr'  => $oprema,
 			'naziv'  => $input['naziv'],
 			'velicina'  => $input['velicina'],
 			'tip'  => $input['tip'],

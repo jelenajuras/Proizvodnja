@@ -41,3 +41,12 @@ section{
 	border: solid 3px #d9d9d9;
 	color: #d9d9d9;
 }
+
+.login button:hover {
+	color: #e85c00;
+	background-color: #d9d9d9;
+}
+
+button a {
+	text-decoration: none;
+}

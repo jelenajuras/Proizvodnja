@@ -76,7 +76,10 @@
 				<i class="fa fa-caret-down"></i>
 			</button>
 			<div class="dropdown-container">
-				<a class="{{ Request::is('proizvodnja/*') ? 'active' : '' }}" href="{{ route('admin.cabinets.index') }}">Ormari</a>
+				<a class="{{ Request::is('basic/*') ? 'active' : '' }}" href="{{ route('admin.customers.index') }}">Naručitelji</a>
+				<a class="{{ Request::is('basic/*') ? 'active' : '' }}" href="{{ route('admin.projects.index') }}">Projekti</a>
+			
+				<a class="{{ Request::is('basic/*') ? 'active' : '' }}" href="{{ route('admin.cabinets.index') }}">Ormari</a>
 			</div>
 		@endif
 		@if (Sentinel::check() && Sentinel::inRole('kupac') || Sentinel::inRole('basic'))

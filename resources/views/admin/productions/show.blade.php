@@ -100,10 +100,9 @@
 		padding: 10px 10px;
 		border-bottom: solid 1px black;
 	}
-
 </style>
 @section('content')
-	
+	<h5>{{ 'Naziv projekta: '}}<b>{{ $project->id . ' - ' . $project->naziv }}</b></h5>
 	<div class="tab">
 		@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator'))
 			<button class="tablinks" onclick="openCity(event, 'Opći')" id="defaultOpen">Opći podaci</button>

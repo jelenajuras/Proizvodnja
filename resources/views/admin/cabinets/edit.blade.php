@@ -62,31 +62,32 @@
 							</script> 
 							<label>Proizvođač ormara:</label>
 							<div class="form-group">
-								<select class="form-control" name="proizvodjac">
-									<option selected="selected">{{ $cabinet->proizvodjac }}
-									<option>ABB</option>
-									<option>Eaton</option>
-									<option>Filko</option>
-									<option>Rittal</option>
-									<option>Schneider</option>
-									<option>Schrack</option>
-									<option>Siemens</option>
-									<option>Slobodan odabir</option>
+								<select class="form-control" name="proizvodjac" id="proizvodjac">
+									<option {!! ($cabinet->proizvodjac == 'ABB' ? 'selected' : '') !!} >ABB</option>
+									<option {!! ($cabinet->proizvodjac == 'Eaton' ? 'selected' : '') !!}>Eaton</option>
+									<option {!! ($cabinet->proizvodjac == 'Filko' ? 'selected' : '') !!}>Filko</option>
+									<option {!! ($cabinet->proizvodjac == 'Rittal' ? 'selected' : '') !!}>Rittal</option>
+									<option {!! ($cabinet->proizvodjac == 'Schneider' ? 'selected' : '') !!}>Schneider</option>
+									<option {!! ($cabinet->proizvodjac == 'Schrack' ? 'selected' : '') !!}>Schrack</option>
+									<option {!! ($cabinet->proizvodjac == 'Siemens' ? 'selected' : '') !!}>Siemens</option>
+									<option {!! ($cabinet->proizvodjac == 'Slobodan odabir' ? 'selected' : '') !!}>Slobodan odabir</option>
+									<option value="{{$cabinet->proizvodjac}}" selected>{{$cabinet->proizvodjac}}</option>
+									<option class="editable1">Unos drugog proizvođača...</option>
 								</select>
 								{!! ($errors->has('proizvodjac') ? $errors->first('proizvodjac', '<p class="text-danger">:message</p>') : '') !!}
 							</div>
+							<div class="form-group">
+								<input class="form-control editOption1" placeholder="Unesi drugog proizvođača" type="text" value="{{ old('proizvodjac') }}" style="display:none;"></input>
+							</div>
 							<label>Proizvođač opreme:</label>
 							<div class="form-group">
-								<select class="form-control" name="proizvodjacOpr">
-									<option selected="selected">{{ $cabinet->proizvodjacOpr }}
-									<option>ABB</option>
-									<option>Eaton</option>
-									<option>Rittal</option>
-									<option>Schneider</option>
-									<option>Schrack</option>
-									<option>Siemens</option>
-									<option>Slobodan odabir</option>
-								</select>
+								<input type="checkbox" name="proizvodjacOpr_1" value="ABB" {!! (in_array('ABB',$proizvodjacOpr)? 'checked' : '') !!}>ABB<br>
+								<input type="checkbox" name="proizvodjacOpr_2" value="Eaton"  {!! (in_array('Eaton',$proizvodjacOpr)? 'checked' : '') !!}>Eaton<br>
+								<input type="checkbox" name="proizvodjacOpr_3" value="Rittal"  {!! (in_array('Rittal',$proizvodjacOpr)? 'checked' : '') !!}>Rittal<br>
+								<input type="checkbox" name="proizvodjacOpr_4" value="Schneider"  {!! (in_array('Schneider',$proizvodjacOpr)? 'checked' : '') !!}>Schneider<br>
+								<input type="checkbox" name="proizvodjacOpr_5" value="Schrack"  {!! (in_array('Schrack',$proizvodjacOpr)? 'checked' : '') !!}> Schrack<br>
+								<input type="checkbox" name="proizvodjacOpr_6" value="Siemens"  {!! (in_array('Siemens',$proizvodjacOpr)? 'checked' : '') !!}> Siemens<br>
+								<input type="checkbox" name="proizvodjacOpr_7" value="Slobodan odabir"  {!! (in_array('Slobodan odabir',$proizvodjacOpr)? 'checked' : '') !!}> Slobodan odabir<br>
 							</div>
 							<label>Naziv ormara (KKS):</label>
 							<div class="form-group">
@@ -101,47 +102,44 @@
 							<label>Izvedba:</label>
 							<div class="form-group">
 								<select class="form-control" name="izvedba">
-									<option selected="selected">{{ $cabinet->izvedba }}	
-									<option>Samostojeći</option>
-									<option>Nazidni</option>
-									<option>Ukopni</option>
+									<option {!! ($cabinet->izvedba == 'Samostojeći' ? 'selected' : '') !!} >Samostojeći</option>
+									<option {!! ($cabinet->izvedba == 'Nazidni' ? 'selected' : '') !!}>Nazidni</option>
+									<option {!! ($cabinet->izvedba == 'Ukopni' ? 'selected' : '') !!}>Ukopni</option>
 								</select>
 							</div>
 							<label>Tip:</label>
 							<div class="form-group">
 								<select class="form-control" name="tip">
-									<option selected="selected">{{ $cabinet->tip }}
-									<option>Razvodni</option>
-									<option>Upravljački</option>
-									<option>MCC</option>
+									<option  {!! ($cabinet->tip == 'Razvodni' ? 'selected' : '') !!} >Razvodni</option>
+									<option {!! ($cabinet->tip == 'Upravljački' ? 'selected' : '') !!} >Upravljački</option>
+									<option {!! ($cabinet->tip == 'MCC' ? 'selected' : '') !!} >MCC</option>
 								</select>
 							</div>
+						</div>
+						<div class="col-lg-6">
 							<label>Izvedba vrata:</label>
 							<div class="form-group {{ ($errors->has('model')) ? 'has-error' : '' }}">
 								<select class="form-control" name="model">
-									<option selected="selected">{{ $cabinet->model }}
-									<option>Jednokrilni desni</option>
-									<option>Jednokrilni lijevi</option>
-									<option>Dvokrilni desni</option>
-									<option>Dvokrilni lijevi</option>
-									<option>Dvokrilni x2 desni</option>
-									<option>Dvokrilni x2 lijevi</option>
+									<option {!! ($cabinet->model == 'Jednokrilni desni' ? 'selected' : '') !!} >Jednokrilni desni</option>
+									<option {!! ($cabinet->model == 'Jednokrilni lijevi' ? 'selected' : '') !!} >Jednokrilni lijevi</option>
+									<option {!! ($cabinet->model == 'Dvokrilni desni' ? 'selected' : '') !!} >Dvokrilni desni</option>
+									<option {!! ($cabinet->model == 'Dvokrilni lijevi' ? 'selected' : '') !!} >Dvokrilni lijevi</option>
+									<option {!! ($cabinet->model == 'Dvokrilni x2 desni' ? 'selected' : '') !!} >Dvokrilni x2 desni</option>
+									<option {!! ($cabinet->model == 'Dvokrilni x2 lijevi' ? 'selected' : '') !!} >Dvokrilni x2 lijevi</option>
 								</select>
 								{!! ($errors->has('model') ? $errors->first('model', '<p class="text-danger">:message</p>') : '') !!}
 							</div>
 							<label>Materijal:</label>
 							<div class="form-group {{ ($errors->has('materijal')) ? 'has-error' : '' }}">
 								<select class="form-control" name="materijal">
-									<option selected="selected">{{ $cabinet->materijal }}
-									<option>Čelični</option>
-									<option>Inox</option>
-									<option>Plastični</option>
-									<option>Aluminijski</option>
+									<option {!! ($cabinet->materijal == 'Čelični' ? 'selected' : '') !!}>Čelični</option>
+									<option {!! ($cabinet->materijal == 'Inox' ? 'selected' : '') !!}>Inox</option>
+									<option {!! ($cabinet->materijal == 'Plastični' ? 'selected' : '') !!}>Plastični</option>
+									<option {!! ($cabinet->materijal == 'Aluminijski' ? 'selected' : '') !!}>Aluminijski</option>
 								</select>
 								{!! ($errors->has('materijal') ? $errors->first('materijal', '<p class="text-danger">:message</p>') : '') !!}
 							</div>
-						</div>
-						<div class="col-lg-6">
+						
 							<label>Nazivni napon:</label>
 							<div class="form-group">
 								<input class="form-control" placeholder="napon" name="napon" type="text" value="{{ $cabinet->napon }}" />
@@ -170,16 +168,16 @@
 							<label>Ulaz kanala:</label>
 							<div class="form-group">
 								<select class="form-control" name="ulaz_kabela" value="{{ $cabinet->ulaz_kabela }}" id="test">
-									<option class="non">Uvodnice gore</option>
-									<option class="non">Uvodnice dolje</option>
-									<option class="editable">Otvor u krovu</option>
-									<option class="editable">Otvor u podnici</option>
-									<option class="editable">Otvor bočno lijevo</option>
-									<option class="editable">Otvor bočno desno</option>
+									<option class="non" {!! ($cabinet->ulaz_kabela == 'Uvodnice gore' ? 'selected' : '') !!} >Uvodnice gore</option>
+									<option class="non" {!! ($cabinet->ulaz_kabela == 'Uvodnice dolje' ? 'selected' : '') !!}>Uvodnice dolje</option>
+									<option class="editable" {!! ($ulaz_kabela == 'Otvor u krovu' ? 'selected' : '') !!}>Otvor u krovu</option>
+									<option class="editable" {!! ($ulaz_kabela == 'Otvor u podnici' ? 'selected' : '') !!}>Otvor u podnici</option>
+									<option class="editable" {!! ($ulaz_kabela == 'Otvor bočno lijevo' ? 'selected' : '') !!}>Otvor bočno lijevo</option>
+									<option class="editable" {!! ($ulaz_kabela == 'Otvor bočno desno' ? 'selected' : '') !!}>Otvor bočno desno</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<input class="editOption form-control" style="display:none;" name="kab_dimenzija" placeholder="upiši dimenziju (ŠxV) u mm"></input>
+								<input class="editOption form-control" name="kab_dimenzija" placeholder="upiši dimenziju (ŠxV) u mm" {!! ( !$kab_dimenzija ? 'style="display:none"' : '' ) !!} value="{{ $kab_dimenzija }}"></input>
 							</div>
 						
 							<label>Opisne oznake na vrata ormara</label>
@@ -223,6 +221,26 @@
 					}
 					});
 					
+				</script>
+				<script>
+					var initialText = $('.editable1').val();
+					$('#proizvodjac').change(function(){
+					var selected = $('option:selected', this).attr('class');
+					var optionText = $('.editable1').text();
+
+					if(selected == "editable1"){
+					  $('.editOption1').show();
+
+					  $('.editOption1').keyup(function(){
+						  var editText = $('.editOption1').val();
+						  $('.editable1').val(editText);
+						  $('.editable1').html(editText);
+					  });
+
+					}else{
+					  $('.editOption1').hide();
+					}
+					});
 				</script>
 			</div>
 		</div>

@@ -29,7 +29,7 @@
 								<select class="form-control" name="projekt_id" id="sel1" value="{{ old('projekt_id') }}">
 									<option disabled selected value></option>
 									@foreach ($projects as $project)
-										<option name="projekt_id" value=" {{$project->id}}">{{ $project->id . ' ' . $project->naziv }}</option>
+										<option name="projekt_id" value=" {{$project->id}}">{{ $project->id . ' - ' . $project->investitor . ', ' . $project->naziv }}</option>
 									@endforeach
 								</select>
 								{!! ($errors->has('projekt_id') ? $errors->first('projekt_id', '<p class="text-danger">:message</p>') : '') !!}
@@ -68,7 +68,7 @@
 							</script> 
 							<label>Proizvođač ormara:</label>
 							<div class="form-group">
-								<select class="form-control" name="proizvodjac" value="{{ old('proizvodjac') }}">
+								<select class="form-control" name="proizvodjac" value="{{ old('proizvodjac') }}" id="proizvodjac">
 									<option value="0"></option>
 									<option>ABB</option>
 									<option>Eaton</option>
@@ -78,25 +78,23 @@
 									<option>Schrack</option>
 									<option>Siemens</option>
 									<option>Slobodan odabir</option>
+									<option class="editable1" value="0">Unos drugog proizvođača...</option>
 								</select>
+								
 								{!! ($errors->has('proizvodjac') ? $errors->first('proizvodjac', '<p class="text-danger">:message</p>') : '') !!}
 							</div>
-							<!--<label> Drugi proizvođač:</label>
 							<div class="form-group">
-								<input class="form-control" placeholder="Proizvođač" name="proizvodjac" type="text" value="{{ old('proizvodjac') }}">
-							</div>-->
+								<input class="form-control editOption1" placeholder="Unesi drugog proizvođača" type="text" value="{{ old('proizvodjac') }}" style="display:none;"></input>
+							</div>
 							<label>Proizvođač opreme:</label>
 							<div class="form-group">
-								<select class="form-control" name="proizvodjacOpr" value="{{ old('proizvodjacOpr') }}">
-									<option value="0"></option>
-									<option>ABB</option>
-									<option>Eaton</option>
-									<option>Rittal</option>
-									<option>Schneider</option>
-									<option>Schrack</option>
-									<option>Siemens</option>
-									<option>Slobodan odabir</option>
-								</select>
+								<input type="checkbox" name="proizvodjacOpr_1" value="ABB">ABB<br>
+								<input type="checkbox" name="proizvodjacOpr_2" value="Eaton">Eaton<br>
+								<input type="checkbox" name="proizvodjacOpr_3" value="Rittal">Rittal<br>
+								<input type="checkbox" name="proizvodjacOpr_4" value="Schneider">Schneider<br>
+								<input type="checkbox" name="proizvodjacOpr_5" value="Schrack"> Schrack<br>
+								<input type="checkbox" name="proizvodjacOpr_6" value="Siemens"> Siemens<br>
+								<input type="checkbox" name="proizvodjacOpr_7" value="Slobodan odabir"> Slobodan odabir<br>
 							</div>
 							<label>Naziv ormara (KKS):</label>
 							<div class="form-group">
@@ -243,20 +241,28 @@
 					  
 					}
 					});
-					
 				</script>
-				<!-- dodavanje dimenzije za bakreni razvod -->
 				<script>
-					function myFunction() {
-						var checkBox = document.getElementById("myCheck");
-						var text = document.getElementById("text");
-						if (checkBox.checked == true){
-						  $('.editOption2').show();
-						} else {
-						  $('.editOption2').hide();
-						}
+					var initialText = $('.editable1').val();
+					$('#proizvodjac').change(function(){
+					var selected = $('option:selected', this).attr('class');
+					var optionText = $('.editable1').text();
+
+					if(selected == "editable1"){
+					  $('.editOption1').show();
+
+					  $('.editOption1').keyup(function(){
+						  var editText = $('.editOption1').val();
+						  $('.editable1').val(editText);
+						  $('.editable1').html(editText);
+					  });
+
+					}else{
+					  $('.editOption1').hide();
 					}
+					});
 				</script>
+				
 			</div>
 		</div>
     </div>
