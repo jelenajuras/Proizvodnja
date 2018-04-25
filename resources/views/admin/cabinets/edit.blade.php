@@ -1,7 +1,21 @@
 @extends('layouts.admin')
 
 @section('title', 'Ispravi ormar')
-
+<style>
+	.ip {
+		position:relative;
+		
+	}
+	.ip span{
+		position:absolute;
+		padding: 6px;
+		text-align:center;
+		font-size: 1rem;
+	}
+	.ip input {
+		padding-left: 20px;
+	}
+</style>
 @section('content')
 
 <div class="row">
@@ -161,8 +175,8 @@
 								{!! ($errors->has('sustav_zastite') ? $errors->first('sustav_zastite', '<p class="text-danger">:message</p>') : '') !!}
 							</div>
 							<label>IP zaštita ormara:</label>
-							<div class="form-group">
-								<input class="form-control" placeholder="IP zaštita ormara" name="ip_zastita" type="text" value="{{ $cabinet->ip_zastita }}"/>
+							<div class="ip form-group">
+								<span>IP</span><input class="form-control" placeholder="IP zaštita ormara" name="ip_zastita" type="text" value="{{ substr_replace($cabinet->ip_zastita,'',0,2) }}"/>
 								{!! ($errors->has('ip_zastita') ? $errors->first('ip_zastita', '<p class="text-danger">:message</p>') : '') !!}
 							</div>
 							<label>Ulaz kanala:</label>

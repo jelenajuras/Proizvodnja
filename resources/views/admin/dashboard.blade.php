@@ -1,21 +1,27 @@
 @extends('layouts.admin')
 
 @section('title', 'Admin - Dashboard')
-<style>
-	#jumbotron  {
-		margin: auto;
-		width: 100%;
-	}
 
-</style>
+<link rel="stylesheet" href="{{ URL::asset('css/dashboard.css') }}"/>
+
 @section('content')
 
-<div class="row" id="jumbotron">
+<div class="db row">
     @if (Sentinel::check())
-    <div class="jumbotron">
-        <h2>Prijavljen/a si, {{ Sentinel::getUser()->first_name . ' ' . Sentinel::getUser()->last_name}}!</h2>
-       
+    <div>
+        <h4>Popis projekata:</h4>
     </div>
+
+	<div>
+		@foreach($projects as $project)
+			@if($project->user_id == Sentinel::getUser()->id )
+				<div class="projekt">
+					<p class="prInv">{{ $project->investitor }}</p>
+					<p><a href="{{ route('admin.productions.show', $project->id) }}">{{ $project->id . ' - ' . $project->naziv }}</p>
+					</a></div>
+			@endif
+		@endforeach
+	</div>
     @else
         <div class="jumbotron">
             <h1>Welcome, Guest!</h1>

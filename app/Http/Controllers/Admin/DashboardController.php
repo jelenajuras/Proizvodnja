@@ -6,6 +6,8 @@ use Sentinel;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Project;
+
 
 class DashboardController extends Controller
 {
@@ -26,6 +28,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-      return view('admin.dashboard');
+		$projects = Project::join('customers','investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->get();
+		
+		return view('admin.dashboard')->with('projects',$projects);
     }
 }

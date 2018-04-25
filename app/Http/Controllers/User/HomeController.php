@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\Project;
 
 class HomeController extends Controller
 {
@@ -25,10 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-		$posts = Post::all();
-
+		$projects = Project::join('customers','investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->get();
 		
-        return view('user.home',['posts'=>$posts]);
+		return view('user.home')->with('projects',$projects);
     }
 	
 	

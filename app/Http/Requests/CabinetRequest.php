@@ -30,7 +30,8 @@ class CabinetRequest extends FormRequest
 			'tip'  => 'required',
 			'model'  => 'required',
 			'materijal'  => 'required',
-			'izvedba'  => 'required'
+			'izvedba'  => 'required',
+			'ip_zastita' => 'numeric|min:2'
         ];
     }
 	
@@ -43,7 +44,9 @@ class CabinetRequest extends FormRequest
 			'model.required'  => 'Unos projekta je obavezan!',
 			'materijal.required'  => 'Unos projekta je obavezan!',
 			'velicina.required'  => 'Unos projekta je obavezan!',
-			'izvedba.required'  => 'Unos projekta je obavezan!'
+			'izvedba.required'  => 'Unos projekta je obavezan!',
+			'ip_zastita.numeric'  => 'Dozvoljen je unos broja!',
+			'ip_zastita.min'  => 'Obavezan unos :min znaka!'
 		];
 	}
 }

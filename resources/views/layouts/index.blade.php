@@ -33,7 +33,7 @@
 	color:#d9d9d9;
 }
 </style>
-    <body>
+    <body class="body">
 		<nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -70,7 +70,7 @@
 			</footer>
 		</section>
 
-		<div class="container">
+		<div class="main container">
 			@include('notifications')
 			@yield('content')
 		</div>
@@ -82,4 +82,34 @@
         <!-- Restfulizer.js - A tool for simulating put,patch and delete requests -->
         <script src="{{ asset('js/restfulizer.js') }}"></script>
     </body>
+	
+
+	<footer>
+		<section>
+			<article>
+					<ul>
+						<li><a>O nama</a></li>
+						<li><a>...</a></li>
+						<li><a>...</a></li>
+					</ul>
+			</article>
+			<article>
+					<ul>
+						<li><a>...</a></li>
+						<li><a>...</a></li>
+						<li><a>...</a></li>
+					</ul>
+			</article>
+			<article>
+					<ul>
+						<li>Kontakt:</li>
+						<li>Svetonedeljska cesta 18</li>
+						<li>Kalinovica, 10436 Rakov Potok</li>
+						<li>Inženjering: +385 1 2657 700</li>
+						<li>Fax: +385 1 6589 231</li>
+						<li>e-mail: duplico@duplico.hr</li>
+					</ul>
+			</article>
+		</section>
+	</footer>
 </html>

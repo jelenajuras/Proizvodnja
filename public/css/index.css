@@ -1,5 +1,9 @@
 /*  CSS Index */
 
+.body {
+	background-color: #262626;
+}
+
 section{
 	display:block;
 	margin:-20px auto 20px 0;
@@ -18,18 +22,12 @@ section{
 }
 
 .login p {
-	width: 100%;
 	position:absolute; 
 	color: #ff8533;
 	font-size: 2.5rem;
 	top: 10%;
 	transform: translateY(-50%);
 	text-shadow: 0 0 10px black;
-}
-
-.login {
-	width: 100%;
-
 }
 
 .login button {
@@ -49,4 +47,31 @@ section{
 
 button a {
 	text-decoration: none;
+}
+
+footer section{
+	width:750px;
+	margin: auto;
+	padding-top:20px;
+}
+
+footer article {
+	float:left;
+	color:#bfbfbf;
+	width:33%;
+	font-size:1.25rem;
+}
+
+footer article ul {
+	list-style:none;
+}
+
+footer article ul a {
+	color:#bfbfbf;
+}
+
+footer article ul a:hover {
+	color:white;
+	text-decoration:none;
+	cursor: pointer;
 }

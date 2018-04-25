@@ -1,9 +1,10 @@
 @extends('layouts.index')
 
 @section('title', 'Register')
+<link rel="stylesheet" href="{{ URL::asset('css/login.css') }}"/>
 
 @section('content')
-<div class="row">
+<div class="pos row">
     <div class="col-md-4 col-md-offset-4">
         <div class="panel panel-default">
             <div class="panel-heading" id="input2">
@@ -33,7 +34,7 @@
                         {!! ($errors->has('password_confirmation') ? $errors->first('password_confirmation', '<p class="text-danger">:message</p>') : '') !!}
                     </div>
                     <input name="_token" value="{{ csrf_token() }}" type="hidden">
-                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Registracija" id="input1">
+                    <input class="butt btn btn-lg btn-default btn-block" type="submit" value="Registracija" >
                 </fieldset>
                 </form>
             </div>

@@ -2,7 +2,6 @@
 
 @section('title', 'Proizvodni projekti')
 
-
 <style>
 	body {font-family: "Lato", sans-serif;}
 
@@ -540,9 +539,11 @@
 								$prod->rijeseno9 == 'DA') ? 'završeno' : '' }}</span></p>
 								
 								@if($prod)
-								<p><b>Datum isporuke: {{ date_format($datum_isp,'d.m.Y') }}</b></p>
+									<p><b>Datum isporuke: {{ date_format($datum_isp,'d.m.Y') }}</b></p>
+									<p><b>Ugovoreni datum isporuke: {{ date('d.m.Y', strtotime($cabinet->datum_isporuke)) }}</b></p>
 								@else
-								<p><b>Datum isporuke: {{ date('d.m.Y', strtotime($cabinet->datum_isporuke)) }}</b></p>
+									<p><b>Ugovoreni datum isporuke: {{ date('d.m.Y', strtotime($cabinet->datum_isporuke)) }}</b></p>
+
 								@endif
 						<hr>
 						<p>Projektirao: {{ $cabinet->projektirao_user['first_name'] . ' ' . $cabinet->projektirao_user['last_name'] }}</p>

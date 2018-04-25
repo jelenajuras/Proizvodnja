@@ -88,7 +88,7 @@ class CabinetController extends Controller
 			'struja'  => $input['struja'],
 			'prekidna_moc'  => $input['prekidna_moc'],
 			'sustav_zastite'  => $input['sustav_zastite'],
-			'ip_zastita'  => $input['ip_zastita'],
+			'ip_zastita'  => 'IP' . $input['ip_zastita'],
 			'ulaz_kabela'  => $input['ulaz_kabela'] . ' '. $input['kab_dimenzija'] ,
 			/*'bak_razvod'  => $input['bak_razvod']. ' '. $input['bak_dimenzija'],*/
 			'oznake'  => $input['oznake'],
@@ -185,7 +185,7 @@ class CabinetController extends Controller
 			'struja'  => $input['struja'],
 			'prekidna_moc'  => $input['prekidna_moc'],
 			'sustav_zastite'  => $input['sustav_zastite'],
-			'ip_zastita'  => $input['ip_zastita'],
+			'ip_zastita'  => 'IP' . $input['ip_zastita'],
 			'ulaz_kabela'  => $input['ulaz_kabela'] . ' '. $input['kab_dimenzija'] ,
 			/*'bak_razvod'  => $input['bak_razvod']. ' '. $input['bak_dimenzija'],*/
 			'oznake'  => $input['oznake'],

@@ -6,6 +6,20 @@
 		text-align: center;
 		font-weight: bold;
 	}
+	
+	.ip {
+		position:relative;
+		
+	}
+	.ip span{
+		position:absolute;
+		padding: 6px;
+		text-align:center;
+		font-size: 1rem;
+	}
+	.ip input {
+		padding-left: 20px;
+	}
 </style>
 @section('content')
 
@@ -101,7 +115,7 @@
 								<input class="form-control" placeholder="Naziv" name="naziv" type="text" value="{{ old('naziv') }}" />
 								{!! ($errors->has('naziv') ? $errors->first('naziv', '<p class="text-danger">:message</p>') : '') !!}
 							</div>
-							<label>Dimenzije ormara [mm]:</label>
+							<label>Dimenzije ormara širina x visina x podnožje x dubina [mm]:</label>
 							<div class="form-group">
 								<input class="form-control" placeholder="Veličina" name="velicina" type="text" value="{{ old('velicina') }}" />
 								{!! ($errors->has('velicina') ? $errors->first('velicina', '<p class="text-danger">:message</p>') : '') !!}
@@ -147,17 +161,17 @@
 							
 						</div>
 						<div class="col-lg-6">
-							<label>Nazivni napon:</label>
+							<label>Nazivni napon [V]:</label>
 							<div class="form-group">
 								<input class="form-control" placeholder="napon" name="napon" type="text" value="{{ old('napon') }}" />
 								{!! ($errors->has('napon') ? $errors->first('napon', '<p class="text-danger">:message</p>') : '') !!}
 							</div>
-							<label>Nazivna struja:</label>
+							<label>Nazivna struja [A]:</label>
 							<div class="form-group">
 								<input class="form-control" placeholder="Struja" name="struja" type="text" value="{{ old('struja') }}" />
 								{!! ($errors->has('struja') ? $errors->first('struja', '<p class="text-danger">:message</p>') : '') !!}
 							</div>
-							<label>Prekidna moć:</label>
+							<label>Prekidna moć [kA]:</label>
 							<div class="form-group">
 								<input class="form-control" placeholder="Prekidna moć" name="prekidna_moc" type="text" value="{{ old('prekidna_moc') }}" />
 								{!! ($errors->has('prekidna_moc') ? $errors->first('prekidna_moc', '<p class="text-danger">:message</p>') : '') !!}
@@ -168,16 +182,16 @@
 								{!! ($errors->has('sustav_zastite') ? $errors->first('sustav_zastite', '<p class="text-danger">:message</p>') : '') !!}
 							</div>
 							<label>IP zaštita ormara:</label>
-							<div class="form-group">
-								<input class="form-control" placeholder="IP zaštita ormara" name="ip_zastita" type="text" value="{{ old('ip_zastita') }}"/>
+							<div class="ip form-group">
+								<span>IP</span><input class="form-control" placeholder="upiši broj" name="ip_zastita" type="text" value="{{ old('ip_zastita') }}"/>
 								{!! ($errors->has('ip_zastita') ? $errors->first('ip_zastita', '<p class="text-danger">:message</p>') : '') !!}
 							</div>
-							<label>Ulaz kanala:</label>
+							<label>Ulaz kabela:</label>
 							<div class="form-group">
 								<select class="form-control" name="ulaz_kabela" value="{{ old('ulaz_kabela') }}" id="test">
 									<option class="non">Uvodnice gore</option>
 									<option class="non">Uvodnice dolje</option>
-									<option class="editable">Otvor u krovu</option>
+									<option class="editable">Otvor u krovu za kabele</option>
 									<option class="editable">Otvor u podnici</option>
 									<option class="editable">Otvor bočno lijevo</option>
 									<option class="editable">Otvor bočno desno</option>

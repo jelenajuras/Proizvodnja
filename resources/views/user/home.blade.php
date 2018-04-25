@@ -1,21 +1,18 @@
 @extends('layouts.index')
 
-@section('title', 'AlgebraBox | The greatest cloud storage')
+@section('title', 'Duplico proizvodnja')
 
 @section('content')
-<div class="row">
-  <ol class="breadcrumb">
-    <li class="active">Home</li>
-  </ol>
-</div>
-<div class="row">
 
-@foreach($posts as $post)
-	<p>
-		<h2>{{ $post->title }}</h2>
-		<div>{{ $post->user->email }}</div>
-		<div> {{ $post->comments->content}} </div>
-	</p>
+<div>
+<h5>Popis projekata</h5>
+@foreach($projects as $project)
+	@if($project->user_id == Sentinel::getUser()->id )
+		<div class="projekt">
+			<p class="prInv">{{ $project->investitor }}</p>
+			<p><a href="{{ route('admin.productions.show', $project->id) }}">{{ $project->id . ' - ' . $project->naziv }}</a></p>
+		</div>
+	@endif
 @endforeach
 </div>
 @stop

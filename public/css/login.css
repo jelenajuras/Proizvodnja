@@ -1,0 +1,14 @@
+/*  CSS login */ 
+.pos {
+	position: absolute;
+	width: inherit;
+	top:100px;
+	left:50%;
+	transform: translate(-50%,0);
+}
+
+.pos .butt {
+	background-color: #262626;
+	color: #cccccc;
+
+}

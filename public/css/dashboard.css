@@ -1,0 +1,39 @@
+/* CSS dashboard */ 
+
+.db {
+	padding-left:20px;
+}
+
+.projekt {
+	width:45%;
+	float:left;
+	padding: 20px;
+	border-top: solid 1px #d9d9d9;
+
+}
+
+.projekt:nth-child(3) {
+	clear:left;
+	
+}
+
+.projekt .prInv {
+	font-weight: bold;
+}
+.projekt a {
+	font-weight: bold;
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+}
+
+.projekt a {
+	font-weight: bold;
+	text-decoration: none;
+	color: black;
+}
+
+.projekt a:hover{
+	text-decoration: none;
+	color: #4d4d4d;
+}
