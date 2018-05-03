@@ -20,7 +20,7 @@
 		outline: none;
 		cursor: pointer;
 		padding: 10px 10px;
-		width: 100px;
+		width: 105px;
 		transition: 0.3s;
 		font-size: 0.75rem;
 	}
@@ -56,49 +56,69 @@
 	#pomak {
 		padding-left: 20px;
 	}
+	
+	
+	#pomak .zadnjiRed {
+		padding-bottom: 10px;
+	}
+	
 	table {
-		font-size: 0.66rem;
+		font-size: 0.75rem;
+		width:100%;
 	}
-	#Priprema th {
+	
+	#Priprema th, #Nabava th, #Proizvodnja th {
 		padding: 10px 30px;
 		border-bottom: solid 1px #ccc;
 		font-size: 0.63rem;
 	}
-	#Priprema td {
+	
+	#Priprema td, #Nabava td, #Proizvodnja td, #Ormari td {
 		padding: 10px;
+		font-size: 0.75rem;
 	}
-	#Nabava th {
-		padding: 10px 30px;
-		border-bottom: solid 1px #ccc;
-		font-size: 0.63rem;
-	}
-	#Nabava td {
-		padding: 10px;
-	}
-	#Proizvodnja th {
-		padding: 10px 30px;
-		border-bottom: solid 1px #ccc;
-		font-size: 0.63rem;
-	}
-	#Proizvodnja td {
-		padding: 10px;
-	}
+
 	#Status p{
 		margin:0;
 		padding: 5px 0px;
 	}
+	
 	#Status .rght {
 		padding-left:20px;
 	}
-	#Status .rght span {
+	
+	#Status .rght .završeno {
 		color: green;
+		font-weight: bold;
+	}
+	
+	#Status .rght .uradu {
+		color: black;
 		font-weight: bold;
 	}
 	
 	#Status div .bordB{
 		padding: 10px 10px;
 		border-bottom: solid 1px black;
+		float:left;
+
 	}
+
+	#Status div .bordB:nth-child(4){
+		display: block;
+		clear:left;
+	}
+	
+	#Opći {
+		overflow: hidden;
+		margin-bottom: 10px;
+		padding-bottom: 10px;
+	}
+	
+	.center{
+		text-align:center;
+	}
+	
 </style>
 @section('content')
 	<h5>{{ 'Naziv projekta: '}}<b>{{ $project->id . ' - ' . $project->naziv }}</b></h5>
@@ -109,13 +129,21 @@
 			<button class="tablinks" onclick="openCity(event, 'Priprema')" id="defaultOpen">Priprema</button>
 			<button class="tablinks" onclick="openCity(event, 'Nabava')" id="defaultOpen">Nabava</button>
 			<button class="tablinks" onclick="openCity(event, 'Proizvodnja')" id="defaultOpen">Proizvodnja</button>
-		@endif
-		@if (Sentinel::check() && Sentinel::inRole('kupac') || Sentinel::inRole('basic'))
 			<button class="tablinks" onclick="openCity(event, 'Status')" id="defaultOpen">Status ormara</button>
+		@endif
+		@if (Sentinel::check() && Sentinel::inRole('basic'))
+			<button class="tablinks" onclick="openCity(event, 'Opći')" id="defaultOpen">Opći podaci</button>
+			<button class="tablinks" onclick="openCity(event, 'Status')" id="defaultOpen">Status ormara</button>
+			
+		@endif
+		@if (Sentinel::check() && Sentinel::inRole('kupac') )
+		
+			<button class="tablinks" onclick="openCity(event, 'Status')" id="defaultOpen">Status ormara</button>
+			
 		@endif
 	</div>
 	<!-- Opći podaci projekta -->
-	@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator'))
+	@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator') || Sentinel::inRole('basic'))
 	<div id="Opći" class="tabcontent">
 		<!--<span onclick="this.parentElement.style.display='none'" class="topright">&times</span>-->
 		
@@ -128,7 +156,7 @@
 					<p>{{ 'Kontakti: '}}</p>
 					
 					<div id="pomak">
-						<table>
+						<table style="width:50%">
 						@foreach($contacts as $contact)
 							<tr>
 								<td>
@@ -150,7 +178,7 @@
 								</td>
 							</tr>
 							@if(DB::table('role_users')->where('user_id', $contact->id)->first())
-							<tr>
+							<tr class="zadnjiRed">
 								<td>
 									<p><ins>Glavni kontakt</ins></p> 
 								</td>
@@ -165,6 +193,7 @@
 		<hr>
 		<div class="row">
 			<div class="col-sm-6 col-md-6 col-lg-4">
+			 <div class="panel-heading">
 			<h4><small>Dodaj novi kontakt</small></h4>
 			</br>
 				<form accept-charset="UTF-8" role="form" method="post" action="{{ route('customer.contact')}}">
@@ -209,14 +238,15 @@
 					<input class="btn btn-default btn-md" type="submit" value="Unesi kontakt">
 				</form>
 			</div>
+			</div>
 		</div>
 	</div>
 
 	<!-- Opći podaci ormara -->
-	<div id="Ormari" class="tabcontent a">
-		<!--<span onclick="this.parentElement.style.display='none'" class="topright">&times</span>-->
-		<div class="row">
-			<div class="col-xs-6 col-md-8 col-md-10 col-lg-12">
+		<div id="Ormari" class="tabcontent a">
+			<!--<span onclick="this.parentElement.style.display='none'" class="topright">&times</span>-->
+			<div class="row">
+				<div class="col-xs-6 col-md-8 col-md-10 col-lg-12">
 					<h5>Popis ormara</h5>
 					<br>
 					 <table id="table_id" class="display proizv">
@@ -275,10 +305,12 @@
 						</tbody>
 					</table>
 
+				</div>
 			</div>
 		</div>
-	</div>
 	
+	@endif
+	@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator'))
 	<!-- Priprema -->
 	<div id="Priprema" class="tabcontent">
 		<!--<span onclick="this.parentElement.style.display='none'" class="topright">&times</span>-->
@@ -305,35 +337,52 @@
 			<tbody>
 				@foreach($cabinets as $cabinet)
 					<tr>
-						<td>{{ $cabinet->brOrmara }}</td>
+						<td class="center">{{ $cabinet->brOrmara }}</td>
 						@if(!$preparations->where('ormar_id','=', $cabinet->id)->first())
-							<td>
+							<td class="center">
 								<a href="{{ route('admin.preparations.create', ['id' => $cabinet->id]) }}">Dodaj status pripreme</a>
 							</td>
 							<?php $datum_1 = new DateTime($cabinet->datum_isporuke);
-								$datum_1->modify('-18 days')?>
-							<td>{{ date_format($datum_1,'d.m.Y') }}</td>
+								$datum_1->modify('-18 days');
+								$danas = new DateTime('now');
+								$interval = $danas->diff($datum_1); 
+								$dana = $interval->format("%r%a");
+								?>
+								@if($dana <= 0)
+									<td style="color:red">{{ date_format($datum_1,'d.m.Y') }}</td>
+								@else
+									<td>{{ date_format($datum_1,'d.m.Y') }}</td>
+								@endif
+						@else
+							@foreach($preparations as $preparation)
+								@if($preparation->ormar_id == $cabinet->id)
+								<td class="center">
+									<a href="{{ route('admin.preparations.edit', ['id' => $preparation->id] ) }}" >Izmjeni status pripreme</a>
+								</td>
+								
+								<?php 
+								$datum1 = new DateTime($preparation->datum);
+								$datum3 = $datum1->modify('+18 days');
+								$datum2 = new DateTime($cabinet->datum_isporuke);
+								$razlika = $datum3->diff($datum2);
+
+								?>
+								@if( strtotime($preparation->datum) < time() )
+									<td class="center" style="color:red">{{ date('d.m.Y', strtotime($preparation->datum)) }}</td>
+								@else
+									<td class="center">{{ date('d.m.Y', strtotime($preparation->datum)) }}</td>
+								@endif
+								<td class="center">{{ $razlika->format('%d') . ' dana' }}</td>
+								<td>{{ $preparation->rijeseno1 . ' ' . $preparation->koment_3p }}</td>
+								<td>{{ $preparation->rijeseno2 . ' ' . $preparation->koment_3pOd }}</td>
+								<td>{{ $preparation->rijeseno3 . ' ' . $preparation->koment_komax }}</td>
+								<td>{{ $preparation->rijeseno4 . ' ' . $preparation->koment_perf }}</td>
+								<td>{{ $preparation->rijeseno5 . ' ' . $preparation->koment_od }}</td>
+								<td>{{ $preparation->rijeseno6 . ' ' . $preparation->koment_exp }}</td>
+								<td>{{ $preparation->rijeseno7 . ' ' . $preparation->koment_pr }}</td>
+								@endif
+							@endforeach
 						@endif
-						@foreach($preparations as $preparation)
-							@if($preparation->ormar_id == $cabinet->id)
-							<td><a href="{{ route('admin.preparations.edit', ['id' => $preparation->id] ) }}" >Izmjeni status pripreme</a></td>
-							<td>{{ date('d.m.Y', strtotime($preparation->datum)) }}</td>
-							<?php 
-							$datum1 = new DateTime($preparation->datum);
-							$datum1->modify('+18 days');
-							$datum2 = new DateTime($cabinet->datum_isporuke);
-							$razlika = $datum1->diff($datum2);
-							?>
-							<td>{{ $razlika->format('%d') . ' dana' }}</td>
-							<td>{{ $preparation->rijeseno1 . ' ' . $preparation->koment_3p }}</td>
-							<td>{{ $preparation->rijeseno2 . ' ' . $preparation->koment_3pOd }}</td>
-							<td>{{ $preparation->rijeseno3 . ' ' . $preparation->koment_komax }}</td>
-							<td>{{ $preparation->rijeseno4 . ' ' . $preparation->koment_perf }}</td>
-							<td>{{ $preparation->rijeseno5 . ' ' . $preparation->koment_od }}</td>
-							<td>{{ $preparation->rijeseno6 . ' ' . $preparation->koment_exp }}</td>
-							<td>{{ $preparation->rijeseno7 . ' ' . $preparation->koment_pr }}</td>
-							@endif
-						@endforeach
 					</tr>
 				@endforeach
 			</tbody>
@@ -364,45 +413,57 @@
 			<tbody>
 				@foreach($cabinets as $cabinet)
 					<tr>
-						<td>{{ $cabinet->brOrmara }}</td>
+						<td class="center">{{ $cabinet->brOrmara }}</td>
 						@if(!$purchases->where('ormar_id','=', $cabinet->id)->first())
-						<td>
-							<a href="{{ route('admin.purchases.create', ['id' => $cabinet->id]) }}">Dodaj status pripreme</a>
-						</td>
-						<?php 
-						$preparation = $preparations->where('ormar_id','=', $cabinet->id)->first();
-						if($preparation) {
-							$datum_1 = new DateTime($preparation->datum);
-							$datum_1->modify('+15 days');
-						} else {
-							$datum_1 = new DateTime($cabinet->datum_isporuke);
-							$datum_1->modify('-3 days');
-						}
-						?>
-						<td>{{ date_format($datum_1,'d.m.Y') }}</td>
-						@endif
-						
-						@foreach($purchases as $purchase)
-							@if($purchase->ormar_id == $cabinet->id)
-							<td><a href="{{ route('admin.purchases.edit', ['id' => $purchase->id] ) }}" >Izmjeni status pripreme</a></td>
-							<td>{{ date('d.m.Y', strtotime($purchase->datum)) }}</td>
+							<td class="center">
+								<a href="{{ route('admin.purchases.create', ['id' => $cabinet->id]) }}">Dodaj status pripreme</a>
+							</td>
 							<?php 
-							$datum1 = new DateTime($purchase->datum);
-							$datum1->modify('+3 days');
-							$datum2 = new DateTime($cabinet->datum_isporuke);
-							$razlika = $datum1->diff($datum2);
+							$preparation = $preparations->where('ormar_id','=', $cabinet->id)->first();
+							if($preparation) {
+								$datum_1 = new DateTime($preparation->datum);
+								$datum_2 = $datum_1->modify('+15 days');
+							} else {
+								$datum_1 = new DateTime($cabinet->datum_isporuke);
+								$datum_2 = $datum_1->modify('-3 days');
+								$danas = new DateTime('now');
+							}
 							?>
-							<td>{{ $razlika->format('%d') . ' dana' }}</td>
-							<td>{{ $purchase->rijeseno1 . ' ' . $purchase->koment_orm }}</td>
-							<td>{{ $purchase->rijeseno2 . ' ' . $purchase->koment_kan }}</td>
-							<td>{{ $purchase->rijeseno3 . ' ' . $purchase->koment_sine }}</td>
-							<td>{{ $purchase->rijeseno4 . ' ' . $purchase->koment_vod }}</td>
-							<td>{{ $purchase->rijeseno5 . ' ' . $purchase->koment_bak }}</td>
-							<td>{{ $purchase->rijeseno6 . ' ' . $purchase->koment_stez }}</td>
-							<td>{{ $purchase->rijeseno7 . ' ' . $purchase->koment_sklOpr }}</td>
-							
+							@if($datum_2 <= $danas)
+								<td class="center" style="color:red">{{ date_format($datum_2,'d.m.Y') }}</td>
+							@else
+								<td class="center" >{{ date_format($datum_2,'d.m.Y') }}</td>
 							@endif
-						@endforeach
+						@else
+							@foreach($purchases as $purchase)
+								@if($purchase->ormar_id == $cabinet->id)
+									<td class="center"><a href="{{ route('admin.purchases.edit', ['id' => $purchase->id] ) }}" >Izmjeni status pripreme</a></td>
+
+									@if(strtotime($purchase->datum) <= time())
+										<td class="center" style="color:red">{{ date('d.m.Y', strtotime($purchase->datum)) }}</td>
+									@else
+										<td class="center">{{ date('d.m.Y', strtotime($purchase->datum)) }}</td>
+									@endif
+									
+									
+									<?php 
+									$datum1 = new DateTime($purchase->datum);
+									$datum1->modify('+3 days');
+									$datum2 = new DateTime($cabinet->datum_isporuke);
+									$razlika = $datum1->diff($datum2);
+									?>
+									<td class="center">{{ $razlika->format('%d') . ' dana' }}</td>
+									<td>{{ $purchase->rijeseno1 . ' ' . $purchase->koment_orm }}</td>
+									<td>{{ $purchase->rijeseno2 . ' ' . $purchase->koment_kan }}</td>
+									<td>{{ $purchase->rijeseno3 . ' ' . $purchase->koment_sine }}</td>
+									<td>{{ $purchase->rijeseno4 . ' ' . $purchase->koment_vod }}</td>
+									<td>{{ $purchase->rijeseno5 . ' ' . $purchase->koment_bak }}</td>
+									<td>{{ $purchase->rijeseno6 . ' ' . $purchase->koment_stez }}</td>
+									<td>{{ $purchase->rijeseno7 . ' ' . $purchase->koment_sklOpr }}</td>
+								
+								@endif
+							@endforeach
+						@endif
 					</tr>
 				@endforeach
 			</tbody>
@@ -434,28 +495,44 @@
 			<tbody>
 				@foreach($cabinets as $cabinet)
 					<tr>
-						<td>{{ $cabinet->brOrmara }}</td>
+						<td class="center">{{ $cabinet->brOrmara }}</td>
 						@if(!$productions->where('ormar_id','=', $cabinet->id)->first())
-						<td>
-							<a href="{{ route('admin.productions.create', ['id' => $cabinet->id]) }}">Dodaj status pripreme</a>
-						</td>
-						<?php 
-						$purchase = $purchases->where('ormar_id','=', $cabinet->id)->first();
-						if($purchase){
-						$datum_1 = new DateTime($purchase->datum);
-						$datum_1->modify('+2 days');
-						} else {
-						$datum_1 = new DateTime($cabinet->datum_isporuke);
-						$datum_1->modify('-1 days');
-						}
-						?>
-						<td>{{ date_format($datum_1,'d.m.Y') }}</td>
+							<td class="center">
+								<a href="{{ route('admin.productions.create', ['id' => $cabinet->id]) }}">Dodaj status pripreme</a>
+							</td>
+							<?php 
+							$purchase = $purchases->where('ormar_id','=', $cabinet->id)->first();
+							if($purchase){
+							$datum_1 = new DateTime($purchase->datum);
+							$datum_2 = $datum_1->modify('+2 days');
+							$danas = new DateTime('now');
+							} else {
+							$datum_1 = new DateTime($cabinet->datum_isporuke);
+							$datum_2 = $datum_1->modify('-1 days');
+							$danas = new DateTime('now');
+							}
+							?>
+						
+							@if($datum_2 <= $danas)
+								<td class="center" style="color:red">{{ date_format($datum_2,'d.m.Y') }}</td>
+							@else
+								<td class="center">{{ date_format($datum_2,'d.m.Y') }}</td>
+							@endif
+						
 						@endif
 						
 						@foreach($productions as $production)
 							@if($production->ormar_id == $cabinet->id)
-							<td><a href="{{ route('admin.productions.edit', ['id' => $production->id] ) }}" >Izmjeni status pripreme</a></td>
-							<td>{{ date('d.m.Y', strtotime($production->datum)) }}</td>
+							<td class="center"><a href="{{ route('admin.productions.edit', ['id' => $production->id] ) }}" >Izmjeni status pripreme</a></td>
+						
+						
+							@if(strtotime($production->datum) <= time())
+								<td class="center" style="color:red">{{ date('d.m.Y', strtotime($production->datum)) }}</td>
+							@else
+								<td class="center">{{ date('d.m.Y', strtotime($production->datum)) }}</td>
+							@endif
+							
+							
 							<?php 
 							$datum1 = new DateTime($production->datum);
 							$datum1->modify('+1 days');
@@ -483,13 +560,13 @@
 	@endif
 	
 	<!-- Status -->
-	@if (Sentinel::check() && Sentinel::inRole('kupac') || Sentinel::inRole('basic'))
+	@if (Sentinel::check() && Sentinel::inRole('kupac') || Sentinel::inRole('basic') || Sentinel::inRole('administrator') )
 	<div id="Status" class="tabcontent">
 	  <!--<span onclick="this.parentElement.style.display='none'" class="topright">&times</span>-->
 
 		<div class="row">
 			<div class="col-xs-8 col-md-8 col-md-10 col-lg-12">
-				<div class="bordB panel-heading">
+				<div class="header panel-heading">
 					<h5><b>{{ $project->id . ' - ' . $project->naziv }}</b></h5>
 					<p>{{ 'Naručitelj: '}}<b>{{ $project->investitor }}</b></p>
 					<p>{{ 'Voditelj projekta: '}}<b>{{ $project->user['first_name'] . ' ' . $project->user['last_name'] }}</b></p>
@@ -508,36 +585,46 @@
 					<div class="bordB col-md-4">
 						<p><b>Proizvodni broj ormara: {{ $cabinet->brOrmara }}</b></p>
 								<p><ins>Status</ins></p>
-								<p class="rght">Priprema: <span>{{ ( 
-								$prep &&
+								@if($prep &&
 								$prep->rijeseno1 == 'DA' && 
 								$prep->rijeseno2 == 'DA' && 
 								$prep->rijeseno3 == 'DA' && 
 								$prep->rijeseno4 == 'DA' && 
 								$prep->rijeseno5 == 'DA' && 
 								$prep->rijeseno6 == 'DA' && 
-								$prep->rijeseno7 == 'DA') ? 'završeno' : '' }}</span></p>
-								<p class="rght">Nabava: <span>{{ ( 
-								$purch &&
+								$prep->rijeseno7 == 'DA')
+									<p class="rght">Priprema: <span class="završeno">završeno</span>
+								@else
+									<p class="rght">Priprema: <span class="uradu">u postupku</span>
+								@endif
+								@if($purch &&
 								$purch->rijeseno1 == 'DA' && 
 								$purch->rijeseno2 == 'DA' && 
 								$purch->rijeseno3 == 'DA' && 
 								$purch->rijeseno4 == 'DA' && 
 								$purch->rijeseno5 == 'DA' && 
 								$purch->rijeseno6 == 'DA' && 
-								$purch->rijeseno7 == 'DA') ? 'završeno' : '' }}</span></p>
-								<p class="rght">Proizvodnja: <span>{{ ( 
-								$prod &&
+								$purch->rijeseno7 == 'DA')
+									<p class="rght">Nabava: <span class="završeno">završeno</span>
+								@else
+									<p class="rght">Nabava: <span class="uradu">u postupku</span>
+								@endif
+
+								@if($prod &&
 								$prod->rijeseno1 == 'DA' && 
 								$prod->rijeseno2 == 'DA' && 
 								$prod->rijeseno3 == 'DA' && 
 								$prod->rijeseno4 == 'DA' && 
 								$prod->rijeseno5 == 'DA' && 
 								$prod->rijeseno6 == 'DA' && 
-								$prod->rijeseno7 == 'DA' && 
-								$prod->rijeseno8 == 'DA' && 
-								$prod->rijeseno9 == 'DA') ? 'završeno' : '' }}</span></p>
+								$prod->rijeseno7 == 'DA')
+									<p class="rght">Proizvodnja: <span class="završeno">završeno</span>
+								@else
+									<p class="rght">Proizvodnja: <span class="uradu">u postupku</span>
+								@endif 
 								
+								
+						
 								@if($prod)
 									<p><b>Datum isporuke: {{ date_format($datum_isp,'d.m.Y') }}</b></p>
 									<p><b>Ugovoreni datum isporuke: {{ date('d.m.Y', strtotime($cabinet->datum_isporuke)) }}</b></p>
