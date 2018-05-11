@@ -19,97 +19,91 @@
 		
 		<link rel="stylesheet" href="{{ URL::asset('css/index.css') }}"/>
 </head>
-<style>	
-
-#duplico{
-	color:#ff6600
-}
-#input1 {
-	background-color:#d9d9d9;
-	color:#262626;
-}
-#input2 {
-	background-color:#262626;
-	color:#d9d9d9;
-}
-</style>
-    <body class="body">
-		<nav class="navbar navbar-inverse">
-		  <div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#" id="duplico">Duplico</a>
-				</div>
-				
-				<ul class="nav navbar-nav navbar-right">
-					@if (Sentinel::check())
-						<li>
-						  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="user"></span> {{ Sentinel::getUser()->first_name }} <span class="caret"></span></a>
-						  <ul class="dropdown-menu">
-							<li><a href="{{ route('auth.logout') }}">Odjava</a></li>
-						  </ul>
-						</li>
-					@else
-						<li><a href="{{ route('auth.login.form') }}">Prijava</a></li>
-						<li><a href="{{ route('auth.register.form') }}">Registracija</a></li>
-					@endif
-				</ul>
-				
+<body class="body">
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <div class="logo">
+				<img src="{{ asset('img/Duplico_logo-mali.png') }}" />
 		  </div>
-		</nav>
-		
-		<section>
-			<header class="head">
-				<img src="{{ asset('img/struja.jpeg') }}"/>
-			</header>
-			<article>
-			
-			</article>
-			
-			<footer>
-			</footer>
-		</section>
-
-		<div class="main container">
-			@include('notifications')
-			@yield('content')
 		</div>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <!-- Restfulizer.js - A tool for simulating put,patch and delete requests -->
-        <script src="{{ asset('js/restfulizer.js') }}"></script>
-    </body>
-	
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				@if (Sentinel::check())
+					<li>
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="user"></span> {{ Sentinel::getUser()->first_name }} <span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+						<li><a href="{{ route('auth.logout') }}">Odjava</a></li>
+					  </ul>
+					</li>
+				@else
+					<!--<li><a href="{{ route('auth.login.form') }}">Prijava</a></li>-->
+					<li><a href="{{ route('auth.register.form') }}">Registracija</a></li>
+				@endif
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	<section>
+		<header class="head">
+			<img src="{{ asset('img/struja.jpeg') }}"/>
+		</header>
+		<article>
+		
+		</article>
+		
+		<footer>
+		</footer>
+	</section>
+	<div class="main container">
+		@include('notifications')
+		@yield('content')
+	</div>
 
-	<footer>
-		<section>
-			<article>
-					<ul>
-						<li><a>O nama</a></li>
-						<li><a>...</a></li>
-						<li><a>...</a></li>
-					</ul>
-			</article>
-			<article>
-					<ul>
-						<li><a>...</a></li>
-						<li><a>...</a></li>
-						<li><a>...</a></li>
-					</ul>
-			</article>
-			<article>
-					<ul>
-						<li>Kontakt:</li>
-						<li>Svetonedeljska cesta 18</li>
-						<li>Kalinovica, 10436 Rakov Potok</li>
-						<li>Inženjering: +385 1 2657 700</li>
-						<li>Fax: +385 1 6589 231</li>
-						<li>e-mail: duplico@duplico.hr</li>
-					</ul>
-			</article>
-		</section>
-	</footer>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<!-- Restfulizer.js - A tool for simulating put,patch and delete requests -->
+	<script src="{{ asset('js/restfulizer.js') }}"></script>
+</body>
+
+<footer>
+	<div class="row">
+	  <div class="col-xs-2 col-sm-3 col-md-4 col-lg-4">
+		<ul>
+			<li><a>O nama</a></li>
+			<li><a>...</a></li>
+			<li><a>...</a></li>
+		</ul>
+	  </div>
+	  <div class="col-xs-2 col-sm-3 col-md-4 col-lg-4">
+		<ul>
+			<li><a>...</a></li>
+			<li><a>...</a></li>
+			<li><a>...</a></li>
+		</ul>	
+	  </div>
+	  <div class="col-xs-2 col-sm-3 col-md-4 col-lg-4">
+		<p class="kontakt">Kontakt:</p>
+		<ul>
+			<li>Duplico d.o.o.</li>
+			<li>Svetonedeljska cesta 18</li>
+			<li>Kalinovica, 10436 Rakov Potok</li>
+			<li>Inženjering: +385 1 2657 700</li>
+			<li>Fax: +385 1 6589 231</li>
+			<li>e-mail: duplico@duplico.hr</li>
+		</ul>
+	  </div>
+	</div>
+</footer>
 </html>

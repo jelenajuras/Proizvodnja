@@ -51,28 +51,28 @@ button a {
 	text-decoration: none;
 }
 
-footer section{
-	width:750px;
+footer{
+	width:800px;
 	margin: auto;
-	padding-top:20px;
+	padding-top:10px;
 }
 
-footer article {
+footer .row > div {
 	float:left;
 	color:#bfbfbf;
 	width:33%;
 	font-size:1.25rem;
 }
 
-footer article ul {
+footer ul {
 	list-style:none;
 }
 
-footer article ul a {
+footer ul a {
 	color:#bfbfbf;
 }
 
-footer article ul a:hover {
+footer ul a:hover {
 	color:white;
 	text-decoration:none;
 	cursor: pointer;
@@ -81,10 +81,34 @@ footer article ul a:hover {
 header{
 	
 }
+
 .login .pos {
 	position: absolute;
 	top:15%;
 	left:50%;
 	width:50%;
 	transform: translate(-50%,0);
+}
+
+#duplico{
+	color:#ff6600
+}
+
+#input1 {
+	background-color:#d9d9d9;
+	color:#262626;
+}
+
+#input2 {
+	background-color:#262626;
+	color:#d9d9d9;
+}
+
+.container-fluid .logo img {
+	margin: 0;
+    position: absolute;
+	width:150px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

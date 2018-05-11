@@ -1,18 +1,18 @@
 @extends('layouts.index')
 
 @section('title', 'Duplico proizvodnja')
-
+<link rel="stylesheet" href="{{ URL::asset('css/home.css') }}"/>
 @section('content')
 
-<div>
-<h5>Popis projekata</h5>
-@foreach($projects as $project)
-	@if($project->user_id == Sentinel::getUser()->id )
-		<div class="projekt">
-			<p class="prInv">{{ $project->investitor }}</p>
-			<p><a href="{{ route('admin.productions.show', $project->id) }}">{{ $project->id . ' - ' . $project->naziv }}</a></p>
-		</div>
-	@endif
-@endforeach
-</div>
+@if(count($projects))
+	<div class="home">
+		@foreach($projects as $project)
+			@if($project->user_id == Sentinel::getUser()->id )
+				<div class="projekt">
+					<p><a href="{{ route('admin.productions.show', $project->id) }}">{{ $project->investitor }}<br>{{ $project->id . ' - ' . $project->naziv }}</a></p>
+				</div>
+			@endif
+		@endforeach
+	</div>
+@endif
 @stop

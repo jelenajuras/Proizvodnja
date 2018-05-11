@@ -8,19 +8,21 @@
 
 <div class="db row">
     @if (Sentinel::check())
-			<div>
-				<h4>Popis projekata:</h4>
-			</div>
-			<div>
-				@foreach($projects as $project)
-					@if($project->user_id == Sentinel::getUser()->id )
-						<div class="projekt">
-							<p class="prInv">{{ $project->investitor }}</p>
-							<p><a href="{{ route('admin.productions.show', $project->id) }}">{{ $project->id . ' - ' . $project->naziv }}</p>
-							</a></div>
-					@endif
-				@endforeach
-			</div>
+	<!--	<img src="{{ asset('img/ormar1.jpg') }}" />-->
+		<div>
+			<h4>Popis projekata:</h4>
+		</div>
+		<div>
+			@foreach($projects as $project)
+				@if($project->user_id == Sentinel::getUser()->id )
+					<div class="projekt">
+						<p class="prInv">{{ $project->investitor }}</p>
+						<p><a href="{{ route('admin.productions.show', $project->id) }}">{{ $project->id . ' - ' . $project->naziv }}</p>
+						</a></div>
+				@endif
+			@endforeach
+		</div>
+		
     @else
         <div class="jumbotron">
             <h1>Welcome, Guest!</h1>

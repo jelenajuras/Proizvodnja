@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Cabinet;
 use App\Models\Users;
 use App\Models\Project;
+use App\Models\Preparation;
 use App\Http\Requests\CabinetRequest;
 use App\Http\Controllers\Controller;
 use Sentinel;
+use Mail;
 
 class CabinetController extends Controller
 {
@@ -29,9 +31,13 @@ class CabinetController extends Controller
      */
     public function index()
     {
-		$cabinets = Cabinet::join('projects','cabinets.projekt_id','=','projects.id')->join('customers','projects.investitor_id','=','customers.id')->select('cabinets.*','projects.id as PrBroj','projects.investitor_id as kupac','projects.naziv as PrNaziv','projects.objekt','customers.naziv as investitor')->orderBy('id','ASC')->get();
+		$user = Sentinel::getUser()->id;
+		$cabinets = Cabinet::join('projects','cabinets.projekt_id','=','projects.id')->join('customers','projects.investitor_id','=','customers.id')->select('cabinets.*','projects.id as PrBroj','projects.investitor_id as kupac','projects.naziv as PrNaziv','projects.objekt','customers.naziv as investitor')->get();
+		$priprema = Preparation::get();
+		
+		//dd($priprema);
 
-		return view('admin.cabinets.index',['cabinets'=>$cabinets]);
+		return view('admin.cabinets.index',['cabinets'=>$cabinets])->with('priprema',$priprema);
     }
 
     /**
@@ -41,11 +47,13 @@ class CabinetController extends Controller
      */
     public function create()
     {
-		$projects = Project::join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->orderBy('id','ASC')->get();
+		$user = Sentinel::getUser()->id;
+		$projects = Project::join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->where('user_id','=',$user)->orderBy('id','ASC')->get();
 		$zadnjibr = Cabinet::orderBy('brOrmara','DESC')->first();
 		$users = Users::join('role_users','users.id','=','role_users.user_id')->select('users.*','role_users.role_id')->where('role_users.role_id','<>','4')->orderBy('last_name','ASC')->get();
+
+		//dd($projects);
 		
-		//dd($zadnjibr->brOrmara);
 		return view('admin.cabinets.create')->with('projects',$projects)->with('zadnjibr',$zadnjibr)->with('users',$users);
     }
 
@@ -58,7 +66,7 @@ class CabinetController extends Controller
     public function store(CabinetRequest $request)
     {
 		$input = $request->except(['_token']);
-		
+	
 		$proizvodjacOpr=array();
 		$i=0;
 		foreach($input as $key => $value){
@@ -68,7 +76,6 @@ class CabinetController extends Controller
 			}
 		}
 		$oprema = implode(", ", $proizvodjacOpr);
-		//dd($input);
 
 		$data = array(
 			'brOrmara'  => $input['brOrmara'],
@@ -96,9 +103,32 @@ class CabinetController extends Controller
 			'napomena'  => $input['napomena']
 		);
 		
+		
 		$cabinet = new Cabinet();
 		$cabinet->saveCabinet($data);
 		
+		$ormar = Project::where('projects.id','=',$input['projekt_id'])->join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->first();
+
+		//dd($investitor);
+		
+		//$ = Equipment::distinct()->get(['User_id']);
+		//$user_mail = Users::select('id','email')->where('id',$zaduzena_osoba->User_id)->value('email');
+		$email_proba = 'jelena.juras@duplico.hr'; 
+		$koordinacija = 'koordicija@duplico.hr';
+		$priprena = 'priprema@duplico.hr';
+		$isporuka = date("Y-m-d", strtotime($input['datum_isporuke']));
+		$investitor = $ormar->investitor;
+			Mail::queue(
+				'email.store_cabinet',
+				['ormar' => $ormar,'email_proba' => $email_proba,'brOrmara' => $input['brOrmara'], 'naziv' => $input['naziv'], 'isporuka' => $isporuka, 'investitor' => $investitor],
+				function ($message) use ($email_proba) {
+					$message->to($email_proba)
+							//->cc($koordinacija)
+							// ->cc($priprena)
+						->subject('Novi ormar proizvodnje');
+				}
+			);
+
 		$message = session()->flash('success', 'Ormar je uspješno spremljen.');
 		
 		//return redirect()->back()->withFlashMessage($messange);
@@ -195,6 +225,26 @@ class CabinetController extends Controller
 		
 		$cabinet->updateCabinet($data);
 		
+		$ormar = Project::where('projects.id','=',$input['projekt_id'])->join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->first();
+
+		//dd($investitor);
+		
+		$email_proba = 'jelena.juras@duplico.hr'; 
+		$koordinacija = 'koordicija@duplico.hr';
+		$priprena = 'priprema@duplico.hr';
+		$isporuka = date("Y-m-d", strtotime($input['datum_isporuke']));
+		$investitor = $ormar->investitor;
+			Mail::queue(
+				'email.store_cabinet',
+				['ormar' => $ormar,'email_proba' => $email_proba,'brOrmara' => $input['brOrmara'], 'naziv' => $input['naziv'], 'isporuka' => $isporuka, 'investitor' => $investitor],
+				function ($message) use ($email_proba) {
+					$message->to($email_proba)
+							//->cc($koordinacija)
+							// ->cc($priprena)
+						->subject('Novi ormar proizvodnje');
+				}
+			);
+			
 		$message = session()->flash('success', 'Ispravljeni su podaci ormara' . $cabinet->id );
 		
 		return redirect()->route('admin.cabinets.index')->withFlashMessage($message);

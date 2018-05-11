@@ -4,7 +4,6 @@
 
 @section('content')
 <section class="login">
-		<p>Za ulazak na stranice potrebna je prijava</p>
 		<div class="pos row">
 			<div class="col-md-4 col-md-offset-4">
 				<div class="panel panel-default">
@@ -28,7 +27,7 @@
 								</label>
 							</div>
 							<input name="_token" value="{{ csrf_token() }}" type="hidden">
-							<input class="butt btn btn-lg btn-default btn-block" type="submit" value="Prijava">
+							<input class="butt btn btn-lg btn-default btn-block" type="submit" value="Prijava" id="input2">
 							<!--<p style="margin-top:5px; margin-bottom:0"><a href="{{ route('auth.password.request.form') }}" type="submit">Forgot your password?</a></p>-->
 						</fieldset>
 						</form>

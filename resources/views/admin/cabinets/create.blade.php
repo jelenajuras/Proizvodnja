@@ -40,7 +40,7 @@
 							</div>
 							<label>Projekt:</label>
 							<div class="form-group {{ ($errors->has('projekt_id')) ? 'has-error' : '' }}">
-								<select class="form-control" name="projekt_id" id="sel1" value="{{ old('projekt_id') }}">
+								<select class="form-control" name="projekt_id" id="sel1" value="{{ old('projekt_id') }}" autofocus>
 									<option disabled selected value></option>
 									@foreach ($projects as $project)
 										<option name="projekt_id" value=" {{$project->id}}">{{ $project->id . ' - ' . $project->investitor . ', ' . $project->naziv }}</option>

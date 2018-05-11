@@ -23,6 +23,27 @@ class Cabinet extends Model
 	protected static $userModel = 'App\Models\Users'; 
 	
 	/*
+	* The Eloquent project model name
+	* 
+	* @var string
+	*/
+	protected static $preparationModel = 'App\Models\Preparation'; 
+	
+	/*
+	* The Eloquent purchase model name
+	* 
+	* @var string
+	*/
+	protected static $purchaseModel = 'App\Models\Purchase'; 
+	
+	/*
+	* The Eloquent purchase model name
+	* 
+	* @var string
+	*/
+	protected static $productionModel = 'App\Models\Production'; 
+	
+	/*
 	* Returns the customer relationship
 	* 
 	* @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -53,6 +74,39 @@ class Cabinet extends Model
 	public function projekt()
 	{
 		return $this->belongsTo(static::$projectModel,'projekt_id');
+	}
+	
+	/*
+	* Returns the customer relationship
+	* 
+	* @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	*/
+	
+	public function preparation()
+	{
+		return $this->hasOne(static::$preparationModel,'ormar_id');
+	}
+	
+	/*
+	* Returns the purchase relationship
+	* 
+	* @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	*/
+	
+	public function purchase()
+	{
+		return $this->hasOne(static::$purchaseModel,'ormar_id');
+	}
+	
+	/*
+	* Returns the production relationship
+	* 
+	* @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	*/
+	
+	public function production()
+	{
+		return $this->hasOne(static::$productionModel,'ormar_id');
 	}
 	
 	/*

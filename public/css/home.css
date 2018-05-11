@@ -1,0 +1,28 @@
+/* CSS home */
+
+.home {
+	
+	background-color:rgba(256,256,256,0.3);
+	width:100%;
+	box-sizing: border-box;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+.projekt {
+	box-sizing: border-box;
+	width:100%;
+	background-color:white;
+	padding: 10px;
+	color: black;
+	margin:10px 0;
+	
+}
+.projekt p a {
+	color: black;
+	text-decoration:none;
+}
+
+.projekt p a:hover {
+	color:#8c8c8c;
+	
+}

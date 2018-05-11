@@ -1,24 +1,47 @@
 /* CSS dashboard */ 
 
+body{
+	margin:0;
+	padding:0;
+
+}
 .db {
-	padding-left:20px;
+	position:relative;
+	color:black;
+}
+
+.db img{
+	position:absolute;
+	margin-top: -20px;
+	opacity: 0.3;
+	position:absolute;
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	z-index: -1;
+}
+
+.db div{
+	padding-left:30px;
+	position:relative;
+	top:0px;
 }
 
 .projekt {
+	position:relative;
 	width:45%;
 	float:left;
+	margin: 20px;
 	padding: 20px;
-	border-top: solid 1px #d9d9d9;
-
 }
 
 .projekt:nth-child(3) {
 	clear:left;
-	
 }
 
 .projekt .prInv {
-	font-weight: bold;
+	
+	font-size: 1rem;
 }
 .projekt a {
 	font-weight: bold;

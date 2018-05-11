@@ -1,137 +1,20 @@
 @extends('layouts.admin')
 
 @section('title', 'Proizvodni projekti')
+<link rel="stylesheet" href="{{ URL::asset('css/production.css') }}"/>
 
-<style>
-	body {font-family: "Lato", sans-serif;}
-
-	/* Style the tab */
-	.tab {
-		overflow: hidden;
-		border: 1px solid #ccc;
-		background-color: #ff751a;
-	}
-
-	/* Style the buttons inside the tab */
-	.tab button {
-		background-color: inherit;
-		float: center;
-		border: none;
-		outline: none;
-		cursor: pointer;
-		padding: 10px 10px;
-		width: 105px;
-		transition: 0.3s;
-		font-size: 0.75rem;
-	}
-
-	/* Change background color of buttons on hover */
-	.tab button:hover {
-		background-color: #ddd;
-	}
-
-	/* Create an active/current tablink class */
-	.tab button.active {
-		background-color: #666666;
-		color: #ff751a;
-		font-weight: bold;
-	}
-
-	/* Style the tab content */
-	.tabcontent {
-		display: none;
-		padding: 6px 12px;
-		border: 1px solid #ccc;
-		border-top: none;
-	}
-
-	/* Style the close button */
-	.topright {
-		float: right;
-		cursor: pointer;
-		font-size: 1.75rem;
-	}
-
-	.topright:hover {color: red;}
-	#pomak {
-		padding-left: 20px;
-	}
-	
-	
-	#pomak .zadnjiRed {
-		padding-bottom: 10px;
-	}
-	
-	table {
-		font-size: 0.75rem;
-		width:100%;
-	}
-	
-	#Priprema th, #Nabava th, #Proizvodnja th {
-		padding: 10px 30px;
-		border-bottom: solid 1px #ccc;
-		font-size: 0.63rem;
-	}
-	
-	#Priprema td, #Nabava td, #Proizvodnja td, #Ormari td {
-		padding: 10px;
-		font-size: 0.75rem;
-	}
-
-	#Status p{
-		margin:0;
-		padding: 5px 0px;
-	}
-	
-	#Status .rght {
-		padding-left:20px;
-	}
-	
-	#Status .rght .završeno {
-		color: green;
-		font-weight: bold;
-	}
-	
-	#Status .rght .uradu {
-		color: black;
-		font-weight: bold;
-	}
-	
-	#Status div .bordB{
-		padding: 10px 10px;
-		border-bottom: solid 1px black;
-		float:left;
-
-	}
-
-	#Status div .bordB:nth-child(4){
-		display: block;
-		clear:left;
-	}
-	
-	#Opći {
-		overflow: hidden;
-		margin-bottom: 10px;
-		padding-bottom: 10px;
-	}
-	
-	.center{
-		text-align:center;
-	}
-	
-</style>
 @section('content')
 	<h5>{{ 'Naziv projekta: '}}<b>{{ $project->id . ' - ' . $project->naziv }}</b></h5>
 	<div class="tab">
 		@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator'))
-			<button class="tablinks" onclick="openCity(event, 'Opći')" id="defaultOpen">Opći podaci</button>
+		<!--	<button class="tablinks" onclick="openCity(event, 'Opći')" id="defaultOpen">Opći podaci</button>-->
 			<button class="tablinks" onclick="openCity(event, 'Ormari')" id="defaultOpen">Ormari</button>
 			<button class="tablinks" onclick="openCity(event, 'Priprema')" id="defaultOpen">Priprema</button>
 			<button class="tablinks" onclick="openCity(event, 'Nabava')" id="defaultOpen">Nabava</button>
 			<button class="tablinks" onclick="openCity(event, 'Proizvodnja')" id="defaultOpen">Proizvodnja</button>
-			<button class="tablinks" onclick="openCity(event, 'Status')" id="defaultOpen">Status ormara</button>
+			<!--<button class="tablinks" onclick="openCity(event, 'Status')" id="defaultOpen">Status ormara</button>-->
 		@endif
-		@if (Sentinel::check() && Sentinel::inRole('basic'))
+		@if (Sentinel::check() && Sentinel::inRole('voditelj'))
 			<button class="tablinks" onclick="openCity(event, 'Opći')" id="defaultOpen">Opći podaci</button>
 			<button class="tablinks" onclick="openCity(event, 'Status')" id="defaultOpen">Status ormara</button>
 			
@@ -143,7 +26,7 @@
 		@endif
 	</div>
 	<!-- Opći podaci projekta -->
-	@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator') || Sentinel::inRole('basic'))
+	@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator') || Sentinel::inRole('voditelj'))
 	<div id="Opći" class="tabcontent">
 		<!--<span onclick="this.parentElement.style.display='none'" class="topright">&times</span>-->
 		
@@ -278,7 +161,7 @@
 						</thead>
 						<tbody>
 							@foreach($cabinets as $cabinet)
-							<tr>
+							<tr class="OrmProiz">
 								<td><a href="{{ route('admin.cabinets.edit', $cabinet->id) }}">{{ $cabinet->brOrmara }}</a></td>
 								<td>{{ $cabinet->projektirao_user['last_name'] }}</td>
 								<td>{{ $cabinet->odobrio_user['last_name'] }}</td>
@@ -314,10 +197,8 @@
 	<!-- Priprema -->
 	<div id="Priprema" class="tabcontent">
 		<!--<span onclick="this.parentElement.style.display='none'" class="topright">&times</span>-->
-
-		<div class='btn-toolbar pull-right'>
-		
-        </div>
+			<div class='btn-toolbar pull-right'>
+			</div>
 		<table>
 			<thead>
 				<tr>	
@@ -353,22 +234,32 @@
 								@else
 									<td>{{ date_format($datum_1,'d.m.Y') }}</td>
 								@endif
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 						@else
 							@foreach($preparations as $preparation)
 								@if($preparation->ormar_id == $cabinet->id)
 								<td class="center">
 									<a href="{{ route('admin.preparations.edit', ['id' => $preparation->id] ) }}" >Izmjeni status pripreme</a>
 								</td>
-								
 								<?php 
 								$datum1 = new DateTime($preparation->datum);
 								$datum3 = $datum1->modify('+18 days');
 								$datum2 = new DateTime($cabinet->datum_isporuke);
 								$razlika = $datum3->diff($datum2);
-
 								?>
 								@if( strtotime($preparation->datum) < time() )
-									<td class="center" style="color:red">{{ date('d.m.Y', strtotime($preparation->datum)) }}</td>
+									@if($preparation->rijeseno1 == 'DA' && $preparation->rijeseno2 == 'DA' && $preparation->rijeseno3 == 'DA' && $preparation->rijeseno4 == 'DA' && $preparation->rijeseno5 == 'DA' && $preparation->rijeseno6 == 'DA' && $preparation->rijeseno7 == 'DA')
+										<td class="center" style="color:green">{{ date('d.m.Y', strtotime($preparation->datum)) }}</td>
+									@else
+										<td class="center" style="color:red">{{ date('d.m.Y', strtotime($preparation->datum)) }}</td>
+									@endif
 								@else
 									<td class="center">{{ date('d.m.Y', strtotime($preparation->datum)) }}</td>
 								@endif
@@ -387,7 +278,6 @@
 				@endforeach
 			</tbody>
 		</table>
-		
 	</div>
 	
 	<!-- Nabava -->
@@ -401,13 +291,36 @@
 					<th>izmjena</td>
 					<th>Rok</td>
 					<th>Očekivana promjena roka isporuke</td>
-					<th>Ormar</td>
-					<th>Kanalice</td>
-					<th>Din šine</td>
-					<th>Vodič</td>
-					<th>Bakar</td>
-					<th>Redne stezaljke</td>
-					<th>Sklopna oprema</td>
+					<th colspan="2">Ormar</td>
+					<th colspan="2">Kanalice</td>
+					<th colspan="2">Din šine</td>
+					<th colspan="2">Vodič</td>
+					<th colspan="2">Bakar</td>
+					<th colspan="2">Redne stezaljke</td>
+					<th colspan="2">Sklopna oprema</td>
+					<th colspan="2">PLC</td>
+				</tr>
+				<tr>	
+					<th></td>
+					<th></td>
+					<th></td>
+					<th></td>
+					<th>Naručeno</td>
+					<th>Dostavljeno</td>
+					<th>Naručeno</td>
+					<th>Dostavljeno</td>
+					<th>Naručeno</td>
+					<th>Dostavljeno</td>
+					<th>Naručeno</td>
+					<th>Dostavljeno</td>
+					<th>Naručeno</td>
+					<th>Dostavljeno</td>
+					<th>Naručeno</td>
+					<th>Dostavljeno</td>
+					<th>Naručeno</td>
+					<th>Dostavljeno</td>
+					<th>Naručeno</td>
+					<th>Dostavljeno</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -434,18 +347,37 @@
 							@else
 								<td class="center" >{{ date_format($datum_2,'d.m.Y') }}</td>
 							@endif
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
 						@else
 							@foreach($purchases as $purchase)
 								@if($purchase->ormar_id == $cabinet->id)
 									<td class="center"><a href="{{ route('admin.purchases.edit', ['id' => $purchase->id] ) }}" >Izmjeni status pripreme</a></td>
-
 									@if(strtotime($purchase->datum) <= time())
-										<td class="center" style="color:red">{{ date('d.m.Y', strtotime($purchase->datum)) }}</td>
+										@if($purchase->rijeseno1 == 'DA' && $purchase->rijeseno2 == 'DA' && $purchase->rijeseno3 == 'DA' && $purchase->rijeseno4 == 'DA' && $purchase->rijeseno5 == 'DA' && $purchase->rijeseno6 == 'DA' && $purchase->rijeseno7 == 'DA' && $purchase->rijeseno8 == 'DA')
+											<td class="center" style="color:green">{{ date('d.m.Y', strtotime($purchase->datum)) }}</td>
+										@else
+											<td class="center" style="color:red">{{ date('d.m.Y', strtotime($purchase->datum)) }}</td>
+										@endif
 									@else
 										<td class="center">{{ date('d.m.Y', strtotime($purchase->datum)) }}</td>
 									@endif
-									
-									
+
 									<?php 
 									$datum1 = new DateTime($purchase->datum);
 									$datum1->modify('+3 days');
@@ -453,13 +385,30 @@
 									$razlika = $datum1->diff($datum2);
 									?>
 									<td class="center">{{ $razlika->format('%d') . ' dana' }}</td>
-									<td>{{ $purchase->rijeseno1 . ' ' . $purchase->koment_orm }}</td>
+									<td>{{ $purchase->rijeseno1 }}</td>
+									<td>{{ $purchase->naruceno1 }}</td>
+									<td>{{ $purchase->rijeseno2 }}</td>
+									<td>{{ $purchase->naruceno2 }}</td>
+									<td>{{ $purchase->rijeseno3 }}</td>
+									<td>{{ $purchase->naruceno3 }}</td>
+									<td>{{ $purchase->rijeseno4 }}</td>
+									<td>{{ $purchase->naruceno4 }}</td>
+									<td>{{ $purchase->rijeseno5 }}</td>
+									<td>{{ $purchase->naruceno5 }}</td>
+									<td>{{ $purchase->rijeseno6 }}</td>
+									<td>{{ $purchase->naruceno6 }}</td>
+									<td>{{ $purchase->rijeseno7 }}</td>
+									<td>{{ $purchase->naruceno7 }}</td>
+									<td>{{ $purchase->rijeseno8 }}</td>
+									<td>{{ $purchase->naruceno8 }}</td>
+								
+									<!--<td>{{ $purchase->rijeseno1 . ' ' . $purchase->koment_orm }}</td>
 									<td>{{ $purchase->rijeseno2 . ' ' . $purchase->koment_kan }}</td>
 									<td>{{ $purchase->rijeseno3 . ' ' . $purchase->koment_sine }}</td>
 									<td>{{ $purchase->rijeseno4 . ' ' . $purchase->koment_vod }}</td>
 									<td>{{ $purchase->rijeseno5 . ' ' . $purchase->koment_bak }}</td>
 									<td>{{ $purchase->rijeseno6 . ' ' . $purchase->koment_stez }}</td>
-									<td>{{ $purchase->rijeseno7 . ' ' . $purchase->koment_sklOpr }}</td>
+									<td>{{ $purchase->rijeseno7 . ' ' . $purchase->koment_sklOpr }}</td>-->
 								
 								@endif
 							@endforeach
@@ -518,16 +467,27 @@
 							@else
 								<td class="center">{{ date_format($datum_2,'d.m.Y') }}</td>
 							@endif
-						
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
 						@endif
 						
 						@foreach($productions as $production)
 							@if($production->ormar_id == $cabinet->id)
 							<td class="center"><a href="{{ route('admin.productions.edit', ['id' => $production->id] ) }}" >Izmjeni status pripreme</a></td>
-						
-						
 							@if(strtotime($production->datum) <= time())
-								<td class="center" style="color:red">{{ date('d.m.Y', strtotime($production->datum)) }}</td>
+								@if($production->rijeseno1 == 'DA' && $production->rijeseno2 == 'DA' && $production->rijeseno3 == 'DA' && $production->rijeseno4 == 'DA' && $production->rijeseno5 == 'DA' && $production->rijeseno6 == 'DA' && $production->rijeseno7 == 'DA')
+									<td class="center" style="color:green">{{ date('d.m.Y', strtotime($production->datum)) }}</td>
+								@else
+									<td class="center" style="color:red">{{ date('d.m.Y', strtotime($production->datum)) }}</td>
+								@endif
 							@else
 								<td class="center">{{ date('d.m.Y', strtotime($production->datum)) }}</td>
 							@endif
@@ -560,12 +520,12 @@
 	@endif
 	
 	<!-- Status -->
-	@if (Sentinel::check() && Sentinel::inRole('kupac') || Sentinel::inRole('basic') || Sentinel::inRole('administrator') )
-	<div id="Status" class="tabcontent">
+	@if (Sentinel::check() && Sentinel::inRole('kupac') || Sentinel::inRole('voditelj') || Sentinel::inRole('administrator') )
+	<div id="Status" class="clearfix tabcontent">
 	  <!--<span onclick="this.parentElement.style.display='none'" class="topright">&times</span>-->
 
 		<div class="row">
-			<div class="col-xs-8 col-md-8 col-md-10 col-lg-12">
+			<div class="col-xs-12 col-md-12 col-md-10 col-lg-12">
 				<div class="header panel-heading">
 					<h5><b>{{ $project->id . ' - ' . $project->naziv }}</b></h5>
 					<p>{{ 'Naručitelj: '}}<b>{{ $project->investitor }}</b></p>
@@ -582,8 +542,8 @@
 						}
 						
 				?>
-					<div class="bordB col-md-4">
-						<p><b>Proizvodni broj ormara: {{ $cabinet->brOrmara }}</b></p>
+					<div class="bordB  col-md-4">
+						<h6><b>Proizvodni broj ormara: {{ $cabinet->brOrmara }}</b></h6>
 								<p><ins>Status</ins></p>
 								@if($prep &&
 								$prep->rijeseno1 == 'DA' && 
@@ -629,7 +589,8 @@
 									<p><b>Datum isporuke: {{ date_format($datum_isp,'d.m.Y') }}</b></p>
 									<p><b>Ugovoreni datum isporuke: {{ date('d.m.Y', strtotime($cabinet->datum_isporuke)) }}</b></p>
 								@else
-									<p><b>Ugovoreni datum isporuke: {{ date('d.m.Y', strtotime($cabinet->datum_isporuke)) }}</b></p>
+									<p><b>Datum isporuke: </b></p>
+								<p><b>Ugovoreni datum isporuke: {{ date('d.m.Y', strtotime($cabinet->datum_isporuke)) }}</b></p>
 
 								@endif
 						<hr>
@@ -660,21 +621,29 @@
 	</div>
 	@endif
 	<script>
-	function openCity(evt, cityName) {
-		var i, tabcontent, tablinks;
-		tabcontent = document.getElementsByClassName("tabcontent");
-		for (i = 0; i < tabcontent.length; i++) {
-			tabcontent[i].style.display = "none";
+		function openCity(evt, cityName) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+			document.getElementById(cityName).style.display = "block";
+			evt.currentTarget.className += " active";
 		}
-		tablinks = document.getElementsByClassName("tablinks");
-		for (i = 0; i < tablinks.length; i++) {
-			tablinks[i].className = tablinks[i].className.replace(" active", "");
-		}
-		document.getElementById(cityName).style.display = "block";
-		evt.currentTarget.className += " active";
-	}
 
-	// Get the element with id="defaultOpen" and click on it
-	document.getElementById("defaultOpen").click();
+		// Get the element with id="defaultOpen" and click on it
+		document.getElementById("defaultOpen").click();
+	</script>
+	
+	<script>
+			$(document).ready(function(){
+				$(".OrmProiz").click(function(){
+					$("p").toggle();
+				});
+			});
 	</script>
 @stop

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\Cabinet;
 use App\Models\Preparation;
+use App\Models\Purchase;
+use App\Models\Production;
 use App\Http\Controllers\Controller;
 use Sentinel;
 use DateTime;
@@ -28,9 +30,13 @@ class PreparationController extends Controller
      */
     public function index()
     {
-        $preparations = Preparation::get();
+        $cabinets = Cabinet::get();
+
+		$preparations = Preparation::get();
+		$productions = Production::get();
+		$purchases = Purchase::get();
 		
-		return view('admin.preparations.index',['preparations'=>$preparations]);
+		return view('admin.preparations.index',['preparations'=>$preparations])->with('cabinets', $cabinets)->with('productions', $productions)->with('purchases', $purchases);
     }
 
     /**
@@ -55,8 +61,7 @@ class PreparationController extends Controller
     public function store(Request $request)
     {
         $input = $request->except(['_token']);
-		$project = Cabinet::where('id',$input['ormar_id'])->first();
-		$brProj = $project->projekt_id;
+		
 		//dd($brProj);
 		
 		$data = array(
@@ -80,11 +85,13 @@ class PreparationController extends Controller
 		
 		$preparation = new Preparation();
 		$preparation->savePreparation($data);
+		$project = Cabinet::where('id',$input['ormar_id'])->first();
+		$brProj = $project->projekt_id;
 		
 		$message = session()->flash('success', 'Zapis je uspješno spremljen.');
 		
-		//return redirect()->back()->withFlashMessage($messange);
-		return redirect()->route('admin.productions.show', ['brProj' => $brProj])->withFlashMessage($message);
+		return redirect()->back()->withFlashMessage($message);
+		//return redirect()->route('admin.productions.show', ['brProj' => $brProj])->withFlashMessage($message);
     }
 
     /**
@@ -95,7 +102,10 @@ class PreparationController extends Controller
      */
     public function show($id)
     {
-        //
+        $preparation = Preparation::join('cabinets','preparations.ormar_id','cabinets.id')->select('preparations.*','cabinets.brOrmara')->find($id);
+		
+		//dd($preparation);
+		return view('admin.preparations.show', ['preparation' => $preparation]);
     }
 
     /**
@@ -108,10 +118,16 @@ class PreparationController extends Controller
     {
 		$preparation = Preparation::find($id);
 		$cabinet = Cabinet::where('id','=',$preparation->ormar_id)->first();
+
+		$purchase= Purchase::where('ormar_id','=',$preparation->ormar_id)->first();
 		
-		//dd($cabinet);
+		//$purchase = Purchase::find($id);
+		//$cabinet = Cabinet::where('id','=',$purchase->ormar_id)->first();
 		
-		return view('admin.preparations.edit', ['preparation' => $preparation])->with('cabinet', $cabinet);
+		$production = Production::where('ormar_id','=',$preparation->ormar_id)->first();
+		//dd($production);
+		
+		return view('admin.preparations.edit', ['preparation' => $preparation], ['purchase' => $purchase], ['production' => $production])->with('cabinet', $cabinet)->with('purchase', $purchase)->with('production', $production);
     }
 
     /**
@@ -152,8 +168,8 @@ class PreparationController extends Controller
 		
 		$message = session()->flash('success', 'Uspješno su ispravljeni podaci');
 		
-		//return redirect()->back()->withFlashMessage($messange);
-		return redirect()->route('admin.productions.show', ['brProj' => $brProj])->withFlashMessage($message);
+		return redirect()->back()->withFlashMessage($message);
+		//return redirect()->route('admin.productions.show', ['brProj' => $brProj])->withFlashMessage($message);
     }
 
     /**
@@ -166,4 +182,7 @@ class PreparationController extends Controller
     {
         //
     }
+	
+	
+	
 }

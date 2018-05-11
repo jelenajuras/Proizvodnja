@@ -18,7 +18,7 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-
+	
 	<!-- Date picker-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -27,6 +27,9 @@
 	<!-- Side dropdown -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
+	<!-- Awesome icon -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+	
 	<link rel="stylesheet" href="{{ URL::asset('css/admin.css') }}"/>
 	
 	@stack('stylesheet')
@@ -34,9 +37,10 @@
 </head>
 
 <body>
-	<div class="sidenav">
+	<div id="mySidenav" class="sidenav">
 		<!--<img src="{{ asset('img/Duplico_logo-mali.png') }}"/>-->
-		<a class="navbar-brand" href="{{ route('admin.dashboard') }}" id="duplico">Duplico</a>
+		<a href="javascript:void(0)" class="closebtn" id="close" onclick="closeNav()">&times;</a>
+		<!--<a class="navbar-brand" href="{{ route('admin.dashboard') }}" id="duplico">Duplico</a>-->
 	
 	<!-- Vide administrator i proizvodnja -->
 		@if (Sentinel::check() && Sentinel::inRole('administrator') || Sentinel::inRole('proizvodnja'))
@@ -48,9 +52,12 @@
 				<a class="{{ Request::is('admin/roles*') ? 'active' : '' }}" href="{{ route('roles.index') }}">Dozvole</a>
 				<a class="{{ Request::is('proizvodnja/*') ? 'active' : '' }}" href="{{ route('admin.customers.index') }}">Naručitelji</a>
 				<a class="{{ Request::is('proizvodnja/*') ? 'active' : '' }}" href="{{ route('admin.projects.index') }}">Projekti</a>
-				<a class="{{ Request::is('proizvodnja/*') ? 'active' : '' }}" href="{{ route('admin.cabinets.index') }}">Ormari</a>
+				<!--<a class="{{ Request::is('proizvodnja/*') ? 'active' : '' }}" href="{{ route('admin.cabinets.index') }}">Ormari</a>-->
 			</div>
-
+			
+			<p><a class="{{ Request::is('proizvodnja/*') ? 'active' : '' }}" href="{{ route('admin.cabinets.index') }}">Ormari proizvodnje</a>
+				<i class="fa fa-caret-down"></i>
+			</p>
 			<button class="dropdown-btn">Proizvodnja
 				<i class="fa fa-caret-down"></i>
 			</button>
@@ -70,26 +77,30 @@
 			</div>-->
 		@endif
 		
-	<!-- Vidi kupac i basic -->
-		@if (Sentinel::check() && Sentinel::inRole('basic'))
+	<!-- Vidi nabava, priprema -->
+		@if (Sentinel::check() && Sentinel::inRole('basic') || Sentinel::inRole('nabava')|| Sentinel::inRole('priprema'))
 			<button class="dropdown-btn">Opći podaci 
 				<i class="fa fa-caret-down"></i>
 			</button>
 			<div class="dropdown-container">
 				<a class="{{ Request::is('basic/*') ? 'active' : '' }}" href="{{ route('admin.customers.index') }}">Naručitelji</a>
 				<a class="{{ Request::is('basic/*') ? 'active' : '' }}" href="{{ route('admin.projects.index') }}">Projekti</a>
-			
-				<a class="{{ Request::is('basic/*') ? 'active' : '' }}" href="{{ route('admin.cabinets.index') }}">Ormari</a>
+			</div>
+			<button class="dropdown-btn">Proizvodnja
+				<i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-container">
+				<a class="{{ Request::is('cabinets/*') ? 'active' : '' }}" href="{{ route('admin.cabinets.index') }}">Ormari proizvodnje</a>
 			</div>
 		@endif
-		@if (Sentinel::check() && Sentinel::inRole('kupac') || Sentinel::inRole('basic'))
+		@if (Sentinel::check() && Sentinel::inRole('kupac') || Sentinel::inRole('voditelj') )
 			<button class="dropdown-btn">Proizvodnja
 				<i class="fa fa-caret-down"></i>
 			</button>
 			<div class="dropdown-container">
 			@foreach(DB::table('projects')->get() as $project)
 				@if($project->id == Sentinel::getUser()->productionProject_id || $project->user_id == Sentinel::getUser()->id)
-					<a class="{{ Request::is('kupac/*') ? 'active' : '' }}" href="{{ route('admin.productions.show', $project->id) }}">{{ $project->id . ' ' . $project->naziv}}</a>
+					<a class="{{ Request::is('kupac/*') || Request::is('voditelj/*') ? 'active' : '' }}" href="{{ route('admin.productions.show', $project->id) }}">{{ $project->id . ' ' . $project->naziv}}</a>
 				@endif
 			@endforeach
 			</div>
@@ -97,7 +108,11 @@
 	</div>
 	
 	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
+		<div class="container-fluid clearfix" >
+			<span style="font-size:30px;cursor:pointer" id="open" onclick="openNav()">&#9776; </span>
+			<div class="logo">
+				<img src="{{ asset('img/Duplico_logo-mali.png') }}" />
+			</div>
 			@if (Sentinel::check())
 			<!--<form class="navbar-form navbar-left" action="/action_page.php" id="center">
 				<div class="form-group">
@@ -105,10 +120,10 @@
 				</div>
 			</form>-->
 			@endif	
-			<div class="navbar-header navbar-right" id="nav-right" >
+			<div class="navbar-header navbar-right"  >
 				@if (Sentinel::check())
 				<li>
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="nav-right"><span class="user"></span> {{ Sentinel::getUser()->first_name }} <span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><i class="fas fa-angle-down"></i>{{ Sentinel::getUser()->first_name }} </a>
 					<ul class="dropdown-menu">
 					<li><a href="{{ route('auth.logout') }}">Odjava</a></li>
 					</ul>
@@ -120,12 +135,32 @@
 			</div>
 		</div>
 	</nav>
-	<div class="main">
+	<div id="main" class="main">
+		<!--<span style="font-size:30px;cursor:pointer" id="open" onclick="openNav()">&#9776; </span>-->
 		@include('notifications')
 		@yield('content')
+		
+		<script>
+			function openNav() {
+				document.getElementById("mySidenav").style.width = "200px";
+				document.getElementById("main").style.marginLeft = "200px";
+				document.getElementById("navbar").style.marginLeft = "200px";
+				$("#open").hide();
+				$("#close").show();
+			}
+
+			function closeNav() {
+				document.getElementById("mySidenav").style.width = "0";
+				document.getElementById("main").style.marginLeft= "0";
+				document.getElementById("navbar").style.marginLeft = "200px";
+				$("#open").show();
+				$("#close").hide();
+			}
+		</script>
 	</div>
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <!-- Restfulizer.js - A tool for simulating put,patch and delete requests -->
@@ -158,8 +193,9 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/datatables.min.js"></script>
-
-
+		<script>
+			
+		</script>
 		<script>
 			$(document).ready( function () {
 				$('#table_id').DataTable( {
@@ -172,17 +208,17 @@
 						"search": "Filtriraj:",
 						"lengthMenu": "Prikaži _MENU_ zapisa"
 					},
-					 "lengthMenu": [ 25, 50, 75, 100 ],
-					 dom: 'Bfrtip',
+					 "lengthMenu": [ 25, 50, 75, 100 ]
+					/* dom: 'Bfrtip',
 						buttons: [
 							//'copy', 'excel', 'pdf', 'print',
-					/*{
+					{
 						extend: 'pdfHtml5',
 						text: 'Izradi PDF',
 						exportOptions: {
 							columns: ":not(.not-export-column)"
 							}
-						},*/
+						},
 						{
 					extend: 'excelHtml5',
 					text: 'Izradi XLS',
@@ -190,10 +226,39 @@
 						columns: ":not(.not-export-column)"
 					}
 					},
-					 ],
+					 ],*/
 				});
+				/* get id from selected row*/
+				var table = $('#table_id').DataTable();
+ 
+				$('#table_id tbody').on( 'click', 'tr', function () {
+					var id = table.row( this ).id();
+					 $("#ormarId").val(id);
+					/* $.ajax({
+					  type: 'POST',
+					  url: 'index.php',
+					  data: ({name:"ormarId"}),
+					  cache: false,
+					  success: function(data){
+						$('#results').html(data);
+					  }
+					})
+					return false;*/
+				} );
+				/* Row selection (multiple rows) 
+					var table = $('#table_id').DataTable();
+				 
+					$('#table_id tbody').on( 'click', 'tr', function () {
+						$(this).toggleClass('selected');
+					} );
+				 
+					$('#button').click( function () {
+						alert( table.rows('.selected').data().length +' row(s) selected' );
+					} );*/
+				
 			});
 		</script>
+		
 		@stack('script')
     </body>
 </html>

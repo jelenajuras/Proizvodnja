@@ -88,8 +88,8 @@ class ProductionController extends Controller
 		
 		$message = session()->flash('success', 'Zapis je uspješno spremljen.');
 		
-		//return redirect()->back()->withFlashMessage($messange);
-		return redirect()->route('admin.productions.show', ['brProj' => $brProj])->withFlashMessage($message);
+		return redirect()->back()->withFlashMessage($message);
+		//return redirect()->route('admin.productions.show', ['brProj' => $brProj])->withFlashMessage($message);
     }
 
     /**
@@ -175,8 +175,8 @@ class ProductionController extends Controller
 		
 		$message = session()->flash('success', 'Uspješno su ispravljeni podaci');
 		
-		//return redirect()->back()->withFlashMessage($messange);
-		return redirect()->route('admin.productions.show', ['brProj' => $brProj])->withFlashMessage($message);
+		return redirect()->back()->withFlashMessage($message);
+		//return redirect()->route('admin.productions.show', ['brProj' => $brProj])->withFlashMessage($message);
     }
 
     /**
