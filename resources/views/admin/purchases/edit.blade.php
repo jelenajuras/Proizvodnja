@@ -22,6 +22,7 @@ tr th {
 .padd1 td {
 	padding: 15px;
 	font-size:0.75rem
+	
 }
 
 .butt {
@@ -49,8 +50,17 @@ tr th {
 }
 </style>
 @section('content')
+<div class="page-header">
+	<div class='btn-toolbar'>
+		<a class="btn btn-default btn-md" href="{{ route('admin.productions.show', $cabinet->projekt_id) }}">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			Go Back
+		</a>
+	</div>
+</div>
+@if (Sentinel::check() && Sentinel::inRole('administrator') || Sentinel::inRole('nabava') || Sentinel::inRole('proizvodnja'))
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-10 col-md-offset-1">
         <br/>
 		<h3 class="panel-title">Izmjeni status nabave</h3>
 		<br/>
@@ -154,4 +164,5 @@ tr th {
         </div>
     </div>
 </div>
+@endif
 @stop

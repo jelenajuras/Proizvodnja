@@ -1,44 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Status ormara')
-<style>
-
-table {
-	box-sizing: border-box;
-	width:100%;
-	font-size: 0.75rem;
-	border: solid 1px #ccc;
-	margin: 20px;
-	padding: 20px;
-}
-
-.status th, .status td{
-	padding: 10px;
-	border: solid 1px #ccc;
-}
-
-.status th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    border-bottom: solid 1px #ccc;
-}
-.status .bord-bott {
-	border-bottom: solid 1px black;
-}
-
-.status .bord-rght {
-	border-right: solid 1px black;
-}
-
-td {
-	text-align:center;
-}
-
-.rok {
-	min-width: 100px;
-}
-</style>
+<link rel="stylesheet" href="{{ URL::asset('css/preparation.css') }}"/>
 @section('content')
     <div class="page-header">
         <div class='btn-toolbar'>
@@ -51,8 +14,7 @@ td {
     </div>
     <div class="row">
         <div class="status col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            
-				
+			<div class="table-responsive">	
 				<table id="table_id" class="display">
 					<thead>
 						<tr>
@@ -170,7 +132,7 @@ td {
 					
 			</div>
            		
-        
+        </div>
 
     </div>
 	

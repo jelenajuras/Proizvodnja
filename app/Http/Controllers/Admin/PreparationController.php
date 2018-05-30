@@ -48,7 +48,7 @@ class PreparationController extends Controller
     {
 		$idOrmara = $request->id;
 		$cabinet = Cabinet::where('id','=',$idOrmara)->first();
-	//	dd($cabinet);
+
 		return view('admin.preparations.create')->with('idOrmara', $idOrmara)->with('cabinet', $cabinet);
     }
 

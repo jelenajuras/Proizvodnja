@@ -1,62 +1,8 @@
 /* CSS dashboard */ 
 
-body{
-	margin:0;
-	padding:0;
-
-}
-.db {
-	position:relative;
-	color:black;
-}
-
-.db img{
-	position:absolute;
-	margin-top: -20px;
-	opacity: 0.3;
-	position:absolute;
-	width:100%;
-	height:auto;
-	overflow:hidden;
-	z-index: -1;
-}
-
-.db div{
-	padding-left:30px;
-	position:relative;
-	top:0px;
-}
-
-.projekt {
-	position:relative;
-	width:45%;
-	float:left;
-	margin: 20px;
-	padding: 20px;
-}
-
-.projekt:nth-child(3) {
-	clear:left;
-}
-
-.projekt .prInv {
+.dashb {
+	padding:20px;
+	height:100%;
 	
-	font-size: 1rem;
-}
-.projekt a {
-	font-weight: bold;
-	text-decoration: none;
-	color: black;
-	cursor: pointer;
-}
 
-.projekt a {
-	font-weight: bold;
-	text-decoration: none;
-	color: black;
-}
-
-.projekt a:hover{
-	text-decoration: none;
-	color: #4d4d4d;
 }

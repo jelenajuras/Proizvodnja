@@ -1,20 +1,21 @@
 @extends('layouts.admin')
 
 @section('title', 'Priprema')
-<style>
 
-.padd1 td {
-	padding: 5px;
-	font-size:0.75rem
-}
-.btn {
-	width: 150px;
-	margin: auto;
-}
-</style>
+<link rel="stylesheet" href="{{ URL::asset('css/production.css') }}"/>
+
 @section('content')
+<div class="page-header">
+	<div class='btn-toolbar'>
+		<a class="btn btn-default btn-md" href="{{ route('admin.productions.show', $cabinet->projekt_id) }}">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			Go Back
+		</a>
+	</div>
+</div>
+@if (Sentinel::check() && Sentinel::inRole('administrator') || Sentinel::inRole('priprema') || Sentinel::inRole('proizvodnja'))
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-8 col-md-offset-2">
         <br/>
 		<h3 class="panel-title">Izmjeni status proizvodnje</h3>
 		<br/>
@@ -99,4 +100,5 @@
         </div>
     </div>
 </div>
+@endif
 @stop

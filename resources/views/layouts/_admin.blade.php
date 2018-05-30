@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">	
+
 	<title>@yield('title')</title>
 
 	<!-- Bootstrap - Latest compiled and minified CSS -->
@@ -18,9 +19,6 @@
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	
-	<!-- Google fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,800,900" rel="stylesheet">
-		
 	<!-- Date picker-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -33,98 +31,133 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 	
 	<link rel="stylesheet" href="{{ URL::asset('css/admin.css') }}"/>
-	<link rel="stylesheet" href="{{ URL::asset('css/w3_dropdown.css') }}"/>
+	
 	@stack('stylesheet')
 	
 </head>
 
 <body>
-	@if (Sentinel::check() && Sentinel::inRole('administrator') || Sentinel::inRole('proizvodnja') || Sentinel::inRole('voditelj'))
-		<section class="side col-12 col-md-12 col-lg-3">
-			<header class="col-12">
-				<img src="//www.gravatar.com/avatar/{{ md5(Sentinel::getUser()->email) }}?d=mm" alt="{{ Sentinel::getUser()->email }}" class="img-circle">
-				<h2>{{ Sentinel::getUser()->first_name }}</h2>
-				<p>Duplico</p>
-				<div class="dropdwn">
-					<div class="w3-dropdown-hover">
-						<button class="w3-button"><i class="fas fa-ellipsis-v"></i></button>
-						<div class="dropdwn-hv w3-dropdown-content">
-							<a href="{{ route('admin.projects.create') }}" class="w3-bar-item w3-button">add new project</a>
-							<a href="{{ route('admin.customers.create') }}" class="w3-bar-item w3-button">add new customers</a>
-							<a href="{{ route('admin.cabinets.index') }}" class="w3-bar-item w3-button" >show all</a>
-							@if (Sentinel::check() && Sentinel::inRole('administrator') )
-							<a href="{{ route('users.index') }}" class="w3-bar-item w3-button">Users</a>
-							<a href="{{ route('roles.index') }}" class="w3-bar-item w3-button">permissions</a>
-							<a href="{{ route('admin.projects.index') }}" class="w3-bar-item w3-button">projects</a>
-							@endif
-							<a href="{{ route('auth.logout') }}" class="w3-bar-item w3-button">log out</a>
-							
-						</div>
-					</div>
-				</div>
-
-			</header>
-			<article class="col-12">
-				<div class="Jsearch">
-					<i class="fas fa-search"></i><input id="myInput" type="text" placeholder="Search..">
-				</div>
-				<div class="Jfilter">
-					filter<i class="fas fa-filter"></i>
-				</div>
-			</article>
-			<article class="projects col-12">
-				<table id="myTable">
-					@foreach(DB::table('projects')->join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->get() as $project)
-						@if($project->id == Sentinel::getUser()->productionProject_id || $project->user_id == Sentinel::getUser()->id)
-						<tr>
-							<td>
-								<div class="project col-12 col-md-12 col-lg-12">
-									<a href="{{ route('admin.productions.show', $project->id) }}">
-										<p>id: <span>{{ $project->id }}</span></p>
-										<p>name: <span>{{ $project->naziv}}</span></p>
-										<p>client: <span>{{ $project->investitor}}</span></p>
-									</a>
-								</div>
-							</td>
-						</tr>
-						@endif
-					@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator') )
-						<tr>
-							<td>
-								<div class="project col-12 col-md-12 col-lg-12">
-									<a href="{{ route('admin.productions.show', $project->id) }}">
-										<p>id: <span>{{ $project->id }}</span></p>
-										<p>name: <span>{{ $project->naziv}}</span></p>
-										<p>client: <span>{{ $project->investitor}}</span></p>
-									</a>
-								</div>
-							</td>
-						</tr>
-					@endif
-					@endforeach	
-					<!-- Search -->
-					<script>
-						$(document).ready(function(){
-						  $("#myInput").on("keyup", function() {
-							var value = $(this).val().toLowerCase();
-							$("#myTable tr").filter(function() {
-							  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-							});
-						  });
-						});
-					</script>
-				</table>
-			</article>
-		</section>
+	<div id="mySidenav" class="sidenav">
+		<!--<img src="{{ asset('img/Duplico_logo-mali.png') }}"/>-->
+		<a href="javascript:void(0)" class="closebtn" id="close" onclick="closeNav()">&times;</a>
+		<!--<a class="navbar-brand" href="{{ route('admin.dashboard') }}" id="duplico">Duplico</a>-->
+	
+	<!-- Vide administrator i proizvodnja -->
+		@if (Sentinel::check() && Sentinel::inRole('administrator') || Sentinel::inRole('proizvodnja'))
+			<button class="dropdown-btn">Opći podaci 
+				<i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-container">
+				<a class="{{ Request::is('admin/users*') ? 'active' : '' }}" href="{{ route('users.index') }}">Korisnici</a>
+				<a class="{{ Request::is('admin/roles*') ? 'active' : '' }}" href="{{ route('roles.index') }}">Dozvole</a>
+				<a class="{{ Request::is('proizvodnja/*') ? 'active' : '' }}" href="{{ route('admin.customers.index') }}">Naručitelji</a>
+				<a class="{{ Request::is('proizvodnja/*') ? 'active' : '' }}" href="{{ route('admin.projects.index') }}">Projekti</a>
+				<!--<a class="{{ Request::is('proizvodnja/*') ? 'active' : '' }}" href="{{ route('admin.cabinets.index') }}">Ormari</a>-->
+			</div>
+			
+			<p><a class="{{ Request::is('proizvodnja/*') ? 'active' : '' }}" href="{{ route('admin.cabinets.index') }}">Ormari proizvodnje</a>
+				<i class="fa fa-caret-down"></i>
+			</p>
+			<button class="dropdown-btn">Proizvodnja
+				<i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-container">
+				@foreach(DB::table('projects')->get() as $project)
+					<a class="{{ Request::is('proizvodnja/*') ? 'active' : '' }}" href="{{ route('admin.productions.show', $project->id) }}">{{ $project->id . ' ' . $project->naziv}}</a>
+				@endforeach
+			</div>
+			
+			<!-- <button class="dropdown-btn">...
+				<i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-container">
+				<a class="" href="">...</a>
+				<a href="">...</a>
+				<a href="">...</a>
+			</div>-->
+		@endif
 		
-	@endif
-	<section id="main" class="Jmain col-12 col-md-12 col-lg-9">
+	<!-- Vidi nabava, priprema -->
+		@if (Sentinel::check() && Sentinel::inRole('basic') || Sentinel::inRole('nabava')|| Sentinel::inRole('priprema'))
+			<button class="dropdown-btn">Opći podaci 
+				<i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-container">
+				<a class="{{ Request::is('basic/*') ? 'active' : '' }}" href="{{ route('admin.customers.index') }}">Naručitelji</a>
+				<a class="{{ Request::is('basic/*') ? 'active' : '' }}" href="{{ route('admin.projects.index') }}">Projekti</a>
+			</div>
+			<button class="dropdown-btn">Proizvodnja
+				<i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-container">
+				<a class="{{ Request::is('cabinets/*') ? 'active' : '' }}" href="{{ route('admin.cabinets.index') }}">Ormari proizvodnje</a>
+			</div>
+		@endif
+		@if (Sentinel::check() && Sentinel::inRole('kupac') || Sentinel::inRole('voditelj') )
+			<button class="dropdown-btn">Proizvodnja
+				<i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-container">
+			@foreach(DB::table('projects')->get() as $project)
+				@if($project->id == Sentinel::getUser()->productionProject_id || $project->user_id == Sentinel::getUser()->id)
+					<a class="{{ Request::is('kupac/*') || Request::is('voditelj/*') ? 'active' : '' }}" href="{{ route('admin.productions.show', $project->id) }}">{{ $project->id . ' ' . $project->naziv}}</a>
+				@endif
+			@endforeach
+			</div>
+		@endif
+	</div>
+	
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid clearfix" >
+			<span style="font-size:30px;cursor:pointer" id="open" onclick="openNav()">&#9776; </span>
+			<div class="logo">
+				<img src="{{ asset('img/Duplico_logo-mali.png') }}" />
+			</div>
+			@if (Sentinel::check())
+			<!--<form class="navbar-form navbar-left" action="/action_page.php" id="center">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Traži na stranici..." name="search" id="myInput">
+				</div>
+			</form>-->
+			@endif	
+			<div class="navbar-header navbar-right"  >
+				@if (Sentinel::check())
+				<li>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><i class="fas fa-angle-down"></i>{{ Sentinel::getUser()->first_name }} </a>
+					<ul class="dropdown-menu">
+					<li><a href="{{ route('auth.logout') }}">Odjava</a></li>
+					</ul>
+				</li>
+				@else
+					<li><a href="{{ route('auth.login.form') }}">Prijava</a></li>
+					<li><a href="{{ route('auth.register.form') }}">Registracija</a></li>
+				@endif				
+			</div>
+		</div>
+	</nav>
+	<div id="main" class="main">
 		<!--<span style="font-size:30px;cursor:pointer" id="open" onclick="openNav()">&#9776; </span>-->
 		@include('notifications')
 		@yield('content')
+		
+		<script>
+			function openNav() {
+				document.getElementById("mySidenav").style.width = "200px";
+				document.getElementById("main").style.marginLeft = "200px";
+				document.getElementById("navbar").style.marginLeft = "200px";
+				$("#open").hide();
+				$("#close").show();
+			}
 
-	</section>
-	
+			function closeNav() {
+				document.getElementById("mySidenav").style.width = "0";
+				document.getElementById("main").style.marginLeft= "0";
+				document.getElementById("navbar").style.marginLeft = "200px";
+				$("#open").show();
+				$("#close").hide();
+			}
+		</script>
+	</div>
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		

@@ -7,6 +7,7 @@ use Centaur\AuthManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Centaur\Dispatches\BaseDispatch;
+use App\Models\Project;
 
 class SessionController extends Controller
 {
@@ -54,7 +55,9 @@ class SessionController extends Controller
 
         // Attempt the Login
         $result = $this->authManager->authenticate($credentials, $remember);
-
+		
+		$projects = Project::join('customers','investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->get();
+		
         // Return the appropriate response
         if(Sentinel::check())  {
           return $result->dispatch(route('admin.dashboard'));

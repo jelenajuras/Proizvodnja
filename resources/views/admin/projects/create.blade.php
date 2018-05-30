@@ -1,9 +1,4 @@
-@extends('layouts.admin')
-
-@section('title', 'Dodaj novi projekt')
-
-@section('content')
-<div class="row">
+<div class="row" id="myModal" >
     <div class="col-md-6 col-md-offset-3">
         <br/>
 		<h3 class="panel-title">Upiši novi projekt</h3>
@@ -65,4 +60,3 @@
         </div>
     </div>
 </div>
-@stop

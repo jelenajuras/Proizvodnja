@@ -2,6 +2,11 @@
 
 @section('title', 'Priprema')
 <style>
+.btn {
+	width: 150px;
+	margin: auto;
+}
+
 table {
 	width:auto;
 }
@@ -50,8 +55,18 @@ tr th {
 }
 </style>
 @section('content')
+
+<div class="page-header">
+	<div class='btn-toolbar'>
+		<a class="btn btn-default btn-md" href="{{ route('admin.productions.show', $cabinet->projekt_id) }}">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			Go Back
+		</a>
+	</div>
+</div>
+@if (Sentinel::check() && Sentinel::inRole('administrator') || Sentinel::inRole('priprema') || Sentinel::inRole('proizvodnja'))
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-10 col-md-offset-1">
         <br/>
 		<h3 class="panel-title">Upiši status nabave</h3>
 		<br/>
@@ -91,50 +106,56 @@ tr th {
 								</tr>
 								<tr class="padd1">
 									<td>Kanalice</td>
+									<td><input name="naruceno2" type="radio" value="DA" />DA <input name="naruceno2" type="radio" value="NE" checked />NE</td>
 									<td><input name="rijeseno2" type="radio" value="DA" />DA <input name="rijeseno2" type="radio" value="NE" checked />NE </td>
-									<td><input name="naruceno2" type="radio" value="DA" />DA <input name="naruceno1" type="radio" value="NE" checked />NE</td>
 									<td><input name="datum2" class="date form-control" type="text"  value = "{{ $datum_1->format('d-m-Y') }}"></td>
 									<td><input class="form-control" placeholder="Upiši komentar" name="koment_kan" type="text" value="{{ old('koment_kan') }}" /></td>
 								</tr>
 								<tr class="padd1">
 									<td>Din šine</td>
+									<td><input name="naruceno3" type="radio" value="DA" />DA <input name="naruceno3" type="radio" value="NE" checked />NE</td>
 									<td><input name="rijeseno3" type="radio" value="DA" />DA <input name="rijeseno3" type="radio" value="NE" checked />NE </td>
-									<td><input name="naruceno3" type="radio" value="DA" />DA <input name="naruceno1" type="radio" value="NE" checked />NE</td>
+									
 									<td><input name="datum3" class="date form-control" type="text"  value = "{{ $datum_1->format('d-m-Y') }}"></td>
 									<td><input class="form-control" placeholder="Upiši komentar" name="koment_sine" type="text" value="{{ old('koment_sine') }}" /></td>
 								</tr>
 								<tr class="padd1">
 									<td>Vodič</td>
+									<td><input name="naruceno4" type="radio" value="DA" />DA <input name="naruceno4" type="radio" value="NE" checked />NE</td>
 									<td><input name="rijeseno4" type="radio" value="DA" />DA <input name="rijeseno4" type="radio" value="NE" checked />NE </td>
-									<td><input name="naruceno4" type="radio" value="DA" />DA <input name="naruceno1" type="radio" value="NE" checked />NE</td>
+									
 									<td><input name="datum4" class="date form-control" type="text"  value = "{{ $datum_1->format('d-m-Y') }}"></td>
 									<td><input class="form-control" placeholder="Upiši komentar" name="koment_vod" type="text" value="{{ old('koment_vod') }}" /></td>
 								</tr>
 								<tr class="padd1">
 									<td>Bakar</td>
+									<td><input name="naruceno5" type="radio" value="DA" />DA <input name="naruceno5" type="radio" value="NE" checked />NE</td>
 									<td><input name="rijeseno5" type="radio" value="DA" />DA <input name="rijeseno5" type="radio" value="NE" checked />NE </td>
-									<td><input name="naruceno5" type="radio" value="DA" />DA <input name="naruceno1" type="radio" value="NE" checked />NE</td>
+									
 									<td><input name="datum5" class="date form-control" type="text"  value = "{{ $datum_1->format('d-m-Y') }}"></td>
 									<td><input class="form-control" placeholder="Upiši komentar" name="koment_bak" type="text" value="{{ old('koment_bak') }}" /></td>
 								</tr>
 								<tr class="padd1">
 									<td>Redne stezaljke</td>
+									<td><input name="naruceno6" type="radio" value="DA" />DA <input name="naruceno6" type="radio" value="NE" checked />NE</td>
 									<td><input name="rijeseno6" type="radio" value="DA" />DA <input name="rijeseno6" type="radio" value="NE" checked />NE </td>
-									<td><input name="naruceno6" type="radio" value="DA" />DA <input name="naruceno1" type="radio" value="NE" checked />NE</td>
+									
 									<td><input name="datum6" class="date form-control" type="text"  value = "{{ $datum_1->format('d-m-Y') }}"></td>
 									<td><input class="form-control" placeholder="Upiši komentar" name="koment_stez" type="text" value="{{ old('koment_stez') }}" /></td>
 								</tr>
 								<tr class="padd1">
 									<td>Sklopna oprema</td>
+									<td><input name="naruceno7" type="radio" value="DA" />DA <input name="naruceno7" type="radio" value="NE" checked />NE</td>
 									<td><input name="rijeseno7" type="radio" value="DA" />DA <input name="rijeseno7" type="radio" value="NE" checked />NE </td>
-									<td><input name="naruceno7" type="radio" value="DA" />DA <input name="naruceno1" type="radio" value="NE" checked />NE</td>
+									
 									<td><input name="datum7" class="date form-control" type="text"  value = "{{ $datum_1->format('d-m-Y') }}"></td>
 									<td><input class="form-control" placeholder="Upiši komentar" name="koment_sklOpr" type="text" value="{{ old('koment_sklOpr') }}" /></td>
 								</tr>
 								<tr class="padd1">
 									<td>PLC</td>
+									<td><input name="naruceno8" type="radio" value="DA" />DA <input name="naruceno8" type="radio" value="NE" checked />NE</td>
 									<td><input name="rijeseno8" type="radio" value="DA" />DA <input name="rijeseno8" type="radio" value="NE" checked />NE </td>
-									<td><input name="naruceno8" type="radio" value="DA" />DA <input name="naruceno1" type="radio" value="NE" checked />NE</td>
+									
 									<td><input name="datum8" class="date form-control" type="text"  value = "{{ $datum_1->format('d-m-Y') }}"></td>
 									<td><input class="form-control" placeholder="Upiši komentar" name="koment_PLC" type="text" value="{{ old('koment_PLC') }}" /></td>
 								</tr>
@@ -157,4 +178,5 @@ tr th {
         </div>
     </div>
 </div>
+@endif
 @stop

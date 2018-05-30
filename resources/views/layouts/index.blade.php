@@ -7,8 +7,8 @@
 
 	<title>@yield('title')</title>
 		
-        <!-- Bootstrap - Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Bootstrap - Latest compiled and minified CSS 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
 		
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -17,93 +17,74 @@
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 		
+		<!-- Awesom icons -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+		
+		<!-- Google fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,800,900" rel="stylesheet">
+		
 		<link rel="stylesheet" href="{{ URL::asset('css/index.css') }}"/>
 </head>
-<body class="body">
-	<nav class="navbar navbar-inverse">
-	  <div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		  </button>
-		  <div class="logo">
-				<img src="{{ asset('img/Duplico_logo-mali.png') }}" />
-		  </div>
+<body>
+	<aside class="col-12 col-md-12 col-lg-3">
+		<div class="box overlay black"></div>
+		<div class="Jlogo">
+			<img src="{{ asset('img/Duplico_logo_white.png') }}" class="logo"/>
 		</div>
+		<div class="slideshow-container">
+			<h2>how does duplico production work</h2>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right">
-				@if (Sentinel::check())
-					<li>
-					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="user"></span> {{ Sentinel::getUser()->first_name }} <span class="caret"></span></a>
-					  <ul class="dropdown-menu">
-						<li><a href="{{ route('auth.logout') }}">Odjava</a></li>
-					  </ul>
-					</li>
-				@else
-					<!--<li><a href="{{ route('auth.login.form') }}">Prijava</a></li>-->
-					<li><a href="{{ route('auth.register.form') }}">Registracija</a></li>
-				@endif
-			</ul>
-		</div><!-- /.navbar-collapse -->
-	  </div><!-- /.container-fluid -->
-	</nav>
-	<section>
-		<header class="head">
-			<img src="{{ asset('img/struja.jpeg') }}"/>
-		</header>
-		<article>
+			<div class="mySlides fade">
+			  <p>1. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+			</div>
+			<div class="mySlides fade">
+			  <p>2. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+			</div>
+			<div class="mySlides fade">
+			  <p>3. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+			</div>
+		</div>
+		<br>
+		<div class="ikone">
+			<span class="dot" onclick="currentSlide(1)"></span> 
+			<span class="dot" onclick="currentSlide(2)"></span> 
+			<span class="dot" onclick="currentSlide(3)"></span> 
+			<a class="next" onclick="plusSlides(1)" style="size:26px;">&#8594;</a>
+		</div>
 		
-		</article>
-		
-		<footer>
-		</footer>
-	</section>
-	<div class="main container">
+	</aside>
+	<div class="col-12 col-md-12 col-lg-9 main">
 		@include('notifications')
 		@yield('content')
 	</div>
+	
+	<script>
+	var slideIndex = 1;
+	showSlides(slideIndex);
 
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<!-- Restfulizer.js - A tool for simulating put,patch and delete requests -->
-	<script src="{{ asset('js/restfulizer.js') }}"></script>
+	function plusSlides(n) {
+	  showSlides(slideIndex += n);
+	}
+
+	function currentSlide(n) {
+	  showSlides(slideIndex = n);
+	}
+
+	function showSlides(n) {
+	  var i;
+	  var slides = document.getElementsByClassName("mySlides");
+	  var dots = document.getElementsByClassName("dot");
+	  if (n > slides.length) {slideIndex = 1}    
+	  if (n < 1) {slideIndex = slides.length}
+	  for (i = 0; i < slides.length; i++) {
+		  slides[i].style.display = "none";  
+	  }
+	  for (i = 0; i < dots.length; i++) {
+		  dots[i].className = dots[i].className.replace(" active", "");
+	  }
+	  slides[slideIndex-1].style.display = "block";  
+	  dots[slideIndex-1].className += " active";
+	}
+	</script>
 </body>
-
-<footer>
-	<div class="row">
-	  <div class="col-xs-2 col-sm-3 col-md-4 col-lg-4">
-		<ul>
-			<li><a>O nama</a></li>
-			<li><a>...</a></li>
-			<li><a>...</a></li>
-		</ul>
-	  </div>
-	  <div class="col-xs-2 col-sm-3 col-md-4 col-lg-4">
-		<ul>
-			<li><a>...</a></li>
-			<li><a>...</a></li>
-			<li><a>...</a></li>
-		</ul>	
-	  </div>
-	  <div class="col-xs-2 col-sm-3 col-md-4 col-lg-4">
-		<p class="kontakt">Kontakt:</p>
-		<ul>
-			<li>Duplico d.o.o.</li>
-			<li>Svetonedeljska cesta 18</li>
-			<li>Kalinovica, 10436 Rakov Potok</li>
-			<li>Inženjering: +385 1 2657 700</li>
-			<li>Fax: +385 1 6589 231</li>
-			<li>e-mail: duplico@duplico.hr</li>
-		</ul>
-	  </div>
-	</div>
-</footer>
 </html>

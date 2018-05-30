@@ -1,160 +1,28 @@
 /*      CSS admin  */
-
-* {
-		padding:0;
-		margin:0;
-		box-sizing: border-box;
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
 }
 
-html {
-	font-family: "Lato", sans-serif;
-	font-size:16px;
+html{
+	font-size: 16px;
+	font-family: 'Montserrat', sans-serif;
 }
 
-/* Fixed sidenav, full height */
-.sidenav {
-	height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #1a1a1a;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
+body {
+	max-width: 1920px;
+	height:auto;
+	position:relative;
+	margin:0;
+	background-color:#f2f2f2;
+	color: rgb(73,73,73);
 }
 
-/* Style the sidenav links and the dropdown button */
-.sidenav a, .dropdown-btn {
-	padding: 6px 8px 6px 20px;
-    text-decoration: none;
-    font-size: 0.75rem;
-	background-color: #1a1a1a;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-	border:none;
-}
-
-.sidenav p a {
-	font-size: 0.88rem;
-	padding: 6px 8px 6px 20px;
-}
-
-.dropdown-btn {
-	font-size: 0.88rem;
-}
-
-.dropdown-container a {
-	padding: 6px 8px 6px 20px;
-}
-
-/* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
-	color: #f1f1f1;
-}
-
-/* Main content */
-.main {
-	font-size: 0.88em; /* Increased text to enable scrolling */
-	padding: 0 15px;
-}
-
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 10px;
-    font-size: 36px;
-    margin-left: 50px;
-	margin-top:-5px;
-}
-
-#main {
-    transition: margin-left .5s;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-/* Add an active class to the active dropdown button */
-.active {
-	color: orange;
-}
-
-/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-.dropdown-container {
-	display: none;
-	background-color: #1a1a1a;
-	padding-left: 16px;
-}
-
-/* Optional: Style the caret down icon */
-.fa-caret-down {
-	float: right;
-	padding-left: 8px;
-}
-
-/* Some media queries for responsiveness */
-@media screen and (max-height: 450px) {
-	.sidenav {padding-top: 0.94em;}
-	.sidenav a {font-size: 1.13em;}
-}
-
-#duplico {
-	color: #ff6600;
-	font-size: 1.25em;
-}
-
-.navbar-right {
-	color: #818181;
-	padding-top: 13px;
-	list-style-type: none;
-}
-
-.navbar a {
-	color: #818181;
-}
-
-#input2 {
-	background-color:#262626;
-	color:#ff6600;
-}
-
-th {
-	text-align: center;
-	font-weight: normal;
-	font-size: 0.66rem;
-}
-
-#button {
-	font-size: 0.75rem;
-}
-
-.button {
-	font-size: 0.88rem;
-}
-
-.tabcontent, a {
+.clearfix {
 	overflow: auto;
-}
-
-input {
-	font-size:0.75rem;
-}
-
-option {
-	font-size:0.75rem;
-}
-
-.sidenav img {
-	width: 80%;
-	margin:auto;
-}
-
-.navbar #open, .sidenav #close {
-	color: white;
 }
 
 .clearfix::after {
@@ -163,33 +31,318 @@ option {
     display: table;
 }
 
-.container-fluid .logo, .container-fluid span  {
-	display: inline;
+/* grid */
+[class^="col-"] {
+	float:left;	
+}
+.col-1 {
+	width: 8.333333333%
+}
+.col-2 {
+	width: 16.66666667%
+}
+.col-3 {
+	width: 25%;
+}
+.col-4 {
+	width: 33.3333333%;
+}
+.col-5 {
+	width: 41.66666667%;
+}
+.col-6 {
+	width: 50%;
+}
+.col-7 {
+	width: 58.33333333%;
+}
+.col-8 {
+	width: 66.66666667%;
+}
+.col-9 {
+	width: 75%;
+}
+.col-10 {
+	width: 83.33333333%;
+}
+.col-11 {
+	width: 91.66666667%;
+}
+.col-12 {
+	width: 100%;
+}
+
+@media only screen and (min-width:800px) {
+	.w3-dropdown-content {
+		right:5px;
+	}
+	.col-md-1 {
+	width: 8.333333333%
+	}
+	.col-md-2 {
+		width: 16.66666667%
+	}
+	.col-md-3 {
+		width: 25%;
+	}
+	.col-md-4 {
+		width: 33.3333333%;
+	}
+	.col-md-5 {
+		width: 41.66666667%;
+	}
+	.col-md-6 {
+		width: 50%;
+	}
+	.col-md-7 {
+		width: 58.33333333%;
+	}
+	.col-md-8 {
+		width: 66.66666667%;
+	}
+	.col-md-9 {
+		width: 75%;
+	}
+	.col-md-10 {
+		width: 83.33333333%;
+	}
+	.col-md-11 {
+		width: 91.66666667%;
+	}
+	.col-md-12 {
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width:992px) {
+	.side {
+	height:100%;
+	}
+	
+	.col-lg-1 {
+	width: 8.333333333%
+	}
+	.col-lg-2 {
+		width: 16.66666667%
+	}
+	.col-lg-3 {
+		width: 25%;
+	}
+	.col-lg-4 {
+		width: 33.3333333%;
+	}
+	.col-lg-5 {
+		width: 41.66666667%;
+	}
+	.col-lg-6 {
+		width: 50%;
+	}
+	.col-lg-7 {
+		width: 58.33333333%;
+	}
+	.col-lg-8 {
+		width: 66.66666667%;
+	}
+	.col-lg-9 {
+		width: 75%;
+	}
+	.col-lg-10 {
+		width: 83.33333333%;
+	}
+	.col-lg-11 {
+		width: 91.66666667%;
+	}
+	.col-lg-12 {
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width:1200px) {
+	.side {
+	height:100%;
+	}
+	.col-xl-1 {
+	width: 8.333333333%
+	}
+	.col-xl-2 {
+		width: 16.66666667%
+	}
+	.col-xl-3 {
+		width: 25%;
+	}
+	.col-xl-4 {
+		width: 33.3333333%;
+	}
+	.col-xl-5 {
+		width: 41.66666667%;
+	}
+	.col-xl-6 {
+		width: 50%;
+	}
+	.col-xl-7 {
+		width: 58.33333333%;
+	}
+	.col-xl-8 {
+		width: 66.66666667%;
+	}
+	.col-xl-9 {
+		width: 75%;
+	}
+	.col-xl-10 {
+		width: 83.33333333%;
+	}
+	.col-xl-11 {
+		width: 91.66666667%;
+	}
+	.col-xl-12 {
+		width: 100%;
+	}
+}
+
+.side {
+	height:auto;
+	padding: 10px 30px;
+	
+}
+
+li {
+	list-style:none;
+}
+
+.dropdwn {
+	position:absolute;
+	top:10px;
+	right:10px;
+	background-color:#f2f2f2;
+}
+
+.dropdwn-hv {
+	border:1px solid white;
+	border-radius:5px;
+	box-shadow: 0px 3px 3px rgba(0,0,0,0.1);
+}
+
+.w3-dropdown-content a{
+	font-size:0.56rem;
+	display:block;
+	text-align:left;
+	text-transform: uppercase;
+}
+
+.w3-dropdown-content a:hover {
+	text-decoration:none;
+}
+
+.w3-button i {
+	color: rgb(73,73,73);
+	width:3px;
+}
+
+.side header {
+	width:100%;
+	height: 45px;
+	margin-bottom:30px;
+}
+
+.side header img {
+	height: 100%;
+	width:auto;
 	float:left;
-	width:33.3%;
+	margin-right:20px;
+}
+.side header h2{
+	font-weight: bold;
+	padding-top:10px;
+	margin-bottom:0;
 }
 
-.container-fluid .logo img {
-	width:150px;
-	display: block;
-    margin-left: auto;
-    margin-right: auto;
-	padding: 5px;
+.side header p{
+	font-size:0.56rem;
+	
 }
 
-.navbar-header li a i {
-	padding-right: 10px;
-	font-size: 1rem;
+.side .Jsearch {
+	width:75%;
+	float:left;
+	height: 25px;
+	font-size: 0.56rem;
+	letter-spacing: 0px;
+	line-height: 13px;
+	color: rgb(78,78,78);
+	font-weight: 300;
+	border-bottom: solid 1px #dbe1e5;
 }
 
-.priprema table{
-	width: auto%;
-	margin:auto;
-	height:auto;
-	font-size: 0.88rem;
+.Jsearch input {
+	display:block-inline;
+	border:none;
+	background-color:#f2f2f2;
+	padding: 5px ;
+	font-size: 0.56rem;
+	width:90%;
 }
-.priprema table tr, .priprema table td{
-	margin:10px;
-	padding:10px;
-	height:auto;
+
+
+.side .Jfilter {
+	width:25%;
+	float:left;
+	font-size: 0.56rem;
+	line-height: 13px;
+	color: rgb(78,78,78);
+	font-weight: bold;
+	text-transform:uppercase;
+	text-align:right;
+	
+}
+
+.Jfilter i {
+	padding-left:13px;
+	font-size: 0.56rem;
+}
+
+.side article {
+	margin:5px 0;
+}
+
+.projects {
+	font-size: 0.75rem;
+}
+
+.project {
+	height: auto;
+	border-radius: 5px;
+	box-shadow: 0px 3px 3px rgba(0,0,0,0.1);
+	background-color: #ffffff;
+	color: rgb(125,125,125);
+	margin: 10px 0;
+	padding: 15px 10px;
+}
+
+.project a, .project span {
+	text-decoration:none;
+	display:block-inline;
+}
+
+.project a:hover {
+	color: rgb(166,166,166);
+
+}
+
+.project p {
+	text-transform: uppercase;
+	font-weight:bold;
+	margin:0;
+}
+
+.project p span {
+	text-transform: capitalize;
+	font-weight:normal;
+}
+
+.projects table {
+	width:100%;
+}
+
+.Jmain {
+	border-left: 2px solid #dbe1e5;
 }

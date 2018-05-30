@@ -1,71 +1,178 @@
-body {font-family: "Lato", sans-serif;}
-.clearfix {
-overflow: auto;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
+/*      CSS production   */
 /* Style the tab */
+section {
+	width:100%;
+	padding:10px;
+}
+
+section .addEnc h2 {
+	padding: 10px 0;
+}
+section .addEnc button {
+	font-size: 0.56rem;
+	color: rgb(125,125,125);
+	font-weight: bold;
+	text-transform:uppercase;
+	float:right;
+	width: 146px;
+	height: 35px;
+	border-radius: 3px;
+	background-color: #f2f2f2;
+	border: 1px solid #7d7d7d;
+}
+
 .tab {
+	width:100%;
 	overflow: hidden;
-	border: 1px solid #ccc;
-	background-color: #ff751a;
+	position: relative;
+	margin-bottom:30px;
+}
+
+.tab1 {
+	width: 20%;
+	height: 100%;
+	position: absolute;
+	
+}
+
+.tab4{
+	width: 79%;
+	float:left;
+	margin-left: 21%;
+
+}
+
+.tab2 {
+	width: 100%;
+	float:left;
+	padding: 10px 0;
+
+}
+
+section h2 {
+	margin-bottom:20px;
+}
+
+.tab1 img {
+	width:100%;
+	margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tab1, .tab2 {
+	overflow: hidden;
+	border-radius: 5px;
+	box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
+	background-color: #ffffff;
+	letter-spacing: 0px;
+	line-height: 13px;
+	color: rgb(125,125,125);
+	font-weight: 800;
+}
+
+
+/* Style the tab content */
+.Jcontent {
+	padding: 6px 12px;
+	border-radius: 5px;
+	box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
+	background-color: #ffffff;
+	float:left;
+	font-size: 0.75rem;
+	color: rgb(125,125,125);
+	width:100%;
+	margin-top:10px;
+}
+
+.Jcontent p, .Jcontent span{
+	margin:0;
+	padding:0;
+}
+
+.Jcontent p {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.Jcontent .cont1 {
+	width: 20%;
+	float:left;
+	padding:5px;
+}
+
+.Jcontent span {
+	margin-bottom:10px;
+
+	display:block;
+}
+
+.Jtab {
+	float:left;
+	width: 25%;
+	border-right: 1px solid #dbe1e5;
+	padding: 10px;
+}
+
+.Jtab:last-child{
+	border-right: none;
+	
+}
+
+.Jtab .icons {
+	margin-bottom:10px;
+}
+
+.Jtab .icons span {
+	float:left;
+}
+
+.Jtab .icons i {
+	float:right;
+	margin-left:5px;
+}
+
+.ellipseR {
+	width: 18px;
+	height: 18px;
+	border-radius: 9px;
+	background-color: #e94f4f;
+}
+
+.ellipseG{
+	width: 18px;
+	height: 18px;
+	border-radius: 9px;
+	background-color: #1dc511;
+}
+
+.ellipseO{
+	width: 18px;
+	height: 18px;
+	border-radius: 9px;
+	background-color: #ff9500;
 }
 
 /* Style the buttons inside the tab */
-.tab button {
+.Jtab p {
 	background-color: inherit;
 	float: center;
 	border: none;
 	outline: none;
-	cursor: pointer;
-	padding: 10px 10px;
-	width: 105px;
+	width: 100%;
 	transition: 0.3s;
 	font-size: 0.75rem;
+	text-transform: uppercase;
+	text-align:left;
 }
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-	background-color: #ddd;
-}
 
-/* Create an active/current tablink class */
-.tab button.active {
-	background-color: #666666;
-	color: #ff751a;
-	font-weight: bold;
-}
-
-/* Style the tab content */
-.tabcontent {
-	display: none;
-	padding: 6px 12px;
-	border: 1px solid #ccc;
-	border-top: none;
-}
-
-/* Style the close button */
-.topright {
-	float: right;
-	cursor: pointer;
-	font-size: 1.75rem;
-}
-
-.topright:hover {
-	color: red;
-}
-
-#pomak {
-	padding-left: 20px;
-}
-
-#pomak .zadnjiRed {
-	padding-bottom: 10px;
+.Jtab p span {
+	display:block;
+	font-weight: normal;
+	font-size: 0.69rem;
 }
 
 table {
@@ -73,86 +180,70 @@ table {
 	width:100%;
 }
 
-#Priprema table, #Nabava table, #Proizvodnja table {
-	border: solid 1px #ccc;
+.btn {
+	width: 150px;
+	margin: auto;
 }
 
-#Priprema thead tr th, #Nabava thead tr th, #Proizvodnja thead tr th{
-	border-bottom: solid 1px black;
+table {
+	width:auto;
 }
 
-#Priprema th, #Nabava th, #Proizvodnja th {
-	padding: 10px 30px;
-	border-bottom: solid 1px #ccc;
-	font-size: 0.75rem;
-	border-bottom: solid 1px #ccc;
+tr th {
+	border-bottom: 1px solid #b3b3b3;
 }
 
-#Priprema td, #Nabava td, #Proizvodnja td, #Ormari td {
-	padding: 10px;
-	font-size: 0.75rem;
+.naslov {
+	margin-bottom: 20px;
 }
 
-#Priprema tbody tr:last-child, #Nabava tbody tr:last-child, #Proizvodnja tbody tr:last-child {
-	border-bottom: solid 1px black;
-}
-
-#Priprema tbody tr:nth-child(even), #Nabava tbody tr:nth-child(even), #Proizvodnja tbody tr:nth-child(even){
-	background-color: #f2f2f2;
-}
-
-#Priprema tbody tr:hover, #Nabava tbody tr:hover, #Proizvodnja tbody tr:hover {
-	background-color: #e6e6e6;
-}
-
-#Nabava tr td {
-	text-align:center;
-}
-
-#Status {
-	width:100%;
-	padding: 20px;
-}
-#Status p{
-	margin:0;
-	padding: 5px 0px;
-}
-
-#Status .rght {
-	padding-left:20px;
-}
-
-#Status .rght .završeno {
-	color: green;
-	font-weight: bold;
-}
-
-#Status .rght .uradu {
-	color: black;
-	font-weight: bold;
-}
-
-#Status div .bordB{
-	padding: 20px 20px;
-	box-sizing: border-box;
-	width: 33.3%;
-	float:left;
-}
-
-.bordB h6 {
+.naslov p {
+	font-weight:bold;
 	font-size: 0.88rem;
 }
 
-#Status div .bordB:nth-child(3+1){
-	clear:left;
+.padd1 td {
+	padding: 15px;
+	font-size:0.75rem
+	
 }
 
-#Opći {
-	overflow: hidden;
-	margin-bottom: 10px;
-	padding-bottom: 10px;
+.butt {
+	width: 200px;
+	margin: 5px;
+	padding: 10px;
+	background-color: #e6e6e6;
+	border: solid 1px #b3b3b3; 
+	border-radius:5px;
 }
 
-.center{
-	text-align:center;
+.butt:hover {
+	background-color: white;
+	font-weight:bold;
+	color: #e64d00;
+}
+
+.date {
+	padding: 5px;
+	border: solid 1px #bfbfbf; 
+	border-radius:5px;
+	text-align: center;
+	font-size: 0.88rem;
+	margin-left: 20px;
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 415px) {
+  .tab1, .tab4, .tab1, .Jtab {
+		width:100%;
+		float:none;
+		display:block;
+	}
+	.tab2, .Jcontent {
+		font-size: 0.63rem;
+	}
+	.Jcontent .cont1{
+		width:100%;
+		float:none;
+	}
 }
