@@ -19,7 +19,7 @@
 	<![endif]-->
 	
 	<!-- Google fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,800,900" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,400,800,900" rel="stylesheet">
 		
 	<!-- Date picker-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
@@ -34,6 +34,7 @@
 	
 	<link rel="stylesheet" href="{{ URL::asset('css/admin.css') }}"/>
 	<link rel="stylesheet" href="{{ URL::asset('css/w3_dropdown.css') }}"/>
+	
 	@stack('stylesheet')
 	
 </head>
@@ -118,10 +119,12 @@
 		</section>
 		
 	@endif
-	<section id="main" class="Jmain col-12 col-md-12 col-lg-9">
+	
+	<section class="Jmain col-12 col-md-12 col-lg-9">
 		<!--<span style="font-size:30px;cursor:pointer" id="open" onclick="openNav()">&#9776; </span>-->
 		@include('notifications')
 		@yield('content')
+		
 
 	</section>
 	
@@ -129,6 +132,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		
         <!-- Latest compiled and minified JavaScript -->
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <!-- Restfulizer.js - A tool for simulating put,patch and delete requests -->
         <script src="{{ asset('js/restfulizer.js') }}"></script>

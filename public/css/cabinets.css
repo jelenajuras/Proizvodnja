@@ -1,11 +1,238 @@
 /* CSS cabinets */
 
-th {
-		font-size: 10px;
-	}
-	td {
-		font-size: 12px;
-	}
-	table {
-		width:100%;
-	}
+*{
+	margin:0;
+	padding:0;
+	color: rgb(125,125,125);
+	font-size: 12px;
+}
+
+.clearfix {
+	overflow: auto;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.tabCab {
+	width: 647px;
+	height: 459px;
+	margin-top: -16px;
+	margin-left:-30px;
+	font-family: "Roboto";
+	background-color:white;
+	border-radius: 3px;
+}
+
+.tabCab1 {
+	width: 180px;
+	height: 100%;
+	border:none;
+	background-color: #f3f5f7;
+	border-radius: 3px 0 0 3px;
+	float:left;
+}
+.tabCab1 p{
+	margin:10px 20px;
+}
+
+.tabCab1 button {
+	display:block;
+	text-align:left;
+    width: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 0.81rem;
+	line-height: 35px;
+	padding:3px 20px;
+}
+
+.tabCab1 span {
+	display: inline-block;
+	font-size: 0.75rem ;
+	line-height: 20px;
+	font-weight: bold;
+	text-align: center;
+	background-color:white;
+	border:1px solid white;
+	border-radius: 9px;
+	margin-right:20px;
+	width: 19px;
+	height: 19px;
+	
+	
+}
+.tablinks span:target{
+	background-color: #7d7d7d;
+	color:white;
+}
+
+.tabCab1 .addCab{
+	padding-top:15px;
+	font-size: 14px;
+	line-height: 35px;
+	color: rgb(119,119,119);
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 1px;
+	padding-bottom:20px;
+}
+
+/* Style the tab content */
+.tabcontent {
+    width: 65%;
+	height:100%;
+	float: left;
+    padding: 15px 0 0 30px;
+}
+
+.tabcontent select {
+	width:100%;
+	height: 29px;
+	font-size: 12px;
+	padding:5px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	border: 1px solid #d5d5d5;
+	font-family: "Montserrat";
+	margin:0;
+}
+
+.tabCab p {
+	padding: 20px 0 0 0;
+	font-size:11px;
+	line-height: 7px;
+	text-align: left;
+	text-transform:uppercase;
+	font-family: "Montserrat";
+	font-weight:600;
+}
+
+.Equip div{
+	width:35%;
+	float:left;
+	font-size: 0.81rem;
+	font-family: "Montserrat";
+}
+
+.Equip .container {
+    display: block;
+    position: relative;
+    padding-bottom: 12px;
+    cursor: pointer;
+    font-size: 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	line-height: 9px;
+    height: 9px;
+	text-align: left;
+	font-weight:600;
+	
+}
+
+/* Hide the browser's default checkbox */
+.Equip .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+	float:left;
+	display:inline-block;
+}
+
+/* Create a custom checkbox */
+.Equip .checkmark {
+    float:left;
+	width: 9px;
+	height: 9px;
+	border: 1px solid #959595;
+	margin-right:5px;
+	display:inline-block;
+    
+}
+
+/* On mouse-over, add a grey background color */
+.Equip .container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.Equip .container input:checked ~ .checkmark {
+    background-color: #7d7d7d;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.Equip .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.Equip .container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.Equip .container .checkmark:after {
+  
+}
+
+input[type=text]{
+	width:100%;
+	margin:0;
+	border-radius:3px;
+	border: 1px solid #d5d5d5;
+	padding: 5px;
+}
+
+.date {
+	width:40%;
+}
+
+.ip {
+	width:100%;
+	position:relative;
+}
+
+.ip input {
+	width:100%;
+	padding-left:25px;
+}
+
+.ip span {
+	display:inline;
+	position:absolute;
+	left:5px;
+	padding:6px;
+}
+
+textarea{
+	width: 100%;
+	height: 135px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	border: 1px solid #d5d5d5;
+}
+
+.note {
+	margin-top:40px;
+}
+
+.topright {
+    float: right;
+    cursor: pointer;
+    font-size: 50px;
+	font-weight: 200;
+	color: #7d7d7d;
+	margin-top:-30px;
+	margin-right:-40px;
+	font-family: "Montserrat";
+	margin-left:-50px;
+}

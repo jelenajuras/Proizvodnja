@@ -1,3 +1,8 @@
+@extends('layouts.index')
+
+@section('title', 'New project')
+
+@section('content')
 <div class="row" id="myModal" >
     <div class="col-md-6 col-md-offset-3">
         <br/>

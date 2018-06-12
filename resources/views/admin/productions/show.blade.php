@@ -6,8 +6,31 @@
 @section('content')
 	<section>
 		<div class="addEnc">
-			<button><a href="{{ route('admin.cabinets.create') }}" >add enclosure</a></button>
+			<!-- Trigger/Open The Modal -->
+			<button data-path="{{ route('admin.cabinets.create') }}" 
+			   class="load-ajax-modal" 
+			   role="button" 
+			   data-toggle="modal" data-target="#dynamic-modal">
+			   <span class="glyphicon glyphicon-eye-open"></span> add enclosure
+			</button>
+
+			<div class="modal fade" id="dynamic-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 			
+			  <div class="modal-dialog" style="width:647px">
+				<div class="modal-content">
+				 
+					
+				  <div class="modal-body">
+					
+				  </div>
+				  <button type="button" class="Jbtn-close" data-dismiss="modal">&times</button>
+				  
+				
+				</div>
+			  </div>
+			</div>
+			<script src="custom.js"></script>
+		
 			<h2>{{ 'Naziv projekta: '}}<b>{{ $project->id . ' - ' . $project->naziv }}</b></h2>
 		</div>
 		
@@ -219,7 +242,25 @@
 		@endforeach
 	</section>
 
+	<script>
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+		}
+	});
 	
+	$('.load-ajax-modal').click(function(){
+
+    $.ajax({
+        type : 'GET',
+        url : $(this).data('path'),
+
+        success: function(result) {
+            $('#dynamic-modal div.modal-body').html(result);
+        }
+    });
+	});
+	</script>
 	
 	<script>
 			$(document).ready(function(){

@@ -50,8 +50,9 @@ class CabinetController extends Controller
 		$user = Sentinel::getUser()->id;
 		$projects = Project::join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->where('user_id','=',$user)->orderBy('id','ASC')->get();
 		$zadnjibr = Cabinet::orderBy('brOrmara','DESC')->first();
+		
 		$users = Users::join('role_users','users.id','=','role_users.user_id')->select('users.*','role_users.role_id')->where('role_users.role_id','<>','4')->orderBy('last_name','ASC')->get();
-
+		
 		//dd($projects);
 		
 		return view('admin.cabinets.create')->with('projects',$projects)->with('zadnjibr',$zadnjibr)->with('users',$users);
@@ -113,7 +114,8 @@ class CabinetController extends Controller
 		
 		//$ = Equipment::distinct()->get(['User_id']);
 		//$user_mail = Users::select('id','email')->where('id',$zaduzena_osoba->User_id)->value('email');
-		$email_proba = 'jelena.juras@duplico.hr'; 
+		
+		/*$email_proba = 'jelena.juras@duplico.hr'; 
 		$koordinacija = 'koordicija@duplico.hr';
 		$priprena = 'priprema@duplico.hr';
 		$isporuka = date("Y-m-d", strtotime($input['datum_isporuke']));
@@ -127,7 +129,7 @@ class CabinetController extends Controller
 							// ->cc($priprena)
 						->subject('Novi ormar proizvodnje');
 				}
-			);
+			);*/
 
 		$message = session()->flash('success', 'Ormar je uspješno spremljen.');
 		
