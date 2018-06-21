@@ -4,7 +4,7 @@
 	margin:0;
 	padding:0;
 	color: rgb(125,125,125);
-	font-size: 12px;
+	font-family: "Montserrat";
 }
 
 .clearfix {
@@ -21,10 +21,12 @@
 	width: 647px;
 	height: 459px;
 	margin-top: -16px;
-	margin-left:-30px;
+    margin-left: -15px;
 	font-family: "Roboto";
 	background-color:white;
 	border-radius: 3px;
+	font-size: 12px;
+	position:relative;
 }
 
 .tabCab1 {
@@ -35,8 +37,15 @@
 	border-radius: 3px 0 0 3px;
 	float:left;
 }
+
 .tabCab1 p{
-	margin:10px 20px;
+	margin:10px 0 30px 0;
+	font-size: 14px;
+	line-height: 35px;
+	color: rgb(119,119,119);
+	font-family: "Montserrat";
+	font-weight: bold;
+	text-align: center;
 }
 
 .tabCab1 button {
@@ -47,9 +56,11 @@
     outline: none;
     cursor: pointer;
     transition: 0.3s;
-    font-size: 0.81rem;
+    font-size: 13px;
 	line-height: 35px;
 	padding:3px 20px;
+	font-family: "Roboto";
+
 }
 
 .tabCab1 span {
@@ -64,9 +75,8 @@
 	margin-right:20px;
 	width: 19px;
 	height: 19px;
-	
-	
 }
+
 .tablinks span:target{
 	background-color: #7d7d7d;
 	color:white;
@@ -89,6 +99,7 @@
 	height:100%;
 	float: left;
     padding: 15px 0 0 30px;
+	position:relative;
 }
 
 .tabcontent select {
@@ -103,7 +114,7 @@
 	margin:0;
 }
 
-.tabCab p {
+.tabcontent>p {
 	padding: 20px 0 0 0;
 	font-size:11px;
 	line-height: 7px;
@@ -117,7 +128,14 @@
 	width:35%;
 	float:left;
 	font-size: 0.81rem;
+}
+
+.Equip .container {
+	font-size: 10px;
+	line-height: 15px;
+	color: rgb(125,125,125);
 	font-family: "Montserrat";
+	font-weight:100;
 }
 
 .Equip .container {
@@ -184,7 +202,7 @@
   
 }
 
-input[type=text]{
+input[type=text]:not(.date):not(.ip1) {
 	width:100%;
 	margin:0;
 	border-radius:3px;
@@ -193,21 +211,43 @@ input[type=text]{
 }
 
 .date {
+	display:inline-block;
+	width:100%;
+	position:relative;
+	margin:0;
+	border-radius:3px;
+	border: 1px solid #d5d5d5;
+	text-align:center;
+	font-size:13px;
+}
+.Jdate {
+	position:relative;
 	width:40%;
 }
-
+.Jdate i {
+	display:inline-block;
+	font-size:1rem;
+	padding:7px;
+	position:absolute;
+	top:0;
+	right:0;
+}
 .ip {
 	width:100%;
 	position:relative;
 }
 
 .ip input {
+	display:inline-block;
 	width:100%;
-	padding-left:25px;
+	padding: 5px 0 5px 25px;
+	border-radius:3px;
+	border: 1px solid #d5d5d5;
+	
 }
 
 .ip span {
-	display:inline;
+	display:inline-block;
 	position:absolute;
 	left:5px;
 	padding:6px;
@@ -235,4 +275,72 @@ textarea{
 	margin-right:-40px;
 	font-family: "Montserrat";
 	margin-left:-50px;
+}
+
+.Jlabel, .Jlogo {
+	width:100%;
+}
+
+.Jlabel div, .Jlogo div  {
+	width:30%;
+	display: inline-block;
+	font-size:10px;
+}
+
+
+.Jsubmit{
+	width: 111px;
+	height: 32px;
+	border-radius: 3px;
+	background-color: white;
+	border: 2px solid #7d7d7d;
+	position:absolute;
+	right:25px;
+	bottom:25px;
+	text-transform:uppercase;
+}
+
+.Jbtn-back{
+	font-size: 13px;
+	line-height: 25px;
+	font-family: "Roboto";
+	font-weight: bold;
+	text-align: center;
+	border:none;
+	position:absolute;
+	right:135px;
+	bottom:25px;
+	text-decoration:underline;
+	background-color: white;
+	text-transform:uppercase;
+	margin: 5px 40px 0 0 ;
+}
+
+.Jbtn-next{
+	font-size: 13px;
+	line-height: 25px;
+	font-family: "Roboto";
+	font-weight: bold;
+	text-align: center;
+	width: 111px;
+	border-radius: 3px;
+	background-color: white;
+	border: 2px solid #7d7d7d;
+	position:absolute;
+	right:25px;
+	bottom:25px;
+	text-transform:uppercase;
+}
+
+.Jbtn-close {
+	position:absolute;
+	right:20px;
+	height:45px;
+	top:0;
+	color: rgb(125,125,125);
+	background-color: white;
+	border:none;
+	font-size:45px;
+	font-weight:100;
+	font-family: 'Montserrat', sans-serif;
 }

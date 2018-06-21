@@ -1,9 +1,20 @@
 /*      CSS production   */
-/* Style the tab */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800|Roboto:400,500,700');
+
+.clearfix {
+	overflow: auto;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
 
 section {
 	width:100%;
 	padding:10px;
+
 }
 
 section .addEnc h2 {
@@ -134,9 +145,11 @@ section h2 {
 	float:left;
 }
 
-.Jtab .icons i {
+.Jtab .icons button, .Jtab .icons i {
 	float:right;
 	margin-left:5px;
+	background-color:white;
+	border:none;
 }
 
 .ellipseR {
@@ -144,6 +157,7 @@ section h2 {
 	height: 18px;
 	border-radius: 9px;
 	background-color: #e94f4f;
+
 }
 
 .ellipseG{
@@ -151,15 +165,40 @@ section h2 {
 	height: 18px;
 	border-radius: 9px;
 	background-color: #1dc511;
+
 }
 
 .ellipseO{
 	width: 18px;
 	height: 18px;
 	border-radius: 9px;
-	background-color: #ff9500;
+	background-color: #ff9500;    
+
 }
 
+.ellipseR1 {
+	width: 11px;
+	height: 11px;
+	border-radius: 9px;
+	background-color: #e94f4f;
+	display: inline-block;
+}
+
+.ellipseG1{
+	width: 11px;
+	height: 11px;
+	border-radius: 9px;
+	background-color: #1dc511;
+	display: inline-block;
+}
+
+.ellipseO1{
+	width: 11px;
+	height: 11px;
+	border-radius: 9px;
+	background-color: #ff9500;    
+	display: inline-block;
+}
 /* Style the buttons inside the tab */
 .Jtab p {
 	background-color: inherit;
@@ -208,8 +247,8 @@ tr th {
 }
 
 .padd1 td {
-	padding: 15px;
-	font-size:0.75rem
+	padding: 5px 0;
+	font-size:0.75rem;
 }
 
 .butt {
@@ -234,6 +273,7 @@ tr th {
 	text-align: center;
 	font-size: 0.88rem;
 	margin-left: 20px;
+	display:inline;
 }
 
 /* On smaller screens, decrease text size */
@@ -253,7 +293,7 @@ tr th {
 }
 .modal{
 	width:100%;
-	max-height: 550px;
+	max-height: 600px;
 	margin:auto;
 	padding:0;
 }
@@ -262,53 +302,206 @@ tr th {
 	width: 647px;
 	height: 459px;
 	margin:auto;
-
 	border-radius: 3px;
 	box-shadow: 0px 5px 10px rgba(0,0,0,0.25);
 	background-color: #ffffff;
 	padding:0;
 }
+
 .modal-content {
 	width: 647px;
 	height: 459px;
 	margin:0;
+	margin: 0 -3px;
 	padding:0;
 	position:relative;
+	background-color: rgba(256,256,256,0);
 }
+
 .modal-body {
 	width:100%;
 	height: 100%;
 }
 
-.Jbtn-next{
-	width: 111px;
-	height: 32px;
+.Jprod {
+	width: 647px;
+	height: 529px;
 	border-radius: 3px;
-	background-color: white;
-	border: 2px solid #7d7d7d;
+	background-color: rgba(256,256,256,1);
+	margin:-17px 0 0 -15px;
+	font-size: 9px;
+	position:relative;
+}
+
+.Jprod-head {
+	width: 647px;
+	height: 120px;
+	background-color: #f3f5f7;
+	padding: 10px 15px 0 40px;
+	position:relative;
+}
+
+.Jprod-head h3, .Jpurch-head h3, .Jproduct-head h3 {
+	font-size: 16px;
+	font-weight:700;
+	line-height: 35px;
+	color: rgb(73,73,73);
+	margin:0;
+	padding: 0;
+	font-family: "Montserrat";
+}
+
+.Jprod-head p,.Jprod-head span, .Jpurch-head p, .Jpurch-head span, .Jproduct-head p, .Jproduct-head span  {
+	font-size: 12px;
+	margin:0;
+	padding: 3px 0;
+	line-height: 10px;
+	color: rgb(73,73,73);
+	font-family: "Montserrat";
+	font-weight:700 ;
+	text-transform: uppercase;
+}	
+
+.Jprod-head span, .Jpurch-head span, .Jproduct-main span {
+	font-weight: 400;
+	display:inline-block;
+}
+
+.Jprod-head > div:not(.tblHead), .Jpurch-head > div:not(.tblHead), .Jproduct-head > div:not(.tblHead){
+	width:50%;
+	float:left;
+}
+
+.Jprod-main {
+	width: 647px;
+	height: 409px;
+	position:relative;
+}
+
+.Jprod-main form, .Jpurch-main form, .Jproduct-main form{
+	height:100%;
+}
+
+fieldset {
+	height:100%;
+	border:none;
+	padding:15px 15px 0 35px;
+	position:relative;
+}
+
+.datum {
 	position:absolute;
-	right:25px;
-	bottom:25px;
+	right: 30px;
+	top:-60px;
 	text-transform:uppercase;
 }
 
-.Jbtn-next a {
-	display:black;
-	margin:-20px 0;
+.datum input{
+	width: 116px;
+	height: 32px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	border: 1px solid #a3a3a3;
+	font-size: 11px;
+	line-height: 42px;
+	color: rgb(125,125,125);
+	font-family: "Montserrat";
+	font-weight: bold;
 }
 
+.datum span {
+	font-size: 12px;
+	line-height: 10px;
+	color: rgb(73,73,73);
+	font-family: "Montserrat";
+	font-weight: bold;
+}
 
-.Jbtn-close {
-	position:absolute;
-	right:20px;
-	height:45px;
-	top:0;
+.Prep-tbl {
+	width:100%;
+	font-size: 11px;
+	
 	color: rgb(125,125,125);
-	background-color: white;
-	border:none;
-	font-size:45px;
-	font-weight:100;
-	font-family: 'Montserrat', sans-serif;
+	font-family: "Montserrat";
+	font-weight: 600;
+}
+
+.Prep-tbl tbody{
+	padding-bottom: 5px;
+}
+
+.Prep-tbl th {
+	text-align: center; 
+	font-size: 8px;
+	line-height: 10px;
+	color: rgb(73,73,73);
+	font-family: "Montserrat";
+	font-weight: bold;
+	text-transform:uppercase;
+	border-bottom: none;
+}
+
+.Jprod .tblHead {
+	min-width: 647px;
+	padding-top: 20px;
+	float:left;
+	margin: 0 -20px 0 -40px;
+	position:absolute;
+	top: -35px;
+	left:0;
+}
+
+.Jpurch .tblHead {
+	min-width: 755px;
+	padding-top: 15px;
+	float:left;
+	margin: 0 -20px 0 -40px;
+	position:absolute;
+	top: -35px;
+	left:0;
+}
+
+.Jproduct .tblHead {
+	min-width: 647px;
+	padding-top: 25px;
+	float:left;
+	margin: 0 -20px 0 -40px;
+	position:absolute;
+	top: -40px;
+	left:0;
+}
+
+.Jprod .tblHead th, .Jproduct .tblHead th  {
+	width:33%;
+}
+
+.Jpurch .tblHead th {
+	width:20%;
+}
+
+.padd2 {
+	height:13px;
+	text-align:center;
+}
+
+.padd1 > .circle{
+	text-align:center;
+	
+}
+
+.padd1 > .comment input {
+	width: 116px;
+	height: 30px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	border: 1px solid #d4d4d4;
+	text-align: center;
+	font-size: 0.75rem;
+	line-height: 7px;
+	color: rgb(125,125,125);
+	font-family: "Montserrat";
+	font-weight: 300;
+	text-align: center;
 }
 
 .Jsubmit{
@@ -318,25 +511,150 @@ tr th {
 	background-color: white;
 	border: 2px solid #7d7d7d;
 	position:absolute;
-	right:25px;
-	bottom:25px;
+	right:45px;
+	bottom:15px;
 	text-transform:uppercase;
 }
 
-.Jbtn-back{
-	font-size: 13px;
-	letter-spacing: 0px;
-	line-height: 35px;
-	color: rgb(125,125,125);
-	font-family: "Roboto";
-	font-weight: bold;
-	text-align: center;
-	border:none;
-	position:absolute;
-	right:135px;
-	bottom:10px;
-	text-decoration:underline;
+/* custom radio button*/
+.padd1 td {
+	position: relative;
+}
+/* The container */
+.Jcontainer {
+    cursor: pointer;
+    font-size: 11px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.Jpurch .Jcontainer {
+	margin: 0 30px;
+}
+
+/* Hide the browser's default radio button */
+.Jcontainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark1, .checkmark2, .checkmark3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+	transform: translate(-50%, -50%);
+    width: 16px;
+	height: 16px;
+	border-radius: 50%;
 	background-color: white;
-	text-transform:uppercase;
-	margin: 0 40px 5px 0 ;
+	border: 2px solid #ccc;
+	display: inline-block;
+}
+
+/* On mouse-over, add a grey background color */
+.Jcontainer:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark1:after, .checkmark2:after, .checkmark3:after   {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.Jcontainer input:checked ~ .checkmark1:after, .Jcontainer input:checked ~ .checkmark2:after,.Jcontainer input:checked ~ .checkmark3:after   {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.Jcontainer .checkmark1:after {
+ 	top: 2px;
+	left: 2px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background-color: #e94f4f;
+}
+
+.Jcontainer .checkmark2:after {
+ 	top: 2px;
+	left: 2px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background-color: #ff9500;
+}
+
+.Jcontainer .checkmark3:after {
+ 	top: 2px;
+	left: 2px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background-color: #1dc511;
+}
+
+.Jbtn-close {
+	position:absolute;
+	right:15px;
+	height:15px;
+	top:0;
+	color: rgb(125,125,125);
+	background-color: #f3f5f7;
+	border:none;
+	font-size:45px;
+	font-weight:100;
+	font-family: 'Montserrat', sans-serif;
+	z-index:1;
+}
+
+.Jpurch {
+	width: 755px;
+	height: 586px;
+	border-radius: 3px;
+	background-color: rgba(256,256,256,1);
+	margin:-17px 0 0 -15px;
+	font-size: 9px;
+	position:relative;
+}
+
+.Jpurch-head {
+	width: 755px;
+	height: 120px;
+	background-color: #f3f5f7;
+	padding: 10px 15px 0 40px;
+}
+
+.Jpurch-main {
+	width: 755px;
+	height: 465px;
+}
+
+.Jproduct {
+	width: 647px;
+	height: 600px;
+	border-radius: 3px;
+	background-color: rgba(256,256,256,1);
+	box-shadow: 0px 5px 10px rgba(0,0,0,0.25);
+	margin:-17px 0 0 -15px;
+	font-size: 9px;
+	position:relative;
+}
+
+.Jproduct-head {
+	width: 647px;
+	height: 120px;
+	background-color: #f3f5f7;
+	padding: 10px 15px 0 40px;
+}
+
+.Jproduct-main {
+	width: 647px;
+	height: 480px;
 }

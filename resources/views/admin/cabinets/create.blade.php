@@ -1,10 +1,6 @@
-@extends('layouts.index')
-
-@section('title', 'Cabinets')
 <link rel="stylesheet" href="{{ URL::asset('css/cabinets.css') }}"/>
-@section('content')
-	
 <div class="tabCab">
+<button type="button" class="Jbtn-close" data-dismiss="modal">&times</button>
 	<div class="">
 		
 		<div class="tabCab1" id="tabCab1">
@@ -52,10 +48,10 @@
 					</select>
 				</div>	
 				<p>date of delivery of the enclosure:</p>
-				<div class="">
+				<div class="Jdate">
 					<input name="datum_isporuke" class="date" type="text" value = "{{ Carbon\Carbon::now()->format('d-m-Y') }}">
 					{!! ($errors->has('datum_isporuke') ? $errors->first('datum_isporuke', '<p class="text-danger">:message</p>') : '') !!}
-					
+					<i class="fas fa-calendar-alt"></i>
 				</div>
 				  <script type="text/javascript">
 					$('.date').datepicker({  
@@ -199,12 +195,12 @@
 			<button type="button" class="tablinks Jbtn-next" onclick="openCity(event, 'finalizing')"><a href="#link4">next</a></button>
 				<p>protection system:</p>
 				<div class="">
-					<input class="" placeholder="Sustav zaštite" name="sustav_zastite" type="text" value="{{ old('sustav_zastite') }}"/>
+					<input class="protect" placeholder="Sustav zaštite" name="sustav_zastite" type="text" value="{{ old('sustav_zastite') }}"/>
 					{!! ($errors->has('sustav_zastite') ? $errors->first('sustav_zastite', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<p>IP protection cabinets:</p>
 				<div class="ip">
-					<span>IP</span><input class="" placeholder="upiši broj" name="ip_zastita" type="text" value="{{ old('ip_zastita') }}"/>
+					<span>IP</span><input class="ip1" placeholder="upiši broj" name="ip_zastita" type="text" value="{{ old('ip_zastita') }}"/>
 					{!! ($errors->has('ip_zastita') ? $errors->first('ip_zastita', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<p>cable entry:</p>
@@ -247,30 +243,68 @@
 			
 			
 		</form>
-<!--<div class="">
-						
-					<!--<label>Dimenzije kanalica (ŠxV)</label>
-					<div class="form-group">
-						<select class="" name="dim_kanalice" value="{{ old('dim_kanalice') }}" id="test">
-							<option>20x80 mm</option>
-							<option>40x80 mm</option>
-							<option>60x80 mm</option>
-							<option>80x80 mm</option>
-							<option>100x80 mm</option>
-							<option>120x80 mm</option>
-						</select>
-					</div>
-					<label>Bakreni razvod (ŠxV):</label>
-					<div class="form-group">
-						<input type="checkbox" name="bak_razvod" id="myCheck" value="DA" onclick="myFunction()">DA
-					</div>
-					<div class="form-group">
-						<input class="editOption2 " name="bak_dimenzija" style="display:none;" placeholder="upiši dimenziju u mm" ></input>
-
-					-->
-		
-
 	</div>
 </div>
 
-@stop
+<script>
+	var slideIndex = 1;
+	showSlides(slideIndex);
+
+	function plusSlides(n) {
+		showSlides(slideIndex += n);
+	}
+
+	function currentSlide(n) {
+		showSlides(slideIndex = n);
+	}
+
+	function showSlides(n) {
+		var i;
+		var slides = document.getElementsByClassName("mySlides");
+		if (slides.length === 0) {
+			return
+		}
+		var dots = document.getElementsByClassName("dot");
+		if (n > slides.length) {slideIndex = 1}    
+		if (n < 1) {slideIndex = slides.length}
+		for (i = 0; i < slides.length; i++) {
+			slides[i].style.display = "none";  
+		}
+		for (i = 0; i < dots.length; i++) {
+			dots[i].className = dots[i].className.replace(" active", "");
+		}
+		slides[slideIndex-1].style.display = "block";  
+		dots[slideIndex-1].className += " active";
+	}
+</script>
+<script>
+	function openCity(evt, cityName) {
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+		document.getElementById(cityName).style.display = "block";
+		evt.currentTarget.className += " active";
+	}
+
+	// Get the element with id="defaultOpen" and click on it
+	document.getElementById("defaultOpen").click();
+</script>
+	
+<script>
+	// Add active class to the current button (highlight it)
+	var header = document.getElementById("tabCab1");
+	var btns = header.getElementsByClassName("tablinks");
+	for (var i = 0; i < btns.length; i++) {
+	  btns[i].addEventListener("click", function() {
+		var current = document.getElementsByClassName("active");
+		current[0].className = current[0].className.replace(" active", "");
+		this.className += " active";
+	  });
+	}
+</script>

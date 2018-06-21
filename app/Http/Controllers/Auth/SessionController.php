@@ -60,7 +60,7 @@ class SessionController extends Controller
 		
         // Return the appropriate response
         if(Sentinel::check())  {
-          return $result->dispatch(route('admin.dashboard'));
+          return $result->dispatch(route('admin.projects.index'));
         } 
 		return $result->dispatch(route('auth.login.form'));
 

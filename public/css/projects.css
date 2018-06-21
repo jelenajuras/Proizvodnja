@@ -1,0 +1,141 @@
+/*   CSS project */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800|Roboto:400,500,700');
+.modal{
+	width:100%;
+	max-height: 550px;
+	margin:auto;
+	padding:0;
+	font-size: 12px;
+	font-family: "Montserrat";
+	color: rgb(125,125,125);
+}
+
+.modal-dialog {
+	width: 647px;
+	height: 544px;
+	margin:auto;
+	border-radius: 3px;
+	box-shadow: 0px 5px 10px rgba(0,0,0,0.25);
+}
+.modal-content {
+	width: 647px;
+	height: 544px;
+	border-radius: 3px;
+	margin:0;
+	padding:0;
+	position:relative;
+}
+.modal-body {
+	width:100%;
+	height: 100%;
+
+}
+
+.Jproj {
+	width:100%;
+	height:100%;
+	color: rgb(119,119,119);
+	position:relative;
+}
+
+.Jside-proj {
+	width: 28%;
+	height: 542px;
+	background-color: #f3f5f7;
+	float:left;
+	margin:-15px 0 0 -15px ;
+	border-radius: 3px 0 0 3px;
+}
+
+.Jside-proj h3 {
+	font-size: 14px;
+	padding:15px 0 25px 0;
+	font-weight: bold;
+	text-align: center;
+}
+
+.Jside-proj p {
+	line-height: 35px;
+	text-align: center;
+}
+.Jside-proj span {
+	display: inline-block;
+	font-size: 0.75rem ;
+	line-height: 20px;
+	font-weight: bold;
+	text-align: center;
+	background-color:white;
+	border:1px solid white;
+	border-radius: 9px;
+	margin-right:20px;
+	width: 19px;
+	height: 19px;
+}
+
+.Jmain-proj {
+	float:left;
+	width: 72%;
+	height:100%;
+	margin-top:-15px;
+	position:relative;
+}
+.Jmain-proj fieldset{
+	border:none;
+	height:100%;
+	position:relative;
+}
+
+.Jmain-proj fieldset div{
+	padding: 20px 0 5px 0
+}
+
+.Jmain-proj fieldset p {
+	text-transform:uppercase;
+	font-size: 11px;
+	line-height: 7px;
+	color: rgb(125,125,125);
+	font-weight:600;
+	font-family: "Montserrat";
+}
+
+.Jmain-proj input:not(.Proj-submit ), .Jmain-proj select, .Jmain-proj textarea {
+	width: 100%;
+	height: 29px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	border: 1px solid #d5d5d5;
+	margin: 5px 0 0px 0;
+	padding:5px;
+}
+
+.Proj-submit {
+	width: 111px;
+	height: 32px;
+	border-radius: 3px;
+	border: 2px solid #7d7d7d;
+	background-color: white;
+	
+	position:absolute;
+	bottom:10px;
+	right:15px;
+	text-transform:uppercase;
+	font-size: 13px;
+	line-height: 25px;
+	color: rgb(125,125,125);
+	font-family: "Roboto";
+	font-weight: bold;
+	text-align: center;
+}
+
+.Jbtn-close {
+	position:absolute;
+	right:20px;
+	height:40px;
+	top:0;
+	color: rgb(125,125,125);
+	background-color: white;
+	border:none;
+	font-size:45px;
+	font-weight:100;
+	font-family: 'Montserrat', sans-serif;
+}

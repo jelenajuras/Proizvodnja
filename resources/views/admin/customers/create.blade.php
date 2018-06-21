@@ -1,43 +1,42 @@
-@extends('layouts.admin')
+<link rel="stylesheet" href="{{ URL::asset('css/projects.css') }}"/>
 
-@section('title', 'Upis novog naručitelja')
 
-@section('content')
-<div class="row" >
-    <div class="col-md-6 col-md-offset-3">
-        <br/>
-		<h3 class="panel-title">Upiši novog naručitelja</h3>
-		<br/>
-		<div class="panel panel-default">
-            <div class="panel-body">
-                <form accept-charset="UTF-8" role="form" method="post" action="{{ route('admin.customers.store') }}">
-					<fieldset>
-						<div class="form-group {{ ($errors->has('naziv')) ? 'has-error' : '' }}">
-						<text>Naziv firme</text>
-							<input class="form-control" placeholder="Naziv firme" name="naziv" type="text" value="{{ old('naziv') }}" autofocus />
-							{!! ($errors->has('naziv') ? $errors->first('naziv', '<p class="text-danger">:message</p>') : '') !!}
-						</div>
-						<div class="form-group {{ ($errors->has('adresa')) ? 'has-error' : '' }}">
-						<text>Adresa</text>
-							<input class="form-control" placeholder="Adresa" name="adresa" type="text" value="{{ old('adresa') }}" />
-							{!! ($errors->has('adresa') ? $errors->first('adresa', '<p class="text-danger">:message</p>') : '') !!}
-						</div>
-						<div class="form-group {{ ($errors->has('grad')) ? 'has-error' : '' }}">
-						<text>Grad</text>
-							 <input class="form-control" placeholder="Grad" name="grad" type="text" value="{{ old('grad') }}" />
-							{!! ($errors->has('grad') ? $errors->first('grad', '<p class="text-danger">:message</p>') : '') !!}
-						</div>
-						<div class="form-group {{ ($errors->has('oib')) ? 'has-error' : '' }}">
-						<text>OIB</text>
-							 <input class="form-control" placeholder="OIB" name="oib" type="text" value="{{ old('oib') }}" />
-							{!! ($errors->has('oib') ? $errors->first('oib', '<p class="text-danger">:message</p>') : '') !!}
-						</div>
-						<input name="_token" value="{{ csrf_token() }}" type="hidden">
-						<input class="btn btn-lg btn-primary btn-block" type="submit" value="Upiši naručitelja"  id="input2">
-					</fieldset>
-                </form>
-            </div>
-        </div>
+<div class="Jproj" id="myModal" >
+
+    <div class="Jside-proj">
+		<h3 class="">Add new client</h3>
+		<p class=""><span>1</span>Client info</h3>
+		
+	</div>
+	<br/>
+	<div class="Jmain-proj">
+            
+		<form accept-charset="UTF-8" role="form" method="post" action="{{ route('admin.customers.store') }}">
+			<fieldset>
+				<div class="{{ ($errors->has('naziv')) ? 'has-error' : '' }}">
+				<p>clint name</p>
+					<input class="form-control" name="naziv" type="p" value="{{ old('naziv') }}" autofocus />
+					{!! ($errors->has('naziv') ? $errors->first('naziv', '<p class="p-danger">:message</p>') : '') !!}
+				</div>
+				<div class="{{ ($errors->has('adresa')) ? 'has-error' : '' }}">
+				<p>address</p>
+					<input class="" name="adresa" type="p" value="{{ old('adresa') }}" />
+					{!! ($errors->has('adresa') ? $errors->first('adresa', '<p class="p-danger">:message</p>') : '') !!}
+				</div>
+				<div class="{{ ($errors->has('grad')) ? 'has-error' : '' }}">
+				<p>city</p>
+					 <input class="form-control" name="grad" type="p" value="{{ old('grad') }}" />
+					{!! ($errors->has('grad') ? $errors->first('grad', '<p class="p-danger">:message</p>') : '') !!}
+				</div>
+				<div class="{{ ($errors->has('oib')) ? 'has-error' : '' }}">
+				<p>OIB</p>
+					 <input class="" name="oib" type="p" value="{{ old('oib') }}" />
+					{!! ($errors->has('oib') ? $errors->first('oib', '<p class="p-danger">:message</p>') : '') !!}
+				</div>
+				<input name="_token" value="{{ csrf_token() }}" type="hidden">
+				<input class="Proj-submit" type="submit" value="add">
+			</fieldset>
+		</form>
     </div>
 </div>
-@stop
+<button type="button" class="Jbtn-close" data-dismiss="modal">&times</button>

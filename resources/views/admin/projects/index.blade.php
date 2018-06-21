@@ -4,17 +4,16 @@
 
 @section('content')
 
-    <div class='btn-toolbar pull-right' id="button2">
+   <!-- <div class="btn-toolbar pull-right">
 		<a class="btn btn-default btn-md" href="{{ route('admin.projects.create') }}" id="button">
 			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-			Dodaj projekt
+			add project
 		</a>
-	</div>      
+	</div>  -->    
     <h3>Projekti</h3>
 		<!--<input class="form-control" id="myInput" type="text" placeholder="Traži..">-->
 
-
-    <div class="row">
+    <div class="Jproj row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="table-responsive">
 			@if(count($projects) > 0)

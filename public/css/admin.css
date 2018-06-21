@@ -20,6 +20,7 @@ body {
 	margin:0;
 	background-color:#f2f2f2;
 	color: rgb(73,73,73);
+	font-size: 0.75rem;
 }
 
 .clearfix {
@@ -215,6 +216,7 @@ li {
 	top:10px;
 	right:10px;
 	background-color:#f2f2f2;
+	font-size:11px;
 }
 
 .dropdwn-hv {
@@ -223,13 +225,25 @@ li {
 	box-shadow: 0px 3px 3px rgba(0,0,0,0.1);
 }
 
-.w3-dropdown-content a{
-	font-size:0.56rem;
+.w3-dropdown-content button, .w3-dropdown-content a{
+	font-size:9px;
 	display:block;
 	text-align:left;
-	text-transform: uppercase;
+	color: rgb(125,125,125);
+	font-family: "Montserrat";
+	font-weight: 400;
+	width:100%;
+	border:none;
+	background-color:white;
+	padding:8px 0;
+	padding-left:17px;
+	text-transform:uppercase;
 }
 
+
+.w3-dropdown-content button:hover{
+	background-color:#f2f2f2;
+}
 .w3-dropdown-content a:hover {
 	text-decoration:none;
 }
@@ -258,7 +272,7 @@ li {
 }
 
 .side header p{
-	font-size:0.56rem;
+	
 	
 }
 
@@ -272,6 +286,7 @@ li {
 	color: rgb(78,78,78);
 	font-weight: 300;
 	border-bottom: solid 1px #dbe1e5;
+	position:relative;
 }
 
 .Jsearch input {
@@ -280,10 +295,15 @@ li {
 	background-color:#f2f2f2;
 	padding: 5px ;
 	font-size: 0.56rem;
-	width:90%;
+	width:85%;
 }
 
-
+.Jsearch i {
+	position:absolute;
+	right: -30px;
+	top:0;
+	padding:5px;
+}
 .side .Jfilter {
 	width:25%;
 	float:left;
@@ -305,7 +325,7 @@ li {
 	margin:5px 0;
 }
 
-.projects {
+.project, .side {
 	font-size: 0.75rem;
 }
 
@@ -346,4 +366,15 @@ li {
 
 .Jmain {
 	border-left: 2px solid #dbe1e5;
+	font-size:0.75rem;
+	padding: 20px;
 }
+
+.btn {
+	font-size:0.75rem;
+}
+
+form {
+	height:100%;
+}
+

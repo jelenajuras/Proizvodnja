@@ -22,12 +22,18 @@
 		
 		<!-- Google fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,800,900|Roboto" rel="stylesheet">
-		
-		<!-- Date picker-->
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+		<!-- Restfulizer.js - A tool for simulating put,patch and delete requests -->
+		<script src="{{ asset('js/restfulizer.js') }}"></script>
+	
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script>
+		$( function() {
+		$( "#datepicker" ).datepicker();
+		} );
+		</script>
 		
 		
 		<link rel="stylesheet" href="{{ URL::asset('css/index.css') }}"/>
@@ -38,14 +44,8 @@
 		@yield('content')
 	</div>
 	
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	
-	<!-- Latest compiled and minified JavaScript -->
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	
-	<!-- Restfulizer.js - A tool for simulating put,patch and delete requests -->
-	<script src="{{ asset('js/restfulizer.js') }}"></script>
 		
 	<script>
 	var slideIndex = 1;

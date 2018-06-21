@@ -8,29 +8,10 @@
 		<div class="addEnc">
 			<!-- Trigger/Open The Modal -->
 			<button data-path="{{ route('admin.cabinets.create') }}" 
-			   class="load-ajax-modal" 
-			   role="button" 
-			   data-toggle="modal" data-target="#dynamic-modal">
-			   <span class="glyphicon glyphicon-eye-open"></span> add enclosure
+			   class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+			   add enclosure
 			</button>
 
-			<div class="modal fade" id="dynamic-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-			
-			  <div class="modal-dialog" style="width:647px">
-				<div class="modal-content">
-				 
-					
-				  <div class="modal-body">
-					
-				  </div>
-				  <button type="button" class="Jbtn-close" data-dismiss="modal">&times</button>
-				  
-				
-				</div>
-			  </div>
-			</div>
-			<script src="custom.js"></script>
-		
 			<h2>{{ 'Naziv projekta: '}}<b>{{ $project->id . ' - ' . $project->naziv }}</b></h2>
 		</div>
 		
@@ -61,18 +42,18 @@
 										$preparation->rijeseno7 == 'DA')
 											<span class="ellipseG"></span>
 											<?php $status_Prep ='Complited'; ?>
-										@elseif($preparation->rijeseno1 == 'DA' ||
-										$preparation->rijeseno2 == 'DA' || 
-										$preparation->rijeseno3 == 'DA' ||
-										$preparation->rijeseno4 == 'DA' ||
-										$preparation->rijeseno5 == 'DA' ||
-										$preparation->rijeseno6 == 'DA' ||
+										@elseif($preparation->rijeseno1 == 'NE' &&
+										$preparation->rijeseno2 == 'NE' &&
+										$preparation->rijeseno3 == 'NE' &&
+										$preparation->rijeseno4 == 'NE' &&
+										$preparation->rijeseno5 == 'NE' &&
+										$preparation->rijeseno6 == 'NE' &&
 										$preparation->rijeseno7 == 'DA')
-											<span class="ellipseO"></span>
-											<?php $status_Prep ='In progress'; ?>
-										@else
 											<span class="ellipseR"></span>
 											<?php $status_Prep ='Havent started'; ?>
+										@else
+											<span class="ellipseO"></span>
+											<?php $status_Prep ='In progress'; ?>
 										@endif
 									@else
 										<span class="ellipseR"></span>
@@ -80,9 +61,16 @@
 									@endif
 									<a href="#"><i class="fas fa-info-circle"></i></a>
 									@if($preparation)
-										<a class="{{ Request::is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.preparations.edit', $preparation->id) }}"><i class="far fa-edit"></i></a>
+										<button data-path="{{ route('admin.preparations.edit', $preparation->id) }}" 
+										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
+										<i class="far fa-edit"></i>
+										</button>
 									@else
-										<a class="{{ Request::is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.preparations.create', ['id' => $cabinet->id]) }}"><i class="far fa-edit"></i></a>
+										<button data-path="{{ route('admin.preparations.create', ['id' => $cabinet->id]) }}" 
+										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
+										<i class="far fa-edit"></i>
+										</button>
+										
 									@endif
 								</div>
 								<p class="tablinks" onclick="openCity(event, 'preparation')" id="defaultOpen">
@@ -102,19 +90,27 @@
 										$purchase->rijeseno8 == 'DA')
 											<span class="ellipseG"></span>
 											<?php $status_Purch ='Complited'; ?>
-										@elseif($purchase->rijeseno1 == 'DA' ||
-										$purchase->rijeseno2 == 'DA' || 
-										$purchase->rijeseno3 == 'DA' ||
-										$purchase->rijeseno4 == 'DA' ||
-										$purchase->rijeseno5 == 'DA' ||
-										$purchase->rijeseno6 == 'DA' ||
-										$purchase->rijeseno7 == 'DA' || 
-										$purchase->rijeseno8 == 'DA')
-											<span class="ellipseO"></span>
-											<?php $status_Purch ='In progress'; ?>
-										@else
+										@elseif($purchase->naruceno1 == 'NE' &&
+										$purchase->naruceno2 == 'NE' &&
+										$purchase->naruceno3 == 'NE' &&
+										$purchase->naruceno4 == 'NE' &&
+										$purchase->naruceno5 == 'NE' &&
+										$purchase->naruceno6 == 'NE' &&
+										$purchase->naruceno7 == 'NE' &&
+										$purchase->naruceno8 == 'NE' &&
+										$purchase->rijeseno1 == 'NE' &&
+										$purchase->rijeseno2 == 'NE' &&
+										$purchase->rijeseno3 == 'NE' &&
+										$purchase->rijeseno4 == 'NE' &&
+										$purchase->rijeseno5 == 'NE' &&
+										$purchase->rijeseno6 == 'NE' &&
+										$purchase->rijeseno7 == 'NE' && 
+										$purchase->rijeseno8 == 'NE')
 											<span class="ellipseR"></span>
 											<?php $status_Purch ='Havent started'; ?>	
+										@else
+											<span class="ellipseO"></span>
+											<?php $status_Purch ='In progress'; ?>
 										@endif
 									@else
 										<span class="ellipseR"></span>
@@ -122,9 +118,15 @@
 									@endif
 									<a href="#"><i class="fas fa-info-circle"></i></a>
 									@if($purchase)
-										<a class="{{ Request::is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.purchases.edit', $purchase->id) }}"><i class="far fa-edit"></i></a>
+										<button data-path="{{ route('admin.purchases.edit', $purchase->id) }}" 
+										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
+										<i class="far fa-edit"></i>
+										</button>
 									@else
-										<a class="{{ Request::is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.purchases.create', ['id' => $cabinet->id]) }}"><i class="far fa-edit"></i></a>
+										<button data-path="{{ route('admin.purchases.create', ['id' => $cabinet->id]) }}" 
+										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
+										<i class="far fa-edit"></i>
+										</button>
 									@endif
 								</div>
 								<p class="tablinks" onclick="openCity(event, 'purchase')" id="defaultOpen">
@@ -143,34 +145,40 @@
 										$production->rijeseno7 == 'DA' &&
 										$production->rijeseno8 == 'DA')
 											<span class="ellipseG"></span>
-											<?php $status_Prod ='Complited'; ?>
-										@elseif($production->rijeseno1 == 'DA' ||
-										$production->rijeseno2 == 'DA' ||
-										$production->rijeseno3 == 'DA' ||
-										$production->rijeseno4 == 'DA' ||
-										$production->rijeseno5 == 'DA' ||
-										$production->rijeseno6 == 'DA' ||
-										$production->rijeseno7 == 'DA' ||
-										$production->rijeseno8 == 'DA')
-											<span class="ellipseO"></span>
-											<?php $status_Prod ='In progress'; ?>
-										@else
+											<?php $status_Prod  ='Complited'; ?>
+										@elseif($production->rijeseno1 == 'NE' &&
+										$production->rijeseno2 == 'NE' &&
+										$production->rijeseno3 == 'NE' &&
+										$production->rijeseno4 == 'NE' &&
+										$production->rijeseno5 == 'NE' &&
+										$production->rijeseno6 == 'NE' &&
+										$production->rijeseno7 == 'NE' &&
+										$production->rijeseno8 == 'NE')
 											<span class="ellipseR"></span>
 											<?php $status_Prod ='Havent started'; ?>
+										@else
+											<span class="ellipseO"></span>
+											<?php $status_Prod ='In progress'; ?>
 										@endif
 									@else
 										<span class="ellipseR"></span>
 										<?php $status_Prod ='Havent started'; ?>
 									@endif
-									<i class="fas fa-info-circle"></i>
+									<a href="#"><i class="fas fa-info-circle"></i></a>
 									@if($production)
-										<a class="{{ Request::is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.productions.edit', $production->id ) }}"><i class="far fa-edit"></i></a>
+										<button data-path="{{ route('admin.productions.edit', $production->id) }}" 
+										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
+										<i class="far fa-edit"></i>
+										</button>
 									@else
-										<a class="{{ Request::is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.productions.create', ['id' => $cabinet->id]) }}"><i class="far fa-edit"></i></a>
-									@endif	
+										<button data-path="{{ route('admin.productions.create', ['id' => $cabinet->id]) }}" 
+										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
+										<i class="far fa-edit"></i>
+										</button>
+									@endif
 								</div>
 								<p class="tablinks" onclick="openCity(event, 'production')" id="defaultOpen">
-								production<span>status: {{ $status_Prod }}</span>
+									preparation<span>status: {{ $status_Prod }} </span>
 								</p>
 							</div>
 							<div class="Jtab">
@@ -180,8 +188,8 @@
 									<i class="far fa-edit"></i>
 									
 								</div>
-								<p class="tablinks" onclick="openCity(event, 'delivery')" id="defaultOpen">
-								delivery<span>status: In progress</span>
+								<p class="tablinks" onclick="openCity(event, 'production')" id="defaultOpen">
+								production<span>status: In progress</span>
 								</p>
 							</div>
 						
@@ -199,7 +207,7 @@
 						</div>
 						
 					@endif
-				
+					
 				</div>
 				<div class="Jcontent">
 					<div class="cont1">
@@ -241,32 +249,4 @@
 		</div>
 		@endforeach
 	</section>
-
-	<script>
-	$.ajaxSetup({
-		headers: {
-			'X-CSRF-Token': $('meta[name="_token"]').attr('content')
-		}
-	});
-	
-	$('.load-ajax-modal').click(function(){
-
-    $.ajax({
-        type : 'GET',
-        url : $(this).data('path'),
-
-        success: function(result) {
-            $('#dynamic-modal div.modal-body').html(result);
-        }
-    });
-	});
-	</script>
-	
-	<script>
-			$(document).ready(function(){
-				$(".OrmProiz").click(function(){
-					$("p").toggle();
-				});
-			});
-	</script>
 @stop

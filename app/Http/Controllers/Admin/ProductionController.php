@@ -57,6 +57,7 @@ class ProductionController extends Controller
     {
         $input = $request->except(['_token']);
 		$project = Cabinet::where('id',$input['ormar_id'])->first();
+		
 		$brProj = $project->projekt_id;
 
 		
