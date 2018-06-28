@@ -79,14 +79,16 @@
 	margin-top:-15px;
 	position:relative;
 }
+
 .Jmain-proj fieldset{
 	border:none;
 	height:100%;
 	position:relative;
+	padding:10px;
 }
 
 .Jmain-proj fieldset div{
-	padding: 20px 0 5px 0
+	padding: 5px 0 15px 0
 }
 
 .Jmain-proj fieldset p {
@@ -138,4 +140,63 @@
 	font-size:45px;
 	font-weight:100;
 	font-family: 'Montserrat', sans-serif;
+}
+
+.Jmain-user .checkbox {
+	padding: 2px;
+	margin:0;
+	width:50%;
+	float:left;
+}
+
+.Jmain-user {
+	float:left;
+	width: 72%;
+	height:100%;
+	margin-top:-15px;
+	position:relative;
+}
+
+.Jmain-user fieldset{
+	border:none;
+	height:100%;
+	position:relative;
+	padding:25px;
+}
+
+.Jmain-user fieldset div{
+	padding: 5px 0 5px 0
+}
+
+.Jmain-user fieldset p {
+	text-transform:uppercase;
+	font-size: 11px;
+	line-height: 7px;
+	color: rgb(125,125,125);
+	font-weight:600;
+	font-family: "Montserrat";
+}
+
+.Jmain-user input, .Jmain-role input {
+	font-size: 12px;
+}
+
+.Jmain-role .checkbox {
+	padding: 2px;
+	margin:0;
+	width:33%;
+	float:left;
+	font-size: 10px;
+} 
+
+.Jmain-role fieldset {
+	border: none;
+}
+
+.Jmain-role fieldset div {
+	padding: 5px;
+}
+
+.Jmain-role fieldset p {
+	padding-top: 10px;
 }

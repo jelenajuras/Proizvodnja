@@ -51,7 +51,7 @@
 					  <span class="checkmark1"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
-					  <input type="radio" name="rijeseno1" value="PROG" {{ ($production->rijeseno1 == 'PROG') ? 'checked' : '' }} name="radio">
+					  <input type="radio" name="rijeseno1" value="in progress" {{ ($production->rijeseno1 == 'in progress') ? 'checked' : '' }} name="radio">
 					  <span class="checkmark2"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
@@ -67,7 +67,7 @@
 					  <span class="checkmark1"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
-					  <input type="radio" name="rijeseno2" value="PROG" {{ ($production->rijeseno2 == 'PROG') ? 'checked' : '' }} name="radio">
+					  <input type="radio" name="rijeseno2" value="in progress" {{ ($production->rijeseno2 == 'in progress') ? 'checked' : '' }} name="radio">
 					  <span class="checkmark2"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
@@ -83,7 +83,7 @@
 					  <span class="checkmark1"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
-					  <input type="radio" name="rijeseno3" value="PROG" {{ ($production->rijeseno3 == 'PROG') ? 'checked' : '' }} name="radio">
+					  <input type="radio" name="rijeseno3" value="in progress" {{ ($production->rijeseno3 == 'in progress') ? 'checked' : '' }} name="radio">
 					  <span class="checkmark2"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
@@ -99,7 +99,7 @@
 					  <span class="checkmark1"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
-					  <input type="radio" name="rijeseno4" value="PROG" {{ ($production->rijeseno4 == 'PROG') ? 'checked' : '' }} name="radio">
+					  <input type="radio" name="rijeseno4" value="in progress" {{ ($production->rijeseno4 == 'in progress') ? 'checked' : '' }} name="radio">
 					  <span class="checkmark2"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
@@ -115,7 +115,7 @@
 					  <span class="checkmark1"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
-					  <input type="radio" name="rijeseno5" value="PROG" {{ ($production->rijeseno5 == 'PROG') ? 'checked' : '' }} name="radio">
+					  <input type="radio" name="rijeseno5" value="in progress" {{ ($production->rijeseno5 == 'in progress') ? 'checked' : '' }} name="radio">
 					  <span class="checkmark2"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
@@ -131,7 +131,7 @@
 					  <span class="checkmark1"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
-					  <input type="radio" name="rijeseno6" value="PROG" {{ ($production->rijeseno6 == 'PROG') ? 'checked' : '' }} name="radio">
+					  <input type="radio" name="rijeseno6" value="in progress" {{ ($production->rijeseno6 == 'in progress') ? 'checked' : '' }} name="radio">
 					  <span class="checkmark2"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
@@ -147,7 +147,7 @@
 					  <span class="checkmark1"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
-					  <input type="radio" name="rijeseno7" value="PROG" {{ ($production->rijeseno7 == 'PROG') ? 'checked' : '' }} name="radio">
+					  <input type="radio" name="rijeseno7" value="in progress" {{ ($production->rijeseno7 == 'in progress') ? 'checked' : '' }} name="radio">
 					  <span class="checkmark2"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
@@ -163,7 +163,7 @@
 					  <span class="checkmark1"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
-					  <input type="radio" name="rijeseno8" value="PROG" {{ ($production->rijeseno8 == 'PROG') ? 'checked' : '' }} name="radio">
+					  <input type="radio" name="rijeseno8" value="in progress" {{ ($production->rijeseno8 == 'in progress') ? 'checked' : '' }} name="radio">
 					  <span class="checkmark2"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
@@ -179,7 +179,7 @@
 					  <span class="checkmark1"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">
-					  <input type="radio" name="rijeseno9" value="PROG" {{ ($production->rijeseno9 == 'PROG') ? 'checked' : '' }} name="radio">
+					  <input type="radio" name="rijeseno9" value="in progress" {{ ($production->rijeseno9 == 'in progress') ? 'checked' : '' }} name="radio">
 					  <span class="checkmark2"></span>
 					</label></td>
 					<td class="circle"><label class="Jcontainer">

@@ -50,7 +50,7 @@
 						  <span class="checkmark1"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
-						  <input type="radio" name="rijeseno1" value="PROG" name="radio">
+						  <input type="radio" name="rijeseno1" value="in progress" name="radio">
 						  <span class="checkmark2"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
@@ -66,7 +66,7 @@
 						  <span class="checkmark1"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
-						  <input type="radio" name="rijeseno2" value="PROG" name="radio">
+						  <input type="radio" name="rijeseno2" value="in progress" name="radio">
 						  <span class="checkmark2"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
@@ -82,7 +82,7 @@
 						  <span class="checkmark1"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
-						  <input type="radio" name="rijeseno3" value="PROG" name="radio">
+						  <input type="radio" name="rijeseno3" value="in progress" name="radio">
 						  <span class="checkmark2"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
@@ -98,7 +98,7 @@
 						  <span class="checkmark1"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
-						  <input type="radio" name="rijeseno4" value="PROG" name="radio">
+						  <input type="radio" name="rijeseno4" value="in progress" name="radio">
 						  <span class="checkmark2"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
@@ -114,7 +114,7 @@
 						  <span class="checkmark1"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
-						  <input type="radio" name="rijeseno5" value="PROG" name="radio">
+						  <input type="radio" name="rijeseno5" value="in progress" name="radio">
 						  <span class="checkmark2"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
@@ -130,7 +130,7 @@
 						  <span class="checkmark1"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
-						  <input type="radio" name="rijeseno6" value="PROG" name="radio">
+						  <input type="radio" name="rijeseno6" value="in progress" name="radio">
 						  <span class="checkmark2"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
@@ -146,7 +146,7 @@
 						  <span class="checkmark1"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
-						  <input type="radio" name="rijeseno7" value="PROG" name="radio">
+						  <input type="radio" name="rijeseno7" value="in progress" name="radio">
 						  <span class="checkmark2"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
@@ -162,7 +162,7 @@
 						  <span class="checkmark1"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
-						  <input type="radio" name="rijeseno8" value="PROG" name="radio">
+						  <input type="radio" name="rijeseno8" value="in progress" name="radio">
 						  <span class="checkmark2"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
@@ -178,7 +178,7 @@
 						  <span class="checkmark1"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">
-						  <input type="radio" name="rijeseno9" value="PROG" name="radio">
+						  <input type="radio" name="rijeseno9" value="in progress" name="radio">
 						  <span class="checkmark2"></span>
 						</label></td>
 						<td class="circle"><label class="Jcontainer">

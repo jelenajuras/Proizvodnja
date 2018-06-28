@@ -3,11 +3,11 @@
 @section('title', 'Roles')
 
 @section('content')
-    <div class='btn-toolbar pull-right'>
-		<a class="btn btn-default btn-md" href="{{ route('roles.create') }}" id="button">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-			Dodaj dozvolu
-		</a>
+    <div class="addUser">
+		<button data-path="{{ route('roles.create') }}" 
+			class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+			<i class="far fa-plus-square"></i>create role
+		</button>
 	</div>
 	<h3>Dozvole</h3>
 
@@ -30,11 +30,15 @@
                                 <td>{{ $role->slug }}</td>
                                 <td>{{ implode(", ", array_keys($role->permissions)) }}</td>
                                 <td>
-                                    <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-default btn md" id="button">
+                                    <button data-path="{{ route('roles.edit', $role->id) }}" 
+									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+									<i class="far fa-edit"></i>edit 
+									</button>
+									<!--<a href="{{ route('roles.edit', $role->id) }}" class="btn btn-default btn md" id="button">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                         Ispravi
                                     </a>
-                                   <!-- <a href="{{ route('roles.destroy', $role->id) }}" class="btn btn-danger btn-md action_confirm" data-method="delete" data-token="{{ csrf_token() }}" id="button">
+                                    <a href="{{ route('roles.destroy', $role->id) }}" class="btn btn-danger btn-md action_confirm" data-method="delete" data-token="{{ csrf_token() }}" id="button">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Obriši
                                     </a>-->

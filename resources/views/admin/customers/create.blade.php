@@ -1,12 +1,10 @@
 <link rel="stylesheet" href="{{ URL::asset('css/projects.css') }}"/>
 
-
 <div class="Jproj" id="myModal" >
 
     <div class="Jside-proj">
 		<h3 class="">Add new client</h3>
 		<p class=""><span>1</span>Client info</h3>
-		
 	</div>
 	<br/>
 	<div class="Jmain-proj">

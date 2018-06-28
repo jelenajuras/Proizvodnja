@@ -8,7 +8,7 @@
 	</div>
 	<br/>
 	<div class="Jmain-proj">
-			<form accept-charset="UTF-8" role="form" method="post" action="{{ route('admin.projects.store') }}">
+		<form accept-charset="UTF-8" role="form" method="post" action="{{ route('admin.projects.store') }}">
 			<fieldset>
 				<div class="{{ ($errors->has('id')) ? 'has-error' : '' }}">
 					<p>project number</p>
@@ -59,8 +59,7 @@
 				<input name="_token" value="{{ csrf_token() }}" type="hidden">
 				<input class="Proj-submit" type="submit" value="add">
 			</fieldset>
-			</form>
-		</div>
+		</form>
 	</div>
 </div>
 <button type="button" class="Jbtn-close" data-dismiss="modal">&times</button>

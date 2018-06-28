@@ -9,7 +9,7 @@
 			<!-- Trigger/Open The Modal -->
 			<button data-path="{{ route('admin.cabinets.create') }}" 
 			   class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
-			   add enclosure
+			   <i class="far fa-plus-square"></i>add enclosure
 			</button>
 
 			<h2>{{ 'Naziv projekta: '}}<b>{{ $project->id . ' - ' . $project->naziv }}</b></h2>
@@ -178,7 +178,7 @@
 									@endif
 								</div>
 								<p class="tablinks" onclick="openCity(event, 'production')" id="defaultOpen">
-									preparation<span>status: {{ $status_Prod }} </span>
+									production<span>status: {{ $status_Prod }} </span>
 								</p>
 							</div>
 							<div class="Jtab">
@@ -188,8 +188,8 @@
 									<i class="far fa-edit"></i>
 									
 								</div>
-								<p class="tablinks" onclick="openCity(event, 'production')" id="defaultOpen">
-								production<span>status: In progress</span>
+								<p class="tablinks" onclick="openCity(event, 'delivery')" id="defaultOpen">
+								delivery<span>status: In progress</span>
 								</p>
 							</div>
 						

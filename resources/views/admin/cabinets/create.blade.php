@@ -2,7 +2,6 @@
 <div class="tabCab">
 <button type="button" class="Jbtn-close" data-dismiss="modal">&times</button>
 	<div class="">
-		
 		<div class="tabCab1" id="tabCab1">
 			<p>Add new enclocure</p>
 			<button class="tablinks" onclick="openCity(event, 'basic')" style="border:none;background-color: #f3f5f7;" id="defaultOpen"><span id="link1">1</span>Basic info</button>
@@ -15,7 +14,7 @@
 			<div class="">
 				<input class="" name="brOrmara" type="hidden" value="{{ $zadnjibr->brOrmara +1 }}"/>
 			</div>
-		<div id="basic" class="tabcontent">
+			<div id="basic" class="tabcontent">
 				<button type="button" class="tablinks Jbtn-next" onclick="openCity(event, 'info1')"><a href="#link1">next</a></button>
 				
 				<p>project:</p>
@@ -82,75 +81,75 @@
 			</div>
 
 			<div id="info1" class="tabcontent">
-			<button type="button" class="tablinks Jbtn-back" onclick="openCity(event, 'basic')"><a href="#link1">back</a></button>
-			<button type="button" class="tablinks Jbtn-next" onclick="openCity(event, 'info2')"><a href="#link2">next</a></button>
-				<p>equipment manufacturer:</p> 
-				<div class="Equip clearfix">
-					<div>
-						<label class="container">ABB
-							<input type="checkbox" name="proizvodjacOpr_1" value="ABB">
-							<span class="checkmark"></span>
-						</label>
-						<label class="container">Eaton
-							<input type="checkbox" name="proizvodjacOpr_2" value="Eaton">
-							<span class="checkmark"></span>
-						</label>
-						<label class="container">Rittal
-							<input type="checkbox" name="proizvodjacOpr_3" value="Rittal">
-							<span class="checkmark"></span>
-						</label>
-						<label class="container">Schneider
-							<input type="checkbox" name="proizvodjacOpr_4" value="Schneider">
-							<span class="checkmark"></span>
-						</label>
+				<button type="button" class="tablinks Jbtn-back" onclick="openCity(event, 'basic')"><a href="#link1">back</a></button>
+				<button type="button" class="tablinks Jbtn-next" onclick="openCity(event, 'info2')"><a href="#link2">next</a></button>
+					<p>equipment manufacturer:</p> 
+					<div class="Equip clearfix">
+						<div>
+							<label class="container">ABB
+								<input type="checkbox" name="proizvodjacOpr_1" value="ABB">
+								<span class="checkmark"></span>
+							</label>
+							<label class="container">Eaton
+								<input type="checkbox" name="proizvodjacOpr_2" value="Eaton">
+								<span class="checkmark"></span>
+							</label>
+							<label class="container">Rittal
+								<input type="checkbox" name="proizvodjacOpr_3" value="Rittal">
+								<span class="checkmark"></span>
+							</label>
+							<label class="container">Schneider
+								<input type="checkbox" name="proizvodjacOpr_4" value="Schneider">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+						<div>
+							<label class="container">Schrack
+								<input type="checkbox" name="proizvodjacOpr_5" value="Schrack">
+								<span class="checkmark"></span>
+							</label>
+							<label class="container">Siemens
+								<input type="checkbox" name="proizvodjacOpr_6" value="Siemens">
+								<span class="checkmark"></span>
+							</label>
+							<label class="container">Free choice
+								<input type="checkbox" name="proizvodjacOpr_7" value="Slobodan odabir">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+						
 					</div>
-					<div>
-						<label class="container">Schrack
-							<input type="checkbox" name="proizvodjacOpr_5" value="Schrack">
-							<span class="checkmark"></span>
-						</label>
-						<label class="container">Siemens
-							<input type="checkbox" name="proizvodjacOpr_6" value="Siemens">
-							<span class="checkmark"></span>
-						</label>
-						<label class="container">Free choice
-							<input type="checkbox" name="proizvodjacOpr_7" value="Slobodan odabir">
-							<span class="checkmark"></span>
-						</label>
+					<p>name of enclosure (KKS):</p>
+					<div class="">
+						<input name="naziv" type="text" value="{{ old('naziv') }}" />
+						{!! ($errors->has('naziv') ? $errors->first('naziv', '<p class="text-danger">:message</p>') : '') !!}
 					</div>
-					
-				</div>
-				<p>name of enclosure (KKS):</p>
-				<div class="">
-					<input name="naziv" type="text" value="{{ old('naziv') }}" />
-					{!! ($errors->has('naziv') ? $errors->first('naziv', '<p class="text-danger">:message</p>') : '') !!}
-				</div>
-				<p>dimensions of cabinet (width x height x depth):</p>
-				<div class="">
-					<input class="" placeholder="[mm]" name="velicina" type="text" value="{{ old('velicina') }}" />
-					{!! ($errors->has('velicina') ? $errors->first('velicina', '<p class="text-danger">:message</p>') : '') !!}
-				</div>
-				<p>enclosure layout:</p>
-				<div class="">
-					<select class="" name="izvedba" value="{{ old('izvedba') }}">
-						<option>Samostojeći</option>
-						<option>Nazidni</option>
-						<option>Ukopni</option>
-					</select>
-				</div>
-				<p>type:</p>
-				<div class="">
-					<select class="" name="tip" value="{{ old('tip') }}">
-						<option>Razvodni</option>
-						<option>Upravljački</option>
-						<option>MCC</option>
-					</select>
-				</div>
+					<p>dimensions of cabinet (width x height x depth):</p>
+					<div class="">
+						<input class="" placeholder="[mm]" name="velicina" type="text" value="{{ old('velicina') }}" />
+						{!! ($errors->has('velicina') ? $errors->first('velicina', '<p class="text-danger">:message</p>') : '') !!}
+					</div>
+					<p>enclosure layout:</p>
+					<div class="">
+						<select class="" name="izvedba" value="{{ old('izvedba') }}">
+							<option>Samostojeći</option>
+							<option>Nazidni</option>
+							<option>Ukopni</option>
+						</select>
+					</div>
+					<p>type:</p>
+					<div class="">
+						<select class="" name="tip" value="{{ old('tip') }}">
+							<option>Razvodni</option>
+							<option>Upravljački</option>
+							<option>MCC</option>
+						</select>
+					</div>
 			</div>
 
 			<div id="info2" class="tabcontent">
-			<button type="button" class="tablinks Jbtn-back" onclick="openCity(event, 'info1')"><a href="#link2">back</a></button>
-			<button type="button" class="tablinks Jbtn-next" onclick="openCity(event, 'info3')"><a href="#link3">next</a></button>
+				<button type="button" class="tablinks Jbtn-back" onclick="openCity(event, 'info1')"><a href="#link2">back</a></button>
+				<button type="button" class="tablinks Jbtn-next" onclick="openCity(event, 'info3')"><a href="#link3">next</a></button>
 				<p>door design:</p>
 				<div class="{{ ($errors->has('model')) ? 'has-error' : '' }}">
 					<select class="" name="model" value="{{ old('model') }}">
@@ -189,10 +188,10 @@
 					{!! ($errors->has('prekidna_moc') ? $errors->first('prekidna_moc', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 			</div>
-			
+				
 			<div id="info3" class="tabcontent">
-			<button type="button" class="tablinks Jbtn-back" onclick="openCity(event, 'info2')"><a href="#link3">back</a></button>
-			<button type="button" class="tablinks Jbtn-next" onclick="openCity(event, 'finalizing')"><a href="#link4">next</a></button>
+				<button type="button" class="tablinks Jbtn-back" onclick="openCity(event, 'info2')"><a href="#link3">back</a></button>
+				<button type="button" class="tablinks Jbtn-next" onclick="openCity(event, 'finalizing')"><a href="#link4">next</a></button>
 				<p>protection system:</p>
 				<div class="">
 					<input class="protect" placeholder="Sustav zaštite" name="sustav_zastite" type="text" value="{{ old('sustav_zastite') }}"/>
@@ -229,7 +228,7 @@
 					<input type="radio" name="logo" value="NE" checked>No
 				</div>
 			</div>
-			
+				
 			<div id="finalizing" class="tabcontent">
 				
 				<button type="button" class="tablinks Jbtn-back" onclick="openCity(event, 'info3')"><a href="#link4">back</a></button>
@@ -240,43 +239,12 @@
 					<textarea rows="4" cols="50" name="napomena" type="text" value="{{ old('napomena') }}" ></textarea>
 				</div>
 			</div>
-			
-			
+
 		</form>
 	</div>
 </div>
 
-<script>
-	var slideIndex = 1;
-	showSlides(slideIndex);
 
-	function plusSlides(n) {
-		showSlides(slideIndex += n);
-	}
-
-	function currentSlide(n) {
-		showSlides(slideIndex = n);
-	}
-
-	function showSlides(n) {
-		var i;
-		var slides = document.getElementsByClassName("mySlides");
-		if (slides.length === 0) {
-			return
-		}
-		var dots = document.getElementsByClassName("dot");
-		if (n > slides.length) {slideIndex = 1}    
-		if (n < 1) {slideIndex = slides.length}
-		for (i = 0; i < slides.length; i++) {
-			slides[i].style.display = "none";  
-		}
-		for (i = 0; i < dots.length; i++) {
-			dots[i].className = dots[i].className.replace(" active", "");
-		}
-		slides[slideIndex-1].style.display = "block";  
-		dots[slideIndex-1].className += " active";
-	}
-</script>
 <script>
 	function openCity(evt, cityName) {
 		var i, tabcontent, tablinks;
@@ -307,4 +275,19 @@
 		this.className += " active";
 	  });
 	}
+</script>
+<!-- dodavanje dimenzije za kanale -->
+<script>
+	var initialText = $('.editable').val();
+	$('#test').change(function(){
+	var selected = $('option:selected', this).attr('class');
+	var optionText = $('.editable').text();
+	if(selected == "editable"){
+	  $('.editOption').show();
+	}else{
+	  $('.editOption').hide();
+	  
+	}
+	});
+	
 </script>

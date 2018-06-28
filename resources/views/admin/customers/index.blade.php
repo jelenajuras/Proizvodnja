@@ -3,14 +3,14 @@
 @section('title', 'Naručitelji')
 
 @section('content')
-	<div class='btn-toolbar pull-right'>
-		<a class="btn btn-default btn-md" href="{{ route('admin.customers.create') }}" id="button">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-			Dodaj naručitelja
-		</a>
+	<div class="addUser">
+		<button data-path="{{ route('admin.customers.create') }}" 
+			class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+			<i class="far fa-plus-square"></i>create client
+		</button>
 	</div>
 	
-	<h3>Naručitelji</h3>
+	<h3>Clients</h3>
 		<!--<input class="form-control" id="myInput" type="text" placeholder="Traži..">-->
 
     <div class="row">
@@ -35,10 +35,11 @@
 							<td>{{ $customer->grad }}</td>
 							<td>{{ $customer->oib }}</td>
                             <td id="td1">
-                                <a href="{{ route('admin.customers.edit', $customer->id) }}" class="btn btn-default btn-md" id="button">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                        Ispravi
-                                </a>
+                                <button data-path="{{ route('admin.customers.edit', $customer->id)}}" 
+									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+									<i class="far fa-edit"></i>edit 
+								</button>
+									
                                 <!--<a href="{{ route('admin.customers.destroy', $customer->id) }}" class="btn btn-danger btn-md action_confirm" data-method="delete" data-token="{{ csrf_token() }}" id="button">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         Obriši

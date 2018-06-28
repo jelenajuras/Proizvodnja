@@ -6,12 +6,12 @@
 
 @section('content')
 <section>
-	<div class='btn-toolbar pull-right'>
-		<a class="btn btn-default btn-md" href="{{ route('admin.preparations.index')  }}" id="button1">Status ormara</a>
-		<a class="btn btn-default btn-md" href="{{ route('admin.cabinets.create') }}" id="button1">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-			Dodaj novi ormar
-		</a>
+	<div class='addUser'>
+		<a class="load-ajax-modal" href="{{ route('admin.preparations.index')  }}" id="button1">status cabinets</a>
+		<button data-path="{{ route('admin.cabinets.create') }}" 
+			class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+			<i class="far fa-plus-square"></i>create cabinets
+		</button>
 	</div>
 
 	<h3>Ormari</h3> 
@@ -82,7 +82,7 @@
 						</td>
 						<td>{{ $cabinet->PrBroj . ' - ' . $cabinet->investitor . ' - ' . $cabinet->PrNaziv }}</td>
 						<td>{{ $cabinet->objekt }}</td>
-						<td>{{  date('Y.m.d', strtotime($cabinet->datum_isporuke)) }}</td>
+						<td>{{ date('Y.m.d', strtotime($cabinet->datum_isporuke)) }}</td>
 						<td>{{ $cabinet->proizvodjac }}</td>
 						<td>{{ $cabinet->naziv }}</td>
 						<td>{{ $cabinet->velicina }}</td>
@@ -97,10 +97,14 @@
 						<td>{{ $cabinet->ip_zastita }}</td>
 						
 						<td id="td1">
-							<a href="{{ route('admin.cabinets.edit', $cabinet->id) }}" class="btn btn-default btn-md" id="button">
-								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-									Ispravi
-							</a>
+							<button data-path="{{ route('admin.cabinets.edit', $cabinet->id)}}" 
+								class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+								<i class="far fa-edit"></i>edit 
+							</button>
+							
+							<!--<a href="{{ route('admin.cabinets.edit', $cabinet->id) }}" class="btn btn-default btn-md" id="button">
+								<i class="far fa-edit"></i>edit
+							</a>-->
 						</td>
 					</tr>
 					@endforeach
@@ -114,6 +118,7 @@
 						  });
 						});
 					</script>
+					
 					</tbody>
 				</table>
 				@else

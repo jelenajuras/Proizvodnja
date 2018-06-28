@@ -3,14 +3,14 @@
 @section('title', 'Priprema')
 
 @section('content')
-<div class="page-header">
+
 	<div class='btn-toolbar'>
 		<a class="btn btn-default btn-md" href="{{ url()->previous() }}">
 			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 			Go Back
 		</a>
 	</div>
-</div>
+
 <div class="">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
 		<div class="priprema">

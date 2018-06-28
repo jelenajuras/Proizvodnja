@@ -3,15 +3,15 @@
 @section('title', 'Users')
 
 @section('content')
-	<div class='btn-toolbar pull-right'>
-		<a class="btn btn-default btn-md" href="{{ route('users.create') }}" id="button">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-			Dodaj korisnika
-		</a>
+	<div class="addUser">
+			<!-- Trigger/Open The Modal -->
+			<button data-path="{{ route('users.create') }}" 
+			   class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+			    <i class="far fa-plus-square"></i>add user
+			</button>
 	</div>
 
-		<br/>
-        <h3>Korisnici</h3>
+        <h3>Users</h3>
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -53,10 +53,11 @@
 								@endif</td>
 
 								<td>
-									<a href="{{ route('users.edit', $user->id) }}" class="btn btn-default btn-md" id="button">
-										<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-										Ispravi
-									</a>
+									<button data-path="{{ route('users.edit', $user->id) }}" 
+									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+									<i class="far fa-edit"></i>edit 
+									</button>
+									
 									<!--<a href="{{ route('users.destroy', $user->id) }}" class="btn btn-danger btn-md action_confirm" data-method="delete" data-token="{{ csrf_token() }}" id="button">
 										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 										Obriši

@@ -72,13 +72,14 @@
 						@if (Sentinel::check() && Sentinel::inRole('administrator') )
 						<a href="{{ route('users.index') }}" class="w3-bar-item w3-button">Users</a>
 						<a href="{{ route('roles.index') }}" class="w3-bar-item w3-button">permissions</a>
+						<a href="{{ route('admin.customers.index') }}" class="w3-bar-item w3-button">clients</a>
 						<a href="{{ route('admin.projects.index') }}" class="w3-bar-item w3-button">projects</a>
 						@endif
 						<a href="{{ route('auth.logout') }}" class="w3-bar-item w3-button">log out</a>
 
 					</div>
 					<div class="modal fade" id="dynamic-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-						<div class="modal-dialog" style="width:644px; " >
+						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-body">
 								</div>
@@ -193,19 +194,18 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/datatables.min.js"></script>
-	<script>
-	</script>
+
 	<script>
 		$(document).ready(function() {
 			$('#table_id').DataTable({
 				language: {
 					paginate: {
-						previous: 'Prethodna',
-						next: 'Slijedeća',
+						previous: 'Previous',
+						next: 'Next',
 					},
-					"info": "Prikaz _START_ do _END_ od _TOTAL_ zapisa",
-					"search": "Filtriraj:",
-					"lengthMenu": "Prikaži _MENU_ zapisa"
+					"info": "Show _START_ to _END_ of _TOTAL_ entries",
+					"search": "Search:",
+					"lengthMenu": "Show _MENU_ entries"
 				},
 				"lengthMenu": [25, 50, 75, 100]
 				/* dom: 'Bfrtip',
@@ -227,55 +227,39 @@
 				},
 				 ],*/
 			});
-			/* get id from selected row*/
-			var table = $('#table_id').DataTable();
-
-			$('#table_id tbody').on('click', 'tr', function() {
-				var id = table.row(this).id();
-				$("#ormarId").val(id);
-				/* $.ajax({
-				  type: 'POST',
-				  url: 'index.php',
-				  data: ({name:"ormarId"}),
-				  cache: false,
-				  success: function(data){
-					$('#results').html(data);
-				  }
-				})
-				return false;*/
-			});
-			/* Row selection (multiple rows) 
-				var table = $('#table_id').DataTable();
-			 
-				$('#table_id tbody').on( 'click', 'tr', function () {
-					$(this).toggleClass('selected');
-				} );
-			 
-				$('#button').click( function () {
-					alert( table.rows('.selected').data().length +' row(s) selected' );
-				} );*/
-
+			
 		});
 	</script>
 	<script>
-	$.ajaxSetup({
+	  const fetching = `
+		<div style="display:flex;height:100%;justify-content:center;align-items:center;">
+		  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><path opacity=".2" fill="#FF6700" d="M20.201 5.169c-8.254 0-14.946 6.692-14.946 14.946 0 8.255 6.692 14.946 14.946 14.946s14.946-6.691 14.946-14.946c-.001-8.254-6.692-14.946-14.946-14.946zm0 26.58c-6.425 0-11.634-5.208-11.634-11.634 0-6.425 5.209-11.634 11.634-11.634 6.425 0 11.633 5.209 11.633 11.634 0 6.426-5.208 11.634-11.633 11.634z"/><path fill="#FF6700" d="M26.013 10.047l1.654-2.866a14.855 14.855 0 0 0-7.466-2.012v3.312c2.119 0 4.1.576 5.812 1.566z"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="0.5s" repeatCount="indefinite"/></path></svg>
+		</div>
+	  `
+
+	  $.ajaxSetup({
 		headers: {
-			'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+		  'X-CSRF-Token': $('meta[name="_token"]').attr('content')
 		}
-	});
-	
-	$('.load-ajax-modal').click(function(){
+	  });
+	 
+	  $('.load-ajax-modal').click(function() {
+		const dest = $('#dynamic-modal div.modal-body')
+		dest.html(fetching);
+	 
+		$.ajax({
+		  type: 'GET',
+		  url: $(this).data('path'),
 
-    $.ajax({
-        type : 'GET',
-        url : $(this).data('path'),
-
-        success: function(result) {
-            $('#dynamic-modal div.modal-body').html(result);
-        }
-    });
-	});
+		  success: function(result) {
+			setTimeout(() => {
+			  dest.hide().html(result).fadeIn();
+			}, 250);
+		  }
+		});
+	  });
 	</script>
+	
 	
 	<script>
 			$(document).ready(function(){
@@ -284,6 +268,8 @@
 				});
 			});
 	</script>
+
+	
 	@stack('script')
 </body>
 
