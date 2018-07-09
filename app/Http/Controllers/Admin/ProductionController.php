@@ -56,10 +56,10 @@ class ProductionController extends Controller
     public function store(Request $request)
     {
         $input = $request->except(['_token']);
-		$project = Cabinet::where('id',$input['ormar_id'])->first();
-		
-		$brProj = $project->projekt_id;
-
+		$ormar = Cabinet::where('id',$input['ormar_id'])->first();
+		$brProj = $ormar->projekt_id;
+		$tvornickiBr = Production::orderBy('tvornickiBr','desc')->first();
+		$tvornickiBr = $tvornickiBr->tvornickiBr+1;
 		
 		$data = array(
 			'ormar_id'  => $input['ormar_id'],
@@ -81,8 +81,12 @@ class ProductionController extends Controller
 			'rijeseno6'  => $input['rijeseno6'],
 			'rijeseno7'  => $input['rijeseno7'],
 			'rijeseno8'  => $input['rijeseno8'],
-			'rijeseno9'  => $input['rijeseno9']
+			'rijeseno9'  => $input['rijeseno9'],
 		);
+		
+		if($input['rijeseno9'] == 'DA'){
+			$data['tvornickiBr'] = $tvornickiBr;
+			}
 		
 		$production = new Production();
 		$production->saveProduction($data);
@@ -99,23 +103,14 @@ class ProductionController extends Controller
      * @param  \App\Production  $production
      * @return \Illuminate\Http\Response
      */
+	 
     public function show(Request $request, $id)
     {
-		$project = Project::join('customers','projects.investitor_id','=','customers.id')->select('projects.*','customers.naziv as investitor')->find($id);
-			
-		$roles = app()->make('sentinel.roles')->createModel()->where('slug','kupac')->first();
-		$contacts = Users::where('productionProject_id','=',$id)->get();
-		$cabinets = Cabinet::where('projekt_id','=',$project->id)->get();
-		$preparations = Preparation::get();
-		$purchases = Purchase::get();
-		$productions = Production::get();
 		
-
-	//	$datum_1 = new DateTime($cabinets);
-	//	$datum_1->modify('-10 days');
-	
-		
-		return view('admin.productions.show', ['project' => $project], ['roles' => $roles])->with('contacts',$contacts)->with('cabinets',$cabinets)->with('preparations',$preparations)->with('purchases',$purchases)->with('productions',$productions);
+		$production = Production::join('cabinets','productions.ormar_id','cabinets.id')->select('productions.*','cabinets.brOrmara')->find($id);
+		$cabinet = Cabinet::where('id','=',$production->ormar_id)->first();
+		//dd($preparation);
+		return view('admin.productions.show', ['production' => $production])->with('cabinet', $cabinet);
     }
 
     /**
@@ -143,11 +138,14 @@ class ProductionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $production = Production::find($id);
-		$input = $request;
-		$project = Cabinet::where('id',$input['ormar_id'])->first();
-		$brProj = $project->projekt_id;
-		//dd($brProj);
+        $input = $request->except(['_token']);
+		$production = Production::find($id);
+		
+		$ormar = Cabinet::where('id',$input['ormar_id'])->first();
+		$brProj = $ormar->projekt_id;
+		
+		$tvornickiBr = Production::orderBy('tvornickiBr','desc')->first();
+		$tvornickiBr = $tvornickiBr->tvornickiBr+1;
 
 		$data = array(
 			'ormar_id'  => $input['ormar_id'],
@@ -172,6 +170,11 @@ class ProductionController extends Controller
 			'rijeseno9'  => $input['rijeseno9']
 		);
 		
+		if($input['rijeseno9'] == 'DA' && !$production->tvornickiBr) {
+			$data['tvornickiBr'] = $tvornickiBr;
+		}
+		
+
 		$production->updateProduction($data);
 		
 		$message = session()->flash('success', 'Uspješno su ispravljeni podaci');

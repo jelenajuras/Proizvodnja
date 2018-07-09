@@ -9,7 +9,7 @@
 			<i class="far fa-plus-square"></i>create role
 		</button>
 	</div>
-	<h3>Dozvole</h3>
+	<h3>Permissions</h3>
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -29,7 +29,7 @@
                                 <td>{{ $role->name }}</td>
                                 <td>{{ $role->slug }}</td>
                                 <td>{{ implode(", ", array_keys($role->permissions)) }}</td>
-                                <td>
+                                <td id="td1">
                                     <button data-path="{{ route('roles.edit', $role->id) }}" 
 									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
 									<i class="far fa-edit"></i>edit 

@@ -103,9 +103,9 @@ class PreparationController extends Controller
     public function show($id)
     {
         $preparation = Preparation::join('cabinets','preparations.ormar_id','cabinets.id')->select('preparations.*','cabinets.brOrmara')->find($id);
-		
+		$cabinet = Cabinet::where('id','=',$preparation->ormar_id)->first();
 		//dd($preparation);
-		return view('admin.preparations.show', ['preparation' => $preparation]);
+		return view('admin.preparations.show', ['preparation' => $preparation])->with('cabinet', $cabinet);
     }
 
     /**

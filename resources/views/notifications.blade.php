@@ -1,3 +1,13 @@
+<style>
+.alert{
+	position: fixed;
+    top: 20px;
+    left: 20px;
+    color: white;
+    z-index: 1;
+}
+</style>
+
 <?php
 
     $vars = Session::all();
@@ -11,8 +21,8 @@
               $key = 'danger';
             }
                 ?>
-                <div class="row">
-                    <div class="alert alert-{{ $key }} alert-dismissable">
+                <div class="alert">
+                    <div class="">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <strong>{{ ucfirst($key) }}:</strong> {!! $value !!}
                     </div>

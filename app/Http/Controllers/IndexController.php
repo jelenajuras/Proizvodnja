@@ -27,8 +27,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-       // $posts = Post::orderBy('created_at', 'DESC')->paginate(12);
-		return view('index');//->with('posts', $posts); drugi parametar - drugi način slanja
+		return view('index');
     }
 	public function show($slug)
 	{

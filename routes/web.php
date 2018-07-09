@@ -90,15 +90,6 @@ Route::group(['prefix' => 'admin'], function () {
   'update'		=> 'admin.cabinets.update', 
   'destroy'		=> 'admin.cabinets.destroy'
   ]]);
-  Route::resource('production_projects', 'Admin\ProductionProjectController', ['names' => [
-  'index' 		=> 'admin.production_projects.index', 
-  'create' 		=> 'admin.production_projects.create', 
-  'store' 		=> 'admin.production_projects.store', 
-  'show' 		=> 'admin.production_projects.show', 
-  'edit' 		=> 'admin.production_projects.edit', 
-  'update'		=> 'admin.production_projects.update', 
-  'destroy'		=> 'admin.production_projects.destroy'
-  ]]);
   Route::resource('productions', 'Admin\ProductionController', ['names' => [
   'index' 		=> 'admin.productions.index', 
   'create' 		=> 'admin.productions.create', 
@@ -134,3 +125,11 @@ Route::get('/{slug}', ['as' => 'post.show', 'uses' => 'IndexController@show']);
 
 // Kontakt - kupac
 Route::post('customer/contact', ['as' => 'customer.contact', 'uses' => 'Admin\UserController@store']);
+
+// izjava
+Route::get('/izjava_pdf/{ormar_id}','Admin\CabinetController@izjava_pdf');
+Route::get('/izjava/{ormar_id}','Admin\CabinetController@izjava');
+
+// protokol
+Route::get('/protokol_pdf/{ormar_id}','Admin\CabinetController@protokol_pdf');
+Route::get('/protokol/{ormar_id}','Admin\CabinetController@protokol');

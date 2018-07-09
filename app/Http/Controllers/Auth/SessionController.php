@@ -59,10 +59,16 @@ class SessionController extends Controller
 		$projects = Project::join('customers','investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->get();
 		
         // Return the appropriate response
-        if(Sentinel::check())  {
-          return $result->dispatch(route('admin.projects.index'));
-        } 
-		return $result->dispatch(route('auth.login.form'));
+        if(Sentinel::check() && Sentinel::inRole('voditelj'))  {
+			return $result->dispatch(route('admin.dashboard'));
+        } elseif(Sentinel::check() && Sentinel::inRole('administrator')) {
+			return $result->dispatch(route('admin.dashboard'));
+		} elseif(Sentinel::check() && Sentinel::inRole('kupac')) {
+			return $result->dispatch(route('admin.dashboard'));
+		} else {
+			return $result->dispatch(route('auth.login.form'));
+		}
+		
 
     }
 

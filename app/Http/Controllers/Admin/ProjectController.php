@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
 use App\Models\Users;
+use App\Models\Cabinet;
+use App\Models\Preparation;
+use App\Models\Purchase;
+use App\Models\Production;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProjectRequest;
 use App\Http\Controllers\Controller;
 use Sentinel;
-
+use DateTime;
 
 class ProjectController extends Controller
 {
@@ -42,7 +46,8 @@ class ProjectController extends Controller
     public function create()
     {
 		$users = Users::join('role_users','users.id','=','role_users.user_id')->select('users.*','role_users.role_id')->where('role_users.role_id','<>','4')->orderBy('last_name','ASC')->get();
-        return view('admin.projects.create')->with('users',$users);
+		$roles = app()->make('sentinel.roles')->createModel()->all();
+        return view('admin.projects.create', ['roles' => $roles])->with('users',$users);
     }
 	
 	/**
@@ -88,14 +93,28 @@ class ProjectController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     
     public function show($id)
     {
         $project = Project::find($id);
 		
 		return view('admin.projects.show', ['project' => $project]);
+    }*/
+	
+	public function show(Request $request, $id)
+    {
+		$project = Project::join('customers','projects.investitor_id','=','customers.id')->select('projects.*','customers.naziv as investitor')->find($id);
+			
+		$roles = app()->make('sentinel.roles')->createModel()->where('slug','kupac')->first();
+		$contacts = Users::where('productionProject_id','=',$id)->get();
+		$cabinets = Cabinet::where('projekt_id','=',$project->id)->get();
+		$preparations = Preparation::get();
+		$purchases = Purchase::get();
+		$productions = Production::get();
+		
+		return view('admin.projects.show', ['project' => $project], ['roles' => $roles])->with('contacts',$contacts)->with('cabinets',$cabinets)->with('preparations',$preparations)->with('purchases',$purchases)->with('productions',$productions);
     }
-
+	
     /**
      * Show the form for editing the specified resource.
      *

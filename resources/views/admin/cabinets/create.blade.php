@@ -11,12 +11,10 @@
 			<button class="tablinks" onclick="openCity(event, 'finalizing')" style="border:none;background-color: #f3f5f7;"><span id="link5">5</span>Finalizing</button>
 		</div>
 		<form accept-charset="UTF-8" role="form" method="post" action="{{ route('admin.cabinets.store') }}">
-			<div class="">
-				<input class="" name="brOrmara" type="hidden" value="{{ $zadnjibr->brOrmara +1 }}"/>
-			</div>
+		
 			<div id="basic" class="tabcontent">
 				<button type="button" class="tablinks Jbtn-next" onclick="openCity(event, 'info1')"><a href="#link1">next</a></button>
-				
+
 				<p>project:</p>
 				<div class="{{ ($errors->has('projekt_id')) ? 'has-error' : '' }}">
 					<select class="" name="projekt_id" id="sel1" value="{{ old('projekt_id') }}" autofocus>

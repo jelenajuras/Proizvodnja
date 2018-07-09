@@ -13,20 +13,9 @@
 			<i class="far fa-plus-square"></i>create cabinets
 		</button>
 	</div>
-
-	<h3>Ormari</h3> 
+	<h3>Cabinets</h3> 
 
 	<br>
-	<!--<form accept-charset="UTF-8" role="form" method="post" action="{!! (isset($_POST['name']) ? route('admin.cabinets.edit', '<span id="results"></span>') : '') !!}">
-		<input type="text" id="ormarId" name="ormarId" value="">
-		<input name="_token" value="{{ csrf_token() }}" type="hidden">
-		<input class="btn-default btn pull-right" type="submit" value="Upiši">
-	</form> 
-
-	<p>ormarId <input type="text" id="ormarId" value=""></p>-->
-	<!--
-	<button id="button">Row count</button>-->
-
 	<div class="ProjIndex">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="table-responsive">
@@ -34,7 +23,7 @@
 				<table id="table_id" class="display">
 					<thead>
 						<tr class="center">
-							<!--<th></th>-->
+							<th class="not-export-column">Opcije</th>
 							<th>Broj</th>
 							<th>Broj projekta, Investitor, naziv projekta</th>
 							<th>Objekt</th>
@@ -51,7 +40,7 @@
 							<th>Prekidna moć</th>
 							<th>Sustav zaštite</th>
 							<th>IP zaštita ormara</th>
-							<th class="not-export-column">Opcije</th>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -60,23 +49,29 @@
 						<?php 
 							if($cabinet) {
 								$priprema = DB::table('preparations')->where('ormar_id',$cabinet->id)->value('id');
+								$tvornickiBr = DB::table('productions')->where('ormar_id',$cabinet->id)->value('tvornickiBr');
 							}
 						?>
-						<!--<td>
-							@if($priprema)
-								<a href="{{ route('admin.preparations.edit', $priprema  ) }}" class="btn btn-default btn-md" id="button">
-									Izmjeni pripremu
-								</a>
-							<!--	<a href="{{ route('admin.preparations.show', $priprema  ) }}" class="btn btn-default btn-md" id="button">
-									Status pripreme
-								</a>-->
-							<!--@else
-								<a href="{{ route('admin.preparations.create', ['id' => $cabinet->id] ) }}" class="btn btn-default btn-md" id="button">
-									Status pripreme
-								</a>
-
+						<td id="td1" class="sorting_1">
+							<button data-path="{{ route('admin.cabinets.edit', $cabinet->id)}}" 
+								class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal" >
+								<i class="far fa-edit"></i>edit 
+							</button>
+							@if($tvornickiBr)
+							<a href="{{action('Admin\CabinetController@izjava', $cabinet->id) }}" class="izjava">
+								<i class="far fa-file-alt"></i>Izjava
+							</a>
+							<a href="{{action('Admin\CabinetController@protokol', $cabinet->id) }}" class="izjava">
+								<i class="far fa-file-alt"></i>Protokol
+							</a>
 							@endif
-						</td>-->
+							<!--<a href="{{action('Admin\CabinetController@izjava_pdf', $cabinet->id) }}" class="load-ajax-modal">
+								Izjava PDF
+							</a>
+							<a href="{{action('Admin\CabinetController@protokol_pdf', $cabinet->id) }}" class="load-ajax-modal">
+								Protokol PDF
+							</a>-->
+						</td>
 						<td>
 							{{ $cabinet->brOrmara }}
 						</td>
@@ -95,17 +90,6 @@
 						<td>{{ $cabinet->prekidna_moc }}</td>
 						<td>{{ $cabinet->sustav_zastite }}</td>
 						<td>{{ $cabinet->ip_zastita }}</td>
-						
-						<td id="td1">
-							<button data-path="{{ route('admin.cabinets.edit', $cabinet->id)}}" 
-								class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
-								<i class="far fa-edit"></i>edit 
-							</button>
-							
-							<!--<a href="{{ route('admin.cabinets.edit', $cabinet->id) }}" class="btn btn-default btn-md" id="button">
-								<i class="far fa-edit"></i>edit
-							</a>-->
-						</td>
 					</tr>
 					@endforeach
 					<script>

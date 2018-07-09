@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.admin')
 
 @section('title', 'Duplico proizvodnja')
 <link rel="stylesheet" href="{{ URL::asset('css/home.css') }}"/>
@@ -9,7 +9,7 @@
 		@foreach($projects as $project)
 			@if($project->user_id == Sentinel::getUser()->id )
 				<div class="projekt">
-					<p><a href="{{ route('admin.productions.show', $project->id) }}">{{ $project->investitor }}<br>{{ $project->id . ' - ' . $project->naziv }}</a></p>
+					<p><a href="{{ route('admin.projects.show', $project->id) }}">{{ $project->investitor }}<br>{{ $project->id . ' - ' . $project->naziv }}</a></p>
 				</div>
 			@endif
 		@endforeach

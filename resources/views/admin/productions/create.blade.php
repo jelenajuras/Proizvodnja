@@ -187,6 +187,7 @@
 						</label></td>
 						<td class="comment"><input class="form-control" placeholder="Upiši komentar" name="koment_isp" type="text" value="{{ old('koment_isp') }}" /></td>
 					</tr>
+
 				</table>
 				<script type="text/javascript">
 					$('.date').datepicker({  

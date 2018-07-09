@@ -11,10 +11,10 @@ body {
 </style>
 	<body>
 
-		<h4>Unesen je novi ormar za projekt {{ $investitor . ', ' . $ormar->naziv }}</h4>
+		<h4>Unesen je novi ormar za projekt {{ $investitor . ', ' . $projekt->naziv }}</h4>
 		
 		<div>
-			<p>{{ $brOrmara . ' ' .  $naziv}}</p>
+			<p>{{ $brOrmaraProjekta . ' - '. $naziv}}</p>
 		</div>
 		<div>
 			<p>Datum isporuke:{{ $isporuka}} </p>

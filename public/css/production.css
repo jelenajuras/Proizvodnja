@@ -145,11 +145,12 @@ section h2 {
 	float:left;
 }
 
-.Jtab .icons button, .Jtab .icons i {
+.Jtab .icons button, .Jtab .icons a, .Jtab .icons i {
 	float:right;
-
 	background-color:white;
 	border:none;
+	font-size:11px;
+	padding:2px;
 }
 
 .ellipseR {
@@ -356,7 +357,7 @@ tr th {
 
 .Jprod-head span, .Jpurch-head span, .Jproduct-main span {
 	font-weight: 400;
-	display:inline-block;
+	
 }
 
 .Jprod-head > div:not(.tblHead), .Jpurch-head > div:not(.tblHead), .Jproduct-head > div:not(.tblHead){
@@ -412,7 +413,6 @@ fieldset {
 .Prep-tbl {
 	width:100%;
 	font-size: 11px;
-	
 	color: rgb(125,125,125);
 	font-family: "Montserrat";
 	font-weight: 600;
@@ -443,13 +443,24 @@ fieldset {
 	left:0;
 }
 
+.production .tblHead {
+	min-width: 647px;
+	padding-top: 20px;
+	float:left;
+	margin: 0;
+	position:absolute;
+	top: -35px;
+	left:0;
+}
+
+
 .Jpurch .tblHead {
 	min-width: 755px;
 	padding-top: 15px;
 	float:left;
-	margin: 0 -20px 0 -40px;
+	margin: 0;
 	position:absolute;
-	top: -35px;
+	top: -30px;
 	left:0;
 }
 
@@ -595,12 +606,12 @@ fieldset {
 .Jbtn-close {
 	position:absolute;
 	right:15px;
-	height:15px;
+	height:40px;
 	top:0;
 	color: rgb(125,125,125);
 	background-color: #f3f5f7;
 	border:none;
-	font-size:45px;
+	font-size:40px;
 	font-weight:100;
 	font-family: 'Montserrat', sans-serif;
 	z-index:1;
@@ -659,4 +670,107 @@ fieldset {
 
 .load-ajax-modal i {
 	padding-right:15px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.production {
+	width:100%;
+	padding:10px 15px 0 40px;
+	position:relative;
+}
+.production table{
+	width:100%;
+}
+
+.padding10 {
+	padding: 10px 0;
+}
+.padding10_t {
+	padding-top: 10px;
+}
+.prep-tbl2 tr td{
+	padding: 5px 0;
+}
+
+.production .prep-tbl2 tr td:first-child, .production .prep-tbl2 tr td:nth-child(3)  {
+	width: 40%;
+}
+
+.production .prep-tbl2 tr td:nth-child(2) {
+	width: 20%;
+	text-align:center;
+}
+
+.prep-tbl2 .circle{
+	position:relative;
+}
+
+.prep-tbl2 .checkmark1, .prep-tbl2 .checkmark2, .prep-tbl2 .checkmark3 {
+ 	position: absolute;
+    top: 50%;
+    left: 50%;
+	transform: translate(-50%, -50%);
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background-color: white;
+	border: 2px solid #ccc;
+	display: inline-block;
+}
+
+.prep-tbl2 .checkmark1{
+	background-color: #e94f4f;
+}
+
+.prep-tbl2 .checkmark2 {
+	background-color: #ff9500;
+}
+
+.prep-tbl2 .checkmark3 {
+	background-color: #1dc511;
+}
+
+.padding30_t {
+	padding-top: 30px;
+}
+
+.purchase{
+	width:100%;
+	padding:10px 15px 0 40px;
+	position:relative;
+}
+
+.purchase table{
+	width:100%;
+}
+
+.purchase .prep-tbl2 tr th {
+	text-align:center;
+}
+
+.purchase .prep-tbl2 tr th, .purchase .prep-tbl2 tr th{
+	width: 20%;
 }

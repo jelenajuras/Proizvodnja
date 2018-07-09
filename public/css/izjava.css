@@ -1,0 +1,224 @@
+*{
+	padding:0;
+	margin:0;
+}
+
+.clearfix {
+	overflow: auto;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.container {
+	width: 700px;
+	margin:auto;
+	font-family:Arial;
+	font-size:14px;
+	height: 1024px;
+	position:relative;
+
+}
+
+.Jhead {
+	width: 700px;
+	position:relative;
+}
+
+.Jhead img {
+	max-width: 700px;
+}
+
+.Jhead .adresa {
+	font-size:10px;
+	position:absolute;
+	right:0;
+	top:60px;
+	text-align:right;
+}
+
+.protokol h3 {
+	text-align:center;
+	margin:25px 0 25px 0;
+	font-size:18px;
+}
+
+.izjava h3 {
+	text-align:center;
+	margin:40px 0 40px 0;
+	font-size:18px;
+}
+
+.izjava table, .izjava p {
+	margin: 15px 0;
+}
+p{
+	margin:5px;
+}
+
+.font14 {
+	font-size:12px;
+}
+.font12 {
+	font-size:12px;
+}
+
+.font10 {
+	font-size:10px;
+}
+
+.font9 {
+	font-size:9px;
+}
+
+.font8 {
+	font-size:9px;
+}
+
+.ital  {
+	font-style: italic;
+	font-weight:normal;
+}
+
+.padd10_b {
+	padding-bottom:10px;
+}
+
+.padd10 {
+	padding:10px 0;
+}
+
+.marg15_t {
+	margin-top:15px;
+}
+
+.bold {
+	font-weight:bold;
+}
+
+.bott_bord {
+	border-bottom: 1px solid black;
+}
+
+.top_bord {
+	border-top: 1px solid black;
+}
+
+.righ_bord {
+	border-right: 1px solid black;
+}
+
+.Jmain table, tr, td{
+	font-size:14px;
+
+}
+
+.dupl tr td:first-child{
+	width:70px;
+}
+
+.Jmain .Jorm p{
+	padding: 7px 0;
+}
+
+.orm-spec tr td:first-child{
+	width:150px;
+}
+
+.orm-spec tr td{
+	padding: 7px 0;
+}
+
+.Jfoot {
+	padding-top: 20px;
+}
+
+.Jfoot .footer {
+	position:absolute;
+	bottom:0;
+	left:0;
+	text-align:center;
+	width:100%;
+	font-size:10px;
+}
+
+.potpis {
+	width:50%;
+	float:right;
+}
+
+.Jmain .inv, .Jmain .inv table tr {
+	width:100%;
+}
+
+.Jmain .inv table, .Jmain .inv table tr, .Jmain .tehn table, .Jmain .ispit table, .Jmain .rez table {
+	width:100%;
+	border-spacing: 0;
+	border: 1px solid black;
+}
+
+.Jmain .potp table {
+	width:100%;
+	border-spacing: 0;
+	text-align:center;
+	margin:20px 0;
+}
+
+.Jmain .tehn table tr td:first-child, .Jmain .rez table tr td:first-child{
+	width:30%;
+}
+
+.Jmain .tehn table tr td:nth-child(2){
+	width:70%;
+}
+
+.Jmain .inv table tr td {
+	width:50%;
+}
+
+.Jmain .inv .yell p, .Jmain .tehn .yell p, .Jmain .ispit .yell p, .Jmain .rez .yell p{
+	background-color:yellow;
+	border:1px solid yellow;
+	border-radius: 3px;
+	margin: 5px;
+	line-height:15px;
+	padding:5px;
+}
+
+.da_ne {
+	padding: 0 20px;	
+}
+
+.da_ne:first-child {
+	border: 1px solid black;
+	border-radius: 40%;
+	background-color:yellow;
+	padding: 0 10px;
+}
+
+.potp1 {
+	padding-top: 40px;
+}
+
+.footer p {
+	
+}
+
+@media print and (color) {
+   * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+   }
+   header, footer, aside, form, … {
+        display: none;
+    }
+	article {
+    width:100%!important;
+    padding:0!important;
+    margin:0!important;
+  }
+
+}

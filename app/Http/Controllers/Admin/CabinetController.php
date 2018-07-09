@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Cabinet;
 use App\Models\Users;
 use App\Models\Project;
+use App\Models\Customer;
 use App\Models\Preparation;
+use App\Models\Production;
 use App\Http\Requests\CabinetRequest;
 use App\Http\Controllers\Controller;
 use Sentinel;
 use Mail;
+use PDF;
 
 class CabinetController extends Controller
 {
@@ -34,10 +37,10 @@ class CabinetController extends Controller
 		$user = Sentinel::getUser()->id;
 		$cabinets = Cabinet::join('projects','cabinets.projekt_id','=','projects.id')->join('customers','projects.investitor_id','=','customers.id')->select('cabinets.*','projects.id as PrBroj','projects.investitor_id as kupac','projects.naziv as PrNaziv','projects.objekt','customers.naziv as investitor')->get();
 		$priprema = Preparation::get();
-		
+		$proizvodnja = Production::get();
 		//dd($priprema);
 
-		return view('admin.cabinets.index',['cabinets'=>$cabinets])->with('priprema',$priprema);
+		return view('admin.cabinets.index',['cabinets'=>$cabinets])->with('priprema',$priprema)->with('proizvodnja',$proizvodnja);
     }
 
     /**
@@ -49,13 +52,10 @@ class CabinetController extends Controller
     {
 		$user = Sentinel::getUser()->id;
 		$projects = Project::join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->where('user_id','=',$user)->orderBy('id','ASC')->get();
-		$zadnjibr = Cabinet::orderBy('brOrmara','DESC')->first();
-		
+		//$zadnjibr = Cabinet::orderBy('brOrmara','DESC')->first();
 		$users = Users::join('role_users','users.id','=','role_users.user_id')->select('users.*','role_users.role_id')->where('role_users.role_id','<>','4')->orderBy('last_name','ASC')->get();
-		
-		//dd($projects);
-		
-		return view('admin.cabinets.create')->with('projects',$projects)->with('zadnjibr',$zadnjibr)->with('users',$users);
+
+		return view('admin.cabinets.create')->with('projects',$projects)->with('users',$users);
     }
 
     /**
@@ -67,7 +67,8 @@ class CabinetController extends Controller
     public function store(CabinetRequest $request)
     {
 		$input = $request->except(['_token']);
-	
+		$brOrmaraProjekta = count(Cabinet::where('projekt_id',$input['projekt_id'])->get())+1;
+		
 		$proizvodjacOpr=array();
 		$i=0;
 		foreach($input as $key => $value){
@@ -77,9 +78,9 @@ class CabinetController extends Controller
 			}
 		}
 		$oprema = implode(", ", $proizvodjacOpr);
-
+		
 		$data = array(
-			'brOrmara'  => $input['brOrmara'],
+			'brOrmara'  => $brOrmaraProjekta,
 			'projektirao_id'  => $input['projektirao_id'],
 			'odobrio_id'  => $input['odobrio_id'],
 			'projekt_id'  => $input['projekt_id'],
@@ -115,21 +116,21 @@ class CabinetController extends Controller
 		//$ = Equipment::distinct()->get(['User_id']);
 		//$user_mail = Users::select('id','email')->where('id',$zaduzena_osoba->User_id)->value('email');
 		
-		/*$email_proba = 'jelena.juras@duplico.hr'; 
+		$email_proba = 'jelena.juras@duplico.hr'; 
 		$koordinacija = 'koordicija@duplico.hr';
 		$priprena = 'priprema@duplico.hr';
 		$isporuka = date("Y-m-d", strtotime($input['datum_isporuke']));
 		$investitor = $ormar->investitor;
 			Mail::queue(
 				'email.store_cabinet',
-				['ormar' => $ormar,'email_proba' => $email_proba,'brOrmara' => $input['brOrmara'], 'naziv' => $input['naziv'], 'isporuka' => $isporuka, 'investitor' => $investitor],
+				['ormar' => $ormar,'email_proba' => $email_proba,'brOrmaraProjekta' => $$brOrmaraProjekta, 'naziv' => $input['naziv'], 'isporuka' => $isporuka, 'investitor' => $investitor],
 				function ($message) use ($email_proba) {
 					$message->to($email_proba)
 							//->cc($koordinacija)
 							// ->cc($priprena)
 						->subject('Novi ormar proizvodnje');
 				}
-			);*/
+			);
 
 		$message = session()->flash('success', 'Ormar je uspješno spremljen.');
 		
@@ -186,8 +187,9 @@ class CabinetController extends Controller
     {
         $cabinet = Cabinet::find($id);
 		$input = $request->except(['_token']);
-		//dd($input);
 		
+		$brOrmaraProjekta = $cabinet->brOrmara;
+
 		$proizvodjacOpr=array();
 		$Ulkabela =array();
 		$i=0;
@@ -200,7 +202,6 @@ class CabinetController extends Controller
 		$oprema = implode(", ", $proizvodjacOpr);
 		
 		$data = array(
-			'brOrmara'  => $input['brOrmara'],
 			'projektirao_id'  => $input['projektirao_id'],
 			'odobrio_id'  => $input['odobrio_id'],
 			'projekt_id'  => $input['projekt_id'],
@@ -227,23 +228,23 @@ class CabinetController extends Controller
 		
 		$cabinet->updateCabinet($data);
 		
-		$ormar = Project::where('projects.id','=',$input['projekt_id'])->join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->first();
+		$projekt = Project::where('projects.id','=',$input['projekt_id'])->join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->first();
 
-		//dd($investitor);
 		
 		$email_proba = 'jelena.juras@duplico.hr'; 
 		$koordinacija = 'koordicija@duplico.hr';
 		$priprena = 'priprema@duplico.hr';
 		$isporuka = date("Y-m-d", strtotime($input['datum_isporuke']));
-		$investitor = $ormar->investitor;
+		$investitor = $projekt->investitor;
+		
 			Mail::queue(
-				'email.store_cabinet',
-				['ormar' => $ormar,'email_proba' => $email_proba,'brOrmara' => $input['brOrmara'], 'naziv' => $input['naziv'], 'isporuka' => $isporuka, 'investitor' => $investitor],
+				'email.update_cabinet',
+				['projekt' => $projekt,'email_proba' => $email_proba, 'brOrmaraProjekta' => $brOrmaraProjekta,'naziv' => $input['naziv'], 'isporuka' => $isporuka, 'investitor' => $investitor],
 				function ($message) use ($email_proba) {
 					$message->to($email_proba)
 							//->cc($koordinacija)
 							// ->cc($priprena)
-						->subject('Novi ormar proizvodnje');
+						->subject('Promjene ormara proizvodnje');
 				}
 			);
 			
@@ -262,4 +263,43 @@ class CabinetController extends Controller
     {
         //
     }
+	
+	public function izjava_pdf($id)
+	{
+	$cabinet = Cabinet::find($id);
+	$pdf = PDF::loadView('documents.izjava.show', compact('cabinet'));
+	return $pdf->download($cabinet->brOrmara . '_Izjava.pdf');
+	}
+	
+	public function izjava($id)
+	{
+	$cabinet = Cabinet::find($id);
+	$tvornickiBr = Production::where('ormar_id',$cabinet->id)->value('tvornickiBr');
+	
+	return view('documents.izjava.show', ['cabinet' => $cabinet])->with('tvornickiBr',$tvornickiBr);
+	}
+	
+	public function protokol($id)
+	{
+	$cabinet = Cabinet::find($id);
+	$project = Project::where('id', $cabinet->projekt_id)->first();
+	$customer = Customer::where('id', $project->investitor_id)->first();
+	$tvornickiBr = Production::where('ormar_id',$cabinet->id)->value('tvornickiBr');
+	
+	//$cabinetsProj = count($cabinet->where('projekt_id',$projekt)->get());
+	//dd($cabinetsProj);
+	
+	
+	return view('documents.protokol.show', ['cabinet' => $cabinet])->with('project',$project)->with('customer',$customer)->with('tvornickiBr',$tvornickiBr);
+	}
+	
+	public function protokol_pdf($id)
+	{
+	$cabinet = Cabinet::find($id);
+	$project = Project::where('id', $cabinet->projekt_id)->first();
+	$customer = Customer::where('id', $project->investitor_id)->first();
+	
+	$pdf = PDF::loadView('documents.protokol.show', compact('cabinet'), compact('customer'), compact('project'));
+	return $pdf->download($cabinet->brOrmara . 'protokol.pdf');
+	}
 }

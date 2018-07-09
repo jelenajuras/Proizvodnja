@@ -34,19 +34,16 @@
 		$( "#datepicker" ).datepicker();
 		} );
 		</script>
-		
-		
+
 		<link rel="stylesheet" href="{{ URL::asset('css/index.css') }}"/>
 </head>
 <body>
-	<div class=" col-12 col-md-12 col-lg-12">
+	<div class=" col-12 col-md-12 col-lg-12" >
 		@include('notifications')
 		@yield('content')
 	</div>
 	
-	
-	
-		
+
 	<script>
 	var slideIndex = 1;
 	showSlides(slideIndex);

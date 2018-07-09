@@ -110,7 +110,10 @@ class PurchaseController extends Controller
      */
     public function show($id)
     {
-        //
+        $purchase = Purchase::join('cabinets','purchases.ormar_id','cabinets.id')->select('purchases.*','cabinets.brOrmara')->find($id);
+		$cabinet = Cabinet::where('id','=',$purchase->ormar_id)->first();
+		//dd($preparation);
+		return view('admin.purchases.show', ['purchase' => $purchase])->with('cabinet', $cabinet);
     }
 
     /**

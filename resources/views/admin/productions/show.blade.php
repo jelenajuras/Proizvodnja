@@ -1,252 +1,166 @@
-@extends('layouts.admin')
-
-@section('title', 'Proizvodni projekti')
 <link rel="stylesheet" href="{{ URL::asset('css/production.css') }}"/>
 
-@section('content')
-	<section>
-		<div class="addEnc">
-			<!-- Trigger/Open The Modal -->
-			<button data-path="{{ route('admin.cabinets.create') }}" 
-			   class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
-			   <i class="far fa-plus-square"></i>add enclosure
-			</button>
+<div class="Jprod">
+<button type="button" class="Jbtn-close" data-dismiss="modal">&times</button>
+	<div class="Jprep">
+		<div class="Jprod-head prep_show clearfix">
+			<h3 class="">production status</h3>
 
-			<h2>{{ 'Naziv projekta: '}}<b>{{ $project->id . ' - ' . $project->naziv }}</b></h2>
+			<p>Project: <span>{{ $cabinet->projekt['naziv'] }}</span></p>
+			<p>Enclosure: <span>{{ $cabinet->brOrmara . ' ' . $cabinet->naziv }}</span></p>
+
 		</div>
 		
-		@foreach($cabinets as $cabinet)
-		<?php 
-			if($cabinet) {
-				$preparation = DB::table('preparations')->where('ormar_id',$cabinet->id)->first();
-				$purchase = DB::table('purchases')->where('ormar_id',$cabinet->id)->first();
-				$production = DB::table('productions')->where('ormar_id',$cabinet->id)->first();
-			}
-		?>
-		<div class="tab clearfix">
-			<div class="tab1">
-				<img src="{{ asset('img/cab.png') }}"/>
-			</div>
-			<div class="tab4">
-				<div class="tab2">
-					@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator') || Sentinel::inRole('voditelj') )
-							<div class="Jtab">
-								<div class="icons clearfix">
-									@if($preparation)
-										@if($preparation->rijeseno1 == 'DA' &&
-										$preparation->rijeseno2 == 'DA' &&
-										$preparation->rijeseno3 == 'DA' &&
-										$preparation->rijeseno4 == 'DA' &&
-										$preparation->rijeseno5 == 'DA' &&
-										$preparation->rijeseno6 == 'DA' &&
-										$preparation->rijeseno7 == 'DA')
-											<span class="ellipseG"></span>
-											<?php $status_Prep ='Complited'; ?>
-										@elseif($preparation->rijeseno1 == 'NE' &&
-										$preparation->rijeseno2 == 'NE' &&
-										$preparation->rijeseno3 == 'NE' &&
-										$preparation->rijeseno4 == 'NE' &&
-										$preparation->rijeseno5 == 'NE' &&
-										$preparation->rijeseno6 == 'NE' &&
-										$preparation->rijeseno7 == 'DA')
-											<span class="ellipseR"></span>
-											<?php $status_Prep ='Havent started'; ?>
-										@else
-											<span class="ellipseO"></span>
-											<?php $status_Prep ='In progress'; ?>
-										@endif
-									@else
-										<span class="ellipseR"></span>
-										<?php $status_Prep ='Havent started'; ?>
-									@endif
-									<a href="#"><i class="fas fa-info-circle"></i></a>
-									@if($preparation)
-										<button data-path="{{ route('admin.preparations.edit', $preparation->id) }}" 
-										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
-										<i class="far fa-edit"></i>
-										</button>
-									@else
-										<button data-path="{{ route('admin.preparations.create', ['id' => $cabinet->id]) }}" 
-										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
-										<i class="far fa-edit"></i>
-										</button>
-										
-									@endif
-								</div>
-								<p class="tablinks" onclick="openCity(event, 'preparation')" id="defaultOpen">
-									preparation<span>status: {{ $status_Prep }} </span>
-								</p>
-							</div>
-							<div class="Jtab">
-								<div class="icons clearfix">
-									@if($purchase)
-										@if($purchase->rijeseno1 == 'DA' &&
-										$purchase->rijeseno2 == 'DA' &&
-										$purchase->rijeseno3 == 'DA' &&
-										$purchase->rijeseno4 == 'DA' &&
-										$purchase->rijeseno5 == 'DA' &&
-										$purchase->rijeseno6 == 'DA' &&
-										$purchase->rijeseno7 == 'DA' && 
-										$purchase->rijeseno8 == 'DA')
-											<span class="ellipseG"></span>
-											<?php $status_Purch ='Complited'; ?>
-										@elseif($purchase->naruceno1 == 'NE' &&
-										$purchase->naruceno2 == 'NE' &&
-										$purchase->naruceno3 == 'NE' &&
-										$purchase->naruceno4 == 'NE' &&
-										$purchase->naruceno5 == 'NE' &&
-										$purchase->naruceno6 == 'NE' &&
-										$purchase->naruceno7 == 'NE' &&
-										$purchase->naruceno8 == 'NE' &&
-										$purchase->rijeseno1 == 'NE' &&
-										$purchase->rijeseno2 == 'NE' &&
-										$purchase->rijeseno3 == 'NE' &&
-										$purchase->rijeseno4 == 'NE' &&
-										$purchase->rijeseno5 == 'NE' &&
-										$purchase->rijeseno6 == 'NE' &&
-										$purchase->rijeseno7 == 'NE' && 
-										$purchase->rijeseno8 == 'NE')
-											<span class="ellipseR"></span>
-											<?php $status_Purch ='Havent started'; ?>	
-										@else
-											<span class="ellipseO"></span>
-											<?php $status_Purch ='In progress'; ?>
-										@endif
-									@else
-										<span class="ellipseR"></span>
-										<?php $status_Purch ='Havent started'; ?>
-									@endif
-									<a href="#"><i class="fas fa-info-circle"></i></a>
-									@if($purchase)
-										<button data-path="{{ route('admin.purchases.edit', $purchase->id) }}" 
-										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
-										<i class="far fa-edit"></i>
-										</button>
-									@else
-										<button data-path="{{ route('admin.purchases.create', ['id' => $cabinet->id]) }}" 
-										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
-										<i class="far fa-edit"></i>
-										</button>
-									@endif
-								</div>
-								<p class="tablinks" onclick="openCity(event, 'purchase')" id="defaultOpen">
-									purchase<span>status: {{ $status_Purch }} </span>
-								</p>
-							</div>
-							<div class="Jtab">
-								<div class="icons clearfix">
-									@if($production)
-										@if($production->rijeseno1 == 'DA' &&
-										$production->rijeseno2 == 'DA' &&
-										$production->rijeseno3 == 'DA' &&
-										$production->rijeseno4 == 'DA' &&
-										$production->rijeseno5 == 'DA' &&
-										$production->rijeseno6 == 'DA' &&
-										$production->rijeseno7 == 'DA' &&
-										$production->rijeseno8 == 'DA')
-											<span class="ellipseG"></span>
-											<?php $status_Prod  ='Complited'; ?>
-										@elseif($production->rijeseno1 == 'NE' &&
-										$production->rijeseno2 == 'NE' &&
-										$production->rijeseno3 == 'NE' &&
-										$production->rijeseno4 == 'NE' &&
-										$production->rijeseno5 == 'NE' &&
-										$production->rijeseno6 == 'NE' &&
-										$production->rijeseno7 == 'NE' &&
-										$production->rijeseno8 == 'NE')
-											<span class="ellipseR"></span>
-											<?php $status_Prod ='Havent started'; ?>
-										@else
-											<span class="ellipseO"></span>
-											<?php $status_Prod ='In progress'; ?>
-										@endif
-									@else
-										<span class="ellipseR"></span>
-										<?php $status_Prod ='Havent started'; ?>
-									@endif
-									<a href="#"><i class="fas fa-info-circle"></i></a>
-									@if($production)
-										<button data-path="{{ route('admin.productions.edit', $production->id) }}" 
-										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
-										<i class="far fa-edit"></i>
-										</button>
-									@else
-										<button data-path="{{ route('admin.productions.create', ['id' => $cabinet->id]) }}" 
-										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
-										<i class="far fa-edit"></i>
-										</button>
-									@endif
-								</div>
-								<p class="tablinks" onclick="openCity(event, 'production')" id="defaultOpen">
-									production<span>status: {{ $status_Prod }} </span>
-								</p>
-							</div>
-							<div class="Jtab">
-								<div class="icons clearfix">
-									<span class="ellipseO"></span>
-									<i class="fas fa-info-circle"></i>
-									<i class="far fa-edit"></i>
-									
-								</div>
-								<p class="tablinks" onclick="openCity(event, 'delivery')" id="defaultOpen">
-								delivery<span>status: In progress</span>
-								</p>
-							</div>
-						
-					@endif
-					@if (Sentinel::check() && Sentinel::inRole('kupac'))
-						<div class="Jtab">
-								<div class="icons clearfix">
-									<span class="ellipseO"></span>
-									<i class="fas fa-info-circle"></i>
-									<i class="far fa-edit"></i>
-								</div>
-								<p class="tablinks" onclick="openCity(event, 'delivery')" id="defaultOpen">
-								delivery<span>status: In progress</span>
-								</p>
-						</div>
-						
-					@endif
-					
-				</div>
-				<div class="Jcontent">
-					<div class="cont1">
-						<p>client: </p><span>{{ $project->investitor }}</span>
-						<p>enclosure title:</p><span> {{ $cabinet->naziv }}</span>
-						<p>enclosure number: </p><span>{{ $cabinet->brOrmara }}</span>
-						<p>contracted delivery date: </p><span>{{ $cabinet->	datum_isporuke }}</span>
-						<p>delivery date: </p><span>{{ $cabinet->datum_isporuke }}</span>
-					</div>
-					<div class="cont1">
-						<p>Project leader:</p><span> {{ $project->user['first_name'] . ' ' . $cabinet->user['last_name'] }}</span>
-						<p>Designed by: </p><span>{{ $cabinet->projektirao_user['first_name'] . ' ' . $cabinet->projektirao_user['last_name'] }}</span>
-						<p>approved by: </p><span>{{ $cabinet->odobrio_user['first_name'] . ' ' . $cabinet->odobrio_user['last_name'] }}</span>
-						<p>manufacturer of cabinets: </p><span>{{ $cabinet->proizvodjac }}</span>
-						<p>equipment manufacturer: </p><span>{{ $cabinet->proizvodjacOpr }}</span>
-					</div>
-					<div class="cont1">
-						<p>dimension: </p><span>{{ $cabinet->velicina}}</span>
-						<p>design: </p><span>{{ $cabinet->izvedba }}</span>
-						<p>type: </p><span>{{ $cabinet->tip }}</span>
-						<p>door design: </p><span>{{ $cabinet->model }}</span>
-						<p>material: </p><span>{{ $cabinet->materijal }}</span>
-					</div>
-					<div class="cont1">
-						<p>Rated voltage: </p><span>{{ $cabinet->napon }}</span>
-						<p>Rated current:  </p><span>{{ $cabinet->struja }}</span>
-						<p>Breaking power: </p><span>{{ $cabinet->prekidna_moc }}</span>
-						<p>Protection system: </p><span>{{ $cabinet->sustav_zastite }}</span>
-						<p>IP protection of cabinets: </p><span>{{ $cabinet->ip_zastita }}</span>
-					</div>
-					<div class="cont1">
-						<p>Cable entry: </p><span>{{ $cabinet->ulaz_kabela }}</span>
-						<p>Tags: </p><span>{{ $cabinet->oznake }}</span>
-						<p>Logo: </p><span>{{ $cabinet->logo }}</span>
-						<p>note: </p><span>{{ $cabinet->napomena }}</span>
-					</div>
-				</div>
-			</div>
+		<div class="production">
+			<table class="prep-tbl2">
+				<tr class="padding10_t">
+					<td colspan="2" class="padding10_t">Datum isporuke</td>
+					<?php 
+						$datum1 = new DateTime($production->datum);
+						$cabinet= DB::table('cabinets')->where('id',$production->ormar_id)->first();
+						$datum2 = new DateTime($cabinet->datum_isporuke);
+						$razlika = $datum1->diff($datum2);
+						?>
+						@if( strtotime($production->datum) < time() )
+							@if($production->rijeseno1 == 'DA' && $production->rijeseno2 == 'DA' && $production->rijeseno3 == 'DA' && $production->rijeseno4 == 'DA' && $production->rijeseno5 == 'DA' && $production->rijeseno6 == 'DA' && $production->rijeseno7 == 'DA' && $production->rijeseno8 == 'DA')
+								<td class="center padding10_t" style="color:green">{{ date('d.m.Y', strtotime($production->datum)) }}</td>
+							@else
+								<td class="center padding10_t" style="color:red">{{ date('d.m.Y', strtotime($production->datum)) }}</td>
+							@endif
+						@endif
+				</tr>
+				<tr>	
+					<td colspan="2" class="">Očekivana promjena roka</td>
+					<td class="center">{{ $razlika->format('%d') . ' dana' }}</td>
+				</tr>
+				<tr class="Prep-tbl" style="border-bottom:1px solid #ccc">
+					<th class="padding30_t">Item</th>
+					<th class="padding30_t">resolved</th>
+					<th class="padding30_t">comment</th>
+				</tr>
+				<tr>	
+					<td class="padding10_t">Obrada montažne ploče</td>
+					<td class="padding10_t circle">
+						@if($production->rijeseno1 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($production->rijeseno1 == 'in progress')
+							<span class="checkmark2"></span>
+						@elseif($production->rijeseno1 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td class="padding10_t">{{ $production->koment_mp }}</td>
+				</tr>
+				<tr>	
+					<td>Obrada ormara</td>
+					<td class="padding10_t circle">
+						@if($production->rijeseno2 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($production->rijeseno2 == 'in progress')
+							<span class="checkmark2"></span>
+						@elseif($production->rijeseno2 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $production->koment_orm }}</td>
+				</tr>
+				<tr>	
+					<td>Rezanje vodiča</td>
+					<td class="padding10_t circle">
+						@if($production->rijeseno3 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($production->rijeseno3 == 'in progress')
+							<span class="checkmark2"></span>
+						@elseif($production->rijeseno3 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $production->koment_vod }}</td>
+				</tr>
+				<tr>	
+					<td>Izrada oznaka</td>
+					<td class="padding10_t circle">
+						@if($production->rijeseno4 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($production->rijeseno4 == 'in progress')
+							<span class="checkmark2"></span>
+						@elseif($production->rijeseno4 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $production->koment_ozn }}</td>
+				</tr>
+				<tr>	
+					<td>Slaganje montažne ploče</td>
+					<td class="padding10_t circle">
+						@if($production->rijeseno5 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($production->rijeseno5 == 'in progress')
+							<span class="checkmark2"></span>
+						@elseif($production->rijeseno5 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $production->koment_slMp }}</td>
+				</tr>
+				<tr>	
+					<td>Označavanje montažne ploče</td>
+					<td class="padding10_t circle">
+						@if($production->rijeseno6 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($production->rijeseno6 == 'in progress')
+							<span class="checkmark2"></span>
+						@elseif($production->rijeseno6 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $production->koment_oznMp }}</td>
+				</tr>
+				<tr>	
+					<td>Ožičenje</td>
+					<td class="padding10_t circle">
+						@if($production->rijeseno7 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($production->rijeseno7 == 'in progress')
+							<span class="checkmark2"></span>
+						@elseif($production->rijeseno7 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $production->koment_ozic }}</td>
+				</tr>
+				<tr>	
+					<td>CE QR dokumentacija</td>
+					<td class="padding10_t circle">
+						@if($production->rijeseno8 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($production->rijeseno8 == 'in progress')
+							<span class="checkmark2"></span>
+						@elseif($production->rijeseno8 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $production->koment_dok }}</td>
+				</tr>
+				<tr>	
+					<td>Ispitivanje</td>
+					<td class="padding10_t circle">
+						@if($production->rijeseno9 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($production->rijeseno9 == 'in progress')
+							<span class="checkmark2"></span>
+						@elseif($production->rijeseno9 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $production->koment_isp }}</td>
+				</tr>
+				<tr>
+				<td></td>
+				</tr>
+			</table>
+			
 		</div>
-		@endforeach
-	</section>
-@stop
+	</div>
+	
+</div>

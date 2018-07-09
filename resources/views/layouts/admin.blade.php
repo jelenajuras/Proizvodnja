@@ -47,7 +47,7 @@
 </head>
 
 <body>
-	@if (Sentinel::check() && Sentinel::inRole('administrator') || Sentinel::inRole('proizvodnja') || Sentinel::inRole('voditelj'))
+	@if (Sentinel::check() && Sentinel::inRole('administrator') || Sentinel::inRole('proizvodnja') || Sentinel::inRole('voditelj') || Sentinel::inRole('kupac'))
 	<section class="side col-12 col-md-12 col-lg-3">
 		<header class="col-12">
 			<img src="//www.gravatar.com/avatar/{{ md5(Sentinel::getUser()->email) }}?d=mm" alt="{{ Sentinel::getUser()->email }}" class="img-circle">
@@ -59,6 +59,7 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdwn-hv w3-dropdown-content">
+						@if (Sentinel::check() && Sentinel::inRole('administrator') || Sentinel::inRole('proizvodnja') || Sentinel::inRole('voditelj'))
 						<button data-path="{{ route('admin.projects.create') }}" 
 						class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
 						add new project
@@ -76,7 +77,11 @@
 						<a href="{{ route('admin.projects.index') }}" class="w3-bar-item w3-button">projects</a>
 						@endif
 						<a href="{{ route('auth.logout') }}" class="w3-bar-item w3-button">log out</a>
-
+						@endif
+						@if (Sentinel::check() && Sentinel::inRole('kupac'))
+						<a href="" class="w3-bar-item w3-button">support</a>
+						<a href="{{ route('auth.logout') }}" class="w3-bar-item w3-button">log out</a>	
+						@endif
 					</div>
 					<div class="modal fade" id="dynamic-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 						<div class="modal-dialog">
@@ -109,7 +114,7 @@
 				<tr>
 					<td>
 						<div class="project col-12 col-md-12 col-lg-12">
-							<a href="{{ route('admin.productions.show', $project->id) }}">
+							<a href="{{ route('admin.projects.show', $project->id) }}">
 								<p>id:
 									<span>{{ $project->id }}</span>
 								</p>
@@ -129,7 +134,7 @@
 				<tr>
 					<td>
 						<div class="project col-12 col-md-12 col-lg-12">
-							<a href="{{ route('admin.productions.show', $project->id) }}">
+							<a href="{{ route('admin.projects.show', $project->id) }}">
 								<p>id:
 									<span>{{ $project->id }}</span>
 								</p>
@@ -164,11 +169,8 @@
 	@endif
 
 	<section class="Jmain col-12 col-md-12 col-lg-9">
-		<!--<span style="font-size:30px;cursor:pointer" id="open" onclick="openNav()">&#9776; </span>-->
 		@include('notifications') 
 		@yield('content')
-
-
 	</section>
 
 	<script>
@@ -268,7 +270,8 @@
 				});
 			});
 	</script>
-
+	
+	
 	
 	@stack('script')
 </body>

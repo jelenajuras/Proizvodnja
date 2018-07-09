@@ -52,7 +52,7 @@
 									<em>No Assigned Role</em>
 								@endif</td>
 
-								<td>
+								<td id="td1">
 									<button data-path="{{ route('users.edit', $user->id) }}" 
 									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
 									<i class="far fa-edit"></i>edit 

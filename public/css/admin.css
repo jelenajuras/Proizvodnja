@@ -300,10 +300,11 @@ li {
 
 .Jsearch i {
 	position:absolute;
-	right: -30px;
+	right:0;
 	top:0;
 	padding:5px;
 }
+
 .side .Jfilter {
 	width:25%;
 	float:left;
@@ -317,7 +318,7 @@ li {
 }
 
 .Jfilter i {
-	padding-left:13px;
+	padding-left:5px;
 	font-size: 0.56rem;
 }
 
@@ -343,6 +344,7 @@ li {
 .project a, .project span {
 	text-decoration:none;
 	display:block-inline;
+
 }
 
 .project a:hover {
@@ -368,7 +370,7 @@ li {
 .Jmain {
 	border-left: 2px solid #dbe1e5;
 	font-size:0.75rem;
-	padding: 20px;
+	padding: 0 20px;
 }
 
 .btn {
@@ -378,20 +380,25 @@ li {
 form {
 	height:100%;
 }
+
 #td1{
 	text-align:center;
 }
+
 .load-ajax-modal {
-	padding:7px 0;
+	padding:2px 0;
 	border-radius:3px;
 	border: 1px solid #ccc;
 	background-color:inherit;
-	width:100px;
+
 	text-transform: uppercase;
 	font-size: 0.56rem;
 	color: rgb(125,125,125);
 	font-weight: bold;
-	text-transform:uppercase;
+}
+
+#td1 .load-ajax-modal {
+	padding: 7px 15px;
 }
 
 .Jproj td input {
@@ -415,7 +422,7 @@ form {
 	border-radius: 3px;
 	background-color: #f2f2f2;
 	border: 1px solid #7d7d7d;
-	margin-left:10px;
+	margin:10px;
 	padding: 10px 0;
     text-align: center;
 }
@@ -436,4 +443,11 @@ form {
 
 .load-ajax-modal i {
 	padding-right:5px;
+}
+
+.ProjIndex a i {
+	padding-right:5px;
+}
+.ProjIndex button {
+	width:100%;
 }

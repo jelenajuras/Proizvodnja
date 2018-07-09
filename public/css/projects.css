@@ -94,7 +94,7 @@
 .Jmain-proj fieldset p {
 	text-transform:uppercase;
 	font-size: 11px;
-	line-height: 7px;
+	margin: 0;
 	color: rgb(125,125,125);
 	font-weight:600;
 	font-family: "Montserrat";
@@ -116,7 +116,6 @@
 	border-radius: 3px;
 	border: 2px solid #7d7d7d;
 	background-color: white;
-	
 	position:absolute;
 	bottom:10px;
 	right:15px;
@@ -199,4 +198,114 @@
 
 .Jmain-role fieldset p {
 	padding-top: 10px;
+}
+
+.Jside-proj button {
+	display:block;
+	text-align:left;
+    width: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 13px;
+	line-height: 35px;
+	padding:3px 20px;
+	font-family: "Roboto";
+
+}
+.Jside-proj p{
+	margin:10px 0 30px 0;
+	font-size: 14px;
+	line-height: 35px;
+	color: rgb(119,119,119);
+	font-family: "Montserrat";
+	font-weight: bold;
+	text-align: center;
+}
+
+/* Style the tab content */
+.tabcontent {
+    width: 100%;
+	height:100%;
+	float: left;
+    padding: 15px 0 0 30px;
+	position:relative;
+}
+
+.tabcontent select, .tabcontent .editOption {
+	width:100%;
+	height: 29px;
+	font-size: 12px;
+	padding:5px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	border: 1px solid #d5d5d5;
+	font-family: "Montserrat";
+	margin:0;
+}
+
+.tabcontent>p {
+	padding: 20px 0 0 0;
+	font-size:11px;
+	line-height: 7px;
+	text-align: left;
+	text-transform:uppercase;
+	font-family: "Montserrat";
+	font-weight:600;
+}
+
+.Jbtn-back, .Jbtn-next{
+	font-size: 13px;
+	line-height: 32px;
+	font-family: "Roboto";
+	font-weight: bold;
+	text-align: center;
+	position:absolute;
+	width: 111px;
+	text-decoration:underline;
+	background-color: white;
+	text-transform:uppercase;
+	padding: 2px 0;
+}
+
+.Jbtn-back{ 
+	right:135px;
+	bottom:25px;
+	border:none;
+}
+
+.Jbtn-next{
+	right:25px;
+	bottom:25px;
+	border: 2px solid #7d7d7d;
+	border-radius: 3px;
+}
+
+.Proj-submit {
+	width: 111px;
+	height: 32px;
+	border-radius: 3px;
+	border: 2px solid #7d7d7d;
+	background-color: white;
+	position:absolute;
+	bottom:25px;
+	right:15px;
+	text-transform:uppercase;
+	font-size: 13px;
+	line-height: 32px;
+	color: rgb(125,125,125);
+	font-family: "Roboto";
+	font-weight: bold;
+	text-align: center;
+}
+.dozvola input[type=checkbox] {
+	width: 20%;
+	height: 15px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	border: 1px solid #d5d5d5;
+	margin: 5px 0 0px 0;
+	padding:5px;
+	display:inline;
 }

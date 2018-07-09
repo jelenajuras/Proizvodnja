@@ -6,7 +6,7 @@
     <div class="Jpurch-head clearfix">
 		<h3 class="">Purchase status changes</h3>
 		<div>
-			<p>Project: <span></span></p>
+			<p>Project: <span>{{ $cabinet->projekt['naziv'] }}</span></p>
 			<p>Enclosure: <span>{{ $cabinet->brOrmara . ' ' . $cabinet->naziv }}</span> </p>
 		</div>
 		
@@ -138,19 +138,19 @@
 						<tr class="padd1">
 							<td>Bakar</td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="naruceno5" value="NE" {{ ($purchase->naruceno3 == 'NE') ? 'checked' : '' }} />
+								  <input type="radio" name="naruceno5" value="NE" {{ ($purchase->naruceno5 == 'NE') ? 'checked' : '' }} />
 								  <span class="checkmark1"></span>
 								</label></td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="naruceno5" value="DA" {{ ($purchase->naruceno3 == 'DA') ? 'checked' : '' }} />
+								  <input type="radio" name="naruceno5" value="DA" {{ ($purchase->naruceno5 == 'DA') ? 'checked' : '' }} />
 								  <span class="checkmark3"></span>
 								</label></td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="rijeseno5" value="NE" {{ ($purchase->rijeseno3 == 'NE') ? 'checked' : '' }} />
+								  <input type="radio" name="rijeseno5" value="NE" {{ ($purchase->rijeseno5 == 'NE') ? 'checked' : '' }} />
 								  <span class="checkmark1"></span>
 								</label></td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="rijeseno5" value="DA" {{ ($purchase->rijeseno3 == 'DA') ? 'checked' : '' }} >
+								  <input type="radio" name="rijeseno5" value="DA" {{ ($purchase->rijeseno5 == 'DA') ? 'checked' : '' }} >
 								  <span class="checkmark3"></span>
 								</label></td>
 							<td class="comment"><input name="datum5" class="date " type="text"  value = "{{ date('d-m-Y', strtotime( $purchase->datum5)) }}"></td>
@@ -159,19 +159,19 @@
 						<tr class="padd1">
 							<td>Redne stezaljke</td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="naruceno6" value="NE" {{ ($purchase->naruceno3 == 'NE') ? 'checked' : '' }} />
+								  <input type="radio" name="naruceno6" value="NE" {{ ($purchase->naruceno6 == 'NE') ? 'checked' : '' }} />
 								  <span class="checkmark1"></span>
 								</label></td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="naruceno6" value="DA" {{ ($purchase->naruceno3 == 'DA') ? 'checked' : '' }} />
+								  <input type="radio" name="naruceno6" value="DA" {{ ($purchase->naruceno6 == 'DA') ? 'checked' : '' }} />
 								  <span class="checkmark3"></span>
 								</label></td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="rijeseno6" value="NE" {{ ($purchase->rijeseno3 == 'NE') ? 'checked' : '' }} />
+								  <input type="radio" name="rijeseno6" value="NE" {{ ($purchase->rijeseno6 == 'NE') ? 'checked' : '' }} />
 								  <span class="checkmark1"></span>
 								</label></td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="rijeseno6" value="DA" {{ ($purchase->rijeseno3 == 'DA') ? 'checked' : '' }} >
+								  <input type="radio" name="rijeseno6" value="DA" {{ ($purchase->rijeseno6 == 'DA') ? 'checked' : '' }} >
 								  <span class="checkmark3"></span>
 								</label></td>
 							<td class="comment"><input name="datum6" class="date " type="text"  value = "{{ date('d-m-Y', strtotime( $purchase->datum6)) }}"></td>
@@ -180,19 +180,19 @@
 						<tr class="padd1">
 							<td>Sklopna oprema</td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="naruceno7" value="NE" {{ ($purchase->naruceno3 == 'NE') ? 'checked' : '' }} />
+								  <input type="radio" name="naruceno7" value="NE" {{ ($purchase->naruceno7 == 'NE') ? 'checked' : '' }} />
 								  <span class="checkmark1"></span>
 								</label></td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="naruceno7" value="DA" {{ ($purchase->naruceno3 == 'DA') ? 'checked' : '' }} />
+								  <input type="radio" name="naruceno7" value="DA" {{ ($purchase->naruceno7 == 'DA') ? 'checked' : '' }} />
 								  <span class="checkmark3"></span>
 								</label></td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="rijeseno7" value="NE" {{ ($purchase->rijeseno3 == 'NE') ? 'checked' : '' }} />
+								  <input type="radio" name="rijeseno7" value="NE" {{ ($purchase->rijeseno7 == 'NE') ? 'checked' : '' }} />
 								  <span class="checkmark1"></span>
 								</label></td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="rijeseno7" value="DA" {{ ($purchase->rijeseno3 == 'DA') ? 'checked' : '' }} >
+								  <input type="radio" name="rijeseno7" value="DA" {{ ($purchase->rijeseno7 == 'DA') ? 'checked' : '' }} >
 								  <span class="checkmark3"></span>
 								</label></td>
 							<td class="comment"><input name="datum7" class="date " type="text"  value = "{{ date('d-m-Y', strtotime( $purchase->datum7)) }}"></td>
@@ -201,19 +201,19 @@
 						<tr class="padd1">
 							<td>PLC</td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="naruceno8" value="NE" {{ ($purchase->naruceno3 == 'NE') ? 'checked' : '' }} />
+								  <input type="radio" name="naruceno8" value="NE" {{ ($purchase->naruceno8 == 'NE') ? 'checked' : '' }} />
 								  <span class="checkmark1"></span>
 								</label></td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="naruceno8" value="DA" {{ ($purchase->naruceno3 == 'DA') ? 'checked' : '' }} />
+								  <input type="radio" name="naruceno8" value="DA" {{ ($purchase->naruceno8 == 'DA') ? 'checked' : '' }} />
 								  <span class="checkmark3"></span>
 								</label></td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="rijeseno8" value="NE" {{ ($purchase->rijeseno3 == 'NE') ? 'checked' : '' }} />
+								  <input type="radio" name="rijeseno8" value="NE" {{ ($purchase->rijeseno8 == 'NE') ? 'checked' : '' }} />
 								  <span class="checkmark1"></span>
 								</label></td>
 							<td><label class="Jcontainer">
-								  <input type="radio" name="rijeseno8" value="DA" {{ ($purchase->rijeseno3 == 'DA') ? 'checked' : '' }} >
+								  <input type="radio" name="rijeseno8" value="DA" {{ ($purchase->rijeseno8 == 'DA') ? 'checked' : '' }} >
 								  <span class="checkmark3"></span>
 								</label></td>
 							<td class="comment"><input name="datum8" class="date " type="text"  value = "{{ date('d-m-Y', strtotime( $purchase->datum8)) }}"></td>

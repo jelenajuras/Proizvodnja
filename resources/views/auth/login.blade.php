@@ -4,7 +4,6 @@
 
 <link rel="stylesheet" href="{{ URL::asset('css/login.css') }}"/>
 
-
 @section('content')
 <div class="pos row">
     <div class="col-md-4 col-md-offset-4">

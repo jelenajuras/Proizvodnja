@@ -6,7 +6,7 @@
     <div class="Jpurch-head clearfix">
 		<h3 class="">Purchase status changes</h3>
 		<div>
-			<p>Project: <span></span></p>
+			<p>Project: <span>{{ $cabinet->projekt['naziv'] }}</span></p>
 			<p>Enclosure: <span>{{ $cabinet->brOrmara . ' ' . $cabinet->naziv }}</span> </p>
 		</div>
 		

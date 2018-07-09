@@ -12,7 +12,7 @@ class Production extends Model
 	*
 	* @var array
 	*/
-	protected $fillable = ['ormar_id','datum','koment_mp','koment_orm','koment_vod','koment_ozn','koment_slMp','koment_OznMp','koment_ozic','koment_dok','koment_isp','rijeseno1','rijeseno2','rijeseno3','rijeseno4','rijeseno5','rijeseno6','rijeseno7','rijeseno8','rijeseno9'];
+	protected $fillable = ['ormar_id','tvornickiBr','datum','koment_mp','koment_orm','koment_vod','koment_ozn','koment_slMp','koment_OznMp','koment_ozic','koment_dok','koment_isp','rijeseno1','rijeseno2','rijeseno3','rijeseno4','rijeseno5','rijeseno6','rijeseno7','rijeseno8','rijeseno9'];
 	
 	/*
 	* The Eloquent cabinet model names

@@ -1,32 +1,21 @@
-@extends('layouts.admin')
+<link rel="stylesheet" href="{{ URL::asset('css/production.css') }}"/>
 
-@section('title', 'Priprema')
+<div class="Jprod">
+<button type="button" class="Jbtn-close" data-dismiss="modal">&times</button>
+	<div class="Jprep">
+		<div class="Jprod-head clearfix">
+			<h3 class="">Preparation status</h3>
 
-@section('content')
+			<p>Project: <span>{{ $cabinet->projekt['naziv'] }}</span></p>
+			<p>Enclosure: <span>{{ $cabinet->brOrmara . ' ' . $cabinet->naziv }}</span></p>
 
-	<div class='btn-toolbar'>
-		<a class="btn btn-default btn-md" href="{{ url()->previous() }}">
-			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			Go Back
-		</a>
-	</div>
-
-<div class="">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
-		<div class="priprema">
-			<table>
-				<tr >	
-					<td>Broj ormara, naziv</td>
-					<td class="center">{{ $preparation->brOrmara }}</td>
-				</tr>
+		</div>
+		
+		<div class="production">
+			
+			<table class="prep-tbl2">
 				<tr>
-					<td>izmjena</td>
-					<td class="center">
-						<a href="{{ route('admin.preparations.edit', ['id' => $preparation->id] ) }}" >Izmjeni status pripreme</a>
-					</td>
-				</tr>
-				<tr class="proba">
-					<td>Rok</td>
+					<td colspan="2" class="padding10_t">Datum isporuke</td>
 					<?php 
 						$datum1 = new DateTime($preparation->datum);
 						$datum3 = $datum1->modify('+18 days');
@@ -36,54 +25,114 @@
 						?>
 						@if( strtotime($preparation->datum) < time() )
 							@if($preparation->rijeseno1 == 'DA' && $preparation->rijeseno2 == 'DA' && $preparation->rijeseno3 == 'DA' && $preparation->rijeseno4 == 'DA' && $preparation->rijeseno5 == 'DA' && $preparation->rijeseno6 == 'DA' && $preparation->rijeseno7 == 'DA')
-								<td class="center" style="color:green">{{ date('d.m.Y', strtotime($preparation->datum)) }}</td>
+								<td class="center padding10_t" style="color:green">{{ date('d.m.Y', strtotime($preparation->datum)) }}</td>
 							@else
-								<td class="center" style="color:red">{{ date('d.m.Y', strtotime($preparation->datum)) }}</td>
+								<td class="center " style="color:red">{{ date('d.m.Y', strtotime($preparation->datum)) }}</td>
 							@endif
 						@endif
 				</tr>
 				<tr>	
-					<td>Očekivana promjena roka</td>
+					<td colspan="2" class="">Očekivana promjena roka</td>
 					<td class="center">{{ $razlika->format('%d') . ' dana' }}</td>
 				</tr>
+				<tr class="Prep-tbl" style="border-bottom:1px solid #ccc">
+					<th class="padding30_t">Item</th>
+					<th class="padding30_t">resolved</th>
+					<th class="padding30_t">comment</th>
+				</tr>
 				<tr>	
-					<td>Napravljena 3p shema</td>
-					<td>{{ $preparation->rijeseno1 . ' ' . $preparation->koment_3p }}</td>
+					<td class="padding10_t">Napravljena 3p shema</td>
+					<td class="padding10_t circle">
+						@if($preparation->rijeseno1 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($preparation->rijeseno1 == 'PROG')
+							<span class="checkmark2"></span>
+						@elseif($preparation->rijeseno1 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td class="padding10_t">{{ $preparation->koment_3p }}</td>
 				</tr>
 				<tr>	
 					<td>Odobrena 3p shema</td>
-					<td>{{ $preparation->rijeseno2 . ' ' . $preparation->koment_3pOd }}</td>
+					<td class="padding10_t circle">
+						@if($preparation->rijeseno2 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($preparation->rijeseno2 == 'PROG')
+							<span class="checkmark2"></span>
+						@elseif($preparation->rijeseno2 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $preparation->koment_3pOd }}</td>
 				</tr>
 				<tr>	
 					<td>Pripremljena rezna lista za Komax</td>
-					<td>{{ $preparation->rijeseno3 . ' ' . $preparation->koment_komax }}</td>
+					<td class="padding10_t circle">
+						@if($preparation->rijeseno3 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($preparation->rijeseno3 == 'PROG')
+							<span class="checkmark2"></span>
+						@elseif($preparation->rijeseno3 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $preparation->koment_komax }}</td>
 				</tr>
 				<tr>	
 					<td>Pripremljena rezna lista za Perforex</td>
-					<td>{{ $preparation->rijeseno4 . ' ' . $preparation->koment_perf }}</td>
+					<td class="padding10_t circle">
+						@if($preparation->rijeseno4 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($preparation->rijeseno4 == 'PROG')
+							<span class="checkmark2"></span>
+						@elseif($preparation->rijeseno4 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $preparation->koment_perf }}</td>
 				</tr>
 				<tr>	
 					<td>Odobren 3D izgled ormara</td>
-					<td>{{ $preparation->rijeseno5 . ' ' . $preparation->koment_od }}</td>
+					<td class="padding10_t circle">
+						@if($preparation->rijeseno5 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($preparation->rijeseno5 == 'PROG')
+							<span class="checkmark2"></span>
+						@elseif($preparation->rijeseno5 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $preparation->koment_od }}</td>
 				</tr>
 				<tr>	
 					<td>Oznake eksportirane</td>
-					<td>{{ $preparation->rijeseno6 . ' ' . $preparation->koment_exp }}</td>
+					<td class="padding10_t circle">
+						@if($preparation->rijeseno6 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($preparation->rijeseno6 == 'PROG')
+							<span class="checkmark2"></span>
+						@elseif($preparation->rijeseno6 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $preparation->koment_exp }}</td>
 				</tr>
 				<tr>	
 					<td>Tehnička dokumentacija isprintana</td>
-					<td>{{ $preparation->rijeseno7 . ' ' . $preparation->koment_pr }}</td>
+					<td class="padding10_t circle">
+						@if($preparation->rijeseno7 == 'NE')
+							<span class="checkmark1"></span>
+						@elseif($preparation->rijeseno7 == 'PROG')
+							<span class="checkmark2"></span>
+						@elseif($preparation->rijeseno7 == 'DA')
+							<span class="checkmark3"></span>
+						@endif
+					</td>
+					<td>{{ $preparation->koment_pr }}</td>
 				</tr>
 
 			</table>
 		</div>
 	</div>
 </div>
-<div class="nabava">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
-		<div class="">
-			
-		</div>
-	</div>
-</div>
-@stop
