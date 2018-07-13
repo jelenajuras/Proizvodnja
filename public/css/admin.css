@@ -370,7 +370,7 @@ li {
 .Jmain {
 	border-left: 2px solid #dbe1e5;
 	font-size:0.75rem;
-	padding: 0 20px;
+	padding: 20px 20px;
 }
 
 .btn {
@@ -400,7 +400,9 @@ form {
 #td1 .load-ajax-modal {
 	padding: 7px 15px;
 }
-
+.ProjIndex #td1 .load-ajax-modal {
+	padding: 7px 0;
+}
 .Jproj td input {
 	border:none;
 	background-color:inherit;
@@ -443,6 +445,7 @@ form {
 
 .load-ajax-modal i {
 	padding-right:5px;
+	display: inline;
 }
 
 .ProjIndex a i {
@@ -451,3 +454,61 @@ form {
 .ProjIndex button {
 	width:100%;
 }
+
+
+
+/**************************  Tab - administrator, admin page ************************/
+/* Style the tab */
+.projects .tab {
+    width: 100%;
+	overflow: hidden;
+    border-bottom: 2px solid #dbe1e5;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.projects .tab button {
+    background-color: inherit;
+	color: rgb(125,125,125);
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 10px;
+	font-weight: 600;
+	width: 25%;
+	line-height: 30px;
+	text-transform:uppercase;
+	margin: 5px 0;
+	
+}
+
+/* Create an active/current tablink class */
+.tab button.active{
+     border-bottom: 4px solid #494949;
+}
+
+/* Style the tab content */
+.side .tabcontent {
+    display: none;
+    padding: 30px 12px;
+    border-top: none;
+	font-size: 12px;
+	color: rgb(125,125,125);
+	font-family: "Montserrat";
+}
+
+.side .tabcontent h5 {
+	font-size: 15px;
+	line-height: 13px;
+	font-weight: 600;
+}
+
+.tablinks a{
+	padding: 0;
+    line-height: 30px;
+    display: inline-block;
+    width: 100%;
+}
+

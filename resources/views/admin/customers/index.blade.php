@@ -10,7 +10,7 @@
 		</button>
 	</div>
 	
-	<h3>Clients</h3>
+	<h5>Duplico proizvodnja - Clients</h5>
 		<!--<input class="form-control" id="myInput" type="text" placeholder="Traži..">-->
 
     <div class="row">

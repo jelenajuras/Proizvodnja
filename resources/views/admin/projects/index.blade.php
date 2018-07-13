@@ -9,7 +9,7 @@
 		<i class="far fa-plus-square"></i>add project
 	</button>
 	</div>
-    <h3>Projects</h3>
+    <h5>Duplico proizvodnja - Projects</h5>
 
     <div class="Jproj row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

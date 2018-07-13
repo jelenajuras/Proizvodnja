@@ -19,7 +19,7 @@
 	<![endif]-->
 
 	<!-- Google fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,400,800,900|Roboto" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,400,600,800,900|Roboto" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker3.min.css" rel="stylesheet" defer>
 	{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
 	<!-- DataTables -->
@@ -30,7 +30,6 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 
 	<link rel="stylesheet" href="{{ URL::asset('css/admin.css') }}" />
-	
 	<link rel="stylesheet" href="{{ URL::asset('css/w3_dropdown.css') }}" />
 	
 
@@ -96,6 +95,7 @@
 			</div>
 
 		</header>
+		@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('voditelj') || Sentinel::inRole('kupac'))
 		<article class="col-12">
 			<div class="Jsearch">
 				<input id="myInput" type="text" placeholder="Search..">
@@ -106,51 +106,77 @@
 				<i class="fas fa-filter"></i>
 			</div>
 		</article>
+		@endif
 		<article class="projects col-12">
 			<table id="myTable" style="font-size:0.75rem">
 				@foreach(DB::table('projects')->join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->get() as $project)
 				
-				@if($project->id == Sentinel::getUser()->productionProject_id || $project->user_id == Sentinel::getUser()->id)
-				<tr>
-					<td>
-						<div class="project col-12 col-md-12 col-lg-12">
-							<a href="{{ route('admin.projects.show', $project->id) }}">
-								<p>id:
-									<span>{{ $project->id }}</span>
-								</p>
-								<p>name:
-									<span>{{ $project->naziv}}</span>
-								</p>
-								<p>client:
-									<span>{{ $project->investitor}}</span>
-								</p>
-							</a>
-						</div>
-					</td>
-				</tr>
-				@endif
+					@if($project->id == Sentinel::getUser()->productionProject_id || $project->user_id == Sentinel::getUser()->id)
+					<tr>
+						<td>
+							<div class="project col-12 col-md-12 col-lg-12">
+								<a href="{{ route('admin.projects.show', $project->id) }}">
+									<p>id:
+										<span>{{ $project->id }}</span>
+									</p>
+									<p>name:
+										<span>{{ $project->naziv}}</span>
+									</p>
+									<p>client:
+										<span>{{ $project->investitor}}</span>
+									</p>
+								</a>
+							</div>
+						</td>
+					</tr>
+					@endif
 				
-				@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator') )
-				<tr>
-					<td>
-						<div class="project col-12 col-md-12 col-lg-12">
-							<a href="{{ route('admin.projects.show', $project->id) }}">
-								<p>id:
-									<span>{{ $project->id }}</span>
-								</p>
-								<p>name:
-									<span>{{ $project->naziv}}</span>
-								</p>
-								<p>client:
-									<span>{{ $project->investitor}}</span>
-								</p>
-							</a>
-						</div>
-					</td>
-				</tr>
-				@endif
-				
+					@if (Sentinel::check() && Sentinel::inRole('proizvodnja'))
+					<tr>
+						<td>
+							<div class="project col-12 col-md-12 col-lg-12">
+								<a href="{{ route('admin.projects.show', $project->id) }}">
+									<p>id:
+										<span>{{ $project->id }}</span>
+									</p>
+									<p>name:
+										<span>{{ $project->naziv}}</span>
+									</p>
+									<p>client:
+										<span>{{ $project->investitor}}</span>
+									</p>
+								</a>
+							</div>
+						</td>
+					</tr>
+					@endif
+					
 				@endforeach
+				@if (Sentinel::check() && Sentinel::inRole('administrator'))
+					<div class="tab">
+					  <button class="tablinks" onclick="openTab(event, 'projects')" type="reset" ><a href="{{ route('admin.projects.index') }}" >projects</a></button>
+					  <button class="tablinks" onclick="openTab(event, 'clients')" type="button"><a href="{{ route('admin.customers.index') }}" >clients</a></button>
+					  <button class="tablinks" onclick="openTab(event, 'users')" type="button"><a href="{{ route('users.index') }}" >Users</a></button>
+					  <button class="tablinks" onclick="openTab(event, 'permitions')"><a href="{{ route('roles.index') }}" >permissions</a></button>
+					</div>	
+				
+				
+					<div id="projects" class="tabcontent">
+					projekti
+					</div>
+
+					<div id="clients" class="tabcontent">
+					 klijenti
+
+					</div>
+
+					<div id="users" class="tabcontent">
+					  korisnici
+					</div>
+					<div id="permitions" class="tabcontent">
+					  dozvole
+					</div>
+					@endif
 				<!-- Search -->
 				<script>
 					$(document).ready(function() {
@@ -167,10 +193,12 @@
 	</section>
 
 	@endif
-
+	
 	<section class="Jmain col-12 col-md-12 col-lg-9">
+
 		@include('notifications') 
 		@yield('content')
+		
 	</section>
 
 	<script>
@@ -261,8 +289,23 @@
 		});
 	  });
 	</script>
-	
-	
+	<!-- Tab -->
+	<script>
+	function openTab(evt, tabName) {
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+		document.getElementById(tabName).style.display = "block";
+		evt.currentTarget.className += " active";
+	}
+	</script>
+
 	<script>
 			$(document).ready(function(){
 				$(".OrmProiz").click(function(){

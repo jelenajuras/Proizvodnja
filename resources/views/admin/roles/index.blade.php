@@ -9,7 +9,7 @@
 			<i class="far fa-plus-square"></i>create role
 		</button>
 	</div>
-	<h3>Permissions</h3>
+	<h5>Duplico proizvodnja - Permitions</h5>
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
