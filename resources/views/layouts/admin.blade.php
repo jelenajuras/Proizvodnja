@@ -39,7 +39,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
-
+	
 	<!-- Restfulizer.js - A tool for simulating put,patch and delete requests -->
 	<script src="{{ asset('js/restfulizer.js') }}"></script>
 
@@ -50,7 +50,7 @@
 	<section class="side col-12 col-md-12 col-lg-3">
 		<header class="col-12">
 			<img src="//www.gravatar.com/avatar/{{ md5(Sentinel::getUser()->email) }}?d=mm" alt="{{ Sentinel::getUser()->email }}" class="img-circle">
-			<h2>{{ Sentinel::getUser()->first_name }}</h2>
+			<h2>{{ Sentinel::getUser()->first_name . ' ' . Sentinel::getUser()->last_name}}</h2>
 			<p>Duplico</p>
 			<div class="dropdwn">
 				<div class="w3-dropdown-hover">
@@ -86,6 +86,7 @@
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-body">
+								
 								</div>
 							
 							</div>
@@ -108,10 +109,36 @@
 		</article>
 		@endif
 		<article class="projects col-12">
+		<div>
 			<table id="myTable" style="font-size:0.75rem">
-				@foreach(DB::table('projects')->join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->get() as $project)
+			@if (Sentinel::check() && Sentinel::inRole('administrator'))
+				<div class="tab">
+				  <button class="tablinks" onclick="openTab(event, 'projects')" type="reset" ><a href="{{ route('admin.projects.index') }}" >projects</a></button>
+				  <button class="tablinks" onclick="openTab(event, 'clients')" type="button"><a href="{{ route('admin.customers.index') }}" >clients</a></button>
+				  <button class="tablinks" onclick="openTab(event, 'users')" type="button"><a href="{{ route('users.index') }}" >Users</a></button>
+				  <button class="tablinks" onclick="openTab(event, 'permitions')"><a href="{{ route('roles.index') }}" >permissions</a></button>
+				</div>	
+
+				<div id="projects" class="tabcontent">
 				
-					@if($project->id == Sentinel::getUser()->productionProject_id || $project->user_id == Sentinel::getUser()->id)
+				</div>
+
+				<div id="clients" class="tabcontent">
+				 
+
+				</div>
+
+				<div id="users" class="tabcontent">
+				  
+				</div>
+				<div id="permitions" class="tabcontent">
+				  
+				</div>
+			@endif
+			@foreach(DB::table('projects')->join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->get() as $project)
+			
+				@if($project->id == Sentinel::getUser()->productionProject_id || $project->user_id == Sentinel::getUser()->id)
+				
 					<tr>
 						<td>
 							<div class="project col-12 col-md-12 col-lg-12">
@@ -131,7 +158,7 @@
 					</tr>
 					@endif
 				
-					@if (Sentinel::check() && Sentinel::inRole('proizvodnja'))
+					@if (Sentinel::check() && Sentinel::inRole('proizvodnja')|| Sentinel::inRole('administrator'))
 					<tr>
 						<td>
 							<div class="project col-12 col-md-12 col-lg-12">
@@ -149,47 +176,40 @@
 							</div>
 						</td>
 					</tr>
-					@endif
-					
-				@endforeach
-				@if (Sentinel::check() && Sentinel::inRole('administrator'))
-					<div class="tab">
-					  <button class="tablinks" onclick="openTab(event, 'projects')" type="reset" ><a href="{{ route('admin.projects.index') }}" >projects</a></button>
-					  <button class="tablinks" onclick="openTab(event, 'clients')" type="button"><a href="{{ route('admin.customers.index') }}" >clients</a></button>
-					  <button class="tablinks" onclick="openTab(event, 'users')" type="button"><a href="{{ route('users.index') }}" >Users</a></button>
-					  <button class="tablinks" onclick="openTab(event, 'permitions')"><a href="{{ route('roles.index') }}" >permissions</a></button>
-					</div>	
+				@endif
 				
-				
-					<div id="projects" class="tabcontent">
-					projekti
-					</div>
+			@endforeach
+			<!--Slider 
+			<div class="slidecontainer">
+				<input type="range" min="1" max="100" value="1" class="slider" id="myRange">
+			</div>
+			 
+			<script>
+				var slider = document.getElementById("myRange");
+				var output = document.getElementById("demo");
+				output.innerHTML = slider.value;
 
-					<div id="clients" class="tabcontent">
-					 klijenti
-
-					</div>
-
-					<div id="users" class="tabcontent">
-					  korisnici
-					</div>
-					<div id="permitions" class="tabcontent">
-					  dozvole
-					</div>
-					@endif
-				<!-- Search -->
-				<script>
-					$(document).ready(function() {
-						$("#myInput").on("keyup", function() {
-							var value = $(this).val().toLowerCase();
-							$("#myTable tr").filter(function() {
-								$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-							});
+				slider.oninput = function() {
+				  output.innerHTML = this.value;
+				}
+			</script>-->
+			</table>
+			
+			</div>
+			<!-- Search -->
+			<script>
+				$(document).ready(function() {
+					$("#myInput").on("keyup", function() {
+						var value = $(this).val().toLowerCase();
+						$("#myTable tr").filter(function() {
+							$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 						});
 					});
-				</script>
-			</table>
+				});
+			</script>
+			
 		</article>
+		
 	</section>
 
 	@endif
@@ -234,7 +254,7 @@
 						next: 'Next',
 					},
 					"info": "Show _START_ to _END_ of _TOTAL_ entries",
-					"search": "Search:",
+					"search": '<i class="fas fa-search"></i>',
 					"lengthMenu": "Show _MENU_ entries"
 				},
 				"lengthMenu": [25, 50, 75, 100]
@@ -313,7 +333,6 @@
 				});
 			});
 	</script>
-	
 	
 	
 	@stack('script')

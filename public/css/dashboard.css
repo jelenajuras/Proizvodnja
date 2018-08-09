@@ -1,9 +1,33 @@
 /* CSS dashboard */ 
 
-.dashb {
-	padding:20px;
-	height:100%;
+.dashb{
+	margin:0;
+	padding:0;
+}
+.projekt1 {
+	margin:20px 0;
+	padding:30px;
+	background-color:white;
+	border: 1px solid white;
+	border-radius: 5px;
+	color: rgb(73,73,73);	
 }
 
+.projekt1 p:first-child {
+	font-weight:600;
+	font-size:0.81rem;
+}
 
+.projekt1 p:nth-child(2){
+	padding-left:20px;
+	border-bottom:1px solid #ccc;
+}
 
+.orm {
+	padding-left:50px;
+}
+
+.projekt1 a:hover{
+	text-decoration:none;
+	color: rgb(125,125,125);
+}

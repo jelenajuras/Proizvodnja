@@ -11,22 +11,22 @@
 			<fieldset>
 				<text>Naziv firme</text>
 				<div class=" {{ ($errors->has('naziv')) ? 'has-error' : '' }}">
-					<input class="form-control" name="naziv" type="text" value="{{ $customer->naziv}}"/>
+					<input class="form-control" name="naziv" type="text" value="{{ $customer->naziv}}" required/>
 					{!! ($errors->has('naziv') ? $errors->first('naziv', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<text>Adresa</text>
 				<div class=" {{ ($errors->has('adresa')) ? 'has-error' : '' }}">
-					<input class="form-control" name="adresa" type="text" value="{{ $customer->adresa }} "/>
+					<input class="form-control" name="adresa" type="text" value="{{ $customer->adresa }}" required/>
 					{!! ($errors->has('adresa') ? $errors->first('adresa', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<text>Grad</text>
 				<div class=" {{ ($errors->has('grad')) ? 'has-error' : '' }}">
-					<input class="form-control" name="grad" type="text" value="{{ $customer->grad }} "/>
+					<input class="form-control" name="grad" type="text" value="{{ $customer->grad }}" required/>
 					{!! ($errors->has('grad') ? $errors->first('grad', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<text>OIB</text>
 				<div class=" {{ ($errors->has('oib')) ? 'has-error' : '' }}">
-					<input class="form-control" name="oib" type="text" value="{{ $customer->oib }} "/>
+					<input class="form-control" name="oib" type="text" value="{{ $customer->oib }} " required/>
 					{!! ($errors->has('oib') ? $errors->first('oib', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				{{ csrf_field() }}

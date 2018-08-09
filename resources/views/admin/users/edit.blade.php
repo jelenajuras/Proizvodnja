@@ -9,22 +9,22 @@
 		<form accept-charset="UTF-8" role="form" method="post" action="{{ route('users.update', $user->id) }}">
 		<fieldset>
 			<div class=" {{ ($errors->has('first_name')) ? 'has-error' : '' }}">
-				<input class="form-control" placeholder="Ime" name="first_name" type="text" value="{{ $user->first_name }}" />
+				<input class="form-control" placeholder="Ime" name="first_name" type="text" value="{{ $user->first_name }}" required/>
 				{!! ($errors->has('first_name') ? $errors->first('first_name', '<p class="text-danger">:message</p>') : '') !!}
 			</div>
 			<div class=" {{ ($errors->has('last_name')) ? 'has-error' : '' }}">
-				<input class="form-control" placeholder="Prezime" name="last_name" type="text" value="{{ $user->last_name }}" />
+				<input class="form-control" placeholder="Prezime" name="last_name" type="text" value="{{ $user->last_name }}" required/>
 				{!! ($errors->has('last_name') ? $errors->first('last_name', '<p class="text-danger">:message</p>') : '') !!}
 			</div>
 			<div class=" {{ ($errors->has('email')) ? 'has-error' : '' }}">
-				<input class="form-control" placeholder="E-mail" name="email" type="text" value="{{ $user->email }}">
+				<input class="form-control" placeholder="E-mail" name="email" type="text" value="{{ $user->email }}" required>
 				{!! ($errors->has('email') ? $errors->first('email', '<p class="text-danger">:message</p>') : '') !!}
 			</div>
 			<div class="">
-				<input class="form-control" placeholder="Broj telefona" name="telefon" type="text" value="{{ $user->telefon }}">
+				<input class="form-control" placeholder="Broj telefona" name="telefon" type="text" value="{{ $user->telefon }}" required>
 			</div>
 			<div class="{{ ($errors->has('password')) ? 'has-error' : '' }}">
-				<input class="form-control" placeholder="Password" name="password" type="Promjeni password" value="">
+				<input class="form-control" placeholder="Password" name="password" type="Promjeni password" value="" >
 				{!! ($errors->has('password') ? $errors->first('password', '<p class="text-danger">:message</p>') : '') !!}
 			</div>
 			<div class="{{ ($errors->has('password_confirmation')) ? 'has-error' : '' }}">

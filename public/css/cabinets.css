@@ -108,7 +108,7 @@
     width: 65%;
 	height:100%;
 	float: left;
-    padding: 15px 0 0 30px;
+    padding: 5px 0 0 30px;
 	position:relative;
 }
 
@@ -132,6 +132,12 @@
 	text-transform:uppercase;
 	font-family: "Montserrat";
 	font-weight:600;
+}
+
+.tabcontent>span {
+	font-family: "Montserrat";
+	font-weight:600;
+	font-size:11px;
 }
 
 .Equip div{
@@ -313,7 +319,7 @@ textarea{
 }
 
 .Jbtn-back, .Jbtn-next{
-	font-size: 13px;
+	font-size: 11px;
 	line-height: 25px;
 	font-family: "Roboto";
 	font-weight: bold;
@@ -392,4 +398,31 @@ textarea{
 }
 .sorting_1 .load-ajax-modal{
 	width:100%;
+}
+
+@media only screen and (max-width: 411px) {
+	.tabCab{
+		width:100%;
+		margin-left: 0;
+	}
+	.tabCab1{
+		display:none;
+	}
+	.side .tabcontent {
+		width:100%;
+		padding: 15px 30px;
+	}
+}
+.Jmain header{
+	width:100%;
+}
+h3, .addUser{
+	display: inline-block;
+}
+.Jmain h3 {
+	float:left;
+	padding-left: 15px;
+}
+.addUser {
+	float:right;
 }

@@ -26,7 +26,7 @@
 		<span class="dot" onclick="currentSlide(1)"></span> 
 		<span class="dot" onclick="currentSlide(2)"></span> 
 		<span class="dot" onclick="currentSlide(3)"></span> 
-		<a class="next" onclick="plusSlides(1)" style="size:26px;">&#8594;</a>
+		<a class="next" onclick="plusSlides(1)"><img src="{{ asset('img/left-arrow.png') }}"/></a>
 	</div>
 </aside>
 <section class="Jlogin col-12 col-md-12 col-lg-8" >
@@ -43,11 +43,11 @@
 						{!! ($errors->has('email') ? $errors->first('email', '<p class="text-danger">:message</p>') : '') !!}
 					</div>
 					<label>Password</label>
-					<div class="inp {{ ($errors->has('password')) ? 'has-error' : '' }}">
+					<div class="inp {{ ($errors->has('password')) ? 'has-error' : '' }}" style="margin-bottom: 20px;">
 						<span><i class="fas fa-key"></i></span><input placeholder="Password" name="password" type="password" value="">
 						{!! ($errors->has('password') ? $errors->first('password', '<p class="text-danger">:message</p>') : '') !!}
 					</div>
-					<div class="">
+					<div>
 						<label>
 							<input name="remember" type="checkbox" value="true" {{ old('remember') == 'true' ? 'checked' : ''}}> Remember me
 						</label>

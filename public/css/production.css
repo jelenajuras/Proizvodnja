@@ -22,7 +22,7 @@ section .addEnc h2 {
 }
 
 section .addEnc > button {
-	font-size: 0.56rem;
+	font-size: 0.62rem;
 	color: rgb(125,125,125);
 	font-weight: bold;
 	text-transform:uppercase;
@@ -122,7 +122,6 @@ section h2 {
 
 .Jcontent span {
 	margin-bottom:10px;
-
 	display:block;
 }
 
@@ -139,6 +138,8 @@ section h2 {
 
 .Jtab .icons {
 	margin-bottom:10px;
+	width:100%;
+	padding:5px;
 }
 
 .Jtab .icons span {
@@ -149,8 +150,34 @@ section h2 {
 	float:right;
 	background-color:white;
 	border:none;
-	font-size:11px;
-	padding:2px;
+	font-size:12px;
+	
+	width:11px;
+	padding: 0 5px;
+	margin-left: 5px;
+}
+
+.Jtab .icons button {
+	
+}
+
+/* Style the buttons inside the tab */
+.Jtab p {
+	background-color: inherit;
+	border: none;
+	outline: none;
+	width: 100%;
+	transition: 0.3s;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	text-align:left;
+}
+
+
+.Jtab p span {
+	display:block;
+	font-weight: normal;
+	font-size: 0.69rem;
 }
 
 .ellipseR {
@@ -158,7 +185,6 @@ section h2 {
 	height: 18px;
 	border-radius: 9px;
 	background-color: #e94f4f;
-
 }
 
 .ellipseG{
@@ -166,7 +192,6 @@ section h2 {
 	height: 18px;
 	border-radius: 9px;
 	background-color: #1dc511;
-
 }
 
 .ellipseO{
@@ -174,7 +199,6 @@ section h2 {
 	height: 18px;
 	border-radius: 9px;
 	background-color: #ff9500;    
-
 }
 
 .ellipseR1 {
@@ -200,25 +224,7 @@ section h2 {
 	background-color: #ff9500;    
 	display: inline-block;
 }
-/* Style the buttons inside the tab */
-.Jtab p {
-	background-color: inherit;
-	float: center;
-	border: none;
-	outline: none;
-	width: 100%;
-	transition: 0.3s;
-	font-size: 0.75rem;
-	text-transform: uppercase;
-	text-align:left;
-}
 
-
-.Jtab p span {
-	display:block;
-	font-weight: normal;
-	font-size: 0.69rem;
-}
 
 table {
 	font-size: 0.75rem;
@@ -279,7 +285,7 @@ tr th {
 
 /* On smaller screens, decrease text size */
 @media only screen and (max-width: 415px) {
-  .tab1, .tab4, .tab1, .Jtab {
+  .tab4, .tab1, .Jtab {
 		width:100%;
 		float:none;
 		display:block;
@@ -291,6 +297,12 @@ tr th {
 		width:100%;
 		float:none;
 	}
+	.tab1{display:none;
+	}
+	.tab4 {
+		margin-left: 0;
+	}
+	
 }
 .modal{
 	width:100%;

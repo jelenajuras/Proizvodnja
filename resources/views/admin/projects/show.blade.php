@@ -83,9 +83,7 @@
 										</button>
 									@endif
 								@endif
-
-								
-								
+	
 							</div>
 							<p class="tablinks" onclick="openCity(event, 'preparation')" id="defaultOpen">
 								preparation<span>status: {{ $status_Prep }} </span>
@@ -222,13 +220,12 @@
 						<div class="Jtab">
 							<div class="icons clearfix">
 								<span class="ellipseO"></span>
-								<i class="fas fa-info-circle"></i>
-								@if (Sentinel::inRole('voditelj') || Sentinel::inRole('kupac'))
-									
-								@else
-									<i class="far fa-edit"></i>
-								@endif
-								
+								<button>
+									<i class="fas fa-info-circle"></i>
+								</button>
+								<button>
+								<i class="far fa-edit"></i>
+								</button>
 							</div>
 							<p class="tablinks" onclick="openCity(event, 'delivery')" id="defaultOpen">
 							delivery<span>status: In progress</span>

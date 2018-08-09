@@ -12,12 +12,12 @@
 			<fieldset>
 				<div class="{{ ($errors->has('id')) ? 'has-error' : '' }}">
 					<p>project number</p>
-					<input class="" placeholder="Broj projekta" name="id" type="p" value="{{ old('id') }}" autofocus/>
+					<input class="" placeholder="Broj projekta" name="id" type="p" value="{{ old('id') }}" autofocus required/>
 					{!! ($errors->has('id') ? $errors->first('id', '<p class="p-danger">:message</p>') : '') !!}
 				</div>
 				<div class="{{ ($errors->has('customer_id')) ? 'has-error' : '' }}">
 					<p>client</p>
-					<select class="" name="customer_id" id="sel1">
+					<select class="" name="customer_id" id="sel1" required>
 						<option disabled selected value></option>
 						@foreach (DB::table('customers')->orderBy('naziv','ASC')->get() as $customer)
 							<option name="customer_id" value="{{$customer->id }}">{{ $customer->naziv }}</option>
@@ -36,7 +36,7 @@
 				</div>
 				<div class="{{ ($errors->has('user_id')) ? 'has-error' : '' }}">
 				<p>project leader</p>
-					<select class="" name="user_id" id="sel1">
+					<select class="" name="user_id" id="sel1" required>
 						<option disabled selected value> </option>
 						@foreach ($users as $user)
 							<option name="user_id" value=" {{ $user->id}} ">{{ $user->first_name . ' ' . $user->last_name }}</option>
@@ -52,7 +52,7 @@
 				</div>
 				<div class="{{ ($errors->has('naziv')) ? 'has-error' : '' }}">
 					<p>project name</p>
-				   <textarea class=""  placeholder="Naziv projekta"  name="naziv" id="projekt-name"></textarea>
+				   <textarea rows="3" wrap="hard" placeholder="Naziv projekta"  name="naziv" id="projekt-name" required></textarea>
 					{!! ($errors->has('naziv') ? $errors->first('naziv', '<p class="p-danger">:message</p>') : '') !!}
 				</div>
 

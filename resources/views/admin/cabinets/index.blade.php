@@ -3,17 +3,19 @@
 @section('title', 'Ormari')
 
 <link rel="stylesheet" href="{{ URL::asset('css/cabinets.css') }}"/>
-
+<link rel="stylesheet" href="{{ URL::asset('css/user.css') }}"/>
 @section('content')
 <section>
-	<div class='addUser'>
-		<a class="load-ajax-modal" href="{{ route('admin.preparations.index')  }}" id="button1">status cabinets</a>
-		<button data-path="{{ route('admin.cabinets.create') }}" 
-			class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
-			<i class="far fa-plus-square"></i>create cabinets
-		</button>
-	</div>
-	<h3>Cabinets</h3> 
+	<header>
+		<h3>Cabinets</h3>
+		<div class='addUser'>
+			<a class="load-ajax-modal" href="{{ route('admin.preparations.index')  }}" id="button1">status cabinets</a>
+			<button data-path="{{ route('admin.cabinets.create') }}" 
+				class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+				<i class="far fa-plus-square"></i>add cabinets
+			</button>
+		</div>
+	</header> 
 
 	<br>
 	<div class="ProjIndex">
@@ -36,6 +38,7 @@
 							<th>Izvedba</th>
 							<th>Materijal</th>
 							<th>Nazivni napon</th>
+							<th>Kontrolni napon</th>
 							<th>Nazivna struja</th>
 							<th>Prekidna moć</th>
 							<th>Sustav zaštite</th>
@@ -45,14 +48,14 @@
 					</thead>
 					<tbody>
 					@foreach ($cabinets as $cabinet)
-					<tr id="{{ $cabinet->id }}">
+					<tr id="{{ $cabinet->id }}" class="ormari">
 						<?php 
 							if($cabinet) {
 								$priprema = DB::table('preparations')->where('ormar_id',$cabinet->id)->value('id');
 								$tvornickiBr = DB::table('productions')->where('ormar_id',$cabinet->id)->value('tvornickiBr');
 							}
 						?>
-						<td id="td1" class="sorting_1">
+						<!--<td id="td1" class="sorting_1">
 							<button data-path="{{ route('admin.cabinets.edit', $cabinet->id)}}" 
 								class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal" >
 								<i class="far fa-edit"></i>edit 
@@ -70,9 +73,21 @@
 							</a>
 							<a href="{{action('Admin\CabinetController@protokol_pdf', $cabinet->id) }}" class="load-ajax-modal">
 								Protokol PDF
-							</a>-->
-						</td>
+							</a>
+						</td>-->
 						<td>
+							<button data-path="{{ route('admin.cabinets.edit', $cabinet->id)}}" 
+								class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal" >
+								<i class="far fa-edit"></i> 
+							</button>
+							@if($tvornickiBr)
+							<a href="{{action('Admin\CabinetController@izjava', $cabinet->id) }}" title="Izjava" target="_blank">
+								<i class="far fa-file-alt"></i>
+							</a>
+							<a href="{{action('Admin\CabinetController@protokol', $cabinet->id) }}" title="Protokol" target="_blank">
+								<i class="far fa-file-alt"></i>
+							</a>
+							@endif
 							{{ $cabinet->brOrmara }}
 						</td>
 						<td>{{ $cabinet->PrBroj . ' - ' . $cabinet->investitor . ' - ' . $cabinet->PrNaziv }}</td>
@@ -86,6 +101,7 @@
 						<td>{{ $cabinet->izvedba }}</td>
 						<td>{{ $cabinet->materijal }}</td>
 						<td>{{ $cabinet->napon }}</td>
+						<td>{{ $cabinet->kontrolni_napon }}</td>
 						<td>{{ $cabinet->struja }}</td>
 						<td>{{ $cabinet->prekidna_moc }}</td>
 						<td>{{ $cabinet->sustav_zastite }}</td>

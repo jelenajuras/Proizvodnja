@@ -52,10 +52,11 @@ class CabinetController extends Controller
     {
 		$user = Sentinel::getUser()->id;
 		$projects = Project::join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->where('user_id','=',$user)->orderBy('id','ASC')->get();
+		$projects_all = Project::join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->orderBy('id','ASC')->get();
 		//$zadnjibr = Cabinet::orderBy('brOrmara','DESC')->first();
 		$users = Users::join('role_users','users.id','=','role_users.user_id')->select('users.*','role_users.role_id')->where('role_users.role_id','<>','4')->orderBy('last_name','ASC')->get();
 
-		return view('admin.cabinets.create')->with('projects',$projects)->with('users',$users);
+		return view('admin.cabinets.create')->with('projects',$projects)->with('projects_all',$projects_all)->with('users',$users);
     }
 
     /**
@@ -68,7 +69,7 @@ class CabinetController extends Controller
     {
 		$input = $request->except(['_token']);
 		$brOrmaraProjekta = count(Cabinet::where('projekt_id',$input['projekt_id'])->get())+1;
-		
+
 		$proizvodjacOpr=array();
 		$i=0;
 		foreach($input as $key => $value){
@@ -94,13 +95,14 @@ class CabinetController extends Controller
 			'materijal'  => $input['materijal'],
 			'izvedba'  => $input['izvedba'],
 			'napon'  => $input['napon'],
+			'kontrolni_napon'  => $input['kontrolni_napon'],
 			'struja'  => $input['struja'],
 			'prekidna_moc'  => $input['prekidna_moc'],
 			'sustav_zastite'  => $input['sustav_zastite'],
 			'ip_zastita'  => 'IP' . $input['ip_zastita'],
 			'ulaz_kabela'  => $input['ulaz_kabela'] . ' '. $input['kab_dimenzija'] ,
-			/*'bak_razvod'  => $input['bak_razvod']. ' '. $input['bak_dimenzija'],*/
-			'oznake'  => $input['oznake'],
+			/*'bak_razvod'  => $input['bak_razvod']. ' '. $input['bak_dimenzija'],
+			'oznake'  => $input['oznake'],*/
 			'logo'  => $input['logo'],
 			'napomena'  => $input['napomena']
 		);
@@ -110,8 +112,8 @@ class CabinetController extends Controller
 		$cabinet->saveCabinet($data);
 		
 		$ormar = Project::where('projects.id','=',$input['projekt_id'])->join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->first();
-
-		//dd($investitor);
+		
+		
 		
 		//$ = Equipment::distinct()->get(['User_id']);
 		//$user_mail = Users::select('id','email')->where('id',$zaduzena_osoba->User_id)->value('email');
@@ -121,16 +123,17 @@ class CabinetController extends Controller
 		$priprena = 'priprema@duplico.hr';
 		$isporuka = date("Y-m-d", strtotime($input['datum_isporuke']));
 		$investitor = $ormar->investitor;
-			Mail::queue(
+		
+		//dd($investitor);
+		
+	/*	Mail::queue(
 				'email.store_cabinet',
 				['ormar' => $ormar,'email_proba' => $email_proba,'brOrmaraProjekta' => $$brOrmaraProjekta, 'naziv' => $input['naziv'], 'isporuka' => $isporuka, 'investitor' => $investitor],
 				function ($message) use ($email_proba) {
 					$message->to($email_proba)
-							//->cc($koordinacija)
-							// ->cc($priprena)
-						->subject('Novi ormar proizvodnje');
+					->subject('Novi ormar proizvodnje');
 				}
-			);
+			);*/
 
 		$message = session()->flash('success', 'Ormar je uspješno spremljen.');
 		
@@ -161,6 +164,7 @@ class CabinetController extends Controller
     {
         $cabinet = Cabinet::find($id);
 		$projects = Project::join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->orderBy('id','ASC')->get();
+		$projects_all = Project::join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->orderBy('id','ASC')->get();
 		$users = Users::join('role_users','users.id','=','role_users.user_id')->select('users.*','role_users.role_id')->where('role_users.role_id','<>','4')->orderBy('last_name','ASC')->get();
 		$proizvodjacOpr = explode(', ',$cabinet->proizvodjacOpr);
 		
@@ -173,7 +177,7 @@ class CabinetController extends Controller
 			$ulaz_kabela = implode(' ',$ulaz_kabela[0]);
 		} 
 
-		return view('admin.cabinets.edit', ['cabinet' => $cabinet])->with('projects',$projects)->with('users',$users)->with('proizvodjacOpr',$proizvodjacOpr)->with('kab_dimenzija',$kab_dimenzija)->with('ulaz_kabela',$ulaz_kabela);
+		return view('admin.cabinets.edit', ['cabinet' => $cabinet])->with('projects',$projects)->with('projects_all',$projects_all)->with('users',$users)->with('proizvodjacOpr',$proizvodjacOpr)->with('kab_dimenzija',$kab_dimenzija)->with('ulaz_kabela',$ulaz_kabela);
     }
 
     /**
@@ -215,13 +219,14 @@ class CabinetController extends Controller
 			'materijal'  => $input['materijal'],
 			'izvedba'  => $input['izvedba'],
 			'napon'  => $input['napon'],
+			'kontrolni_napon'  => $input['kontrolni_napon'],
 			'struja'  => $input['struja'],
 			'prekidna_moc'  => $input['prekidna_moc'],
 			'sustav_zastite'  => $input['sustav_zastite'],
 			'ip_zastita'  => 'IP' . $input['ip_zastita'],
 			'ulaz_kabela'  => $input['ulaz_kabela'] . ' '. $input['kab_dimenzija'] ,
-			/*'bak_razvod'  => $input['bak_razvod']. ' '. $input['bak_dimenzija'],*/
-			'oznake'  => $input['oznake'],
+			/*'bak_razvod'  => $input['bak_razvod']. ' '. $input['bak_dimenzija'],
+			'oznake'  => $input['oznake'],*/
 			'logo'  => $input['logo'],
 			'napomena'  => $input['napomena']
 		);

@@ -61,6 +61,26 @@ return [
             'region' => 'your-region',
             'bucket' => 'your-bucket',
         ],
+		
+		'user' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/img/user'),
+            'visibility' => 'public',
+        ],
+		
+		'sftp' => [
+			'driver'   => 'sftp',
+			'host'     => 'mail.duplico.hr',
+			'username' => 'jelena.juras@duplico.hr',
+			'password' => 'jjas1',
+
+			// Optional FTP Settings...
+			// 'port'     => 21,
+			// 'root'     => '',
+			// 'passive'  => true,
+			// 'ssl'      => true,
+			// 'timeout'  => 30,
+		],
 
     ],
 

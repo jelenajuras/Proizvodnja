@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Cabinet;
 
 
 class DashboardController extends Controller
@@ -29,7 +30,6 @@ class DashboardController extends Controller
     public function index()
     {
 		$projects = Project::join('customers','investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->get();
-		
 		return view('admin.dashboard')->with('projects',$projects);
     }
 }

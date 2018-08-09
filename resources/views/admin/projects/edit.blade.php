@@ -11,13 +11,13 @@
 		<form accept-charset="UTF-8" role="form" method="post" action="{{ route('admin.projects.update', $project->id) }}">
 			<fieldset>
 				<div class="{{ ($errors->has('id')) ? 'has-error' : '' }}">
-				<text>Broj projekta</text>
-				<input class="" placeholder="Broj projekta" name="id" type="text" value="{{ $project->id }}" />
+				<p>Broj projekta</p>
+				<input class="" placeholder="Broj projekta" name="id" type="text" value="{{ $project->id }}" required/>
 				{!! ($errors->has('id') ? $errors->first('id', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<div class="">
-					<text>Naručitelj</text>
-					<select class="" name="customer_id" id="sel1">	
+					<p>Naručitelj</p>
+					<select class="" name="customer_id" id="sel1" required>	
 						@if ($project->customer_id)
 							<option selected="selected"  value="{{ $project->customer_id }}">
 								{{$project->narucitelj['naziv']}}
@@ -33,7 +33,7 @@
 					{!! ($errors->has('customer_id') ? $errors->first('customer_id', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<div class="">
-					<text>Investitor</text>
+					<p>Investitor</p>
 					<select class="" name="investitor_id" value="" id="sel1">
 						@if ($project->investitor_id)
 						<option selected="selected" value="{{ $project->investitor_id }}">
@@ -50,17 +50,17 @@
 					{!! ($errors->has('investitor_id') ? $errors->first('investitor_id', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<div class="{{ ($errors->has('naziv')) ? 'has-error' : '' }}">
-				   <text>Naziv projekta</text>
-				   <textarea class="" name="naziv" id="projekt-name" >{{ $project->naziv }}</textarea>
+				   <p>Naziv projekta</p>
+				   <textarea rows="3" name="naziv" id="projekt-name" required>{{ $project->naziv }}</textarea>
 				   {!! ($errors->has('naziv') ? $errors->first('naziv', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<div class="{{ ($errors->has('objekt')) ? 'has-error' : '' }}">
-				   <text>Naziv objekta</text>
-				   <textarea class="" name="objekt" id="projekt-name" >{{ $project->objekt }}</textarea>
+				   <p>Naziv objekta</p>
+				   <textarea name="objekt" id="projekt-name" >{{ $project->objekt }}</textarea>
 				   {!! ($errors->has('objekt') ? $errors->first('objekt', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<div class="{{ ($errors->has('user_id')) ? 'has-error' : '' }}">
-				<text>Voditelj projekta</text>
+				<p>Voditelj projekta</p>
 					<select class="" name="user_id" id="sel1">
 						<option selected="selected" value="{{ $project->user_id }}">
 						{{ $project->user['first_name'] . ' '. $project->user['last_name']}} </option>
@@ -74,7 +74,7 @@
 				{{ csrf_field() }}
 				{{ method_field('PUT') }}
 				<input name="_token" value="{{ csrf_token() }}" type="hidden">
-				<input class="Proj-submit" type="submit" value="edit" id="input2">
+				<input class="Proj-submit Proj-submit2" type="submit" value="edit" id="input2">
 			</fieldset>
 		</form>
 		</div>
@@ -124,7 +124,7 @@
 						</label>
 					</div>-->
 					<input name="_token" value="{{ csrf_token() }}" type="hidden">
-					<input class="Proj-submit" type="submit" value="add">
+					<input class="Proj-submit Proj-submit2" type="submit" value="add">
 
 				</fieldset>
 			</form>

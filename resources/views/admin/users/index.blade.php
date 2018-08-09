@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="table-responsive">
-				<table id="table_id" class="display" style="border-bottom:none;">
+				<table id="table_id" class="display user1" style="border-bottom:none;" >
 					<thead>
 						<tr>
 							<th>Avatar</th>
@@ -25,7 +25,7 @@
 							<th>email</th>
 							<th>Phone</th>
 							<th>Roles</th>
-							<th>Opcije</th>
+							
 						</tr>
 					</thead>
 					<tbody id="myTable">
@@ -40,34 +40,31 @@
 							<?php $kupac=null; ?>
 						@endif
 							
-							<tr class="user" style="background-color:white;">
-								<td style="border-color:white;"><img src="//www.gravatar.com/avatar/{{ md5($user->email) }}?d=mm" alt="{{ $user->email }}" class="img-circle"></td>
-								<td style="border-color:white;">{{ $user->first_name . " ". $user->last_name }}</td>
-								<td style="border-color:white;">{{ $kupac }}</td>
-								<td style="border-color:white;">{{ $user->email }}</td>
-								<td style="border-color:white;">{{ $user->telefon }}</td>
+							<tr class="user">
+								<td ><img src="//www.gravatar.com/avatar/{{ md5($user->email) }}?d=mm" alt="{{ $user->email }}" class="img-circle"></td>
+								<td >{{ $user->first_name . " ". $user->last_name }}<div class="vl"></div></td>
+								<td>{{ $kupac }}<div class="vl"></div></td>
+								<td>{{ $user->email }}<div class="vl"></div></td>
+								<td>{{ $user->telefon }}<div class="vl"></div></td>
 								<!--<td>{{ $user->department['name'] }}</td>-->
-								<td style="border-color:white;">
+								<td>
 									@if ($user->roles->count() > 0)
 										{{ $user->roles->implode('name', ', ') }}
 									@else
 										<em>No Assigned Role</em>
 									@endif
-								</td>
-
-								<td id="td1" style="border-color:white;">
 									<button data-path="{{ route('users.edit', $user->id) }}" 
 									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
-									<i class="far fa-edit"></i>edit 
+										<i class="far fa-edit"></i>
 									</button>
-									
-									<!--<a href="{{ route('users.destroy', $user->id) }}" class="btn btn-danger btn-md action_confirm" data-method="delete" data-token="{{ csrf_token() }}" id="button">
-										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-										Obriši
-									</a>-->
+									<a href="{{ route('users.destroy', $user->id) }}" class="action_confirm" data-method="delete" data-token="{{ csrf_token() }}" id="button">
+										<i class="far fa-trash-alt"></i>
+									</a>
 								</td>
-							</tr>
 
+								
+							</tr>
+							
 						@endforeach
 						<script>
 							$(document).ready(function(){
@@ -86,3 +83,4 @@
     </div>
 
 @stop
+

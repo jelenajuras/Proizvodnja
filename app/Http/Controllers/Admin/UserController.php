@@ -11,6 +11,8 @@ use Cartalyst\Sentinel\Users\IlluminateUserRepository;
 use App\Http\Controllers\Controller;
 use App\Models\Users;
 use App\Models\Project;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller
 {
@@ -63,6 +65,8 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $input = $request;
+		$avatar = $request->file('avatar');
+		//dd($request);
 		
 		$data = array(
 			'email' => trim($request->get('email')),
@@ -75,8 +79,7 @@ class UserController extends Controller
 		if($request->get('productionProject_id')){
 			$data['productionProject_id'] = $request->get('productionProject_id');
 		}
-
-			
+		
 		$result = $this->authManager->register($data, $activation=true);
 		// Assign User Roles
         foreach ($request->get('roles', []) as $slug => $id) {
@@ -85,7 +88,10 @@ class UserController extends Controller
                 $role->users()->attach($result->user);
             }
         }
-			
+		
+		//Storage::put('avatars/'.$avatar, 'Contents');
+		Storage::disk('public')->put($avatar, 'Contents');
+		
 		$message = session()->flash('success', 'Uspješno je dodan novi djelatnik');
 		
 		//return redirect()->back()->withFlashMessage($messange);

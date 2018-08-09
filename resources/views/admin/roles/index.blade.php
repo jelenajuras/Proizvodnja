@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Roles')
-
+<link rel="stylesheet" href="{{ URL::asset('css/user.css') }}"/>
 @section('content')
     <div class="addUser">
 		<button data-path="{{ route('roles.create') }}" 
@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table id="table_id" class="display">
                     <thead>
                         <tr>
                             <th>Naziv</th>
@@ -25,14 +25,14 @@
                     </thead>
                     <tbody>
                         @foreach ($roles as $role)
-                            <tr>
+                            <tr class="role">
                                 <td>{{ $role->name }}</td>
                                 <td>{{ $role->slug }}</td>
                                 <td>{{ implode(", ", array_keys($role->permissions)) }}</td>
-                                <td id="td1">
+                                <td>
                                     <button data-path="{{ route('roles.edit', $role->id) }}" 
 									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
-									<i class="far fa-edit"></i>edit 
+									<i class="far fa-edit"></i> 
 									</button>
 									<!--<a href="{{ route('roles.edit', $role->id) }}" class="btn btn-default btn md" id="button">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>

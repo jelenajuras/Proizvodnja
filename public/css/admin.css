@@ -114,6 +114,9 @@ body {
 	.col-md-12 {
 		width: 100%;
 	}
+	.side {
+		height: auto;
+	}
 }
 
 @media only screen and (min-width:992px) {
@@ -211,6 +214,9 @@ li {
 	list-style:none;
 }
 
+table {
+	width:100%;
+}
 .dropdwn {
 	position:absolute;
 	top:10px;
@@ -223,6 +229,7 @@ li {
 	border:1px solid white;
 	border-radius:5px;
 	box-shadow: 0px 3px 3px rgba(0,0,0,0.1);
+	right:0;
 }
 
 .w3-dropdown-content button, .w3-dropdown-content a{
@@ -271,11 +278,6 @@ li {
 	margin-bottom:0;
 }
 
-.side header p{
-	
-	
-}
-
 .side .Jsearch {
 	width:75%;
 	float:left;
@@ -295,14 +297,14 @@ li {
 	background-color:#f2f2f2;
 	padding: 5px ;
 	font-size: 0.56rem;
-	width:85%;
+	width:100%;
 }
 
 .Jsearch i {
 	position:absolute;
 	right:0;
 	top:0;
-	padding:5px;
+	padding:10px;
 }
 
 .side .Jfilter {
@@ -328,6 +330,7 @@ li {
 
 .project, .side {
 	font-size: 0.75rem;
+    border-right: 2px solid #dbe1e5;
 }
 
 .project {
@@ -368,7 +371,6 @@ li {
 }
 
 .Jmain {
-	border-left: 2px solid #dbe1e5;
 	font-size:0.75rem;
 	padding: 20px 20px;
 }
@@ -414,7 +416,7 @@ form {
 }
 
 .addUser > button, .addUser > a {
-	font-size: 0.56rem;
+	font-size: 0.62rem;
 	color: rgb(125,125,125);
 	font-weight: bold;
 	text-transform:uppercase;
@@ -444,18 +446,9 @@ form {
 }
 
 .load-ajax-modal i {
-	padding-right:5px;
+	padding-right:15px;
 	display: inline;
 }
-
-.ProjIndex a i {
-	padding-right:5px;
-}
-.ProjIndex button {
-	width:100%;
-}
-
-
 
 /**************************  Tab - administrator, admin page ************************/
 /* Style the tab */
@@ -467,7 +460,7 @@ form {
 }
 
 /* Style the buttons inside the tab */
-.projects .tab button {
+.tab button {
     background-color: inherit;
 	color: rgb(125,125,125);
     float: left;
@@ -492,7 +485,7 @@ form {
 /* Style the tab content */
 .side .tabcontent {
     display: none;
-    padding: 30px 12px;
+    padding: 15px 12px;
     border-top: none;
 	font-size: 12px;
 	color: rgb(125,125,125);
@@ -512,3 +505,182 @@ form {
     width: 100%;
 }
 
+
+table.dataTable.display tbody .client1 td:not(:nth-child(2)), table.dataTable.display tbody .user td:not(:first-child), .projekti, .role {
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+}
+
+
+table.dataTable.display tbody tr td:not(:first-child) {
+	border-bottom: 1px solid white;
+	border-top: 1px solid white;
+	position: relative;
+}
+
+table.dataTable.display tbody tr{
+	position: relative;
+}
+
+table.dataTable.display tbody tr td:first-child {
+	border: none;
+}
+
+table.dataTable.stripe tbody tr, table.dataTable.display tbody tr.odd, table.dataTable.stripe tbody tr.even, table.dataTable.display tbody tr.even, table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1,table.dataTable.display tbody tr.even>.sorting_1, table.dataTable.order-column.stripe tbody tr.even>.sorting_1  {
+    background-color: white;
+}
+
+table.dataTable.display tbody .user td:first-child {
+	background-color: #f2f2f2;
+}
+ 
+table.dataTable.display tbody .user td:nth-child(2), .client1 td:first-child, .client1 td:nth-child(3), table.dataTable.display tbody .projekti td:first-child, table.dataTable.display tbody .ormari td:first-child {
+	border: 1px solid white;
+	border-radius: 5px 0 0 5px;
+}
+
+table.dataTable.display tbody .user td:last-child, table.dataTable.display tbody .client1 td:last-child, table.dataTable.display tbody .projekti td:last-child, table.dataTable.display tbody .ormari td:last-child {
+	border: 1px solid white;
+	border-radius: 0 5px 5px 0;
+}
+
+table.dataTable.display tbody .client1 td:first-child {
+	border: 1px solid white;
+	border-radius:5px;
+
+}
+
+table.dataTable.display tbody .client1 td:nth-child(2) {
+	border: 1px solid #f2f2f2;
+	width: 20px;
+	background-color: #f2f2f2;
+    margin: 0;
+	border:none;
+	border-radius:0;
+}
+
+#table_id{
+	border-collapse: separate;
+    border-spacing: 0 20px;
+	border-bottom: 1px solid #ccc;
+}
+
+.#myTable img {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+.table-responsive {
+    padding: 10px;
+}
+
+/*vertical line */
+.vl {
+    width: 1px;
+	height: 41px;
+	background-color: #dbe1e5;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+	display:inline;
+}
+
+.dataTables_filter input{
+	background-color:#f2f2f2;
+	border: 1px solid #e6e6e6;
+}
+
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate{
+	color:rgb(125,125,125);
+}
+
+.client1 td:not(:nth-child(2)) {
+	width: 20%;
+}
+
+.user td:not(:first-child), .projekti td:not(:first-child) {
+	width: 18%;
+}
+
+.user td:last-child, .ormari td:first-child {
+	position:relative;
+}
+table.dataTable thead .sorting{
+	text-align:center;
+}
+
+.alert{
+	line-height:20px;
+	padding:10px;
+	background-color:#3c763d;
+	border: 1px solid #d6e9c6;
+	border-radius:5px;
+	color: #3c763d;
+}
+
+td, input {
+	word-wrap: break-word;
+}
+
+.clickable-row{
+	cursor:pointer;
+}
+
+/* SLIDER */
+.slidecontainer {
+    height: 100%;
+	width:5px;
+	float:right;
+}
+
+.slider {
+    -webkit-appearance: none;
+    height: 100%;
+	width:5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 5px;
+    height: 20px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 5px;
+    height: 20px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 411px) {
+	.project, .side {
+		font-size: 0.68rem;
+		height: auto;
+		
+	}
+	.client  tbody .client1 td:first-child, .display tbody .client1 td:nth-child(2) {
+		display:none;
+	}
+
+	.client  thead tr th:first-child{
+		display:none;
+	}
+	.w3-dropdown-content{
+		right: 0;
+	}
+}

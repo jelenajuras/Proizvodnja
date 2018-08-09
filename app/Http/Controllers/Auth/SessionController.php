@@ -66,7 +66,7 @@ class SessionController extends Controller
 		} elseif(Sentinel::check() && Sentinel::inRole('kupac')) {
 			return $result->dispatch(route('admin.dashboard'));
 		} else {
-			return $result->dispatch(route('auth.login.form'));
+			return $result->dispatch(route('index'));
 		}
 		
 

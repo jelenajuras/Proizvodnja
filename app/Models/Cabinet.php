@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cabinet extends Model
 {
-    protected $fillable = ['brOrmara','projektirao_id','odobrio_id','datum_isporuke','projekt_id','proizvodjac','proizvodjacOpr','naziv','tip','model','velicina','materijal','izvedba','napon','struja','prekidna_moc','sustav_zastite','ip_zastita','ulaz_kabela','oznake','logo','napomena'];
+    protected $fillable = ['brOrmara','projektirao_id','odobrio_id','datum_isporuke','projekt_id','proizvodjac','proizvodjacOpr','naziv','tip','model','velicina','materijal','izvedba','napon','kontrolni_napon','struja','prekidna_moc','sustav_zastite','ip_zastita','ulaz_kabela','oznake','logo','napomena'];
 	
 	/*
 	* The Eloquent project model name

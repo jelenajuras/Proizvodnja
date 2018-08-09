@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="{{ URL::asset('css/cabinets.css') }}"/>
 <div class="tabCab">
 <button type="button" class="Jbtn-close" data-dismiss="modal">&times</button>
-	<div class="">
+	<div>
 		<div class="tabCab1" id="tabCab1">
-			<p>Add new enclocure</p>
+			<p>Add new enclosure</p>
 			<button class="tablinks" onclick="openCity(event, 'basic')" style="border:none;background-color: #f3f5f7;" id="defaultOpen"><span id="link1">1</span>Basic info</button>
 			<button class="tablinks" onclick="openCity(event, 'info1')" style="border:none;background-color: #f3f5f7;"><span id="link2">2</span>Enclosure info</button>
 			<button class="tablinks" onclick="openCity(event, 'info2')" style="border:none;background-color: #f3f5f7;"><span id="link3">3</span>Enclosure info 2</button>
@@ -17,18 +17,24 @@
 
 				<p>project:</p>
 				<div class="{{ ($errors->has('projekt_id')) ? 'has-error' : '' }}">
-					<select class="" name="projekt_id" id="sel1" value="{{ old('projekt_id') }}" autofocus>
+					<select  name="projekt_id" id="sel1" value="{{ old('projekt_id') }}" autofocus required>
 						<option disabled selected value></option>
-						@foreach ($projects as $project)
-							<option name="projekt_id" value=" {{$project->id}}">{{ $project->id . ' - ' . $project->investitor . ', ' . $project->naziv }}</option>
-						@endforeach
+						@if (Sentinel::check() && Sentinel::inRole('priprema') || Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator') )
+							@foreach ($projects_all as $project_all)
+							<option name="projekt_id" value="{{ $project_all->id}}">{{ $project_all->id . ' - ' . $project_all->investitor . ', ' . $project_all->naziv }}</option>
+							@endforeach		
+						@else
+							@foreach ($projects as $project)
+								<option name="projekt_id" value=" {{ $project->id}}">{{ $project->id . ' - ' . $project->investitor . ', ' . $project->naziv }}</option>
+							@endforeach
+						@endif
 					</select>
 					{!! ($errors->has('projekt_id') ? $errors->first('projekt_id', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<p>designed by:</p>
-				<div class="{{ ($errors->has('projektirao_id')) ? 'has-error' : '' }}">
-					<select class="" name="projektirao_id" id="sel1">
-						<option disabled selected value> </option>
+				<div class="{{ ($errors->has('projektirao_id')) ? 'has-error' : '' }}" required>
+					<select  name="projektirao_id" id="sel1">
+						<option disabled selected value></option>
 						@foreach ($users as $user)
 							<option name="projektirao_id" value=" {{ $user->id}} ">{{ $user->first_name . ' ' . $user->last_name }}</option>
 						@endforeach
@@ -36,8 +42,8 @@
 					 {!! ($errors->has('projektirao_id') ? $errors->first('projektirao_id', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<p>enclosure approved by:</p>
-				<div class="">
-					<select class="" name="odobrio_id" id="sel1">
+				<div>
+					<select  name="odobrio_id" id="sel1">
 						<option disabled selected value></option>
 						@foreach ($users as $user)
 							<option name="odobrio_id" value=" {{ $user->id}} ">{{ $user->first_name . ' ' . $user->last_name }}</option>
@@ -46,7 +52,7 @@
 				</div>	
 				<p>date of delivery of the enclosure:</p>
 				<div class="Jdate">
-					<input name="datum_isporuke" class="date" type="text" value = "{{ Carbon\Carbon::now()->format('d-m-Y') }}">
+					<input name="datum_isporuke" class="date" type="text" value = "{{ Carbon\Carbon::now()->format('d-m-Y') }}" required>
 					{!! ($errors->has('datum_isporuke') ? $errors->first('datum_isporuke', '<p class="text-danger">:message</p>') : '') !!}
 					<i class="fas fa-calendar-alt"></i>
 				</div>
@@ -58,9 +64,9 @@
 					}); 
 					</script>
 				<p>manufacturer of cabinets:</p>
-				<div class="">
-					<select class="" name="proizvodjac" value="{{ old('proizvodjac') }}" id="proizvodjac">
-						<option value="0"></option>
+				<div>
+					<select  name="proizvodjac" value="{{ old('proizvodjac') }}" id="proizvodjac" required>
+						<option disabled selected value></option>
 						<option>ABB</option>
 						<option>Eaton</option>
 						<option>Filko</option>
@@ -73,8 +79,8 @@
 					</select>
 					{!! ($errors->has('proizvodjac') ? $errors->first('proizvodjac', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
-				<div class="">
-					<input class="editOption1" placeholder="Unesi drugog proizvođača" type="text" value="{{ old('proizvodjac') }}" style="display:none;"></input>
+				<div>
+					<input name="proizvodjac" class="editOption1" placeholder="Unesi drugog proizvođača" type="text" value="{{ old('proizvodjac') }}" style="display:none;"></input>
 				</div>
 			</div>
 
@@ -118,28 +124,32 @@
 						
 					</div>
 					<p>name of enclosure (KKS):</p>
-					<div class="">
-						<input name="naziv" type="text" value="{{ old('naziv') }}" />
+					<div>
+						<input name="naziv" type="text" value="{{ old('naziv') }}" required/>
 						{!! ($errors->has('naziv') ? $errors->first('naziv', '<p class="text-danger">:message</p>') : '') !!}
 					</div>
 					<p>dimensions of cabinet (width x height x depth):</p>
-					<div class="">
-						<input class="" placeholder="[mm]" name="velicina" type="text" value="{{ old('velicina') }}" />
+					<div>
+						<input  placeholder="[mm]" name="velicina" type="text" value="{{ old('velicina') }}" required/>
 						{!! ($errors->has('velicina') ? $errors->first('velicina', '<p class="text-danger">:message</p>') : '') !!}
 					</div>
 					<p>enclosure layout:</p>
-					<div class="">
-						<select class="" name="izvedba" value="{{ old('izvedba') }}">
+					<div>
+						<select  name="izvedba" value="{{ old('izvedba') }}" required>
+							<option disabled selected value></option>
 							<option>Samostojeći</option>
 							<option>Nazidni</option>
 							<option>Ukopni</option>
 						</select>
 					</div>
 					<p>type:</p>
-					<div class="">
-						<select class="" name="tip" value="{{ old('tip') }}">
+					<div>
+						<select  name="tip" value="{{ old('tip') }}" required>
+							<option disabled selected value></option>
 							<option>Razvodni</option>
-							<option>Upravljački</option>
+							<option>Razvodno-upravljački</option>
+							<option>Upravljačko-mjerni</option>
+							<option>Mjerni</option>
 							<option>MCC</option>
 						</select>
 					</div>
@@ -150,7 +160,8 @@
 				<button type="button" class="tablinks Jbtn-next" onclick="openCity(event, 'info3')"><a href="#link3">next</a></button>
 				<p>door design:</p>
 				<div class="{{ ($errors->has('model')) ? 'has-error' : '' }}">
-					<select class="" name="model" value="{{ old('model') }}">
+					<select  name="model" value="{{ old('model') }}" required>
+						<option disabled selected value></option>
 						<option>Jednokrilni desni</option>
 						<option>Jednokrilni lijevi</option>
 						<option>Dvokrilni desni</option>
@@ -162,65 +173,79 @@
 				</div>
 				<p>material:</p>
 				<div class="{{ ($errors->has('materijal')) ? 'has-error' : '' }}">
-					<select class="" name="materijal" value="{{ old('materijal') }}">
+					<select  name="materijal" value="{{ old('materijal') }}" required>
+						<option disabled selected value></option>
 						<option>Čelični</option>
 						<option>Inox</option>
-						<option>Plastični</option>
+						<option>Poliesterski</option>
 						<option>Aluminijski</option>
 					</select>
 					{!! ($errors->has('materijal') ? $errors->first('materijal', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<p>nominal voltage [V]:</p>
-				<div class="">
-					<input class="" name="napon" type="text" value="{{ old('napon') }}" />
+				<div>
+					<input  name="napon" type="text" value="{{ old('napon') }}" required/>
 					{!! ($errors->has('napon') ? $errors->first('napon', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
+				<p>controlling voltage [V]:</p>
+				<div>
+					<input  name="kontrolni_napon" type="text" value="{{ old('kontrolni_napon') }}" required/>
+					{!! ($errors->has('kontrolni_napon') ? $errors->first('kontrolni_napon', '<p class="text-danger">:message</p>') : '') !!}
+				</div>
 				<p>rated current [A]:</p>
-				<div class="">
-					<input class="" name="struja" type="text" value="{{ old('struja') }}" />
+				<div>
+					<input name="struja" type="text" value="{{ old('struja') }}" required/>
 					{!! ($errors->has('struja') ? $errors->first('struja', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
-				<p>breaking power[kA]:</p>
-				<div class="">
-					<input class="" name="prekidna_moc" type="text" value="{{ old('prekidna_moc') }}" />
-					{!! ($errors->has('prekidna_moc') ? $errors->first('prekidna_moc', '<p class="text-danger">:message</p>') : '') !!}
-				</div>
+				
 			</div>
 				
 			<div id="info3" class="tabcontent">
 				<button type="button" class="tablinks Jbtn-back" onclick="openCity(event, 'info2')"><a href="#link3">back</a></button>
 				<button type="button" class="tablinks Jbtn-next" onclick="openCity(event, 'finalizing')"><a href="#link4">next</a></button>
+				<p style="display:inline-block;">breaking power</p><span> [kA]:</span>
+				<div>
+					<input  name="prekidna_moc" type="text" value="{{ old('prekidna_moc') }}" />
+					{!! ($errors->has('prekidna_moc') ? $errors->first('prekidna_moc', '<p class="text-danger">:message</p>') : '') !!}
+				</div>
 				<p>protection system:</p>
-				<div class="">
-					<input class="protect" placeholder="Sustav zaštite" name="sustav_zastite" type="text" value="{{ old('sustav_zastite') }}"/>
-					{!! ($errors->has('sustav_zastite') ? $errors->first('sustav_zastite', '<p class="text-danger">:message</p>') : '') !!}
+				<div>
+					<select class="protect" name="sustav_zastite" value="{{ old('sustav_zastite') }}" required>
+						<option disabled selected value></option>
+						<option>TN-S</option>
+						<option>TN-C</option>
+						<option>TN-C/S</option>
+						<option>TT</option>
+						<option>IT</option>
+					</select>
 				</div>
 				<p>IP protection cabinets:</p>
 				<div class="ip">
-					<span>IP</span><input class="ip1" placeholder="upiši broj" name="ip_zastita" type="text" value="{{ old('ip_zastita') }}"/>
+					<span>IP</span><input class="ip1" placeholder="upiši broj" name="ip_zastita" type="text" value="{{ old('ip_zastita') }}" required/>
 					{!! ($errors->has('ip_zastita') ? $errors->first('ip_zastita', '<p class="text-danger">:message</p>') : '') !!}
 				</div>
 				<p>cable entry:</p>
-				<div class="">
-					<select class="" name="ulaz_kabela" value="{{ old('ulaz_kabela') }}" id="test">
+				<div>
+					<select name="ulaz_kabela" value="{{ old('ulaz_kabela') }}" id="test" required>
+						<option disabled selected value></option>
 						<option class="non">Uvodnice gore</option>
 						<option class="non">Uvodnice dolje</option>
 						<option class="editable">Otvor u krovu za kabele</option>
 						<option class="editable">Otvor u podnici</option>
-						<option class="editable">Otvor bočno lijevo</option>
-						<option class="editable">Otvor bočno desno</option>
+						<option class="editable">Otvor - bočna lijeva stranica</option>
+						<option class="editable">Otvor - bočna desna stranica</option>
 					</select>
 				</div>
-				<div class="">
-					<input class="editOption " style="display:none;" name="kab_dimenzija" placeholder="upiši dimenziju (ŠxV) u mm"></input>
+				<div>
+					<input class="editOption" style="display:none;" name="kab_dimenzija" placeholder="upiši dimenziju (ŠxV) u mm"></input>
 				</div>
-				<p>descriptive labels on the door of the enclosure:</p>
-				<div class="">
+				<!--<p>descriptive labels on the door of the enclosure:</p>
+				<div>
 					<input type="radio" name="oznake" value="DA">Yes<br>
 					<input type="radio" name="oznake" value="NE" checked>No
-				</div>
-				<p>logo on the closet:</p>
-				<div class="">
+				</div>-->
+				<p>logo on the enclosure:</p>
+				<div>
 					<input type="radio" name="logo" value="Logo Duplico">Yes - Duplico logo<br>
 					<input type="radio" name="logo" value="Logo Naručitelj">Yes - client logo<br>
 					<input type="radio" name="logo" value="NE" checked>No
@@ -233,7 +258,7 @@
 				<input name="_token" value="{{ csrf_token() }}" type="hidden">
 				<input class="Jsubmit" type="submit" value="add">
 				<p class="note">note:</>
-				<div class="">
+				<div>
 					<textarea rows="4" cols="50" name="napomena" type="text" value="{{ old('napomena') }}" ></textarea>
 				</div>
 			</div>
@@ -284,6 +309,20 @@
 	  $('.editOption').show();
 	}else{
 	  $('.editOption').hide();
+	  
+	}
+	});
+	
+</script>
+<script>
+	var initialText = $('.editable1').val();
+	$('#proizvodjac').change(function(){
+	var selected = $('option:selected', this).attr('class');
+	var optionText = $('.editable1').text();
+	if(selected == "editable1"){
+	  $('.editOption1').show();
+	}else{
+	  $('.editOption1').hide();
 	  
 	}
 	});
