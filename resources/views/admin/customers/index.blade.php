@@ -5,7 +5,7 @@
 @section('content')
 	<div class="addUser">
 		<button data-path="{{ route('admin.customers.create') }}" 
-			class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+			class="load-ajax-modal" role="button" data-toggle="modal" data-target="#myModal">
 			<i class="far fa-plus-square"></i>create client
 		</button>
 	</div>
@@ -25,20 +25,28 @@
                             <th>Adresa</th>
 							<th>Grad</th>
 							<th>OIB</th>
-                            
                         </tr>
                     </thead>
                     <tbody id="myTable">
 					@foreach ($customers as $customer)
                         <tr class="client1">
-							<td style="position:relative";><img src="{{ asset('img/Duplico_logo-mali.png') }}"/></td>
+							<td style="position:relative">
+								@if(is_file('storage/logo/' . $customer->naziv . '.png'))
+									<img src="{{ asset('storage/logo/' . $customer->naziv  . '.png' ) }}" alt="avatar" style="max-width:100%; max-height: 100%;">
+								@elseif(is_file('storage/logo/' . $customer->naziv . '.jpg'))
+									<img src="{{ asset('storage/logo/' . $customer->naziv . '.jpg' ) }}" alt="avatar" style="max-width:100%;max-height: 100%;">
+								@elseif(is_file('storage/logo/' .  $customer->naziv . '.jpeg'))
+									<img src="{{ asset('storage/logo/' . $customer->naziv . '.jpg' ) }}" alt="avatar" style="max-width:100%;max-height: 100%;">
+								@elseif(is_file('storage/logo/' . $customer->naziv . '.gif'))
+									<img src="{{ asset('storage/logo/' . $customer->naziv . '.gif' ) }}" alt="avatar" style="max-width:100%;max-height: 100%;">
+								@endif</td>
 							<td class="v2"></td>
 							<td>{{ $customer->naziv }}<span class="vl"></span></td>
 							<td>{{ $customer->adresa}}<span class="vl"></span></td>
 							<td>{{ $customer->grad }}<span class="vl"></span></td>
 							<td>{{ $customer->oib }}
 								<button data-path="{{ route('admin.customers.edit', $customer->id)}}" 
-									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#myModal">
 									<i class="far fa-edit"></i> 
 								</button>
 							</td>
@@ -61,7 +69,6 @@
 					<td>{{'Nema unesenih naručitelja!'}}</td>
 				@endif
             </div>
-
         </div>
     </div>
 @stop

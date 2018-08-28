@@ -1,12 +1,12 @@
 <link rel="stylesheet" href="{{ URL::asset('css/projects.css') }}"/>
 
-<div class="Jproj" id="myModal" >
+<div class="Jproj1" id="myModal" >
 
 	<div class="Jside-proj">
 		<h3 class="">Add new project</h3>
 		<p class=""><span>1</span>Project info</h3>
 	</div>
-	<br/>
+
 	<div class="Jmain-proj">
 		<form accept-charset="UTF-8" role="form" method="post" action="{{ route('admin.projects.store') }}">
 			<fieldset>

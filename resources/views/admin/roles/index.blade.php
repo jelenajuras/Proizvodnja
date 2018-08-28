@@ -5,7 +5,7 @@
 @section('content')
     <div class="addUser">
 		<button data-path="{{ route('roles.create') }}" 
-			class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+			class="load-ajax-modal" role="button" data-toggle="modal" data-target="#myModal">
 			<i class="far fa-plus-square"></i>create role
 		</button>
 	</div>
@@ -31,7 +31,7 @@
                                 <td>{{ implode(", ", array_keys($role->permissions)) }}</td>
                                 <td>
                                     <button data-path="{{ route('roles.edit', $role->id) }}" 
-									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#myModal">
 									<i class="far fa-edit"></i> 
 									</button>
 									<!--<a href="{{ route('roles.edit', $role->id) }}" class="btn btn-default btn md" id="button">

@@ -205,9 +205,8 @@ body {
 }
 
 .side {
-	height:auto;
+	height:100%;
 	padding: 10px 30px;
-	
 }
 
 li {
@@ -223,6 +222,7 @@ table {
 	right:10px;
 	background-color:#f2f2f2;
 	font-size:11px;
+	float: right;
 }
 
 .dropdwn-hv {
@@ -274,11 +274,10 @@ table {
 }
 .side header h2{
 	font-weight: bold;
-	padding-top:10px;
 	margin-bottom:0;
 }
 
-.side .Jsearch {
+.side .Jsearch{
 	width:75%;
 	float:left;
 	height: 25px;
@@ -291,37 +290,72 @@ table {
 	position:relative;
 }
 
+.Jsearch2{
+	float:right;
+	position:absolute;
+	top:12px;
+	right:50px;
+}
+
+.Jsearch2 #myInput {
+	background-color:rgba(242, 242, 242,0);
+	border:none;
+	position:absolute;
+	right:0;
+	top:0;
+	z-index:1;
+	padding:5px;
+}
+
+.Jsearch2 i{
+	position:absolute;
+	right:5px;
+	top:7px;
+	cursor:pointer;
+}
+
+
 .Jsearch input {
-	display:block-inline;
+	display:inline-block;
 	border:none;
 	background-color:#f2f2f2;
-	padding: 5px ;
-	font-size: 0.56rem;
+	padding: 5px 25px;
+	font-size: 10px;
 	width:100%;
+	color: rgb(78,78,78);
+	font-weight: 300;
+	position: relative;
+    left: 0;
+	top:0;
 }
 
 .Jsearch i {
 	position:absolute;
-	right:0;
-	top:0;
-	padding:10px;
+	left:0;
+	bottom: 5px;
+	font-size: 15px;
+	color: rgb(78,78,78);
 }
 
 .side .Jfilter {
 	width:25%;
 	float:left;
-	font-size: 0.56rem;
-	line-height: 13px;
+	font-size: 10px;
+	line-height: 25px;
 	color: rgb(78,78,78);
 	font-weight: bold;
 	text-transform:uppercase;
 	text-align:right;
-	
 }
-
+.Jfilter p {
+	display:inline;
+	width:80%;
+}
 .Jfilter i {
 	padding-left:5px;
 	font-size: 0.56rem;
+	font-size: 15px;
+	text-align:left;
 }
 
 .side article {
@@ -330,7 +364,6 @@ table {
 
 .project, .side {
 	font-size: 0.75rem;
-    border-right: 2px solid #dbe1e5;
 }
 
 .project {
@@ -372,7 +405,8 @@ table {
 
 .Jmain {
 	font-size:0.75rem;
-	padding: 20px 20px;
+	padding: 25px 50px 20px 30px;
+	border-left: 2px solid #dbe1e5;
 }
 
 .btn {
@@ -381,6 +415,7 @@ table {
 
 form {
 	height:100%;
+	cursor: default;
 }
 
 #td1{
@@ -477,19 +512,15 @@ form {
 	
 }
 
-/* Create an active/current tablink class */
-.tab button.active{
-     border-bottom: 4px solid #494949;
-}
-
 /* Style the tab content */
 .side .tabcontent {
     display: none;
-    padding: 15px 12px;
+    padding: 15px 25px;
     border-top: none;
 	font-size: 12px;
 	color: rgb(125,125,125);
 	font-family: "Montserrat";
+	height:100%;
 }
 
 .side .tabcontent h5 {
@@ -500,16 +531,13 @@ form {
 
 .tablinks a{
 	padding: 0;
-    line-height: 30px;
     display: inline-block;
     width: 100%;
 }
 
-
-table.dataTable.display tbody .client1 td:not(:nth-child(2)), table.dataTable.display tbody .user td:not(:first-child), .projekti, .role {
+table.dataTable.display tbody .client1 td:not(:nth-child(2)), .user , .projekti, .role {
 	box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
 }
-
 
 table.dataTable.display tbody tr td:not(:first-child) {
 	border-bottom: 1px solid white;
@@ -531,6 +559,7 @@ table.dataTable.stripe tbody tr, table.dataTable.display tbody tr.odd, table.dat
 
 table.dataTable.display tbody .user td:first-child {
 	background-color: #f2f2f2;
+	border:none;
 }
  
 table.dataTable.display tbody .user td:nth-child(2), .client1 td:first-child, .client1 td:nth-child(3), table.dataTable.display tbody .projekti td:first-child, table.dataTable.display tbody .ormari td:first-child {
@@ -546,7 +575,6 @@ table.dataTable.display tbody .user td:last-child, table.dataTable.display tbody
 table.dataTable.display tbody .client1 td:first-child {
 	border: 1px solid white;
 	border-radius:5px;
-
 }
 
 table.dataTable.display tbody .client1 td:nth-child(2) {
@@ -586,6 +614,7 @@ table.dataTable.display tbody .client1 td:nth-child(2) {
     right: 0;
     transform: translateY(-50%);
 	display:inline;
+	border:none;
 }
 
 .dataTables_filter input{
@@ -613,12 +642,11 @@ table.dataTable thead .sorting{
 }
 
 .alert{
+	color: white;
 	line-height:20px;
 	padding:10px;
-	background-color:#3c763d;
 	border: 1px solid #d6e9c6;
 	border-radius:5px;
-	color: #3c763d;
 }
 
 td, input {
@@ -629,6 +657,12 @@ td, input {
 	cursor:pointer;
 }
 
+.addEnc i {
+	font-size:16px;
+	top:50%;
+	
+	transform: translateY(-50%);
+}
 /* SLIDER */
 .slidecontainer {
     height: 100%;
@@ -683,4 +717,41 @@ td, input {
 	.w3-dropdown-content{
 		right: 0;
 	}
+}
+
+.padding_8_16{
+	padding: 8px 16px!important;
+}
+
+@media only screen and (max-width: 1200px) {
+	.padding_8_16{
+		padding: 8px 2px!important;
+	}
+	
+	.side, .Jmain {
+		padding: 10px 15px;
+	}
+}
+	
+	
+@media only screen and (max-width: 1650px) {
+	.Jsearch2 {
+		position: relative;
+		bottom: 5px;
+		top: 0;
+		right: 0;
+	}
+}
+
+.dataTables_filter, .dataTables_length {
+	display:none;
+}
+.w3-row a {
+	text-transform:uppercase;
+	font-size: 10px;
+	line-height: 11px;
+	color: rgb(125,125,125);
+	font-family: "Montserrat";
+	font-weight: bold;
+	text-align:center;
 }

@@ -11,7 +11,7 @@
 		<div class='addUser'>
 			<a class="load-ajax-modal" href="{{ route('admin.preparations.index')  }}" id="button1">status cabinets</a>
 			<button data-path="{{ route('admin.cabinets.create') }}" 
-				class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+				class="load-ajax-modal" role="button" data-toggle="modal" data-target="#myModal"">
 				<i class="far fa-plus-square"></i>add cabinets
 			</button>
 		</div>
@@ -77,9 +77,11 @@
 						</td>-->
 						<td>
 							<button data-path="{{ route('admin.cabinets.edit', $cabinet->id)}}" 
-								class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal" >
+								class="load-ajax-modal" role="button" data-toggle="modal" data-target="#myModal" >
 								<i class="far fa-edit"></i> 
 							</button>
+							
+							
 							@if($tvornickiBr)
 							<a href="{{action('Admin\CabinetController@izjava', $cabinet->id) }}" title="Izjava" target="_blank">
 								<i class="far fa-file-alt"></i>

@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="{{ URL::asset('css/projects.css') }}"/>
 
 <div class="Jproj" id="myModal" >
+<button type="button" class="Jbtn-close" data-dismiss="modal">&times</button>
    	<div class="Jside-proj">
 		<h3 class="">Add role</h3>
 		<p class=""><span>1</span>Role info</h3>

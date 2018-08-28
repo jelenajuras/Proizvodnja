@@ -45,17 +45,17 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path('app\public'),
         ],
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => public_path('app/public'),
+			'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
-			'url' => env('APP_URL').'/public/storage',
         ],
-		
-		's3' => [
+
+        's3' => [
             'driver' => 's3',
             'key' => 'your-key',
             'secret' => 'your-secret',
@@ -65,7 +65,7 @@ return [
 		
 		'user' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/'),
+            'root' => storage_path('app/public/img/user'),
             'visibility' => 'public',
         ],
 		

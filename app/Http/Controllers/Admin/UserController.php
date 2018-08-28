@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 use Mail;
 use Sentinel;
 use App\Http\Requests;
-use App\Http\Requests\UserRequest; //ok
+use App\Http\Requests\UserRequest; 
 use Centaur\AuthManager;
 use Illuminate\Http\Request;
 use Cartalyst\Sentinel\Users\IlluminateUserRepository;
@@ -13,6 +13,7 @@ use App\Models\Users;
 use App\Models\Project;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\File;
 
 class UserController extends Controller
 {
@@ -39,7 +40,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = Users::orderBy('last_name','ASC')->get();
+				
+		$users = Users::orderBy('last_name','ASC')->get();
 		
 		$kupac = Project::join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as tvrtka')->get();
 		
@@ -65,7 +67,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $input = $request;
-		$avatar = $request->file('avatar');
+
 		//dd($request);
 		
 		$data = array(
@@ -88,10 +90,13 @@ class UserController extends Controller
                 $role->users()->attach($result->user);
             }
         }
-		
-		//Storage::put('avatars/'.$avatar, 'Contents');
-		Storage::disk('public')->put($avatar, 'Contents');
-		
+	
+		if($request->file('avatar')){ 
+			$avatar = $request->file('avatar');
+			Storage::putFileAs('photos', new File($avatar), $input['last_name'] . ' ' . $input['first_name'].'.'.$avatar->getClientOriginalExtension());
+			
+			
+		}
 		$message = session()->flash('success', 'Uspješno je dodan novi djelatnik');
 		
 		//return redirect()->back()->withFlashMessage($messange);
@@ -118,7 +123,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        // Fetch the user object
+		// Fetch the user object
         // $id = $this->decode($hash);
         $user = $this->userRepository->findById($id);
         // Fetch the available roles
@@ -141,7 +146,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Decode the user id
+        
+		
+		// Decode the user id
         // $id = $this->decode($hash);
         // Validate the form data
         $result = $this->validate($request, [
@@ -185,6 +192,16 @@ class UserController extends Controller
         // Update role assignments
         $roleIds = array_values($request->get('roles', []));
         $user->roles()->sync($roleIds);
+		
+		//Storage::put('file_' . $request->get('last_name') . ' ' . $request->get('first_name') , $avatar);
+		if($request->file('avatar')){
+			$avatar = $request->file('avatar');
+			Storage::putFileAs('photos', new File($avatar),  $request->get('last_name') . ' ' .  $request->get('first_name') .'.'.$avatar->getClientOriginalExtension());
+
+		}
+			
+		
+		
         // All done
         if ($request->ajax()) {
             return response()->json(['user' => $user], 200);

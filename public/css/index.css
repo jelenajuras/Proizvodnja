@@ -424,7 +424,7 @@ input:-webkit-autofill {
 }
 
 /* Fading animation */
-.fade {
+.fade2 {
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
   animation-name: fade;
@@ -498,7 +498,7 @@ input:-webkit-autofill {
 .alert{
 	line-height: 20px;
     padding: 10px;
-    background-color: #dff0d8;
+    background-color: #3c763d;;
     border: 1px solid #d6e9c6;
     border-radius: 5px;
     color: #3c763d;

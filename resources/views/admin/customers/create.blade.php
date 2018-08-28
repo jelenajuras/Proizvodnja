@@ -1,16 +1,22 @@
-<link rel="stylesheet" href="{{ URL::asset('css/projects.css') }}"/>
+<link rel="stylesheet" href="{{ URL::asset('css/clients.css') }}"/>
 
 <div class="Jproj" id="myModal" >
-
     <div class="Jside-proj">
 		<h3 class="">Add new client</h3>
 		<p class=""><span>1</span>Client info</h3>
 	</div>
-	<br/>
 	<div class="Jmain-proj">
-            
-		<form accept-charset="UTF-8" role="form" method="post" action="{{ route('admin.customers.store') }}">
+		<form accept-charset="UTF-8" role="form" method="post" action="{{ route('admin.customers.store') }}" enctype="multipart/form-data">
 			<fieldset>
+				<p>company logo</p>
+				<div class="logo">
+					<img id="output" style="max-height: 100%; max-width: 100%;"/>
+					<div class="logo1">
+						<label for="files" id="label"><i class="fas fa-cloud-upload-alt"></i><span>click to upload</span><span> .png .jpg</span></label>
+						<input id="files" accept="image/*" onchange="loadFile(event)" style="visibility:hidden;" type="file" name="logo"/>
+					</div>
+				</div>
+				
 				<div class="{{ ($errors->has('naziv')) ? 'has-error' : '' }}">
 				<p>clint name</p>
 					<input class="form-control" name="naziv" type="p" value="{{ old('naziv') }}" autofocus required />
@@ -38,3 +44,18 @@
     </div>
 </div>
 <button type="button" class="Jbtn-close" data-dismiss="modal">&times</button>
+
+<script>
+//Preview an image before it is uploaded
+$("#files").change(function() {
+  filename = this.files[0].name
+  console.log(filename);
+});
+</script>
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+	document.getElementById('label').style.display = "none";
+  };
+</script>

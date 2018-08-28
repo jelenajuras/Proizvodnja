@@ -49,9 +49,16 @@
 	@if (Sentinel::check() && Sentinel::inRole('administrator') || Sentinel::inRole('proizvodnja') || Sentinel::inRole('voditelj') || Sentinel::inRole('kupac'))
 	<section class="side col-12 col-md-12 col-lg-3">
 		<header class="col-12">
+			
 			<img src="//www.gravatar.com/avatar/{{ md5(Sentinel::getUser()->email) }}?d=mm" alt="{{ Sentinel::getUser()->email }}" class="img-circle">
 			<h2>{{ Sentinel::getUser()->first_name . ' ' . Sentinel::getUser()->last_name}}</h2>
 			<p>Duplico</p>
+			@if (Sentinel::check() && Sentinel::inRole('administrator'))
+				<div class="Jsearch2">
+					<input id="myInput" type="text">
+					<i class="fas fa-search"></i>
+				</div>
+			@endif
 			<div class="dropdwn">
 				<div class="w3-dropdown-hover">
 					<button class="w3-button">
@@ -60,11 +67,11 @@
 					<div class="dropdwn-hv w3-dropdown-content">
 						@if (Sentinel::check() && Sentinel::inRole('administrator') || Sentinel::inRole('proizvodnja') || Sentinel::inRole('voditelj'))
 						<button data-path="{{ route('admin.projects.create') }}" 
-						class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+						class="load-ajax-modal" data-backdrop="boolean" role="button" data-toggle="modal" data-target="#myModal">
 						add new project
 						</button>
 						<button data-path="{{ route('admin.customers.create') }}" 
-						class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+						class="load-ajax-modal" role="button" data-toggle="modal" data-target="#myModal">
 						add new customers
 						</button>
 
@@ -82,28 +89,29 @@
 						<a href="{{ route('auth.logout') }}" class="w3-bar-item w3-button">log out</a>	
 						@endif
 					</div>
-					<div class="modal fade" id="dynamic-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-body">
-								
-								</div>
-							
-							</div>
-						</div>
-					</div>
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  
+				  <div class="modal-body">
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					
+				  </div>
+				  
+				  </div>
 				</div>
+			  </div>
 			</div>
 
 		</header>
 		@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('voditelj') || Sentinel::inRole('kupac'))
 		<article class="col-12">
 			<div class="Jsearch">
-				<input id="myInput" type="text" placeholder="Search..">
+				<input id="myInput" type="text" placeholder="Search">
 				<i class="fas fa-search"></i>
 			</div>
 			<div class="Jfilter">
-				filter
+				<p>filter</p>
 				<i class="fas fa-filter"></i>
 			</div>
 		</article>
@@ -112,29 +120,41 @@
 		<div>
 			<table id="myTable" style="font-size:0.75rem">
 			@if (Sentinel::check() && Sentinel::inRole('administrator'))
-				<div class="tab">
-				  <button class="tablinks" onclick="openTab(event, 'projects')" type="reset" ><a href="{{ route('admin.projects.index') }}" >projects</a></button>
-				  <button class="tablinks" onclick="openTab(event, 'clients')" type="button"><a href="{{ route('admin.customers.index') }}" >clients</a></button>
-				  <button class="tablinks" onclick="openTab(event, 'users')" type="button"><a href="{{ route('users.index') }}" >Users</a></button>
-				  <button class="tablinks" onclick="openTab(event, 'permitions')"><a href="{{ route('roles.index') }}" >permissions</a></button>
-				</div>	
-
-				<div id="projects" class="tabcontent">
-				
-				</div>
-
-				<div id="clients" class="tabcontent">
-				 
-
-				</div>
-
-				<div id="users" class="tabcontent">
-				  
-				</div>
-				<div id="permitions" class="tabcontent">
-				  
-				</div>
+			
+			<div class="w3-row">
+				<a href="{{ route('admin.projects.index') }}" onclick="openTab(event, 'projects');">
+					<div class="w3-quarter tablink w3-border-bottom2 w3-hover-light-grey padding_8_16" style="@media only screen and (max-width: 1200px) {.w3-quarter{width:100%;}}">projects</div>
+				</a>
+				<a href="{{ route('admin.customers.index') }}" onclick="openTab(event, 'clients');">
+					<div class="w3-quarter tablink w3-border-bottom2 w3-hover-light-grey padding_8_16"  style="@media only screen and (max-width: 1200px) {.w3-quarter{width:100%;}}">clients</div>
+				</a>
+				<a href="{{ route('users.index') }}" onclick="openTab(event, 'users');">
+					<div class="w3-quarter tablink w3-border-bottom2 w3-hover-light-grey padding_8_16"  style="@media only screen and (max-width: 1200px) {.w3-quarter{width:100%;}}">users</div>
+				</a>
+				<a href="{{ route('roles.index') }}" onclick="openTab(event, 'permitions');">
+					<div class="w3-quarter tablink w3-border-bottom2 w3-hover-light-grey padding_8_16"  style="@media only screen and (max-width: 1200px) {.w3-quarter{width:100%;}}">permitions</div>
+				</a>
+			</div>
+			
 			@endif
+			
+			<div id="projects" class="w3-container tab" style="display:none">
+
+			</div>
+
+			<div id="clients" class="w3-container tab" style="display:none">
+
+			</div>
+
+			<div id="users" class="w3-container tab" style="display:none">
+
+			</div>
+			
+			<div id="permitions" class="w3-container tab" style="display:none">
+
+			</div>
+  
+  
 			@foreach(DB::table('projects')->join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->get() as $project)
 			
 				@if($project->id == Sentinel::getUser()->productionProject_id || $project->user_id == Sentinel::getUser()->id)
@@ -280,21 +300,25 @@
 			
 		});
 	</script>
+	
+	
 	<script>
-	  const fetching = `
+	const fetching = `
 		<div style="display:flex;height:100%;justify-content:center;align-items:center;">
 		  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><path opacity=".2" fill="#FF6700" d="M20.201 5.169c-8.254 0-14.946 6.692-14.946 14.946 0 8.255 6.692 14.946 14.946 14.946s14.946-6.691 14.946-14.946c-.001-8.254-6.692-14.946-14.946-14.946zm0 26.58c-6.425 0-11.634-5.208-11.634-11.634 0-6.425 5.209-11.634 11.634-11.634 6.425 0 11.633 5.209 11.633 11.634 0 6.426-5.208 11.634-11.633 11.634z"/><path fill="#FF6700" d="M26.013 10.047l1.654-2.866a14.855 14.855 0 0 0-7.466-2.012v3.312c2.119 0 4.1.576 5.812 1.566z"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="0.5s" repeatCount="indefinite"/></path></svg>
 		</div>
 	  `
-
-	  $.ajaxSetup({
+	$('#myModal').on('shown.bs.modal', function () {
+	  $('#myInput').focus()
+	})
+	$.ajaxSetup({
 		headers: {
 		  'X-CSRF-Token': $('meta[name="_token"]').attr('content')
 		}
 	  });
 	 
 	  $('.load-ajax-modal').click(function() {
-		const dest = $('#dynamic-modal div.modal-body')
+		const dest = $('#myModal div.modal-body')
 		dest.html(fetching);
 	 
 		$.ajax({
@@ -308,21 +332,24 @@
 		  }
 		});
 	  });
+
 	</script>
+
+
 	<!-- Tab -->
 	<script>
-	function openTab(evt, tabName) {
-		var i, tabcontent, tablinks;
-		tabcontent = document.getElementsByClassName("tabcontent");
-		for (i = 0; i < tabcontent.length; i++) {
-			tabcontent[i].style.display = "none";
-		}
-		tablinks = document.getElementsByClassName("tablinks");
-		for (i = 0; i < tablinks.length; i++) {
-			tablinks[i].className = tablinks[i].className.replace(" active", "");
-		}
-		document.getElementById(tabName).style.display = "block";
-		evt.currentTarget.className += " active";
+	function openTab(evt, cityName) {
+	  var i, x, tablinks;
+	  x = document.getElementsByClassName("tab");
+	  for (i = 0; i < x.length; i++) {
+		 x[i].style.display = "none";
+	  }
+	  tablinks = document.getElementsByClassName("tablink");
+	  for (i = 0; i < x.length; i++) {
+		 tablinks[i].className = tablinks[i].className.replace(" w3-border-grey2", "");
+	  }
+	  document.getElementById(cityName).style.display = "block";
+	  evt.currentTarget.firstElementChild.className += " w3-border-grey2";
 	}
 	</script>
 

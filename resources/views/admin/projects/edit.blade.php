@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ URL::asset('css/projects.css') }}"/>
 
-<div class="Jproj" id="myModal" >
+<div class="Jproj1" id="myModal" >
     <div class="Jside-proj">
 		<h3 class="">Edit project</h3>
 		<button class="tablinks" onclick="openCity(event, 'basic')" style="border:none;background-color: #f3f5f7;" id="defaultOpen"><span id="link1">1</span>Project info</button>

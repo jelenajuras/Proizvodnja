@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
 use Sentinel;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Http\File;
 
 class CustomerController extends Controller
 {
@@ -50,7 +53,7 @@ class CustomerController extends Controller
     public function store(CustomerRequest $request)
     {
         $input = $request;
-
+		//dd($request);
 		$data = array(
 			'naziv'  => $input['naziv'],
 			'adresa'  => $input['adresa'],
@@ -60,6 +63,11 @@ class CustomerController extends Controller
 		
 		$customer = new Customer();
 		$customer->saveCustomer($data);
+		
+		if($request->file('logo')){
+			$logo = $request->file('logo');
+			Storage::putFileAs('logo', new File($logo), $input['naziv'] . '.' .$logo->getClientOriginalExtension());
+		}
 		
 		$message = session()->flash('success', 'Uspješno je dodan novi naručitelj');
 		
@@ -113,6 +121,10 @@ class CustomerController extends Controller
 		
 		$customer->updateCustomer($data);
 		
+		if($request->file('logo')){
+			$logo = $request->file('logo');
+			Storage::putFileAs('logo', new File($logo), $input['naziv'] . '.' .$logo->getClientOriginalExtension());
+		}
 		$message = session()->flash('success', 'Uspješno su ispravljeni podaci naručitelja');
 		
 		//return redirect()->back()->withFlashMessage($messange);

@@ -9,7 +9,7 @@
 			@if (Sentinel::check() && Sentinel::inRole('proizvodnja') || Sentinel::inRole('administrator') || Sentinel::inRole('voditelj'))
 			<!-- Trigger/Open The Modal -->
 			<button data-path="{{ route('admin.cabinets.create') }}" 
-			   class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+			   class="load-ajax-modal" role="button" data-toggle="modal" data-target="#myModal">
 			   <i class="far fa-plus-square"></i>add enclosure
 			</button>
 			@endif
@@ -57,14 +57,14 @@
 										<?php $status_Prep ='In progress'; ?>
 									@endif
 									<button data-path="{{ route('admin.preparations.show', $preparation->id) }}" 
-									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#myModal">
 									<i class="fas fa-info-circle"></i>
 									</button>
 									@if (Sentinel::inRole('voditelj') || Sentinel::inRole('kupac'))
 								
 									@else
 										<button data-path="{{ route('admin.preparations.edit', $preparation->id) }}" 
-										class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+										class="load-ajax-modal" role="button" data-toggle="modal" data-target="#myModal">
 										<i class="far fa-edit" ></i>
 										</button>
 									@endif
@@ -78,7 +78,7 @@
 								
 									@else
 										<button data-path="{{ route('admin.preparations.create', ['id' => $cabinet->id]) }}" 
-										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
+										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#myModal">
 										<i class="far fa-edit"></i>
 										</button>
 									@endif
@@ -125,14 +125,14 @@
 										<?php $status_Purch ='In progress'; ?>
 									@endif
 									<button data-path="{{ route('admin.purchases.show', $purchase->id) }}" 
-										class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+										class="load-ajax-modal" role="button" data-toggle="modal" data-target="#myModal">
 										<i class="fas fa-info-circle"></i>
 										</button>
 										@if (Sentinel::inRole('voditelj') || Sentinel::inRole('kupac'))
 										
 										@else
 											<button data-path="{{ route('admin.purchases.edit', $purchase->id) }}" 
-												class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
+												class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#myModal">
 												<i class="far fa-edit"></i>
 											</button>
 										@endif
@@ -146,7 +146,7 @@
 									
 										@else
 											<button data-path="{{ route('admin.purchases.create', ['id' => $cabinet->id]) }}" 
-											class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
+											class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#myModal">
 											<i class="far fa-edit"></i>
 											</button>
 										@endif
@@ -185,14 +185,14 @@
 										<?php $status_Prod ='In progress'; ?>
 									@endif
 									<button data-path="{{ route('admin.productions.show', $production->id) }}" 
-									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#dynamic-modal">
+									class="load-ajax-modal" role="button" data-toggle="modal" data-target="#myModal">
 									<i class="fas fa-info-circle"></i>
 									</button>
 									@if (Sentinel::inRole('voditelj') || Sentinel::inRole('kupac'))
 									
 									@else
 										<button data-path="{{ route('admin.productions.edit', $production->id) }}" 
-										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
+										class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#myModal">
 										<i class="far fa-edit"></i>
 										</button>
 									@endif
@@ -206,7 +206,7 @@
 								
 									@else
 									<button data-path="{{ route('admin.productions.create', ['id' => $cabinet->id]) }}" 
-									class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#dynamic-modal">
+									class="load-ajax-modal {{ Request::is('admin/users*') ? 'active' : '' }}" role="button" data-toggle="modal" data-target="#myModal">
 									<i class="far fa-edit"></i>
 									</button>
 									@endif

@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ URL::asset('css/preparation.css') }}"/>
 @section('content')
     <div class="page-header">
-        <div class='btn-toolbar'>
+        <div class='back btn-toolbar'>
             <a class="btn btn-default btn-md" href="{{ url()->previous() }}">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                 Natrag
