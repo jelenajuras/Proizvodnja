@@ -15,7 +15,6 @@ html{
 body {
 	height: 100vh; 
 	width: 100vw;
-	height:auto;
 	position:relative;
 	margin:0;
 	background-color:#f2f2f2;
@@ -205,8 +204,12 @@ body {
 }
 
 .side {
-	height:100%;
+	min-height:100%;
 	padding: 10px 30px;
+}
+
+.project, .side {
+	font-size: 0.75rem;
 }
 
 li {
@@ -246,7 +249,6 @@ table {
 	padding-left:17px;
 	text-transform:uppercase;
 }
-
 
 .w3-dropdown-content button:hover{
 	background-color:#f2f2f2;
@@ -362,10 +364,6 @@ table {
 	margin:5px 0;
 }
 
-.project, .side {
-	font-size: 0.75rem;
-}
-
 .project {
 	height: auto;
 	border-radius: 5px;
@@ -407,6 +405,7 @@ table {
 	font-size:0.75rem;
 	padding: 25px 50px 20px 30px;
 	border-left: 2px solid #dbe1e5;
+	min-height: 100%;
 }
 
 .btn {
@@ -423,7 +422,7 @@ form {
 }
 
 .load-ajax-modal {
-	padding:2px 0;
+	padding:0;
 	border-radius:3px;
 	border: 1px solid #ccc;
 	background-color:inherit;
@@ -599,10 +598,6 @@ table.dataTable.display tbody .client1 td:nth-child(2) {
     width: 40%;
 }
 
-.table-responsive {
-    padding: 10px;
-}
-
 /*vertical line */
 .vl {
     width: 1px;
@@ -660,45 +655,63 @@ td, input {
 .addEnc i {
 	font-size:16px;
 	top:50%;
-	
 	transform: translateY(-50%);
 }
 /* SLIDER */
-.slidecontainer {
-    height: 100%;
-	width:5px;
-	float:right;
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+	background-color: #f2f2f2; 
+
 }
 
-.slider {
-    -webkit-appearance: none;
-    height: 100%;
-	width:5px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f2f2f2; 
+	
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+	width: 4px;
+	border: 8px solid rgba(0, 0, 0, 0);
+    background: #dbe1e5; 
+	background-clip: padding-box;
+	-webkit-border-radius: 5px;
+	-webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
+
 }
 
-.slider:hover {
-    opacity: 1;
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.4); 
 }
 
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 5px;
-    height: 20px;
-    background: #4CAF50;
-    cursor: pointer;
+::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+::-webkit-scrollbar-corner {
+    background-color: transparent;
 }
 
-.slider::-moz-range-thumb {
-    width: 5px;
-    height: 20px;
-    background: #4CAF50;
-    cursor: pointer;
+.table-wrapper-scroll-y {
+	display: block;
+	max-height: 100%;
+	overflow-y: auto;
+	margin-right:-20px;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd){
+	background-color:#f2f2f2;
+	border:none;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+	padding:0;
+	border: none;
 }
 
 @media only screen and (max-width: 411px) {
@@ -720,12 +733,12 @@ td, input {
 }
 
 .padding_8_16{
-	padding: 8px 16px!important;
+	padding: 8px 16px;
 }
 
 @media only screen and (max-width: 1200px) {
 	.padding_8_16{
-		padding: 8px 2px!important;
+		padding: 8px 2px;
 	}
 	
 	.side, .Jmain {

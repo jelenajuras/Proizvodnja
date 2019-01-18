@@ -10,6 +10,7 @@
 		</div>
 		<div class="Jmain-user">
 			<form accept-charset="UTF-8" role="form" method="post" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
+			
 				<div id="user_info" class="tabcontent">
 					<button type="button" class="tablinks Jbtn-next" onclick="openCity(event, 'permitions')"><a href="#link2">next</a></button>
 					<p class="av1">Avatar</p>
@@ -117,3 +118,4 @@ $("#files").change(function() {
 	  });
 	}
 </script>
+

@@ -592,3 +592,4 @@ table.dataTable.display tbody .odd td:not(:first-child), table.dataTable.display
     background-color: #3c763d;;
 }
    
+.w3-border-grey2,.w3-hover-border-grey2:active,.w3-hover-border-grey2:hover{border-bottom:4px solid #494949!important}

@@ -14,7 +14,15 @@
 		<form accept-charset="UTF-8" role="form" method="post" action="{{ route('admin.productions.store') }}">
 			<fieldset>
 				<div class="datum">
-					<?php $datum_1 = new DateTime($cabinet->datum_isporuke);	?>
+					<?php 
+					if($purchase){
+						$datum_1 = new DateTime($purchase->datum);
+						$datum_1 = $datum_1->modify('+3 day');
+					} else{
+						$datum_1 = new DateTime($cabinet->datum_isporuke);
+					}
+					?>
+
 					<span>delivery date:</span>
 					<input name="datum" class="date" type="text"  value = "{{ $datum_1->format('d-m-Y') }}">
 				</div>

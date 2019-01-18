@@ -43,8 +43,9 @@ class ProductionController extends Controller
     {
         $idOrmara = $request->id;
 		$cabinet = Cabinet::where('id','=',$idOrmara)->first();
-
-		return view('admin.productions.create')->with('idOrmara', $idOrmara)->with('cabinet', $cabinet);
+		$purchase = Purchase::where('ormar_id','=',$idOrmara)->first();
+		
+		return view('admin.productions.create')->with('idOrmara', $idOrmara)->with('cabinet', $cabinet)->with('purchase', $purchase);
     }
 
     /**

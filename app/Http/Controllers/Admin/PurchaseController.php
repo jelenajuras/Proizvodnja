@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\Cabinet;
 use App\Models\Purchase;
+use App\Models\Preparation;
 use App\Http\Controllers\Controller;
 use Sentinel;
 
@@ -39,8 +40,9 @@ class PurchaseController extends Controller
     {
         $idOrmara = $request->id;
 		$cabinet = Cabinet::where('id','=',$idOrmara)->first();
-
-		return view('admin.purchases.create')->with('idOrmara', $idOrmara)->with('cabinet', $cabinet);
+		$preparation = Preparation::where('ormar_id','=',$idOrmara)->first();
+		
+		return view('admin.purchases.create')->with('idOrmara', $idOrmara)->with('cabinet', $cabinet)->with('preparation', $preparation);
     }
 
     /**

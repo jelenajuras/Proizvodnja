@@ -11,6 +11,9 @@
 	<!-- Bootstrap - Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -42,7 +45,7 @@
 	
 	<!-- Restfulizer.js - A tool for simulating put,patch and delete requests -->
 	<script src="{{ asset('js/restfulizer.js') }}"></script>
-
+	
 </head>
 
 <body>
@@ -116,129 +119,112 @@
 			</div>
 		</article>
 		@endif
+		
 		<article class="projects col-12">
 		<div>
-			<table id="myTable" style="font-size:0.75rem">
-			@if (Sentinel::check() && Sentinel::inRole('administrator'))
 			
-			<div class="w3-row">
-				<a href="{{ route('admin.projects.index') }}" onclick="openTab(event, 'projects');">
-					<div class="w3-quarter tablink w3-border-bottom2 w3-hover-light-grey padding_8_16" style="@media only screen and (max-width: 1200px) {.w3-quarter{width:100%;}}">projects</div>
-				</a>
-				<a href="{{ route('admin.customers.index') }}" onclick="openTab(event, 'clients');">
-					<div class="w3-quarter tablink w3-border-bottom2 w3-hover-light-grey padding_8_16"  style="@media only screen and (max-width: 1200px) {.w3-quarter{width:100%;}}">clients</div>
-				</a>
-				<a href="{{ route('users.index') }}" onclick="openTab(event, 'users');">
-					<div class="w3-quarter tablink w3-border-bottom2 w3-hover-light-grey padding_8_16"  style="@media only screen and (max-width: 1200px) {.w3-quarter{width:100%;}}">users</div>
-				</a>
-				<a href="{{ route('roles.index') }}" onclick="openTab(event, 'permitions');">
-					<div class="w3-quarter tablink w3-border-bottom2 w3-hover-light-grey padding_8_16"  style="@media only screen and (max-width: 1200px) {.w3-quarter{width:100%;}}">permitions</div>
-				</a>
-			</div>
-			
-			@endif
-			
-			<div id="projects" class="w3-container tab" style="display:none">
-
-			</div>
-
-			<div id="clients" class="w3-container tab" style="display:none">
-
-			</div>
-
-			<div id="users" class="w3-container tab" style="display:none">
-
-			</div>
-			
-			<div id="permitions" class="w3-container tab" style="display:none">
-
-			</div>
-  
-  
-			@foreach(DB::table('projects')->join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->get() as $project)
-			
-				@if($project->id == Sentinel::getUser()->productionProject_id || $project->user_id == Sentinel::getUser()->id)
-				
-					<tr>
-						<td>
-							<div class="project col-12 col-md-12 col-lg-12">
-								<a href="{{ route('admin.projects.show', $project->id) }}">
-									<p>id:
-										<span>{{ $project->id }}</span>
-									</p>
-									<p>name:
-										<span>{{ $project->naziv}}</span>
-									</p>
-									<p>client:
-										<span>{{ $project->investitor}}</span>
-									</p>
-								</a>
-							</div>
-						</td>
-					</tr>
-					@endif
-				
-					@if (Sentinel::check() && Sentinel::inRole('proizvodnja')|| Sentinel::inRole('administrator'))
-					<tr>
-						<td>
-							<div class="project col-12 col-md-12 col-lg-12">
-								<a href="{{ route('admin.projects.show', $project->id) }}">
-									<p>id:
-										<span>{{ $project->id }}</span>
-									</p>
-									<p>name:
-										<span>{{ $project->naziv}}</span>
-									</p>
-									<p>client:
-										<span>{{ $project->investitor}}</span>
-									</p>
-								</a>
-							</div>
-						</td>
-					</tr>
+				@if (Sentinel::check() && Sentinel::inRole('administrator'))
+					<div class="w3-row">
+						<a href="{{ route('admin.projects.index') }}" onclick="openTab(event, 'projects');" >
+							<div class="w3-quarter tablink w3-border-bottom2 w3-hover-light-grey padding_8_16">projects</div>
+						</a>
+						<a href="{{ route('admin.customers.index') }}" onclick="openTab(event, 'clients');">
+							<div class="w3-quarter tablink w3-border-bottom2 w3-hover-light-grey padding_8_16">clients</div>
+						</a>
+						<a href="{{ route('users.index') }}" onclick="openTab(event, 'users');">
+							<div class="w3-quarter tablink w3-border-bottom2 w3-hover-light-grey padding_8_16">users</div>
+						</a>
+						<a href="{{ route('roles.index') }}" onclick="openTab(event, 'permitions');">
+							<div class="w3-quarter tablink w3-border-bottom2 w3-hover-light-grey padding_8_16">permitions</div>
+						</a>
+					</div>
 				@endif
-				
-			@endforeach
-			<!--Slider 
-			<div class="slidecontainer">
-				<input type="range" min="1" max="100" value="1" class="slider" id="myRange">
-			</div>
-			 
-			<script>
-				var slider = document.getElementById("myRange");
-				var output = document.getElementById("demo");
-				output.innerHTML = slider.value;
+				<div id="projects" class="w3-container tab" style="display:none"></div>
+				<div id="clients" class="w3-container tab" style="display:none"></div>
+				<div id="users" class="w3-container tab" style="display:none"></div>
+				<div id="permitions" class="w3-container tab" style="display:none"></div>
+	  
+				<div class="table-wrapper-scroll-y">
+	
+					<table id="dtDynamicVerticalScrollExample" class="table table-striped table-sm" cellspacing="0" width="100%">
+						<tbody id="myTable">
+						@foreach(DB::table('projects')->join('customers','projects.investitor_id','customers.id')->select('projects.*','customers.naziv as investitor')->get() as $project)
+								@if($project->id == Sentinel::getUser()->productionProject_id || $project->user_id == Sentinel::getUser()->id)
+									
+									<tr>
+										<td>
+											<div class="project col-12 col-md-12 col-lg-12">
+												<a href="{{ route('admin.projects.show', $project->id) }}">
+													<p>id:
+														<span>{{ $project->id }}</span>
+													</p>
+													<p>name:
+														<span>{{ $project->naziv}}</span>
+													</p>
+													<p>client:
+														<span>{{ $project->investitor}}</span>
+													</p>
+												</a>
+											</div>
+										</td>
 
-				slider.oninput = function() {
-				  output.innerHTML = this.value;
-				}
-			</script>-->
-			</table>
+									</tr>
+									@endif
+									@if (Sentinel::check() && Sentinel::inRole('proizvodnja')|| Sentinel::inRole('administrator'))
+									<tr>
+										<td>
+											<div class="project col-12 col-md-12 col-lg-12">
+												<a href="{{ route('admin.projects.show', $project->id) }}">
+													<p>id:
+														<span>{{ $project->id }}</span>
+													</p>
+													<p>name:
+														<span>{{ $project->naziv}}</span>
+													</p>
+													<p>client:
+														<span>{{ $project->investitor}}</span>
+													</p>
+												</a>
+											</div>
+										</td>
+									</tr>
+								@endif
+							@endforeach
+						 </tbody>
+					</table>
+				</div>
+			
 			
 			</div>
-			<!-- Search -->
-			<script>
-				$(document).ready(function() {
-					$("#myInput").on("keyup", function() {
-						var value = $(this).val().toLowerCase();
-						$("#myTable tr").filter(function() {
-							$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-						});
-					});
-				});
-			</script>
 			
 		</article>
 		
 	</section>
-
+		<!--Slider -->
+		<script>
+			$(document).ready(function () {
+			  $('#dtVerticalScrollExample').DataTable({
+				"scrollCollapse": true,
+			  });
+			  $('.dataTables_length').addClass('bs-select');
+			});
+		</script>
+		<!-- Search -->
+		<script>
+			$(document).ready(function() {
+				$("#myInput").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$("#myTable tr").filter(function() {
+						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
+			});
+		</script>
 	@endif
 	
 	<section class="Jmain col-12 col-md-12 col-lg-9">
-
 		@include('notifications') 
 		@yield('content')
-		
 	</section>
 
 	<script>
@@ -350,9 +336,10 @@
 	  }
 	  document.getElementById(cityName).style.display = "block";
 	  evt.currentTarget.firstElementChild.className += " w3-border-grey2";
+
 	}
 	</script>
-
+	
 	<script>
 			$(document).ready(function(){
 				$(".OrmProiz").click(function(){
@@ -361,6 +348,18 @@
 			});
 	</script>
 	
+	<script>  /* editable table*/
+	 jQuery(document).ready(function(){
+            jQuery('#ajaxSubmit').click(function(e){
+               e.preventDefault();
+               $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                  }
+              });
+            });
+          });
+	</script>
 	
 	@stack('script')
 </body>

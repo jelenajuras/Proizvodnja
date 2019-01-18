@@ -72,7 +72,7 @@
 									<span class="ellipseR"></span>
 									<?php $status_Prep ='Havent started'; ?>
 									<button >
-									<i class="fas fa-info-circle" title="Havent started!"></i>
+										<i tabindex="0" class="fas fa-info-circle" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="Havent started!" ></i>
 									</button>
 									@if (Sentinel::inRole('voditelj') || Sentinel::inRole('kupac'))
 								
@@ -140,7 +140,7 @@
 									<span class="ellipseR"></span>
 									<?php $status_Purch ='Havent started'; ?>
 									<button >
-									<i class="fas fa-info-circle" title="Havent started!"></i>
+										<i tabindex="0" class="fas fa-info-circle" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="Havent started!" ></i>
 									</button>
 										@if (Sentinel::inRole('voditelj') || Sentinel::inRole('kupac'))
 									
@@ -200,7 +200,7 @@
 									<span class="ellipseR"></span>
 									<?php $status_Prod ='Havent started'; ?>
 									<button >
-									<i class="fas fa-info-circle" title="Havent started!"></i>
+										<i tabindex="0" class="fas fa-info-circle" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="Havent started!" ></i>
 									</button>
 									@if (Sentinel::inRole('voditelj') || Sentinel::inRole('kupac'))
 								
@@ -219,13 +219,35 @@
 						</div>
 						<div class="Jtab">
 							<div class="icons clearfix">
-								<span class="ellipseO"></span>
-								<button>
-									<i class="fas fa-info-circle"></i>
-								</button>
-								<button>
-								<i class="far fa-edit"></i>
-								</button>
+								
+
+									@if($production)
+										@if($production->rijeseno1 == 'DA' &&
+											$production->rijeseno2 == 'DA' &&
+											$production->rijeseno3 == 'DA' &&
+											$production->rijeseno4 == 'DA' &&
+											$production->rijeseno5 == 'DA' &&
+											$production->rijeseno6 == 'DA' &&
+											$production->rijeseno7 == 'DA' &&
+											$production->rijeseno8 == 'DA')
+										<span class="ellipseG"></span>
+										<button>
+											<i tabindex="0" class="fas fa-info-circle" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="Ready for delivery !" ></i>
+										</button>
+										@else
+											<span class="ellipseR"></span>
+											<button>
+												<i tabindex="0" class="fas fa-info-circle" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="Not finished!" ></i>
+											</button>
+										@endif
+									@else
+										<span class="ellipseR"></span>	
+										<button>
+											<i tabindex="0" class="fas fa-info-circle" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="Not finished!" ></i>
+										</button>
+									@endif
+								
+								
 							</div>
 							<p class="tablinks" onclick="openCity(event, 'delivery')" id="defaultOpen">
 							delivery<span>status: In progress</span>
@@ -274,4 +296,9 @@
 		</div>
 		@endforeach
 	</section>
+	<script>
+	$(document).ready(function(){
+		$('[data-toggle="popover"]').popover();   
+	});
+	</script>
 @stop
